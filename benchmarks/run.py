@@ -21,7 +21,8 @@ from .common import (
 )
 from .metrics import grouped_summary
 
-MODES = ("direct", "code", "json")
+MODES = ("direct", "code", "json", "json_code")
+DEFAULT_MODES = ("direct", "code", "json")
 CONDITIONS = ("kv_cold", "same_page_new_utterance", "page_update")
 
 
@@ -193,7 +194,7 @@ def main(argv: list[str] | None = None) -> int:
         "--model", required=True, help="Local MLX model directory; weights are never modified"
     )
     parser.add_argument("--split", choices=("dev", "test"), default="test")
-    parser.add_argument("--modes", nargs="+", choices=MODES, default=list(MODES))
+    parser.add_argument("--modes", nargs="+", choices=MODES, default=list(DEFAULT_MODES))
     parser.add_argument(
         "--conditions", "--cohorts", nargs="+", choices=CONDITIONS, default=list(CONDITIONS)
     )
@@ -250,7 +251,18 @@ def main(argv: list[str] | None = None) -> int:
         "repeats": args.repeats,
         "seed": args.seed,
         "margin_threshold": args.margin_threshold,
-        "generation": {"sampling": "greedy", "code_max_tokens": 1, "json_max_tokens": 96},
+        "generation": {
+            "sampling": "greedy",
+            "code_max_tokens": 1,
+            "json_max_tokens": 96,
+            "json_code_max_tokens": 96,
+        },
+        "supplementary_output_format_control": {
+            "enabled": "json_code" in args.modes,
+            "mode": "json_code",
+            "origin": "Added after observing code-versus-business-ID confusion in the original JSON test run; not a preregistered comparison.",
+            "protocol": "Same semantic policy/state/choices/threshold; different generated JSON output format. Evaluate on dev before the unchanged frozen test; preserve the original JSON results.",
+        },
         "parity": {
             "enabled": args.parity,
             "atol": args.parity_atol,

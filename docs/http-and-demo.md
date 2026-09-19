@@ -136,3 +136,35 @@ These controller and HTTP tests deliberately inject fake numeric scores to test
 state transitions, single-use authorization, concurrency, input validation, and
 the action mapping. They do **not** measure semantic model quality. Real-model
 evaluation and browser evidence are reported separately.
+
+## Record a real browser run
+
+With the real-model server already running, use a separate Playwright Chromium
+instance to operate the UI and save all outcomes:
+
+```sh
+python -m pip install playwright
+python -m playwright install chromium
+python examples/browser_smoke.py --url http://127.0.0.1:8765 \
+  --output output/playwright
+```
+
+The script uses a fresh browser context and leaves existing browser profiles and
+tabs alone. It saves `browser-transcript.json`, screenshots, and a WebM video. The
+JSON separates raw model correctness, actual execution correctness, observed DOM
+state, and setup clicks. Failed cases are retained, and a failing run exits with a
+nonzero code. Model-driven actions go through the demo's real browser controls;
+setup operations are explicitly logged as manual clicks.
+
+The race check starts inference and changes the page through a manual DOM click.
+It reports whether actual overlap was observed. If the model finishes too fast
+to prove overlap, it reports that limitation and still verifies rejection of a
+held decision after a page update. The loading check records its changing action
+set and separates a stale result from its raw semantic choice. Neither an
+executor rejection nor a browser guard makes a wrong model answer correct.
+
+Use `--headed` to observe the run, `--no-video` to skip video recording, or
+`--executable-path /path/to/chromium` to use an existing Chromium executable in an
+isolated context. The browser dependency is optional; it is not needed for the
+SDK or HTTP service. Inspect captured model metadata and local URLs before
+publishing artifacts.

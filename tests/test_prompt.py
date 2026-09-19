@@ -31,6 +31,18 @@ def test_verified_codes_keep_business_ids():
     assert choices[-1].id == "__abstain__"
 
 
+def test_full_candidate_bound_has_codes_for_both_reserved_choices():
+    candidates = tuple(Candidate(f"item-{index}", f"Open item {index}") for index in range(64))
+    value = DecisionRequest({}, "Open item 63", candidates)
+    prompt = prepare_prompt(CharacterTokenizer(), value)
+    assert len(prompt.choices) == 66
+    assert len({choice.token_id for choice in prompt.choices}) == 66
+    assert len({choice.code for choice in prompt.choices}) == 66
+    assert [choice.id for choice in prompt.choices[:64]] == [c.id for c in candidates]
+    assert [choice.description for choice in prompt.choices[:64]] == [c.description for c in candidates]
+    assert [choice.id for choice in prompt.choices[-2:]] == ["__no_match__", "__abstain__"]
+
+
 def test_snapshot_boundaries_exclude_new_utterance_and_page_changes():
     tokenizer = CharacterTokenizer()
     a = prepare_prompt(tokenizer, request())
@@ -73,3 +85,17 @@ def test_candidate_order_changes_prompt_and_mapping():
     second = prepare_prompt(CharacterTokenizer(), DecisionRequest({}, "Open A", (b, a)))
     assert first.state_tokens != second.state_tokens
     assert first.choices[0].id != second.choices[0].id
+
+
+def test_json_code_control_preserves_semantic_user_content_and_candidate_mapping():
+    tokenizer = CharacterTokenizer()
+    prompts = {
+        mode: prepare_prompt(tokenizer, request(), mode=mode)
+        for mode in ("code", "json", "json_code")
+    }
+    texts = {mode: tokenizer.decode(prompt.tokens) for mode, prompt in prompts.items()}
+    assert len({text.split("<user>", 1)[1] for text in texts.values()}) == 1
+    assert prompts["code"].choices == prompts["json"].choices == prompts["json_code"].choices
+    assert '{"choice":"<option code>"}' in texts["json_code"]
+    assert '{"candidate_id":"<id>"}' in texts["json"]
+    assert "Reply with only the option code," in texts["code"]

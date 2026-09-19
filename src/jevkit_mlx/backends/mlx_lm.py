@@ -195,7 +195,8 @@ class MLXLMBackend:
 
         Code baseline uses exactly the scoring prompt, unrestricted vocabulary and
         max_tokens=1. JSON baseline uses the same semantic policy/state but requests
-        an actual structured business ID. Invalid/truncated output is a failure.
+        an actual structured business ID. The supplementary json_code mode emits
+        a JSON object containing the option code. Invalid/truncated output is a failure.
         """
         from mlx_lm import stream_generate
         from mlx_lm.sample_utils import make_sampler
@@ -221,6 +222,15 @@ class MLXLMBackend:
             choice_id = None
             if mode == "code":
                 choice_id = {c.code: c.id for c in prompt.choices}.get(raw_text.strip())
+            elif mode == "json_code":
+                try:
+                    parsed = json.loads(raw_text)
+                    if isinstance(parsed, dict) and set(parsed) == {"choice"}:
+                        value = parsed["choice"]
+                        if isinstance(value, str):
+                            choice_id = {c.code: c.id for c in prompt.choices}.get(value)
+                except (ValueError, TypeError):
+                    pass
             else:
                 try:
                     parsed = json.loads(raw_text)

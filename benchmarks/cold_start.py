@@ -62,11 +62,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--repeats", type=int, default=1)
     parser.add_argument("--split", choices=("dev", "test"), default="test")
     parser.add_argument(
-        "--modes", nargs="+", choices=("direct", "code", "json"), default=["direct", "code", "json"]
+        "--modes",
+        nargs="+",
+        choices=("direct", "code", "json", "json_code"),
+        default=["direct", "code", "json"],
     )
     parser.add_argument("--timeout", type=float, default=600)
     parser.add_argument("--worker-record", type=Path, help=argparse.SUPPRESS)
-    parser.add_argument("--mode", choices=("direct", "code", "json"), help=argparse.SUPPRESS)
+    parser.add_argument(
+        "--mode", choices=("direct", "code", "json", "json_code"), help=argparse.SUPPRESS
+    )
     args = parser.parse_args(argv)
     if args.worker_record:
         return worker(args)

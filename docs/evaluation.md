@@ -45,6 +45,7 @@ retained. JSON output can be large because each trial retains its evidence.
 | `direct` | One tokenizer-validated candidate code mapped to a business ID | Official model forward and final-position logits restricted to allowed choices, including no-match and abstention |
 | `code` | A single option code | Same model and same semantic/code prompt, official unconstrained greedy generation with `max_tokens=1` |
 | `json` | `{"candidate_id":"..."}` | Same model and semantic state/policy, unconstrained greedy JSON generation with a 96-token limit |
+| `json_code` (supplementary, opt-in) | `{"choice":"<option code>"}` | Same semantic state/policy/choices, unconstrained greedy JSON generation with a 96-token limit, then exact code-to-ID mapping |
 
 The direct method's restricted vocabulary is an explicit modeling difference.
 The one-code baseline can emit a noncandidate token; this is a schema failure,
@@ -53,6 +54,31 @@ expected key and a currently allowed ID. Neither baseline uses a generated-outpu
 grammar. MLX-LM may schedule lookahead work even for `max_tokens=1`; its completed
 work is included in timing. The JSON method is ordinary autoregressive generation.
 No method's output scores are calibrated correctness probabilities.
+
+The supplementary `json_code` control was added **after** the original Qwen test
+run revealed confusion between option codes and business IDs in JSON output.
+It is a disclosed follow-up comparison, not part of the original preregistered
+three-method run or an untouched blind evaluation. Its purpose is to avoid
+claiming a quality advantage based on an unnecessarily difficult output format.
+Only the requested output format and its parser differ: the semantic policy,
+state, choices, rejection threshold, and original `code`/`json` prompts remain
+unchanged. The original JSON failures remain in the original 252-trial report.
+JSON-code generation remains autoregressive, and malformed objects or unknown
+codes remain schema failures. No grammar forces a valid result.
+
+Run development examples before the unchanged frozen test, keeping both outputs:
+
+```sh
+python -m benchmarks.run --model "$MODEL" --split dev --modes json_code \
+  --output results/json-code-dev-v1
+python -m benchmarks.run --model "$MODEL" --split test --modes json_code \
+  --output results/json-code-test-v1
+```
+
+Defaults still select the original three methods. Explicitly passing
+`--modes direct code json json_code` includes all four and produces 336 measured
+decisions per full test repetition; `--modes json_code` alone produces 84.
+Run metadata labels this supplementary control and records its origin.
 
 All methods receive the same fixture state, candidate semantics, question, and
 utterance. The prompt format differs only as needed for the requested output.

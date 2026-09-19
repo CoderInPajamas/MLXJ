@@ -1,0 +1,44 @@
+name: Core tests and distributions
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install core development dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[dev]'
+      - name: Lint
+        run: python -m ruff check src tests benchmarks scripts
+      - name: Test without MLX or local model weights
+        run: python -m pytest -m 'not model'
+      - name: Build wheel and source archive
+        run: python -m build
+      - name: Install and smoke-test the built wheel
+        run: |
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+          cd "$(mktemp -d)"
+          python -c 'from jevkit_mlx import __version__; print(__version__)'
+          jevkit --help
+      - uses: actions/upload-artifact@v4
+        with:
+          name: distributions-python-${{ matrix.python-version }}
+          path: dist/*
+          if-no-files-found: error

@@ -1,4 +1,4 @@
-# Tested macOS arm64 / Python 3.13 environment, including development tools.
+# Tested macOS arm64 / Python 3.13 environment, including development and optional browser tools.
 # Install the project separately with pip install -e . --no-deps
 annotated-doc==0.0.5
 anyio==4.15.1
@@ -7,6 +7,7 @@ certifi==2026.7.22
 click==8.5.0
 filelock==4.0.1
 fsspec==2026.9.0
+greenlet==3.5.6
 h11==0.16.0
 hf-xet==1.6.0
 httpcore==1.0.9
@@ -23,8 +24,10 @@ mlx-lm==0.31.3
 mlx-metal==0.31.2
 numpy==2.5.3
 packaging==26.3
+playwright==1.63.0
 pluggy==1.6.0
 protobuf==7.36.2
+pyee==13.0.1
 pygments==2.21.0
 pyproject-hooks==1.3.3
 pytest==9.1.1

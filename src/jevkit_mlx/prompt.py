@@ -61,7 +61,7 @@ def compile_choices(tokenizer, request: DecisionRequest) -> tuple[CompiledChoice
     codes = []
     seen = set()
     for code in [str(i) for i in range(100)] + list(
-        string.ascii_uppercase + string.ascii_lowercase
+        string.ascii_uppercase + string.ascii_lowercase + string.punctuation
     ):
         ids = tokenizer.encode(code, add_special_tokens=False)
         if len(ids) != 1 or ids[0] in seen or tokenizer.decode(ids) != code:
@@ -101,8 +101,14 @@ def prepare_prompt(tokenizer, request: DecisionRequest, *, mode="code") -> Prepa
             'Reply with only a JSON object {"candidate_id":"<id>"}, using exactly one '
             "listed id, including the NO_MATCH or ABSTAIN id when appropriate."
         )
+    elif mode == "json_code":
+        output = (
+            'Reply with only a JSON object {"choice":"<option code>"}, using exactly one '
+            "listed option code as a string, including the code for NO_MATCH or ABSTAIN "
+            "when appropriate."
+        )
     else:
-        raise ValueError("mode must be code or json")
+        raise ValueError("mode must be code, json or json_code")
     system = POLICY + "\n" + output
     options = [{"code": c.code, "id": c.id, "meaning": c.description} for c in choices]
     if request.kind == "boolean":
