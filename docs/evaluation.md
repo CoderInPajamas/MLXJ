@@ -121,6 +121,14 @@ Metrics use these denominators:
 - **False action rate:** incorrect model selections divided by all attempts;
   the conditional rate among selections is also reported. A host blocking the
   action never turns it into a correct model prediction.
+- **Raw choice accuracy / raw false action rate:** use `raw_selected_id` before
+  the score-margin abstention policy, with the same all-attempt denominator.
+  Reserved IDs map to their distinct no-match/abstain statuses. A wrong raw
+  action followed by policy abstention remains a raw error and raw false action;
+  a correct raw action followed by abstention is raw-correct but not a correct
+  returned action. Invalid generated output, missing raw choice, and exceptions
+  count as raw-incorrect and do not count as raw action selections. These fields
+  separate model top-choice quality from both margin rejection and executor guards.
 - **Rejection rate:** valid no-match or abstain outputs divided by all attempts.
   Abstention is also reported separately.
 - **Executable-request coverage:** correct selections divided by requests with
@@ -134,7 +142,20 @@ Metrics use these denominators:
   always include failures. With small cohorts, percentiles are descriptive only.
 - **Memory:** process lifetime peak RSS and available MLX active, peak, and cache
   memory. Peaks are cumulative within a process and are not independent per-call
-  allocation measurements; do not sum RSS and MLX memory as independent pools.
+allocation measurements; do not sum RSS and MLX memory as independent pools.
+
+Earlier run summaries remain immutable. To calculate the added raw-choice fields
+from their recorded trials without rerunning inference or overwriting evidence:
+
+```sh
+python -m benchmarks.recompute results/test-v1 --output results/test-v1-derived.json
+```
+
+The derived report records the source trial and metric-code SHA-256 hashes and
+original completion state.
+Reporting code can also call `benchmarks.metrics.summarize(rows)` or
+`grouped_summary(rows)` directly. Existing status-based metrics retain their
+original definitions; the derived report adds raw-choice metrics alongside them.
 
 The backend synchronizes actual MLX computations before returning. Outer wall
 time includes request/result orchestration. Process cold-start wall time is

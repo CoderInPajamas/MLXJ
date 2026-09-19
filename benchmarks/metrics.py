@@ -31,6 +31,17 @@ def outcome(row: dict[str, Any]) -> dict[str, bool]:
     correct = schema_valid and predicted.get("status") == expected["status"]
     if executable:
         correct = correct and predicted.get("candidate_id") == expected["candidate_id"]
+    raw_id = predicted.get("raw_selected_id")
+    raw_valid = schema_valid and isinstance(raw_id, str) and bool(raw_id)
+    raw_status = (
+        {"__no_match__": "no_match", "__abstain__": "abstain"}.get(raw_id, "selected")
+        if isinstance(raw_id, str)
+        else None
+    )
+    raw_selected = raw_valid and raw_status == "selected"
+    raw_correct = raw_valid and raw_status == expected["status"]
+    if executable:
+        raw_correct = raw_correct and raw_id == expected["candidate_id"]
     return {
         "correct": bool(correct),
         "selected": bool(selected),
@@ -40,6 +51,10 @@ def outcome(row: dict[str, Any]) -> dict[str, bool]:
         "abstained": bool(schema_valid and predicted.get("status") == "abstain"),
         "schema_valid": bool(schema_valid),
         "failed": not success,
+        "raw_choice_available": bool(raw_valid),
+        "raw_correct": bool(raw_correct),
+        "raw_selected": bool(raw_selected),
+        "raw_false_action": bool(raw_selected and not raw_correct),
     }
 
 
@@ -57,6 +72,8 @@ def summarize(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
         "counts": dict(counts),
         "accuracy": counts["correct"] / n if n else None,
         "false_action_rate": counts["false_action"] / n if n else None,
+        "raw_choice_accuracy": counts["raw_correct"] / n if n else None,
+        "raw_false_action_rate": counts["raw_false_action"] / n if n else None,
         "false_action_rate_among_selections": counts["false_action"] / counts["selected"]
         if counts["selected"]
         else None,

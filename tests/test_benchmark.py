@@ -6,6 +6,8 @@ import pytest
 
 from benchmarks.common import load_fixtures, request_from_dict, sanitize
 from benchmarks.metrics import grouped_summary, outcome, percentile, summarize
+from benchmarks.recompute import main as recompute_main
+from benchmarks.recompute import recompute
 from benchmarks.run import attempt, exit_code, parity_attempt, run_summary
 from jevkit_mlx import BackendOutput
 
@@ -39,6 +41,76 @@ def test_host_gate_does_not_turn_wrong_model_action_into_correct_answer():
     row = trial("no_match", "close", host_rejected=True)
     assert outcome(row)["false_action"]
     assert not outcome(row)["correct"]
+
+
+def test_wrong_raw_choice_is_not_corrected_by_margin_abstention():
+    row = trial("pause", "abstain")
+    row["prediction"]["raw_selected_id"] = "close"
+    summary = summarize([row])
+    assert summary["raw_choice_accuracy"] == 0
+    assert summary["raw_false_action_rate"] == 1
+    assert summary["accuracy"] == 0
+    assert summary["false_action_rate"] == 0
+
+
+def test_correct_raw_choice_and_policy_abstention_are_separate_metrics():
+    row = trial("pause", "abstain")
+    row["prediction"]["raw_selected_id"] = "pause"
+    summary = summarize([row])
+    assert summary["raw_choice_accuracy"] == 1
+    assert summary["raw_false_action_rate"] == 0
+    assert summary["accuracy"] == 0
+
+
+def test_raw_action_does_not_count_as_correct_expected_abstention():
+    row = trial("abstain", "abstain")
+    row["prediction"]["raw_selected_id"] = "pause"
+    summary = summarize([row])
+    assert summary["accuracy"] == 1
+    assert summary["raw_choice_accuracy"] == 0
+    assert summary["raw_false_action_rate"] == 1
+
+
+@pytest.mark.parametrize(
+    "status,raw_id", [("no_match", "__no_match__"), ("abstain", "__abstain__")]
+)
+def test_raw_reserved_choices_use_their_distinct_statuses(status, raw_id):
+    row = trial(status, status)
+    row["prediction"]["raw_selected_id"] = raw_id
+    assert summarize([row])["raw_choice_accuracy"] == 1
+    assert summarize([row])["raw_false_action_rate"] == 0
+
+
+def test_invalid_json_and_missing_raw_choice_stay_in_raw_accuracy_denominator():
+    valid = trial()
+    valid["prediction"]["raw_selected_id"] = "pause"
+    invalid = trial(predicted="invalid", schema_valid=False)
+    invalid["prediction"]["raw_selected_id"] = None
+    missing = trial()
+    failure = trial(error={"type": "RuntimeError"})
+    failure["prediction"]["raw_selected_id"] = "pause"
+    summary = summarize([valid, invalid, missing, failure])
+    assert summary["raw_choice_accuracy"] == 0.25
+    assert summary["raw_false_action_rate"] == 0
+    assert summary["counts"]["raw_choice_available"] == 1
+
+
+def test_recompute_preserves_original_evidence_and_refuses_overwrite(tmp_path):
+    row = trial("no_match", "abstain", mode="direct", condition="kv_cold")
+    row["prediction"]["raw_selected_id"] = "pause"
+    trials = json.dumps(row) + "\n"
+    original = '{"completed":1,"planned":1,"complete":true,"groups":{}}\n'
+    (tmp_path / "trials.jsonl").write_text(trials)
+    (tmp_path / "summary.json").write_text(original)
+    report = recompute(tmp_path)
+    assert report["groups"]["direct/kv_cold"]["raw_false_action_rate"] == 1
+    assert report["original_run_status"]["complete"]
+    output = tmp_path / "derived.json"
+    assert recompute_main([str(tmp_path), "--output", str(output)]) == 0
+    with pytest.raises(SystemExit):
+        recompute_main([str(tmp_path), "--output", str(tmp_path / "summary.json")])
+    assert (tmp_path / "trials.jsonl").read_text() == trials
+    assert (tmp_path / "summary.json").read_text() == original
 
 
 def test_coverage_requires_correct_action_not_merely_any_selection():
