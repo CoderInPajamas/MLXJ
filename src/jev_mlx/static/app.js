@@ -79,7 +79,7 @@ async function handleAction(element) {
     const receipt = {...response.receipt, browser_event:"DOM button click", element:`[data-action="${actionId}"]`, observed_view:current.state.view, observed_state_version:current.state_version};
     showReceipt(receipt);
     byId("notice").textContent = "";
-    document.dispatchEvent(new CustomEvent("jevkit:receipt",{detail:receipt}));
+    document.dispatchEvent(new CustomEvent("jev-mlx:receipt",{detail:receipt}));
   } catch (error) {
     byId("notice").textContent = error.message;
     if (ticket) showReceipt({executed:false,action_id:actionId,reason:error.message});

@@ -1,6 +1,6 @@
 # Architecture
 
-JEVKit MLX 0.1 selects from a bounded set of application-supplied choices. Its
+JEV MLX 0.1 selects from a bounded set of application-supplied choices. Its
 model path is semantic scoring; its execution path is explicit host code. Model
 prediction, execution authorization, and execution receipt remain separate.
 

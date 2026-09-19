@@ -1,228 +1,152 @@
-# JEVKit MLX
+<p align="center">
+  <img src="docs/assets/jev-mlx-header.svg" alt="JEV MLX — the local decision SDK" width="1280" />
+</p>
 
-**JEV-inspired local decisions for Apple Silicon.**
+<p align="center"><strong>JEV-inspired local decisions for Apple Silicon.</strong></p>
 
-JEVKit MLX turns application state, a user utterance, and dynamic allowed choices
-into one selected business ID, no match, or abstention. It runs an existing local
-model through official MLX-LM APIs. Version 0.1 includes a Python SDK, CLI,
-localhost HTTP service, and interactive browser demo.
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="docs/python-api.md">Python API</a> ·
+  <a href="docs/results.md">Measured results</a> ·
+  <a href="docs/architecture.md">How it works</a> ·
+  <a href="CONTRIBUTING.md">Contribute</a>
+</p>
 
-This is an independent, experimental project inspired by
-[TypeSafe AI's JEV](https://typesafe.ai/blog/introducing-system-one-models-and-jev).
-It is not affiliated with or endorsed by TypeSafe AI, contains no JEV weights,
-and does not claim to reproduce JEV's unpublished architecture or RLCD training.
+---
 
-## Install from this checkout
+JEV MLX is a small Python SDK for choosing an action from **current state,
+natural language, and dynamic allowed choices**. Embed it in your own tools:
+an existing local model returns a stable business ID, no match, or abstention.
 
-Inference requires Apple Silicon, native ARM Python 3.11 or newer, and an
-existing local MLX-LM model directory. The package does not bundle or download
-weights. See the [model support table](docs/models.md): successful loading alone
-does not establish compatibility.
+```text
+Application state + user utterance + allowed choices
+                         ↓
+                 Local MLX model
+                         ↓
+        selected(id) · no_match · abstain
+```
+
+| Your application supplies | JEV MLX returns |
+|---|---|
+| The current state and visible order | A ranked choice using that supplied context |
+| Boolean or enum candidates, with stable IDs | A selected ID and typed value, or an explicit rejection |
+| A versioned state snapshot | Scores, margin, model identity, measured timing, and cache details |
+
+Model decisions can be wrong. `DecisionSession` adds version checks and single-use
+execution authorization; scores rank candidates and are **not calibrated
+probabilities of correctness**.
+
+## Quick start
+
+Requires **Apple Silicon**, native ARM **Python 3.11+**, and an existing local
+MLX-LM checkpoint. Start with the verified Qwen checkpoint in the
+[model table](docs/models.md). Weights remain external to the package.
+
+From this checkout:
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e '.[mlx,dev]'
-export JEVKIT_MLX_MODEL=/absolute/path/to/your/local/mlx-model
+python -m pip install -e '.[mlx]'
+export JEV_MLX_MODEL=/absolute/path/to/your/local/mlx-model
 ```
-
-Use this project's own environment; shared environments and model weights need
-no changes. For core development on Linux or without a GPU, install `'.[dev]'`
-instead. Real inference is an optional dependency.
-
-The project is not yet published to PyPI. Build and install a local wheel with:
-
-```sh
-python -m build
-python -m pip install 'dist/jevkit_mlx-0.1.0-py3-none-any.whl[mlx]'
-```
-
-## Make a decision
 
 ```python
 import os
-from jevkit_mlx import Candidate, DecisionRequest, MLXDecisionEngine
+from jev_mlx import Candidate, DecisionRequest, MLXDecisionEngine
 
-engine = MLXDecisionEngine(os.environ["JEVKIT_MLX_MODEL"])
-request = DecisionRequest(
-    state={"view": "library", "visible_titles": ["Amber Maps", "Cloud Songs"]},
-    utterance="Play the first one",
-    candidates=(
-        Candidate("play.amber", "Play the visible course Amber Maps"),
-        Candidate("play.cloud", "Play the visible course Cloud Songs"),
-        Candidate("close.library", "Close the course library"),
-    ),
-    state_version=3,
-)
-result = engine.decide(request)
-print(result.to_dict())
-```
-
-Results report `candidate_id`, `status`, `raw_selected_id`, `raw_scores`,
-`scores`, `margin`, `state_version`, `model`, `timing`, `cache`,
-`request_id`, and `selected_value`. Only `status == "selected"` carries an
-executable candidate ID. `no_match` means no applicable choice; `abstain`
-means clarification or more evidence is needed. Sessions can also return `stale`.
-
-`raw_scores` are candidate-token logits. `scores` are a softmax restricted to
-the supplied candidates plus `__no_match__` and `__abstain__`; **they are not
-calibrated probabilities of correctness**. `margin` is the raw top-minus-runner-up
-logit gap. The default rejection threshold is 0.0, which rejects exact ties.
-Select any other threshold using development data and report its limitations.
-
-Boolean choices preserve typed values, including `False`:
-
-```python
-question = DecisionRequest.boolean(
-    state={"player_status": "paused"},
-    utterance="Is playback paused?",
-    question="Is the player currently paused?",
-)
-answer = engine.decide(question)
-if answer.status == "selected":
-    print(answer.selected_value)  # A Python bool, not a string.
-```
-
-## Keep decisions aligned with application state
-
-`DecisionSession` snapshots state before inference. Updates during inference
-mark the result stale. Execution checks the current version again, verifies
-that the result was issued intact by this session, and consumes it once.
-
-```python
-from jevkit_mlx import DecisionSession
-
-session = DecisionSession(
-    engine,
-    state={"view": "notes"},
+engine = MLXDecisionEngine(os.environ["JEV_MLX_MODEL"])
+result = engine.decide(DecisionRequest(
+    state={"focused_window": "notes"},
+    utterance="Close it",
     candidates=(Candidate("close.notes", "Close the open notes window"),),
-)
-session.prewarm()  # Optional: computes prefix state, never a final answer.
-decision = session.decide("Close it")
+    state_version=1,
+))
 
-def apply_action(candidate):
-    # Apply your application action here, then record its state atomically.
-    version = session.update_state({"view": "desktop"}, candidates=())
-    return {"executed": candidate.id, "state_version": version}
-
-if decision.status == "selected":
-    print(session.execute(decision, apply_action))
+print(result.status, result.candidate_id)
+print(result.margin, result.timing)
 ```
 
-Call `update_state` for every relevant state or candidate change. Callbacks run
-under the session's state lock and may update it reentrantly. Callback failure
-consumes authorization too, preventing accidental replay of a partial effect.
-These checks prevent stale and replayed execution; they do not establish whether
-the model understood the user.
-
-## CLI and real browser controls
+Use [the Python API](docs/python-api.md) for boolean decisions and versioned
+execution. The CLI accepts the same request contract:
 
 ```sh
-jevkit decide --request examples/decision.json
-jevkit serve --port 8765
+jev-mlx decide --request examples/decision.json
 ```
 
-`--model /path/to/model` can replace the environment variable.
-`jevkit decide` also reads request JSON from stdin. `jevkit-mlx` is an alias.
+**0.1.0 is an experimental source release.** It has not been uploaded to PyPI.
+A local wheel and source distribution can be built using the
+[release instructions](docs/releasing.md).
 
-Open [http://127.0.0.1:8765](http://127.0.0.1:8765). **Morrow Studio** has a
-fictional desktop, course library, filters and ordering, notes, and a simulated
-player. Try opening the library, filtering courses, saying “First one,” and
-pausing or closing the player. Compare “Close it” on different pages with “Did
-you just close it?” and “Don't close anything.” Change the page during inference
-to exercise stale-result rejection.
+## What is measured
 
-The model selects an allowed action. The browser maps the server-issued
-operation to an existing `data-action` button and invokes its actual DOM click
-handler. The server validates a single-use decision ticket before applying the
-state transition. The interface shows current state, allowed actions, model
-scores and timing, cache reuse, and a separate execution receipt.
+Direct scoring on an **Apple M2 Max · 64 GiB · 28 fictional English test cases**,
+using the revised cache implementation:
 
-The course content and player are simulated; inference and DOM controls are real.
-This is not arbitrary-website automation, screenshot understanding, or generated
-JavaScript execution. See the [HTTP API and demo](docs/http-and-demo.md).
+| Checkpoint | Exact decisions | False actions observed | Same-page p50 / p95 |
+|---|---:|---:|---:|
+| Qwen3.5-9B-OptiQ-4bit | **25 / 28** | 0 / 28 | **171.7 / 176.4 ms** |
+| GLM-4.7-Flash-4bit | 14 / 28 | 2 / 28 | 147.8 / 170.6 ms |
 
-![A real Qwen decision pauses the fictional course player and records its DOM execution receipt](docs/assets/browser-demo/03b-player-control.png)
+Same-page timings use loaded weights and a cached page prefix with a fresh
+utterance. Cold KV and changed-page decisions take longer. These are small-set
+measurements, not latency or reliability guarantees. GLM is **not recommended
+for automatic action execution with the current prompt**.
 
-The recorded browser run passed 16 scripted checks, plus a concurrent state-change
-check. These demo checks accept either rejection outcome for decline requests;
-the separate frozen benchmark distinguishes no-match from abstention. See the
-[complete transcript](docs/assets/browser-demo/browser-transcript.json) and
-[recorded evidence](docs/results.md) for all outcomes and the initial harness failure.
+**145 core tests passed · 112/112 revised-runtime cache comparisons passed.**
 
-## How scoring and caching work
+The [full report](docs/results.md) includes model revisions, quantization,
+dependencies, cold starts, one-code and JSON baselines, memory, all failures,
+and reproduction commands. Original failed runs remain available. GitHub CI is
+configured; no remote CI result is claimed.
 
-The backend validates single-token option codes with the checkpoint's tokenizer,
-calls the official model and unchanged output head, reads final-position candidate
-logits, and maps the selected code back to a stable business ID. The direct path
-does not generate JSON or an action-token continuation. The checkpoint remains
-a causal language model: this is next-token scoring, not evidence of a new
-non-autoregressive model architecture.
+## How it works
 
-Official MLX-LM cache factories and `LRUPromptCache` store full stable-prefix
-snapshots. Repeated page state can reuse its prefix while every new utterance is
-computed. Page changes invalidate dependent later state; that suffix is recomputed
-from a valid earlier snapshot. Hybrid attention/recurrent models are not treated
-as plain trimmable KV caches. No final decision is cached.
+1. Encode each current candidate as a tokenizer-verified single token.
+2. Use the official MLX-LM loader, model, and unchanged output head to score the
+   candidates at the final prompt position.
+3. Map the result back to the business ID, with no-match and abstention available.
+4. Reuse complete stable-prefix snapshots; state changes invalidate dependent
+   context, and sessions reject stale execution.
 
-Defaults are 64 application candidates, a 4,096-token prompt limit, and a
-512 MiB / 16-entry prefix cache. Inference is serialized per backend. Checkpoints
-may support fewer codes or different templates; incompatible inputs fail
-explicitly. Read the [architecture](docs/architecture.md) and
-[framework audit](docs/framework-audit.md).
+Every new utterance is evaluated. Direct scoring produces no JSON continuation;
+it uses a causal model's next-token logits. The
+[framework audit](docs/framework-audit.md) explains what is reused from MLX-LM,
+and the [architecture](docs/architecture.md) documents the limits.
 
-## Tests and reproducible measurements
+Version 0.1 focuses on **English, single-turn, single-step choices**. General
+chat, arbitrary tool arguments, multi-step planning, training, vision, and GPU
+batching are outside its scope. Other checkpoints require separate validation.
+
+## Documentation
+
+| Guide | What you will find |
+|---|---|
+| [Python API](docs/python-api.md) | Enum/boolean decisions, result fields, state updates, and execution |
+| [Architecture](docs/architecture.md) | Scoring, cache boundaries, and versioned sessions |
+| [Model compatibility](docs/models.md) | Exact checkpoints, revisions, licenses, and measured limitations |
+| [Evaluation](docs/evaluation.md) · [Results](docs/results.md) | Reproducible methods, baselines, and complete evidence |
+| [CLI, HTTP & browser example](docs/http-and-demo.md) | Service integration and an optional recorded validation example |
+| [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) | Development workflow and release history |
+
+The browser example is one integration test of the SDK. Its fictional desktop,
+recording, and execution receipts live in the linked documentation.
+
+## Develop
 
 ```sh
+python -m pip install -e '.[dev]'
 python -m pytest -m 'not model'
-python -m ruff check src tests benchmarks scripts
-
-# Actual model and cache tests on Apple Silicon, explicitly opted in.
-JEVKIT_TEST_MODEL="$JEVKIT_MLX_MODEL" python -m pytest tests/test_model.py
-python scripts/check_parity.py --model "$JEVKIT_MLX_MODEL" \
-  --output results/local-parity.json
-
-# Keep development and frozen test runs separate; use fresh output directories.
-python -m benchmarks.run --model "$JEVKIT_MLX_MODEL" --split dev \
-  --output results/local-dev
-python -m benchmarks.run --model "$JEVKIT_MLX_MODEL" --split test --repeats 3 \
-  --parity --output results/local-test
-python -m benchmarks.cold_start --model "$JEVKIT_MLX_MODEL" --repeats 3 \
-  --output results/local-process-cold
+python -m ruff check src tests benchmarks scripts examples
 ```
 
-Fixtures are newly written fictional scenarios. Comparison includes direct scores,
-the same model generating one option code, and the same model generating structured
-JSON. It records process/model loading, loaded weights with cold KV, new utterances
-on a cached page, and first decisions after page updates. Timing includes completed
-MLX computation. Accuracy, false actions, rejection, executable-request coverage,
-memory, invalid output, and failures are separate metrics. Executor rejections
-never turn model mistakes into correct answers.
+Real-model tests and benchmarks are opt-in; see the
+[evaluation guide](docs/evaluation.md). Run model workloads sequentially.
 
-Read the [evaluation protocol](docs/evaluation.md), [model support](docs/models.md),
-and [actual recorded results](docs/results.md). This README makes no fixed-latency,
-universal compatibility, zero-error, or unmeasured speedup claim. Run different
-models sequentially and report each checkpoint separately.
+## License & inspiration
 
-## Scope and contributing
-
-The first release targets English, text-only, single-turn, single-step decisions
-over known choices. STT, general chat, free-form tool arguments, multi-step
-planning, training, and GPU batching are outside its scope. Small public tests
-cannot establish production reliability. The host application remains responsible
-for the meaning and consequences of its allowed actions.
-
-See [contributing](CONTRIBUTING.md), [changes](CHANGELOG.md), and the
-[release checklist](docs/releasing.md). GitHub publication and package upload
-require an explicitly chosen owner, repository, and publishing credentials.
-
-## License and references
-
-Original code and documentation use the [MIT license](LICENSE). Dependencies,
-model weights, and third-party material retain their own licenses; see
-[NOTICE.md](NOTICE.md). Models remain external to release artifacts.
-
-- [MLX-LM](https://github.com/ml-explore/mlx-lm): official loading, quantization, generation, and cache APIs.
-- [TypeSafe documentation](https://docs.typesafe.ai/): inspiration for typed, state-aware decisions.
-- [jevmlx](https://github.com/bnsd55/jevmlx), [kev](https://github.com/jaredpalmer/kev), and [JEV Ultrafast](https://github.com/browser-use/jev-ultrafast): related public approaches reviewed in the framework audit.
+[MIT](LICENSE). Independently maintained, inspired by
+[TypeSafe AI's JEV](https://docs.typesafe.ai/). No affiliation or endorsement,
+no JEV weights, and no claim to reproduce unpublished RLCD training or model
+architecture. Dependencies and weights retain their own licenses; attribution
+and reviewed reference projects are listed in [NOTICE.md](NOTICE.md).

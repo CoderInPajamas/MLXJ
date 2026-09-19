@@ -286,7 +286,7 @@ def main(argv: list[str] | None = None) -> int:
     write_json("metadata.json", metadata)
     load_start = time.perf_counter()
     try:
-        from jevkit_mlx import MLXDecisionEngine
+        from jev_mlx import MLXDecisionEngine
 
         engine = MLXDecisionEngine(model=args.model, margin_threshold=args.margin_threshold)
     except Exception as exc:

@@ -1,6 +1,6 @@
 """Record real-model decisions driving real DOM controls in an isolated browser.
 
-Start ``jevkit serve --model PATH`` separately. This script never substitutes a
+Start ``jev-mlx serve --model PATH`` separately. This script never substitutes a
 fake model, fixes model output, or invokes the action API instead of the UI.
 Failures remain in its JSON transcript and produce a nonzero exit status.
 """
@@ -44,11 +44,13 @@ def main(argv: list[str] | None = None) -> int:
     from playwright.sync_api import sync_playwright
 
     args.output = args.output.resolve()
+    if args.output.exists() and (not args.output.is_dir() or any(args.output.iterdir())):
+        parser.error(
+            "Output directory must be empty; choose a new path to preserve earlier evidence."
+        )
     args.output.mkdir(parents=True, exist_ok=True)
-    if any(args.output.iterdir()):
-        parser.error("Output directory must be empty so earlier browser evidence is preserved")
     report: dict[str, Any] = {
-        "project": "JEVKit MLX",
+        "project": "JEV MLX",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "url": args.url,
         "scope": "Real local backend; allowlisted decisions -> actual DOM button click -> execution receipt -> observed DOM state.",
@@ -73,7 +75,7 @@ def main(argv: list[str] | None = None) -> int:
         page.set_default_timeout(args.timeout_ms)
         page.on("pageerror", lambda error: report["browser_errors"].append(str(error)))
         page.add_init_script(
-            "window.__jevkitReceipts = []; document.addEventListener('jevkit:receipt', event => window.__jevkitReceipts.push(event.detail));"
+            "window.__jevMLXReceipts = []; document.addEventListener('jev-mlx:receipt', event => window.__jevMLXReceipts.push(event.detail));"
         )
 
         def state() -> dict[str, Any]:
@@ -159,12 +161,12 @@ def main(argv: list[str] | None = None) -> int:
             if result["status"] == "selected":
                 try:
                     page.wait_for_function(
-                        "id => window.__jevkitReceipts.some(receipt => receipt.decision_id === id)",
+                        "id => window.__jevMLXReceipts.some(receipt => receipt.decision_id === id)",
                         arg=result["request_id"],
                         timeout=10_000,
                     )
                     receipt = page.evaluate(
-                        "id => window.__jevkitReceipts.find(receipt => receipt.decision_id === id)",
+                        "id => window.__jevMLXReceipts.find(receipt => receipt.decision_id === id)",
                         result["request_id"],
                     )
                 except Exception as error:
@@ -387,7 +389,7 @@ def main(argv: list[str] | None = None) -> int:
                 arg=result["request_id"],
             )
             loading_receipts = page.evaluate(
-                "id => window.__jevkitReceipts.filter(receipt => receipt.decision_id === id)",
+                "id => window.__jevMLXReceipts.filter(receipt => receipt.decision_id === id)",
                 result["request_id"],
             )
             loading_model_correct = result["raw_selected_id"] in declined

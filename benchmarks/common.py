@@ -32,7 +32,7 @@ def load_fixtures(split: str = "test") -> tuple[list[dict[str, Any]], dict[str, 
 
 
 def request_from_dict(value: dict[str, Any]):
-    from jevkit_mlx import Candidate, DecisionRequest
+    from jev_mlx import Candidate, DecisionRequest
 
     return DecisionRequest(
         **{**value, "candidates": tuple(Candidate(**item) for item in value["candidates"])}
@@ -83,7 +83,7 @@ def memory_snapshot() -> dict[str, Any]:
 def environment_metadata() -> dict[str, Any]:
     deps = {}
     for package in (
-        "jevkit-mlx",
+        "jev-mlx",
         "mlx",
         "mlx-lm",
         "mlx-metal",
@@ -112,7 +112,7 @@ def environment_metadata() -> dict[str, Any]:
     )
     root = Path(__file__).resolve().parents[1]
     sources = [
-        root / "src" / "jevkit_mlx" / name
+        root / "src" / "jev_mlx" / name
         for name in ("prompt.py", "types.py", "engine.py", "backends/mlx_lm.py")
     ]
     sources.extend(

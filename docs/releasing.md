@@ -1,7 +1,9 @@
 # Preparing and publishing a release
 
-Version 0.1 artifacts can be prepared locally without choosing an external
-account. Building a distribution does not publish it. The local project directory
+JEV MLX is distributed as `jev-mlx`, imported as `jev_mlx`, and invoked with
+the `jev-mlx` CLI. Version 0.1 artifacts can be prepared
+locally without choosing an external account. Building a distribution does not
+publish it. The local project directory
 does not reserve a package name, and installation examples currently use the
 source checkout or local wheel rather than PyPI.
 
@@ -22,8 +24,8 @@ source checkout or local wheel rather than PyPI.
 ```sh
 python -m pytest -m 'not model'
 python -m ruff check src tests benchmarks scripts
-JEVKIT_TEST_MODEL="$JEVKIT_MLX_MODEL" python -m pytest tests/test_model.py
-python scripts/check_parity.py --model "$JEVKIT_MLX_MODEL" \
+JEV_TEST_MODEL="$JEV_MLX_MODEL" python -m pytest tests/test_model.py
+python scripts/check_parity.py --model "$JEV_MLX_MODEL" \
   --output results/release-parity.json
 ```
 
@@ -37,8 +39,8 @@ From a clean, reviewed checkout with `'.[dev]'` installed:
 
 ```sh
 python -m build
-python -m zipfile -l dist/jevkit_mlx-0.1.0-py3-none-any.whl
-tar -tzf dist/jevkit_mlx-0.1.0.tar.gz
+python -m zipfile -l dist/jev_mlx-0.1.0-py3-none-any.whl
+tar -tzf dist/jev_mlx-0.1.0.tar.gz
 shasum -a 256 dist/*
 ```
 
@@ -50,12 +52,12 @@ a successful build alone does not verify their contents.
 Test the absolute wheel path in a fresh environment outside the source checkout:
 
 ```sh
-python3 -m venv /tmp/jevkit-wheel-check
-/tmp/jevkit-wheel-check/bin/python -m pip install --no-deps \
-  /absolute/path/to/dist/jevkit_mlx-0.1.0-py3-none-any.whl
-/tmp/jevkit-wheel-check/bin/jevkit --help
-/tmp/jevkit-wheel-check/bin/python -c \
-  'from jevkit_mlx import __version__; print(__version__)'
+python3 -m venv /tmp/jev-wheel-check
+/tmp/jev-wheel-check/bin/python -m pip install --no-deps \
+  /absolute/path/to/dist/jev_mlx-0.1.0-py3-none-any.whl
+/tmp/jev-wheel-check/bin/jev-mlx --help
+/tmp/jev-wheel-check/bin/python -c \
+  'from jev_mlx import __version__; print(__version__)'
 ```
 
 Choose a fresh directory name if the environment already exists. On Apple

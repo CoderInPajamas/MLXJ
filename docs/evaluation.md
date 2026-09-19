@@ -163,7 +163,7 @@ prefix reuse without loading a model:
 
 ```sh
 python -m benchmarks.audit runs/example --public benchmarks/results/example \
-  --source-revision <recorded-source-commit>
+  --source-revision '<recorded-source-commit>'
 ```
 
 The audit exits unsuccessfully on incomplete runs, evidence-copy differences,

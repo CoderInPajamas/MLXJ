@@ -1,4 +1,4 @@
-# JEVKit MLX implementation plan
+# JEV MLX implementation plan
 
 Status: 0.1 implemented. The package, versioned sessions, localhost service, real-model browser demo, synthetic fixtures, and measurement tools are present. Actual completed checks and limitations are recorded in [results](results.md); a source implementation or skipped test alone does not establish model compatibility.
 
@@ -20,9 +20,9 @@ For a direct decision, call the official model with its official output head and
 
 | Path | Responsibility |
 |---|---|
-| src/jevkit_mlx/ | Public decision contract and orchestration |
-| src/jevkit_mlx/backends/ | Official MLX-LM integration and capability checks |
-| src/jevkit_mlx/session.py | Versioned state and atomic execution; backend uses official cache primitives |
+| src/jev_mlx/ | Public decision contract and orchestration |
+| src/jev_mlx/backends/ | Official MLX-LM integration and capability checks |
+| src/jev_mlx/session.py | Versioned state and atomic execution; backend uses official cache primitives |
 | examples/ | Python examples and local interactive desktop demo |
 | benchmarks/ | Synthetic fixtures, baselines and measurement commands |
 | tests/ | Contract, numerical parity and state lifecycle checks |

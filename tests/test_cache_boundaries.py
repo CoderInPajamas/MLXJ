@@ -4,9 +4,9 @@ import copy
 from collections import OrderedDict
 from types import SimpleNamespace
 
-from jevkit_mlx.backends import mlx_lm as backend_module
-from jevkit_mlx.backends.mlx_lm import MLXLMBackend
-from jevkit_mlx.prompt import PreparedPrompt
+from jev_mlx.backends import mlx_lm as backend_module
+from jev_mlx.backends.mlx_lm import MLXLMBackend
+from jev_mlx.prompt import PreparedPrompt
 
 
 class NearestSnapshotDouble:

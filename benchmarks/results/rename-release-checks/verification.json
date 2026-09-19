@@ -1,0 +1,93 @@
+{
+  "recorded_utc": "2026-09-19T08:29:39.899460+00:00",
+  "project": "JEV MLX",
+  "distribution": "jev-mlx",
+  "import_module": "jev_mlx",
+  "console_scripts": [
+    "jev-mlx"
+  ],
+  "version": "0.1.0",
+  "python": "3.13.2",
+  "architecture": "arm64",
+  "source_base_commit": "44a3acc362be0c43a194db441251de1ec3ab16c8",
+  "source_worktree_dirty": true,
+  "source_sha256": {
+    "src/jev_mlx/server.py": "28429f79193f8ee4982904a95615bd3c5d7287f26351798e5897edcae9fa74bc",
+    "src/jev_mlx/session.py": "25e05c1866d9fd30360c4dc5d97cee7b7c7086570b9454434c5332ce10d06436",
+    "src/jev_mlx/__init__.py": "b2aba21e21a700d9e86c4f336ab8c123c0b6bca9ea984715018bfd9303b25023",
+    "src/jev_mlx/types.py": "f58e3d27a2fd2ea3ace839cdef75b50aa3fe793c8a47a56ce043e21f1b4c5c94",
+    "src/jev_mlx/engine.py": "10aebdb027d54fbc42f49f7a249abc2f4149b613de6d063c5e91fe300ba15baa",
+    "src/jev_mlx/cli.py": "0af502fd7fa13077ec0fff465b104024ae520342e646ecc90617644f0f923ab5",
+    "src/jev_mlx/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/jev_mlx/prompt.py": "8d0b340fb804a83ad37a6ee6a0feca39b4af061598712a2078ae1903e3c76f6b",
+    "src/jev_mlx/demo.py": "cbf21b0375eb9b027ba904d4f739f977627c8777d2a5113f5d2321ebffd8d8bf",
+    "src/jev_mlx/backends/mlx_lm.py": "9925f8da4c7b8b9ab6c879d0d2f354170365792a5f886b142ca339af5254d84c",
+    "src/jev_mlx/backends/__init__.py": "3262ab71b23c6b43d5d4ad4fbec4ec8f62ba43547cdbdad717493a595a5e6220",
+    "src/jev_mlx/static/index.html": "56c69509b07363b3d04c0abd27d396850b6e7b963e0adb27a7185d1d0608fcb3",
+    "src/jev_mlx/static/style.css": "f5ce78d77248673db37265669357dff2314161ea08a072889dc54a3d2cc47afe",
+    "src/jev_mlx/static/app.js": "4bb98c2e3699eea3f8ed44b053f62d72d6b0a54b34859cdda7f79971d2403eb1"
+  },
+  "core_tests": {
+    "unique_tests_passed": 145,
+    "model_tests_deselected": 2,
+    "initial_command": "python -m pytest -m 'not model' -q",
+    "initial_result": {
+      "passed": 138,
+      "setup_errors": 7,
+      "elapsed_seconds": 0.43,
+      "exit_code": 1
+    },
+    "initial_error_reason": "Sandbox denied loopback socket binding in seven HTTP fixtures; no assertion failed.",
+    "http_retry": {
+      "command": "python -m pytest tests/test_server.py -q",
+      "environment": "outside sandbox, temporary loopback ports",
+      "passed": 8,
+      "elapsed_seconds": 3.57,
+      "exit_code": 0
+    },
+    "note": "The HTTP retry includes one test that already passed in the first run. All 145 distinct core tests passed across these runs."
+  },
+  "lint": {
+    "command": "python -m ruff check src tests benchmarks scripts examples",
+    "exit_code": 0
+  },
+  "browser_evidence_overwrite_guard": {
+    "command": "python examples/browser_smoke.py --output docs/assets/browser-demo",
+    "exit_code": 2,
+    "expected_exit_code": 2,
+    "existing_evidence_unchanged": true
+  },
+  "wheel": {
+    "filename": "jev_mlx-0.1.0-py3-none-any.whl",
+    "sha256": "ab5a85046b94538f6a6abf6e1d3240172afc59014732e248bff0ae41de32f769",
+    "installed_in_fresh_separate_environment": true,
+    "real_cli_invoked_outside_checkout": true,
+    "command": "JEV_MLX_MODEL=/path/to/local/Qwen3.5-9B-OptiQ-4bit jev-mlx decide --request /path/to/examples/decision.json",
+    "exit_code": 0,
+    "package_files_byte_equal_to_source": 14,
+    "candidate_id": "player.pause",
+    "state_version": 3,
+    "model": "Qwen3.5-9B-OptiQ-4bit",
+    "decision_ms": 2750.8991659997264,
+    "evidence": "wheel-cli-smoke.json"
+  },
+  "readme_preview": {
+    "renderer": "Local GitHub-like Markdown HTML; not a deployed GitHub page",
+    "viewports_px": [
+      1440,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "whole_page_horizontal_overflow": false,
+    "banner_note": "Both name components are readable at mobile width; small decorative banner captions require desktop width. Core information is repeated as Markdown text."
+  },
+  "historical_evidence_unchanged": true,
+  "quality_benchmarks_rerun_for_rename": false,
+  "real_browser_model_suite_rerun_for_rename": false,
+  "published": false,
+  "remote_ci_executed": false,
+  "note": "Brand/package/import/CLI migration with one actual installed-wheel model decision, not a new quality or performance benchmark. Original benchmark and recorded browser artifacts remain under the former project name."
+}

@@ -1,12 +1,12 @@
 # Attribution and scope
 
-JEVKit MLX is independently maintained under MIT. The project name and typed,
+JEV MLX is independently maintained under MIT. The project name and typed,
 state-aware decision interface are inspired by [TypeSafe AI's Jev](https://docs.typesafe.ai/).
 There is no affiliation, endorsement, Jev checkpoint, or reproduction of unpublished RLCD.
 
 Runtime functionality is provided by [MLX](https://github.com/ml-explore/mlx) and
 [MLX-LM](https://github.com/ml-explore/mlx-lm), Copyright Apple Inc., MIT licensed.
-JEVKit calls their public model loader, quantized output heads, cache factory,
+JEV MLX calls their public model loader, quantized output heads, cache factory,
 LRUPromptCache and generation routines. These dependencies retain their own licenses;
 their source is not vendored into this repository.
 

@@ -45,7 +45,7 @@ class MLXLMBackend:
             from mlx_lm.models.cache import LRUPromptCache, make_prompt_cache
         except ImportError as exc:
             raise RuntimeError(
-                "Install jevkit-mlx[mlx] on Apple Silicon to use this backend"
+                "Install jev-mlx[mlx] on Apple Silicon to use this backend"
             ) from exc
         self.mx = mx
         self.model, self.tokenizer, config = load(

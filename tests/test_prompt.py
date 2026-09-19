@@ -1,7 +1,7 @@
 import pytest
 
-from jevkit_mlx import Candidate, DecisionRequest
-from jevkit_mlx.prompt import compile_choices, prepare_prompt
+from jev_mlx import Candidate, DecisionRequest
+from jev_mlx.prompt import compile_choices, prepare_prompt
 
 
 class CharacterTokenizer:

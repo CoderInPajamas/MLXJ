@@ -1,5 +1,15 @@
 # Recorded results for 0.1
 
+The project is now named **JEV MLX**. The measurements, original release-candidate
+checks, screenshots, and recordings below were collected under its former name,
+**JEVKit MLX**. Their metadata still identifies `jevkit-mlx`, the `jevkit_mlx`
+module, original source paths, and recorded commit/file hashes. Those evidence
+files and media have not been rewritten or renamed to imply a new measurement.
+Current reproduction commands use the `jev-mlx` CLI, the `jev_mlx` Python module,
+and `JEV_MLX_MODEL`. Separate verification of the
+renamed package is recorded in
+[rename release checks](../benchmarks/results/rename-release-checks/verification.json).
+
 The revised cache runtime produces consistent local decisions across fresh and
 reused prefixes, with clear semantic limits. Qwen direct decisions reached
 **25/28 correct (89.3%)** in each cache condition, with warm-page **171.7 / 176.4 ms
@@ -546,6 +556,10 @@ and the retained harness-failure note. Use the checksums delivered with the fina
 distribution to identify exact artifacts; byte sizes are not used as artifact
 identity in this report.
 
+These historical checks used the former package name; they do not by themselves
+verify that renamed distributions import or install correctly. The separate
+rename verification linked above covers that packaging change.
+
 These are local release-preparation checks. GitHub CI is configured but has not
 run remotely, and no public GitHub push or package-registry upload has been
 performed. Publication requires the explicitly chosen destination and account
@@ -561,21 +575,21 @@ source uses the cache-boundary revision described above; retain new source hashe
 with reruns and do not treat them as reproductions of the old runtime timings.
 
 ```sh
-python -m benchmarks.run --model "$JEVKIT_MLX_MODEL" --split test \
+python -m benchmarks.run --model "$JEV_MLX_MODEL" --split test \
   --modes direct code json --repeats 1 --margin-threshold 0 \
   --parity --parity-atol 0.5 --parity-rtol 0 --parity-score-atol 0.1 \
   --output results/reproduction-primary
-python -m benchmarks.run --model "$JEVKIT_MLX_MODEL" --split test \
+python -m benchmarks.run --model "$JEV_MLX_MODEL" --split test \
   --modes json_code --repeats 1 --margin-threshold 0 \
   --output results/reproduction-json-code
 
 # Revised-runtime direct verification; repeat separately for each checkpoint.
-python -m benchmarks.run --model "$JEVKIT_MLX_MODEL" --split test \
+python -m benchmarks.run --model "$JEV_MLX_MODEL" --split test \
   --modes direct --repeats 1 --margin-threshold 0 --parity \
   --output results/reproduction-cache-fixed
 
 # First fixture only: Qwen used 3 repetitions; GLM used 2.
-python -m benchmarks.cold_start --model "$JEVKIT_MLX_MODEL" \
+python -m benchmarks.cold_start --model "$JEV_MLX_MODEL" \
   --modes direct code json json_code --repeats 3 \
   --output results/reproduction-process-cold
 ```

@@ -5,10 +5,10 @@ from threading import Event
 
 import pytest
 
-from jevkit_mlx.demo import DemoController, DemoError, Desktop
-from jevkit_mlx.engine import MLXDecisionEngine
-from jevkit_mlx.session import StaleDecisionError
-from jevkit_mlx.types import ABSTAIN_ID, NO_MATCH_ID, BackendOutput
+from jev_mlx.demo import DemoController, DemoError, Desktop
+from jev_mlx.engine import MLXDecisionEngine
+from jev_mlx.session import StaleDecisionError
+from jev_mlx.types import ABSTAIN_ID, NO_MATCH_ID, BackendOutput
 
 
 class StubBackend:

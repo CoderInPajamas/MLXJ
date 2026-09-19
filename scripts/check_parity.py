@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from jevkit_mlx import Candidate, DecisionRequest, MLXDecisionEngine
+from jev_mlx import Candidate, DecisionRequest, MLXDecisionEngine
 
 
 def main():

@@ -3,7 +3,7 @@
 import argparse
 import json
 
-from jevkit_mlx import Candidate, DecisionSession, MLXDecisionEngine
+from jev_mlx import Candidate, DecisionSession, MLXDecisionEngine
 
 
 def main():

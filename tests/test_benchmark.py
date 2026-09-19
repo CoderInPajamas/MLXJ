@@ -9,7 +9,7 @@ from benchmarks.metrics import grouped_summary, outcome, percentile, summarize
 from benchmarks.recompute import main as recompute_main
 from benchmarks.recompute import recompute
 from benchmarks.run import attempt, exit_code, parity_attempt, run_summary
-from jevkit_mlx import BackendOutput
+from jev_mlx import BackendOutput
 
 
 def trial(expected="pause", predicted="pause", *, error=None, schema_valid=True, **extra):

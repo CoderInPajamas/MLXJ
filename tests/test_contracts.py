@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from jevkit_mlx import (
+from jev_mlx import (
     ABSTAIN_ID,
     NO_MATCH_ID,
     BackendOutput,

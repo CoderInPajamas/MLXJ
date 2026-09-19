@@ -2,9 +2,14 @@
 
 ## 0.1.0 — prepared release
 
-Initial experimental JEVKit MLX implementation. Public repository/registry
+Initial experimental JEV MLX implementation. Public repository/registry
 publication is tracked separately from preparing this source release.
 
+- Public branding changed from JEVKit MLX to JEV MLX before publication. The
+  distribution and CLI are `jev-mlx`, and the module is `jev_mlx`. Current model
+  variables are `JEV_MLX_MODEL` and `JEV_TEST_MODEL`.
+  Original benchmark metadata, source hashes, screenshots, and recordings retain
+  their historical names and contents; see [results](docs/results.md).
 - Installable Python package with dynamic enum and typed boolean requests,
   no-match and abstention, logits, restricted scores, raw margin, model identity,
   completed-work timing, and cache metadata.

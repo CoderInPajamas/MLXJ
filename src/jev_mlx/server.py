@@ -36,7 +36,7 @@ class LocalServer(ThreadingHTTPServer):
 
 class RequestHandler(BaseHTTPRequestHandler):
     server: LocalServer
-    server_version = "JEVKitMLX/0.1"
+    server_version = "JEVMLX/0.1"
 
     def log_message(self, format: str, *args: Any) -> None:
         LOGGER.info("%s %s", self.client_address[0], format % args)
@@ -97,7 +97,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 200,
                 {
                     "status": "ready",
-                    "project": "JEVKit MLX",
+                    "project": "JEV MLX",
                     "backend": "local",
                     "state_version": self.server.controller.snapshot()["state_version"],
                 },
@@ -111,7 +111,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 "app.js": "application/javascript; charset=utf-8",
                 "style.css": "text/css; charset=utf-8",
             }[name]
-            self._send(200, files("jevkit_mlx").joinpath("static", name).read_bytes(), mime)
+            self._send(200, files("jev_mlx").joinpath("static", name).read_bytes(), mime)
         else:
             self._json(404, {"error": "not_found"})
 
@@ -219,7 +219,7 @@ def create_server(engine: Any, *, host: str = "127.0.0.1", port: int = 8765) -> 
 
 def serve(engine: Any, *, host: str = "127.0.0.1", port: int = 8765) -> None:
     with create_server(engine, host=host, port=port) as server:
-        print(f"JEVKit MLX demo: http://127.0.0.1:{server.server_port}", flush=True)
+        print(f"JEV MLX demo: http://127.0.0.1:{server.server_port}", flush=True)
         try:
             server.serve_forever()
         except KeyboardInterrupt:

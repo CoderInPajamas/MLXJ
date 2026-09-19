@@ -42,7 +42,7 @@ has changed since this local copy was downloaded.
 | [mlx-community/GLM-4.7-Flash-4bit](https://huggingface.co/mlx-community/GLM-4.7-Flash-4bit/tree/1454cffb1a21737e162f508e5bc70be9def89276) | `1454cffb1a21737e162f508e5bc70be9def89276` |
 
 For exact reproduction, obtain that revision separately, compare hashes, and pass
-the local directory to JEVKit. The package neither includes nor modifies model weights.
+the local directory to JEV MLX. The package neither includes nor modifies model weights.
 It disables remote tokenizer code. The default prompt limit is 4,096 tokens; prompts
 over that bound fail explicitly. In addition to weights, allow memory for snapshots,
 temporary compute arrays, the allocator and your other applications. No system
@@ -52,5 +52,5 @@ The Qwen base checkpoint is under [Apache 2.0](https://huggingface.co/Qwen/Qwen3
 also declared by the [OptiQ conversion card](https://huggingface.co/mlx-community/Qwen3.5-9B-OptiQ-4bit).
 The [GLM base card](https://huggingface.co/zai-org/GLM-4.7-Flash) and
 [MLX conversion card](https://huggingface.co/mlx-community/GLM-4.7-Flash-4bit) declare MIT.
-Those are separate from JEVKit's MIT license. No Jev weights or training artifacts
+Those are separate from JEV MLX's MIT license. No Jev weights or training artifacts
 are used.

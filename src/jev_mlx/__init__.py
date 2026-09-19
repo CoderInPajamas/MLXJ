@@ -1,4 +1,4 @@
-"""JEVKit MLX: JEV-inspired local decisions for Apple Silicon."""
+"""JEV MLX: JEV-inspired local decisions for Apple Silicon."""
 
 from .engine import DecisionBackend, MLXDecisionEngine
 from .session import (

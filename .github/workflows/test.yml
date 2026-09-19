@@ -35,8 +35,8 @@ jobs:
         run: |
           python -m pip install --force-reinstall --no-deps dist/*.whl
           cd "$(mktemp -d)"
-          python -c 'from jevkit_mlx import __version__; print(__version__)'
-          jevkit --help
+          python -c 'from jev_mlx import __version__; print(__version__)'
+          jev-mlx --help
       - uses: actions/upload-artifact@v4
         with:
           name: distributions-python-${{ matrix.python-version }}

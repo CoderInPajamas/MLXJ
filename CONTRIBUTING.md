@@ -1,4 +1,4 @@
-# Contributing to JEVKit MLX
+# Contributing to JEV MLX
 
 Use a dedicated environment and a local model directory. Do not install into a
 shared inference environment, modify model weights, or stop other applications
@@ -15,7 +15,7 @@ python -m build
 ```
 
 On Apple Silicon, install `'.[mlx,dev]'` for real inference. Run one checkpoint
-at a time and explicitly set `JEVKIT_TEST_MODEL` for `tests/test_model.py`. Core
+at a time and explicitly set `JEV_TEST_MODEL` for `tests/test_model.py`. Core
 tests use injected backends; they do not prove model quality, Metal execution,
 or real-checkpoint cache correctness.
 

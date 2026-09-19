@@ -3,7 +3,7 @@
 Start the real MLX backend with a separate local checkpoint:
 
 ```sh
-jevkit serve --model /path/to/local/mlx-model --port 8765
+jev-mlx serve --model /path/to/local/mlx-model --port 8765
 ```
 
 Open `http://127.0.0.1:8765` in a browser. The server only binds to loopback and
@@ -36,7 +36,7 @@ The same handler accepts manual clicks. A model click sends its issued ticket to
 the executor; the executor verifies the original choice, current state version,
 and single use before applying a transition. The receipt records the executed
 action and before/after versions; the browser then renders the returned state.
-The browser dispatches a `jevkit:receipt` event containing that receipt and the
+The browser dispatches a `jev-mlx:receipt` event containing that receipt and the
 observed view for integration tests.
 
 This is a real browser interaction over a bounded, local application. It is not
@@ -116,10 +116,12 @@ service should remain on loopback.
 
 ## CLI
 
+The command is `jev-mlx`, keeping both JEV and MLX in the executable name.
+
 ```sh
-jevkit decide --model /path/to/local/mlx-model --request examples/decision.json
-cat examples/decision.json | jevkit decide --model /path/to/local/mlx-model
-JEVKIT_MLX_MODEL=/path/to/local/mlx-model jevkit serve
+jev-mlx decide --model /path/to/local/mlx-model --request examples/decision.json
+cat examples/decision.json | jev-mlx decide --model /path/to/local/mlx-model
+JEV_MLX_MODEL=/path/to/local/mlx-model jev-mlx serve
 ```
 
 `--no-cache` disables prefix reuse for the CLI request. A one-shot CLI command

@@ -6,8 +6,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from jevkit_mlx.backends.mlx_lm import MLXLMBackend
-from jevkit_mlx.prompt import CompiledChoice
+from jev_mlx.backends.mlx_lm import MLXLMBackend
+from jev_mlx.prompt import CompiledChoice
 
 
 @pytest.fixture

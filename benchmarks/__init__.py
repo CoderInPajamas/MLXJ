@@ -1,1 +1,1 @@
-"""Reproducible, public synthetic evaluation for JEVKit MLX."""
+"""Reproducible, public synthetic evaluation for JEV MLX."""

@@ -11,7 +11,7 @@ from pathlib import Path
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="jevkit", description="JEV-inspired local decisions for Apple Silicon."
+        prog="jev-mlx", description="JEV-inspired local decisions for Apple Silicon."
     )
     sub = parser.add_subparsers(dest="command", required=True)
     decide = sub.add_parser(
@@ -29,12 +29,12 @@ def main(argv: list[str] | None = None) -> int:
     for command in (decide, web):
         command.add_argument(
             "--model",
-            default=os.environ.get("JEVKIT_MLX_MODEL"),
-            help="Local MLX-LM model directory, or JEVKIT_MLX_MODEL.",
+            default=os.environ.get("JEV_MLX_MODEL"),
+            help="Local MLX-LM model directory, or JEV_MLX_MODEL.",
         )
     args = parser.parse_args(argv)
     if not args.model:
-        parser.error("provide --model or set JEVKIT_MLX_MODEL to a local model directory")
+        parser.error("provide --model or set JEV_MLX_MODEL to a local model directory")
     try:
         from .engine import MLXDecisionEngine
         from .server import request_from_dict, serve
@@ -50,7 +50,7 @@ def main(argv: list[str] | None = None) -> int:
             serve(engine, host=args.host, port=args.port)
         return 0
     except (ValueError, OSError, ImportError, RuntimeError) as exc:
-        print(f"jevkit: {exc}", file=sys.stderr)
+        print(f"jev-mlx: {exc}", file=sys.stderr)
         return 1
 
 

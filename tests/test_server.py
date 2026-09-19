@@ -7,9 +7,9 @@ from threading import Event, Thread
 
 import pytest
 
-from jevkit_mlx.engine import MLXDecisionEngine
-from jevkit_mlx.server import MAX_BODY_BYTES, create_server, request_from_dict
-from jevkit_mlx.types import ABSTAIN_ID, NO_MATCH_ID, BackendOutput
+from jev_mlx.engine import MLXDecisionEngine
+from jev_mlx.server import MAX_BODY_BYTES, create_server, request_from_dict
+from jev_mlx.types import ABSTAIN_ID, NO_MATCH_ID, BackendOutput
 
 
 class StubBackend:
@@ -67,7 +67,7 @@ def test_health_static_demo_and_no_external_dependencies(running_server):
     assert request(server, "/health")[1]["status"] == "ready"
     status, html, headers = request(server, "/")
     assert status == 200
-    assert "JEVKit MLX" in html
+    assert "JEV MLX" in html
     assert "http://" not in html and "https://" not in html
     assert "frame-ancestors 'none'" in headers["Content-Security-Policy"]
     assert "Access-Control-Allow-Origin" not in headers
