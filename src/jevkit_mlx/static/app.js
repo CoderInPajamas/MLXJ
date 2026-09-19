@@ -76,7 +76,7 @@ async function handleAction(element) {
   try {
     const response = ticket ? await api("/api/demo/execute",{ticket,action_id:actionId}) : await api("/api/demo/action",{action_id:actionId,state_version:current.state_version});
     render(response);
-    const receipt = {...response.receipt, browser_event:"DOM button click", element:`[data-action="${actionId}"]`, observed_view:response.state.view};
+    const receipt = {...response.receipt, browser_event:"DOM button click", element:`[data-action="${actionId}"]`, observed_view:current.state.view, observed_state_version:current.state_version};
     showReceipt(receipt);
     byId("notice").textContent = "";
     document.dispatchEvent(new CustomEvent("jevkit:receipt",{detail:receipt}));

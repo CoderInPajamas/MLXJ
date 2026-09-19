@@ -173,6 +173,27 @@ def test_manual_page_changes_while_model_is_working():
     assert response["state"]["view"] == "notes"
 
 
+def test_page_change_after_session_returns_before_response_is_published(monkeypatch):
+    demo, _ = controller()
+    session_decide = demo._session.decide
+
+    def decide_then_change_page(utterance):
+        result = session_decide(utterance)
+        # Deterministically reproduce another request acquiring the desktop
+        # lock between the completed session decision and response publication.
+        act(demo, "open.notes")
+        return result
+
+    monkeypatch.setattr(demo._session, "decide", decide_then_change_page)
+    response = demo.decide("Test request")
+    assert response["result"]["status"] == "stale"
+    assert response["result"]["candidate_id"] is None
+    assert response["result"]["raw_selected_id"] == "open.library"
+    assert response["browser_operation"] is None
+    assert response["state_version"] == 1
+    assert response["state"]["view"] == "notes"
+
+
 def test_manual_action_requires_exact_version():
     demo, _ = controller()
     act(demo, "open.library")

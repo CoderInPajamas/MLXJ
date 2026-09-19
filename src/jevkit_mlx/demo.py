@@ -7,7 +7,7 @@ decision engine; the browser and executor can only apply a current allowed actio
 from __future__ import annotations
 
 from collections import OrderedDict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from threading import RLock
 from typing import Any
 
@@ -282,6 +282,11 @@ class DemoController:
         result = self._session.decide(utterance)
         operation = None
         with self._lock:
+            # A manual request may update state after Session.decide returns
+            # but before this response acquires the desktop lock. Reconcile
+            # once more while publishing its state and possible operation.
+            if result.state_version != self._version:
+                result = replace(result, status="stale", candidate_id=None, selected_value=None)
             if result.status == "selected" and result.candidate_id:
                 self._tickets[result.request_id] = result
                 while len(self._tickets) > 128:

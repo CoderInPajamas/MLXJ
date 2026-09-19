@@ -419,10 +419,11 @@ def main(argv: list[str] | None = None) -> int:
             safe = state()["view"] == "notes" and version() == before + 1
             report["state_change_check"] = {
                 "result": result,
-                "inference_overlap_proven": overlap,
+                "decision_request_overlap_proven": overlap,
+                "gpu_compute_overlap_measured": False,
                 "old_result_not_executed": safe,
                 "observed_state": state(),
-                "note": "Concurrent change was observed during inference."
+                "note": "State changed before the decision response was finalized; GPU-compute overlap is not separately measured."
                 if overlap
                 else "Model completed before a concurrent overlap was proven; the held old result was still rejected after the page changed.",
             }

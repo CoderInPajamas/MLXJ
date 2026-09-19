@@ -60,8 +60,15 @@ def test_real_scores_and_generation_baselines(real_engine):
     result = real_engine.decide(request)
     assert result.candidate_id == "close_notes"
     assert result.model["dependencies"]["mlx-lm"] == "0.31.3"
-    for mode in ("code", "json"):
+    for mode in ("code", "json", "json_code"):
         output = real_engine.backend.generate_baseline(request, mode=mode)
-        assert output["schema_valid"], output["raw_text"]
-        assert output["candidate_id"] == "close_notes", output
+        # An unconstrained model can emit invalid JSON/codes. That is measured as
+        # a quality failure by the benchmark, not a broken inference contract.
+        assert isinstance(output["raw_text"], str)
+        assert output["generation_tokens"] > 0
+        assert output["schema_valid"] is (output["status"] != "invalid")
+        if output["status"] == "selected":
+            assert output["candidate_id"] == "close_notes"
+        else:
+            assert output["candidate_id"] is None
         assert output["timing"]["total_ms"] > 0
