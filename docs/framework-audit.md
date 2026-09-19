@@ -19,8 +19,14 @@ masks are introduced.
 The Qwen3.5 source creates one two-array recurrent cache for each linear layer and
 a KV cache for each full-attention layer. `LRUPromptCache.fetch_nearest_cache`
 deep-copies saved caches. It can trim only when every constituent cache supports
-trimming; otherwise it returns a saved shorter prefix. The SDK preserves exactly
-such a prefix before page data. No later state survives a changed earlier token.
+trimming; otherwise it returns a saved shorter prefix. The final SDK accepts only
+exact page or exact system snapshots. They use separate namespaces in one bounded
+official LRU, so inserting a trimmable page cannot remove the saved system prefix.
+In the pinned 0.31.3 implementation, only exact retrieval has an empty suffix;
+trimmed retrieval always leaves at least one suffix token. The SDK discards those
+partial matches after a GLM page-update parity failure demonstrated that they
+could change numerical results. This observation does not establish a framework
+bug or its numerical cause. No later state survives a changed earlier token.
 
 Source inspection also confirms that `generate_step(max_tokens=1)` schedules a
 subsequent `_step` before yielding the first token. Our direct scorer instead runs

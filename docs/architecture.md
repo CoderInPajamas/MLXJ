@@ -94,7 +94,8 @@ Memory peaks are process-lifetime values, not per-decision allocations.
 
 The implementation reuses official `make_prompt_cache` and `LRUPromptCache`;
 see the [framework audit](framework-audit.md). Cache namespaces separate sessions
-and output modes. Actual token sequences identify reusable content. State version
+and output modes, with separate system/page snapshot namespaces under one shared
+LRU capacity limit. Actual token sequences identify reusable content. State version
 is host metadata rather than an answer-cache key.
 
 Two full snapshot boundaries matter:
@@ -108,7 +109,11 @@ text offsets are safe cache boundaries.
 
 The same page with a new utterance can reuse the second snapshot and must compute
 the new suffix. A state, candidate, or question change invalidates its dependent
-suffix; only an earlier valid snapshot can be reused. Hybrid models such as
+suffix; only the complete saved system snapshot can then be reused. The SDK
+discards nearest-cache matches trimmed at intermediate positions, including for
+attention-only models. This keeps prefill boundaries aligned with fresh calls;
+the earlier GLM numerical failure and subsequent validation are recorded in
+[results](results.md). Hybrid models such as
 Qwen3.5 include recurrent/convolution state as well as attention KV. Full earlier
 snapshots preserve both. The implementation does not roll recurrent state back
 like KV, replace a middle prefix while retaining later state, or invent an

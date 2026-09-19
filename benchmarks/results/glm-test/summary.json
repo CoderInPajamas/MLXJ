@@ -1,0 +1,162 @@
+{
+  "completed": 112,
+  "planned": 112,
+  "measurements_complete": true,
+  "complete": true,
+  "groups": {
+    "code/same_page_new_utterance": {
+      "attempts": 28,
+      "counts": {
+        "correct": 5,
+        "selected": 3,
+        "executable": 18,
+        "false_action": 0,
+        "rejected": 8,
+        "abstained": 7,
+        "schema_valid": 11,
+        "failed": 0,
+        "raw_choice_available": 11,
+        "raw_correct": 5,
+        "raw_selected": 3,
+        "raw_false_action": 0
+      },
+      "accuracy": 0.17857142857142858,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 0.17857142857142858,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": 0.0,
+      "rejection_rate": 0.2857142857142857,
+      "abstention_rate": 0.25,
+      "executable_request_coverage": 0.16666666666666666,
+      "selection_rate_on_executable_requests": 0.16666666666666666,
+      "schema_validity": 0.39285714285714285,
+      "latency_ms": {
+        "successful_attempts": 28,
+        "p50": 335.91770850034663,
+        "p95": 810.7060516500494
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "direct/same_page_new_utterance": {
+      "attempts": 28,
+      "counts": {
+        "correct": 14,
+        "selected": 12,
+        "executable": 18,
+        "false_action": 2,
+        "rejected": 16,
+        "abstained": 12,
+        "schema_valid": 28,
+        "failed": 0,
+        "raw_choice_available": 28,
+        "raw_correct": 15,
+        "raw_selected": 14,
+        "raw_false_action": 3
+      },
+      "accuracy": 0.5,
+      "false_action_rate": 0.07142857142857142,
+      "raw_choice_accuracy": 0.5357142857142857,
+      "raw_false_action_rate": 0.10714285714285714,
+      "false_action_rate_among_selections": 0.16666666666666666,
+      "rejection_rate": 0.5714285714285714,
+      "abstention_rate": 0.42857142857142855,
+      "executable_request_coverage": 0.5555555555555556,
+      "selection_rate_on_executable_requests": 0.5555555555555556,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 28,
+        "p50": 191.42822900175815,
+        "p95": 652.5215664507414
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "json/same_page_new_utterance": {
+      "attempts": 28,
+      "counts": {
+        "correct": 19,
+        "selected": 19,
+        "executable": 18,
+        "false_action": 3,
+        "rejected": 3,
+        "abstained": 0,
+        "schema_valid": 22,
+        "failed": 0,
+        "raw_choice_available": 22,
+        "raw_correct": 19,
+        "raw_selected": 19,
+        "raw_false_action": 3
+      },
+      "accuracy": 0.6785714285714286,
+      "false_action_rate": 0.10714285714285714,
+      "raw_choice_accuracy": 0.6785714285714286,
+      "raw_false_action_rate": 0.10714285714285714,
+      "false_action_rate_among_selections": 0.15789473684210525,
+      "rejection_rate": 0.10714285714285714,
+      "abstention_rate": 0.0,
+      "executable_request_coverage": 0.8888888888888888,
+      "selection_rate_on_executable_requests": 0.9444444444444444,
+      "schema_validity": 0.7857142857142857,
+      "latency_ms": {
+        "successful_attempts": 28,
+        "p50": 576.750896001613,
+        "p95": 1900.1091670954331
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "json_code/same_page_new_utterance": {
+      "attempts": 28,
+      "counts": {
+        "correct": 5,
+        "selected": 3,
+        "executable": 18,
+        "false_action": 0,
+        "rejected": 9,
+        "abstained": 8,
+        "schema_valid": 12,
+        "failed": 0,
+        "raw_choice_available": 12,
+        "raw_correct": 5,
+        "raw_selected": 3,
+        "raw_false_action": 0
+      },
+      "accuracy": 0.17857142857142858,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 0.17857142857142858,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": 0.0,
+      "rejection_rate": 0.32142857142857145,
+      "abstention_rate": 0.2857142857142857,
+      "executable_request_coverage": 0.16666666666666666,
+      "selection_rate_on_executable_requests": 0.16666666666666666,
+      "schema_validity": 0.42857142857142855,
+      "latency_ms": {
+        "successful_attempts": 28,
+        "p50": 507.10247949973564,
+        "p95": 1558.8043125961115
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    }
+  },
+  "parity": {
+    "completed": 28,
+    "planned": 28,
+    "passed": 3,
+    "failed": 25
+  }
+}

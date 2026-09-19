@@ -157,7 +157,8 @@ nonzero code. Model-driven actions go through the demo's real browser controls;
 setup operations are explicitly logged as manual clicks.
 
 The race check starts inference and changes the page through a manual DOM click.
-It reports whether actual overlap was observed. If the model finishes too fast
+It reports whether the state changed before the decision request was finalized;
+it does not separately instrument GPU-compute overlap. If the model finishes too fast
 to prove overlap, it reports that limitation and still verifies rejection of a
 held decision after a page update. The loading check records its changing action
 set and separates a stale result from its raw semantic choice. Neither an

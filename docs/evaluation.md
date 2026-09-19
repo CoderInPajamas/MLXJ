@@ -157,6 +157,21 @@ Reporting code can also call `benchmarks.metrics.summarize(rows)` or
 `grouped_summary(rows)` directly. Existing status-based metrics retain their
 original definitions; the derived report adds raw-choice metrics alongside them.
 
+Before publication, compare reviewed copies with the original run and verify its
+schedule, frozen labels, metric totals, retained invalid outputs, and actual
+prefix reuse without loading a model:
+
+```sh
+python -m benchmarks.audit runs/example --public benchmarks/results/example \
+  --source-revision <recorded-source-commit>
+```
+
+The audit exits unsuccessfully on incomplete runs, evidence-copy differences,
+incorrect derived totals, missing preparation costs, or a declared cache cohort
+without the expected reuse. Recorded model errors remain valid evidence and are
+counted in its report. Derived metric reports are verified against the source
+trial hash instead of being mistaken for immutable copies of original outputs.
+
 The backend synchronizes actual MLX computations before returning. Outer wall
 time includes request/result orchestration. Process cold-start wall time is
 measured by the parent process. Model loading failures and subprocess timeouts

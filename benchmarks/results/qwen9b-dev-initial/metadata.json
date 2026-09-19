@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "model_name": "Qwen3.5-9B-OptiQ-4bit",
+  "environment": {
+    "python": "3.13.2",
+    "dependencies": {
+      "jevkit-mlx": "0.1.0",
+      "mlx": "0.31.2",
+      "mlx-lm": "0.31.3",
+      "mlx-metal": "0.31.2",
+      "transformers": "5.9.0",
+      "tokenizers": "0.22.2",
+      "numpy": "2.5.3"
+    },
+    "hardware": {
+      "architecture": "arm64",
+      "system": "Darwin",
+      "release": "25.6.0",
+      "hw.model": "Mac14,6",
+      "machdep.cpu.brand_string": "Apple M2 Max",
+      "hw.memsize": "68719476736",
+      "hw.ncpu": "12"
+    },
+    "git_commit": null,
+    "git_worktree_dirty": true
+  },
+  "fixtures": {
+    "schema_version": 1,
+    "origin": "Written from scratch for JEVKit MLX. Fictional courses, interface states, and utterances; no production exports.",
+    "test_frozen_before_inference": true,
+    "threshold_policy": "Default margin threshold 0.0 fixed before test evaluation. No test-driven threshold tuning.",
+    "files": {
+      "dev.jsonl": {
+        "sha256": "610114cd493232ffd05a9dc5ffe6dd355b1bc3d7c1ad62f65ff02f5c413f6e16",
+        "rows": 16
+      },
+      "test.jsonl": {
+        "sha256": "e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3",
+        "rows": 28
+      }
+    }
+  },
+  "split": "dev",
+  "scope": "full",
+  "case_count": 16,
+  "full_split_case_count": 16,
+  "modes": [
+    "direct"
+  ],
+  "conditions": [
+    "same_page_new_utterance"
+  ],
+  "repeats": 1,
+  "seed": 20260919,
+  "margin_threshold": 0.0,
+  "generation": {
+    "sampling": "greedy",
+    "code_max_tokens": 1,
+    "json_max_tokens": 96
+  },
+  "notes": [
+    "Model decisions scored before any execution gate.",
+    "Preparation calls are recorded and excluded from measured decision latency.",
+    "Wall times include backend synchronization; failed attempts are retained.",
+    "OS filesystem caches are not flushed; loaded-model inference is separate from process cold start."
+  ],
+  "engine_load_wall_ms": 3083.0382909989567,
+  "memory_after_load": {
+    "process_peak_rss_bytes": 6706659328,
+    "active_memory_bytes": 6042583560,
+    "peak_memory_bytes": 6042583560,
+    "cache_memory_bytes": 5316
+  },
+  "memory_at_end": {
+    "process_peak_rss_bytes": 6706659328,
+    "active_memory_bytes": 6520603146,
+    "peak_memory_bytes": 7181570760,
+    "cache_memory_bytes": 2935563818
+  }
+}

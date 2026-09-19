@@ -1,0 +1,38 @@
+{
+  "completed": 16,
+  "planned": 16,
+  "complete": true,
+  "groups": {
+    "direct/same_page_new_utterance": {
+      "attempts": 16,
+      "counts": {
+        "correct": 14,
+        "selected": 10,
+        "executable": 10,
+        "false_action": 1,
+        "rejected": 6,
+        "abstained": 2,
+        "schema_valid": 16,
+        "failed": 0
+      },
+      "accuracy": 0.875,
+      "false_action_rate": 0.0625,
+      "false_action_rate_among_selections": 0.1,
+      "rejection_rate": 0.375,
+      "abstention_rate": 0.125,
+      "executable_request_coverage": 0.9,
+      "selection_rate_on_executable_requests": 1.0,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 16,
+        "p50": 194.14385449999827,
+        "p95": 250.74555199535098
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    }
+  }
+}
