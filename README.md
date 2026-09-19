@@ -143,6 +143,14 @@ The course content and player are simulated; inference and DOM controls are real
 This is not arbitrary-website automation, screenshot understanding, or generated
 JavaScript execution. See the [HTTP API and demo](docs/http-and-demo.md).
 
+![A real Qwen decision pauses the fictional course player and records its DOM execution receipt](docs/assets/browser-demo/03b-player-control.png)
+
+The recorded browser run passed 16 scripted checks, plus a concurrent state-change
+check. These demo checks accept either rejection outcome for decline requests;
+the separate frozen benchmark distinguishes no-match from abstention. See the
+[complete transcript](docs/assets/browser-demo/browser-transcript.json) and
+[recorded evidence](docs/results.md) for all outcomes and the initial harness failure.
+
 ## How scoring and caching work
 
 The backend validates single-token option codes with the checkpoint's tokenizer,

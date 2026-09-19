@@ -143,8 +143,9 @@ With the real-model server already running, use a separate Playwright Chromium
 instance to operate the UI and save all outcomes:
 
 ```sh
-python -m pip install playwright
-python -m playwright install chromium
+python -m pip install -e '.[browser]'
+export PLAYWRIGHT_BROWSERS_PATH=.cache/playwright
+python -m playwright install chromium --only-shell
 python examples/browser_smoke.py --url http://127.0.0.1:8765 \
   --output output/playwright
 ```
@@ -164,7 +165,8 @@ held decision after a page update. The loading check records its changing action
 set and separates a stale result from its raw semantic choice. Neither an
 executor rejection nor a browser guard makes a wrong model answer correct.
 
-Use `--headed` to observe the run, `--no-video` to skip video recording, or
+To use `--headed`, install the full browser with `python -m playwright install chromium`
+first. Use `--no-video` to skip video recording, or
 `--executable-path /path/to/chromium` to use an existing Chromium executable in an
 isolated context. The browser dependency is optional; it is not needed for the
 SDK or HTTP service. Inspect captured model metadata and local URLs before

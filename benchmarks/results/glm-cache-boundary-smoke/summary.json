@@ -1,0 +1,51 @@
+{
+  "completed": 3,
+  "planned": 3,
+  "measurements_complete": true,
+  "complete": true,
+  "groups": {
+    "direct/page_update": {
+      "attempts": 3,
+      "counts": {
+        "correct": 1,
+        "selected": 0,
+        "executable": 2,
+        "false_action": 0,
+        "rejected": 3,
+        "abstained": 1,
+        "schema_valid": 3,
+        "failed": 0,
+        "raw_choice_available": 3,
+        "raw_correct": 1,
+        "raw_selected": 0,
+        "raw_false_action": 0
+      },
+      "accuracy": 0.3333333333333333,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 0.3333333333333333,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": null,
+      "rejection_rate": 1.0,
+      "abstention_rate": 0.3333333333333333,
+      "executable_request_coverage": 0.0,
+      "selection_rate_on_executable_requests": 0.0,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 3,
+        "p50": 1032.100750002428,
+        "p95": 1938.6082756027463
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    }
+  },
+  "parity": {
+    "completed": 3,
+    "planned": 3,
+    "passed": 3,
+    "failed": 0
+  }
+}

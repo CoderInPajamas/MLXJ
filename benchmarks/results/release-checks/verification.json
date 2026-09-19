@@ -1,0 +1,53 @@
+{
+  "recorded_utc": "2026-09-19T08:04:00.999320+00:00",
+  "core_tests": {
+    "command": "python -m pytest -m 'not model' -q",
+    "passed": 145,
+    "deselected": 2,
+    "elapsed_seconds": 3.83,
+    "exit_code": 0
+  },
+  "lint": {
+    "command": "python -m ruff check src tests benchmarks scripts examples",
+    "exit_code": 0
+  },
+  "model_tests": [
+    {
+      "checkpoint": "Qwen3.5-9B-OptiQ-4bit",
+      "passed": 2,
+      "elapsed_seconds": 23.01,
+      "exit_code": 0
+    },
+    {
+      "checkpoint": "GLM-4.7-Flash-4bit",
+      "passed": 2,
+      "elapsed_seconds": 25.11,
+      "exit_code": 0
+    }
+  ],
+  "model_test_command": "JEVKIT_TEST_MODEL=\"$JEVKIT_MLX_MODEL\" python -m pytest tests/test_model.py -q -s",
+  "browser": {
+    "cases": 16,
+    "model_correct": 16,
+    "execution_correct": 16,
+    "browser_errors": 0,
+    "model_execution_receipts": 10,
+    "state_change_old_result_rejected": true,
+    "source": "docs/assets/browser-demo/browser-transcript.json"
+  },
+  "remote_ci_executed": false,
+  "published": false,
+  "note": "These are local executed checks. Model tests verify numerical/runtime invariants; quality is reported separately in the complete fictional fixture benchmarks. Browser decline cases accept either rejection outcome.",
+  "final_wheel": {
+    "filename": "jevkit_mlx-0.1.0-py3-none-any.whl",
+    "sha256": "e75584c3d7debccb142f33271535580bbe8df38b860fdfc210ebf787179a412a",
+    "installed_in_separate_environment": true,
+    "real_cli_invoked_outside_checkout": true,
+    "candidate_id": "player.pause",
+    "state_version": 3,
+    "decision_ms": 2001.6431670010206,
+    "package_source_and_static_files_match": 14,
+    "static_assets_present": 3,
+    "model": "Qwen3.5-9B-OptiQ-4bit"
+  }
+}

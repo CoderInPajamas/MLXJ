@@ -77,6 +77,8 @@ commit/artifacts, configure that remote, publish reviewed source, and create a
 versioned release with wheel, source archive, checksums, changelog, and reproducible
 results. Upload to a package registry only when that destination is authorized.
 Record resulting URLs and immutable commit/tag in release notes.
+Before registry upload, add the chosen public project URLs and resolve README
+documentation/image links against that repository so they also render on the registry.
 
 Until then, the complete local source, distributions, checksums, documentation,
 and authentic demo evidence are the handoff. Do not invent repository URLs,

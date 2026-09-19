@@ -1,0 +1,57 @@
+{
+  "environment": {
+    "python": "3.13.2",
+    "dependencies": {
+      "jevkit-mlx": "0.1.0",
+      "mlx": "0.31.2",
+      "mlx-lm": "0.31.3",
+      "mlx-metal": "0.31.2",
+      "transformers": "5.9.0",
+      "tokenizers": "0.22.2",
+      "numpy": "2.5.3"
+    },
+    "hardware": {
+      "architecture": "arm64",
+      "system": "Darwin",
+      "release": "25.6.0",
+      "hw.model": "Mac14,6",
+      "machdep.cpu.brand_string": "Apple M2 Max",
+      "hw.memsize": "68719476736",
+      "hw.ncpu": "12"
+    },
+    "git_commit": "f79c97f6294b616c7c0cd707f278a4dd98056283",
+    "git_worktree_dirty": true,
+    "source_sha256": {
+      "src/jevkit_mlx/prompt.py": "8d0b340fb804a83ad37a6ee6a0feca39b4af061598712a2078ae1903e3c76f6b",
+      "src/jevkit_mlx/types.py": "f58e3d27a2fd2ea3ace839cdef75b50aa3fe793c8a47a56ce043e21f1b4c5c94",
+      "src/jevkit_mlx/engine.py": "10aebdb027d54fbc42f49f7a249abc2f4149b613de6d063c5e91fe300ba15baa",
+      "src/jevkit_mlx/backends/mlx_lm.py": "e02e527dab128181922ead3524acbb0e04273b66a836ae8d71468dcdb2a50315",
+      "benchmarks/common.py": "429bd0e4ba2194b819cbc4d898d81a4a0de4beb0b251befe4f70f635b6d1885e",
+      "benchmarks/run.py": "95095bc629158301ad31ee7c9e5a6c48265bd2eae5d8ef56694501d42515c1b6",
+      "benchmarks/metrics.py": "b0c690a6c279e73be325306fbe18850ee9cf1b371941034618e0db781bbbd653",
+      "benchmarks/cold_start.py": "1d8485aa4653db06b5399efd19072684b255ff7632c6b98619a2e2ab0611d955"
+    }
+  },
+  "fixtures": {
+    "schema_version": 1,
+    "origin": "Written from scratch for JEVKit MLX. Fictional courses, interface states, and utterances; no production exports.",
+    "test_frozen_before_inference": true,
+    "threshold_policy": "Default margin threshold 0.0 fixed before test evaluation. No test-driven threshold tuning.",
+    "files": {
+      "dev.jsonl": {
+        "sha256": "610114cd493232ffd05a9dc5ffe6dd355b1bc3d7c1ad62f65ff02f5c413f6e16",
+        "rows": 16
+      },
+      "test.jsonl": {
+        "sha256": "e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3",
+        "rows": 28
+      }
+    }
+  },
+  "split": "test",
+  "model_name": "Qwen3.5-9B-OptiQ-4bit",
+  "repeats": 3,
+  "scope": "first_fixture_only",
+  "os_filesystem_cache_flushed": false,
+  "notes": "Fresh Python process and model weights per attempt; OS disk cache is intentionally not flushed. Parent wall time includes interpreter startup, load, first decision, and shutdown. One repetition cannot establish stable percentiles."
+}

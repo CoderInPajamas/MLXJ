@@ -1,0 +1,57 @@
+{
+  "kind": "Post-run source and artifact identity for the completed real browser capture",
+  "run_created_utc": "2026-09-19T07:59:42.967697+00:00",
+  "playwright_version": "1.63.0",
+  "browser": {
+    "name": "Chromium",
+    "version": "153.0.8010.12"
+  },
+  "source_sha256": {
+    "examples/browser_smoke.py": "95045129e5286e1023b01008c2a8f163ddfd7250da058899d670c09d9cdefcef",
+    "src/jevkit_mlx/demo.py": "cbf21b0375eb9b027ba904d4f739f977627c8777d2a5113f5d2321ebffd8d8bf",
+    "src/jevkit_mlx/server.py": "ad453376770fc80a354bc5f0ea34655480f02c3df051b64687de386f1c7a7473",
+    "src/jevkit_mlx/static/app.js": "5c1e217863894acf8f2e6006e1f4194df565953fcdd933561e1199b3abac97f5",
+    "src/jevkit_mlx/static/index.html": "7d155bd96f5c6a5b9ae4a922ec3b5c1ddf67b15624e3e6b544e40e02efe4a0f2",
+    "src/jevkit_mlx/static/style.css": "f5ce78d77248673db37265669357dff2314161ea08a072889dc54a3d2cc47afe",
+    "src/jevkit_mlx/backends/mlx_lm.py": "e02e527dab128181922ead3524acbb0e04273b66a836ae8d71468dcdb2a50315",
+    "src/jevkit_mlx/engine.py": "10aebdb027d54fbc42f49f7a249abc2f4149b613de6d063c5e91fe300ba15baa",
+    "src/jevkit_mlx/prompt.py": "8d0b340fb804a83ad37a6ee6a0feca39b4af061598712a2078ae1903e3c76f6b",
+    "src/jevkit_mlx/session.py": "25e05c1866d9fd30360c4dc5d97cee7b7c7086570b9454434c5332ce10d06436"
+  },
+  "artifact_sha256": {
+    "browser-transcript.json": "1c991f945126f75befb42195ee289a2a5a7a9b07d216be97b3733128c2f3929c",
+    "02-library.png": "88eb7d9e43b6e282ba551a55951507e74ae66bcfb48b4f77fe5e1930665c187e",
+    "01-desktop.png": "d54e3f90522de6a7c0d359a00736e58cd41b23abff4bab81a77a960f721e56cf",
+    "03-course-player.png": "b7811c1fcf31ab9441cf6025088534cfbefecf84c147820c5cd307be39a925dd",
+    "04-stale-protection.png": "ff59af03c5e053a0edbdc9ccc7b392978aba2318a7e7dcc113a6c25bf2ff1df9",
+    "03b-player-control.png": "6faaa221f3b6dd7143fd5b982c68037c9a5f62fa9766ab47ee09a35526b67690",
+    "video/page@9986ccf6fcac324ee3a7302c87bf305e.webm": "d76dc88f13c1ed893526cdf8c45d3a035ec2de7f554399dcdc12fd68bef5b4f4"
+  },
+  "model": {
+    "name": "Qwen3.5-9B-OptiQ-4bit",
+    "model_type": "qwen3_5",
+    "config_sha256": "0362df988d40561f6b41a54635b943f3268f7db190f535373b7573bed8354925",
+    "tokenizer_sha256": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+    "quantization": {
+      "default_bits": 4,
+      "group_size": 64,
+      "mode": "affine",
+      "layer_bits_counts": {
+        "8": 93,
+        "4": 157
+      },
+      "sha256": "d718236e19f73d69e684b2e92ddbc5cfbadbb566f1c88295316029ddbba5745d"
+    },
+    "dependencies": {
+      "mlx": "0.31.2",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.9.0",
+      "tokenizers": "0.22.2"
+    },
+    "cache_types": [
+      "ArraysCache",
+      "KVCache"
+    ]
+  },
+  "note": "All source files were unchanged between the successful browser run and collecting these hashes. Model weight revisions and full weight hashes are recorded separately in benchmarks/results/checkpoints.json."
+}

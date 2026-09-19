@@ -27,4 +27,4 @@ models/
 # Keep raw runs local; publish reviewed, synthetic benchmark artifacts separately
 runs/
 artifacts/raw/
-output/playwright/
+output/playwright*/

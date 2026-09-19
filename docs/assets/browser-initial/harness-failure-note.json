@@ -1,0 +1,7 @@
+{
+  "kind": "post-run diagnostic note, not a model transcript",
+  "exit_code": 1,
+  "model_decisions_recorded": 0,
+  "failure": "The harness used inner_text on a pre inside closed details, yielding empty text and JSONDecodeError during case setup. Finalization then tried to make an absolute video path relative to a relative output directory and failed before writing the transcript.",
+  "evidence": "Original screenshots and Chromium video are preserved in this directory. No semantic result is inferred from this failed harness run."
+}

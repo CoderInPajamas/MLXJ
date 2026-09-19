@@ -1,0 +1,125 @@
+{
+  "completed": 84,
+  "planned": 84,
+  "measurements_complete": true,
+  "complete": true,
+  "groups": {
+    "direct/kv_cold": {
+      "attempts": 28,
+      "counts": {
+        "correct": 25,
+        "selected": 17,
+        "executable": 18,
+        "false_action": 0,
+        "rejected": 11,
+        "abstained": 1,
+        "schema_valid": 28,
+        "failed": 0,
+        "raw_choice_available": 28,
+        "raw_correct": 26,
+        "raw_selected": 18,
+        "raw_false_action": 0
+      },
+      "accuracy": 0.8928571428571429,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 0.9285714285714286,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": 0.0,
+      "rejection_rate": 0.39285714285714285,
+      "abstention_rate": 0.03571428571428571,
+      "executable_request_coverage": 0.9444444444444444,
+      "selection_rate_on_executable_requests": 0.9444444444444444,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 28,
+        "p50": 2159.940395504236,
+        "p95": 2406.632854050258
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "direct/page_update": {
+      "attempts": 28,
+      "counts": {
+        "correct": 25,
+        "selected": 17,
+        "executable": 18,
+        "false_action": 0,
+        "rejected": 11,
+        "abstained": 1,
+        "schema_valid": 28,
+        "failed": 0,
+        "raw_choice_available": 28,
+        "raw_correct": 26,
+        "raw_selected": 18,
+        "raw_false_action": 0
+      },
+      "accuracy": 0.8928571428571429,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 0.9285714285714286,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": 0.0,
+      "rejection_rate": 0.39285714285714285,
+      "abstention_rate": 0.03571428571428571,
+      "executable_request_coverage": 0.9444444444444444,
+      "selection_rate_on_executable_requests": 0.9444444444444444,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 28,
+        "p50": 1050.1964789982594,
+        "p95": 1294.4668146988988
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "direct/same_page_new_utterance": {
+      "attempts": 28,
+      "counts": {
+        "correct": 25,
+        "selected": 17,
+        "executable": 18,
+        "false_action": 0,
+        "rejected": 11,
+        "abstained": 1,
+        "schema_valid": 28,
+        "failed": 0,
+        "raw_choice_available": 28,
+        "raw_correct": 26,
+        "raw_selected": 18,
+        "raw_false_action": 0
+      },
+      "accuracy": 0.8928571428571429,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 0.9285714285714286,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": 0.0,
+      "rejection_rate": 0.39285714285714285,
+      "abstention_rate": 0.03571428571428571,
+      "executable_request_coverage": 0.9444444444444444,
+      "selection_rate_on_executable_requests": 0.9444444444444444,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 28,
+        "p50": 171.6897920014162,
+        "p95": 176.3673857494723
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    }
+  },
+  "parity": {
+    "completed": 28,
+    "planned": 28,
+    "passed": 28,
+    "failed": 0
+  }
+}

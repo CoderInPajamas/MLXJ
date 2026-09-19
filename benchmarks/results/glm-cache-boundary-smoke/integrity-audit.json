@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "complete": true,
+  "attempts": 3,
+  "planned": 3,
+  "source_trials_sha256": "0eb66cb77f3a03a6756b75c81b454a063128a04e0001e0a9cc3ab10018779e91",
+  "errors": [],
+  "warnings": [],
+  "failure_counts": {
+    "runtime_errors": 0,
+    "schema_invalid": 0,
+    "raw_false_actions": 0,
+    "returned_false_actions": 0
+  },
+  "cache_verification": {
+    "page_update/attempts": 3,
+    "page_update/verified_hits": 3
+  },
+  "parity": {
+    "attempts": 3,
+    "passed": 3
+  },
+  "public_evidence": {
+    "metadata.json": {
+      "identical": true,
+      "sha256": "63001dcd05fa0a87769938e515a22215feb1b50c00a51f719e46efd56143d916"
+    },
+    "summary.json": {
+      "identical": true,
+      "sha256": "90868cc4600ca7e38fecc164635e7ff4206c71b036cd30b7f58f4a9d6482d985"
+    },
+    "trials.jsonl": {
+      "identical": true,
+      "sha256": "0eb66cb77f3a03a6756b75c81b454a063128a04e0001e0a9cc3ab10018779e91"
+    },
+    "parity.jsonl": {
+      "identical": true,
+      "sha256": "2e8fadd999e17c4f28cebf9feb2e498ea5819c341a4c6cfa809148c9a7094b6b"
+    }
+  },
+  "source_revision": "579daf3",
+  "source_hash_matches": {
+    "src/jevkit_mlx/prompt.py": true,
+    "src/jevkit_mlx/types.py": true,
+    "src/jevkit_mlx/engine.py": true,
+    "src/jevkit_mlx/backends/mlx_lm.py": true,
+    "benchmarks/common.py": true,
+    "benchmarks/run.py": true,
+    "benchmarks/metrics.py": true,
+    "benchmarks/cold_start.py": true
+  },
+  "groups": {
+    "direct/page_update": {
+      "attempts": 3,
+      "counts": {
+        "correct": 1,
+        "selected": 0,
+        "executable": 2,
+        "false_action": 0,
+        "rejected": 3,
+        "abstained": 1,
+        "schema_valid": 3,
+        "failed": 0,
+        "raw_choice_available": 3,
+        "raw_correct": 1,
+        "raw_selected": 0,
+        "raw_false_action": 0
+      },
+      "accuracy": 0.3333333333333333,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 0.3333333333333333,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": null,
+      "rejection_rate": 1.0,
+      "abstention_rate": 0.3333333333333333,
+      "executable_request_coverage": 0.0,
+      "selection_rate_on_executable_requests": 0.0,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 3,
+        "p50": 1032.100750002428,
+        "p95": 1938.6082756027463
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    }
+  }
+}

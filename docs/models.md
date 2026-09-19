@@ -11,13 +11,24 @@ Python 3.13.2. Full hardware and dependency metadata accompany each run.
 
 | Local checkpoint | Architecture | Quantization | Weight size | Verification |
 |---|---|---|---:|---|
-| Qwen3.5-9B-OptiQ-4bit | `qwen3_5`, hybrid recurrent + full attention | Mixed 4/8-bit, group 64 | 5.63 GiB | See the completed run and parity evidence in [results](results.md) |
-| GLM-4.7-Flash-4bit | `glm4_moe_lite` | 4-bit | 15.70 GiB | See the completed run and parity evidence in [results](results.md) |
+| Qwen3.5-9B-OptiQ-4bit | `qwen3_5`, hybrid recurrent + full attention | Mixed 4/8-bit, group 64 | 5.63 GiB | Revised `579daf3` source: 84 direct decisions completed; 56/56 numerical cache comparisons passed. Returned accuracy 25/28 and coverage 17/18 in every condition; no observed false actions. Historical baselines and all errors remain in [results](results.md). |
+| GLM-4.7-Flash-4bit | `glm4_moe_lite` | 4-bit, group 64 | 15.70 GiB | Revised `579daf3` runtime: 84 direct decisions completed; 56/56 numerical cache comparisons passed. Semantic quality remains 14/28 correct and 2/28 returned false actions in every condition; **not recommended for direct action execution with this prompt**. Original 25/28 parity failures remain published. See [results](results.md). |
 
 The compatibility table must be read together with the results document. A tokenizer
 check alone is not a real-model validation. Other locally inventoried checkpoints,
 including Qwen3.6, Gemma and Nemotron conversions, are not certified by this release.
 Multi-question batching and vision inputs are not supported.
+
+Recorded Qwen and GLM comparison tables describe historical source revisions.
+The subsequent `579daf3` cache-boundary change preserves complete page/system
+snapshots. Full Qwen and GLM numerical verification passed, each with 56/56
+comparisons and identical measured logits to its original valid reference path.
+Semantic quality did not improve. Do not treat prior-run latency as revised-runtime
+comparison evidence or combine methods measured under different implementations.
+
+The recorded real-browser demonstration uses Qwen only. Its 16 scenarios accept
+either no-match or abstention for declines and are not a substitute for strict
+benchmark accuracy. GLM browser operation has not been evaluated.
 
 Exact local checkpoint provenance is recorded in
 [`checkpoints.json`](../benchmarks/results/checkpoints.json). All weight shards were

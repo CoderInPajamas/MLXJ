@@ -15,6 +15,20 @@ from time import perf_counter
 from typing import Any
 
 
+def write_report(report: dict[str, Any], output_dir: Path) -> Path:
+    """Persist the transcript independently of video/browser cleanup success."""
+    report["summary"] = {
+        "cases": len(report["cases"]),
+        "model_correct": sum(bool(case.get("model_correct")) for case in report["cases"]),
+        "execution_correct": sum(bool(case.get("execution_correct")) for case in report["cases"]),
+        "passed": sum(bool(case.get("passed")) for case in report["cases"]),
+        "browser_errors": len(report["browser_errors"]),
+    }
+    output = output_dir / "browser-transcript.json"
+    output.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
+    return output
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", default="http://127.0.0.1:8765")
@@ -29,7 +43,10 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     from playwright.sync_api import sync_playwright
 
+    args.output = args.output.resolve()
     args.output.mkdir(parents=True, exist_ok=True)
+    if any(args.output.iterdir()):
+        parser.error("Output directory must be empty so earlier browser evidence is preserved")
     report: dict[str, Any] = {
         "project": "JEVKit MLX",
         "created_utc": datetime.now(timezone.utc).isoformat(),
@@ -60,7 +77,9 @@ def main(argv: list[str] | None = None) -> int:
         )
 
         def state() -> dict[str, Any]:
-            return json.loads(page.locator("#state-json").inner_text())
+            # The inspector <pre> lives inside a collapsed <details>. Read its
+            # DOM text even when it does not contribute visible innerText.
+            return json.loads(page.locator("#state-json").text_content() or "")
 
         def version() -> int:
             return int(page.locator("#state-version").inner_text().split()[-1])
@@ -285,6 +304,7 @@ def main(argv: list[str] | None = None) -> int:
                 "player",
                 "paused",
             )
+            screenshot("03b-player-control")
             case(
                 "resume-paused-player",
                 paused,
@@ -435,25 +455,35 @@ def main(argv: list[str] | None = None) -> int:
         except Exception as error:
             report["browser_errors"].append(str(error))
         finally:
-            video = page.video
-            context.close()
-            if video:
-                report["video"] = str(Path(video.path()).relative_to(args.output))
-            browser.close()
+            # Save before teardown as well: a video or browser cleanup failure
+            # must never discard completed model/DOM observations.
+            write_report(report, args.output)
+            video = None
+            try:
+                video = page.video
+            except Exception as error:
+                report["browser_errors"].append(f"Video handle: {error}")
+            for label, close in (
+                ("Context cleanup", context.close),
+                ("Browser cleanup", browser.close),
+            ):
+                try:
+                    close()
+                except Exception as error:
+                    report["browser_errors"].append(f"{label}: {error}")
+            if video is not None:
+                try:
+                    report["video"] = str(Path(video.path()).resolve().relative_to(args.output))
+                except Exception as error:
+                    report["browser_errors"].append(f"Video artifact: {error}")
+            write_report(report, args.output)
 
-    count = len(report["cases"])
-    report["summary"] = {
-        "cases": count,
-        "model_correct": sum(bool(case.get("model_correct")) for case in report["cases"]),
-        "execution_correct": sum(bool(case.get("execution_correct")) for case in report["cases"]),
-        "passed": sum(bool(case.get("passed")) for case in report["cases"]),
-        "browser_errors": len(report["browser_errors"]),
-    }
-    output = args.output / "browser-transcript.json"
-    output.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
+    output = write_report(report, args.output)
     print(f"Transcript: {output}")
     print(json.dumps(report["summary"]))
-    return int(bool(report["browser_errors"]) or report["summary"]["passed"] != count)
+    return int(
+        bool(report["browser_errors"]) or report["summary"]["passed"] != report["summary"]["cases"]
+    )
 
 
 if __name__ == "__main__":
