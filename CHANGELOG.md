@@ -5,6 +5,13 @@
 Initial experimental JEV MLX implementation. Public repository/registry
 publication is tracked separately from preparing this source release.
 
+- Chinese-first README with an English switch, original title graphics, a
+  Chinese testing guide, and an owner-provided Xiaohongshu profile link/card.
+  MLXJ is a candidate display name in this preview; package/API names remain
+  `jev-mlx` / `jev_mlx` pending a naming decision.
+- An offline, bilingual recorded browser replay that preserves all 16 decisions
+  and the separate state-change check. It runs without a model or server and is
+  explicitly separate from live inference.
 - Public branding changed from JEVKit MLX to JEV MLX before publication. The
   distribution and CLI are `jev-mlx`, and the module is `jev_mlx`. Current model
   variables are `JEV_MLX_MODEL` and `JEV_TEST_MODEL`.

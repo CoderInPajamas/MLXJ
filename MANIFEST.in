@@ -1,6 +1,8 @@
 include LICENSE NOTICE.md CHANGELOG.md CONTRIBUTING.md
+include README.en.md
 recursive-include docs *.md
-recursive-include docs/assets *.svg *.png *.webm *.json
+recursive-include docs/assets *.svg *.png *.jpg *.webm *.json
+recursive-include docs/demo *.html *.js *.css *.py
 recursive-include benchmarks *.py *.json *.jsonl
 recursive-include examples *.py *.json *.md
 recursive-include scripts *.py
