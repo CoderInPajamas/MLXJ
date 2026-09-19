@@ -104,20 +104,38 @@ class MLXLMBackend:
         if len(prompt.tokens) > self.max_prompt_tokens:
             raise ValueError(f"Prompt exceeds {self.max_prompt_tokens} tokens")
         namespace = (cache_key or "default", mode)
+        system_namespace = (*namespace, "system")
+        page_namespace = (*namespace, "page")
+        cache, reused = None, 0
         if use_cache:
-            cache, suffix = self._cache.fetch_nearest_cache(namespace, list(prompt.state_tokens))
-        else:
-            cache, suffix = None, list(prompt.state_tokens)
-        reused = len(prompt.state_tokens) - len(suffix)
+            page_cache, suffix = self._cache.fetch_nearest_cache(
+                page_namespace, list(prompt.state_tokens)
+            )
+            if page_cache is not None and not suffix:
+                cache, reused = page_cache, len(prompt.state_tokens)
+            else:
+                page_cache = None
+                # Official nearest lookup may trim attention caches at an
+                # arbitrary common prefix. Reuse only complete saved boundaries
+                # so changed pages use the same prefill segments as fresh calls.
+                system_cache, suffix = self._cache.fetch_nearest_cache(
+                    system_namespace, list(prompt.system_tokens)
+                )
+                if system_cache is not None and not suffix:
+                    cache, reused = system_cache, len(prompt.system_tokens)
         if cache is None:
             cache = self._make_cache(self.model)
-        # Store a complete snapshot before any mutable page data. Hybrid recurrent
-        # caches cannot be rolled back to an arbitrary earlier token position.
+        # Separate namespaces also prevent the official LRU from removing the
+        # shorter system snapshot when inserting a trimmable page snapshot.
+        # Both namespaces share the same entry and byte limits.
         if reused < len(prompt.system_tokens):
             self._prefill(prompt.tokens[reused : len(prompt.system_tokens)], cache)
             if use_cache:
                 self._cache.insert_cache(
-                    namespace, list(prompt.system_tokens), copy.deepcopy(cache), cache_type="system"
+                    system_namespace,
+                    list(prompt.system_tokens),
+                    copy.deepcopy(cache),
+                    cache_type="system",
                 )
             cursor = len(prompt.system_tokens)
         else:
@@ -125,7 +143,7 @@ class MLXLMBackend:
         self._prefill(prompt.tokens[cursor : len(prompt.state_tokens)], cache)
         if use_cache and reused < len(prompt.state_tokens):
             self._cache.insert_cache(
-                namespace, list(prompt.state_tokens), copy.deepcopy(cache), cache_type="user"
+                page_namespace, list(prompt.state_tokens), copy.deepcopy(cache), cache_type="user"
             )
         info = {
             "hit": reused > 0,
