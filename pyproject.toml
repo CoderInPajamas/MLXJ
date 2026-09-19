@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jevkit-mlx"
+version = "0.1.0"
+description = "JEV-inspired local decisions for Apple Silicon."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE.md"]
+authors = [{name = "JEVKit MLX contributors"}]
+keywords = ["mlx", "local-inference", "apple-silicon", "semantic-decisions"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Operating System :: MacOS :: MacOS X",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+mlx = ["mlx==0.31.2", "mlx-lm==0.31.3", "transformers==5.9.0", "tokenizers==0.22.2"]
+dev = ["pytest>=8,<10", "build>=1,<2", "ruff>=0.11,<1", "setuptools>=77"]
+browser = ["playwright==1.63.0"]
+
+[project.scripts]
+jevkit = "jevkit_mlx.cli:main"
+jevkit-mlx = "jevkit_mlx.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+jevkit_mlx = ["static/*", "py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["model: requires an explicit local model and Apple Metal (opt-in)"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

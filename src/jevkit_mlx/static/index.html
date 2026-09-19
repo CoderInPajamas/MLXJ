@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4f0">
+  <title>JEVKit MLX — Local decision playground</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="masthead"><a class="brand" href="/" aria-label="JEVKit MLX home"><span class="brand-mark">j<span>↗</span></span>JEVKit <span class="brand-light">MLX</span></a><div class="masthead-right"><span class="local-pill"><span class="dot"></span> LOCAL INFERENCE</span><span class="version-pill">0.1 / experimental</span></div></header>
+  <main>
+    <div class="intro"><div><div class="eyebrow">THE LOCAL DECISION PLAYGROUND</div><h1>A small decision.<br><span>A real action.</span></h1><p>Describe one thing to do. Your local model selects an allowed action,<br class="wide-only"> then clicks a real control in this fictional workspace.</p></div><div class="intro-note"><span class="note-number">01</span><span>State → candidates → model → click<br><strong>No cloud. No scripted language matching.</strong></span></div></div>
+    <div class="workspace-layout">
+      <section class="workspace" aria-label="Interactive fictional desktop">
+        <div class="window-chrome"><div class="traffic"><i></i><i></i><i></i></div><span>MORROW STUDIO</span><span id="state-version" class="state-version">STATE 0</span></div>
+        <div class="desktop-topbar"><div class="studio-brand"><span class="studio-symbol">✳</span> Morrow<span class="studio-light"> / a place to learn</span></div><span id="view-label">Desktop</span></div>
+        <div id="stage" class="stage" aria-live="polite"></div>
+        <div class="command-area"><div class="command-label"><label for="utterance">TELL YOUR WORKSPACE WHAT TO DO</label><span id="decision-status">Ready when you are</span></div><form id="command-form"><span class="command-icon">↳</span><input id="utterance" name="utterance" autocomplete="off" maxlength="4096" placeholder='Try “Open the course library”' required><button id="decide-button" class="send-button" type="submit" aria-label="Ask local model"><span>Decide</span> ↗</button></form><div class="command-foot"><div id="suggestions" class="suggestions"></div><label class="auto-label"><input id="auto-execute" type="checkbox" checked> Execute click</label></div><div id="notice" class="notice" role="status"></div></div>
+      </section>
+      <aside class="inspector" aria-label="Model decision inspector"><div class="inspector-heading"><span class="eyebrow">UNDER THE HOOD</span><span class="live-label"><span class="dot"></span> LIVE</span></div><section class="decision-card"><div class="section-kicker">LATEST DECISION</div><div id="chosen-action" class="chosen-action">Waiting for a thought<span>Start with a simple request on the left.</span></div><div class="metrics"><div><span class="metric-label">MODEL TIME</span><strong id="latency">—<small> ms</small></strong></div><div><span class="metric-label">LOGIT MARGIN</span><strong id="margin">—</strong></div></div><div id="cache-info" class="cache-info">Prefix cache · awaiting first decision</div><div id="score-list" class="score-list"></div></section><section class="receipt-section"><div class="section-title"><h2>Execution receipt</h2><span id="receipt-status" class="tag">NO ACTION YET</span></div><div id="receipt" class="receipt-empty">A model choice and an executed action are recorded separately.</div><button id="execute-pending" class="text-button" type="button" hidden>Execute selected browser click ↗</button></section><details class="state-details" open><summary><span>Allowed actions</span><span id="candidate-count" class="count">0</span></summary><div id="candidate-list" class="candidate-list"></div></details><details class="state-details"><summary><span>Current application state</span><span>↗</span></summary><pre id="state-json"></pre></details><details class="state-details"><summary><span>Full decision &amp; timing</span><span>↗</span></summary><pre id="result-json">No inference yet.</pre></details><div class="model-note"><span class="section-kicker">RUNNING ON YOUR MAC</span><div id="model-name">Connecting to local model…</div><p>Scores rank the supplied choices. They are not calibrated probabilities of correctness.</p></div></aside>
+    </div>
+    <footer><span><strong>JEV-inspired local decisions for Apple Silicon.</strong> Independent project; not affiliated with TypeSafe AI.</span><span>English · single turn · one action</span></footer>
+  </main>
+</body>
+</html>

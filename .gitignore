@@ -1,0 +1,30 @@
+# Local Python environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.DS_Store
+
+# Local configuration, credentials and model weights
+.env
+.env.*
+!.env.example
+*.safetensors
+*.gguf
+*.pt
+*.pth
+models/
+.cache/
+
+# Keep raw runs local; publish reviewed, synthetic benchmark artifacts separately
+runs/
+artifacts/raw/
+output/playwright/

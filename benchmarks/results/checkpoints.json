@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Qwen3.5-9B-OptiQ-4bit",
+    "repository": "mlx-community/Qwen3.5-9B-OptiQ-4bit",
+    "revision_from_download_metadata": "76b3310ab7aa52a34303c66fc928b6d7239c860c",
+    "files": [
+      {
+        "name": "model-00001-of-00002.safetensors",
+        "bytes": 5363611036,
+        "sha256": "6a08f3a68c80529f0a5860fba2d6be8388354abb37b4e4160df56a43005ff03c",
+        "matches_download_digest": true
+      },
+      {
+        "name": "model-00002-of-00002.safetensors",
+        "bytes": 679093430,
+        "sha256": "dd5afd1de63ba8bb5ed67d963cefda5ee3d5b62a432799efe94e444ba48b37ee",
+        "matches_download_digest": true
+      }
+    ]
+  },
+  {
+    "name": "GLM-4.7-Flash-4bit",
+    "repository": "mlx-community/GLM-4.7-Flash-4bit",
+    "revision_from_download_metadata": "1454cffb1a21737e162f508e5bc70be9def89276",
+    "files": [
+      {
+        "name": "model-00001-of-00004.safetensors",
+        "bytes": 5357453035,
+        "sha256": "540741ab088c32f7338636c82c601399c0db6c11c965ac2c2865e9400d32dd8b",
+        "matches_download_digest": true
+      },
+      {
+        "name": "model-00002-of-00004.safetensors",
+        "bytes": 5363462379,
+        "sha256": "28749aa10a019ffa2a68e12a94c3883e5102942b310937667bb359221a4d4a8d",
+        "matches_download_digest": true
+      },
+      {
+        "name": "model-00003-of-00004.safetensors",
+        "bytes": 5363462333,
+        "sha256": "5c6896cb4c209344aac52eb9784d34145bf752aa99653d480d211f8261d5449b",
+        "matches_download_digest": true
+      },
+      {
+        "name": "model-00004-of-00004.safetensors",
+        "bytes": 768064072,
+        "sha256": "48361cae86bb6d78ac246a1a23ec92e863eef276e9bc285ec6a7cbb5f8bc0f07",
+        "matches_download_digest": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "origin": "Written from scratch for JEVKit MLX. Fictional courses, interface states, and utterances; no production exports.",
+  "test_frozen_before_inference": true,
+  "threshold_policy": "Default margin threshold 0.0 fixed before test evaluation. No test-driven threshold tuning.",
+  "files": {
+    "dev.jsonl": {
+      "sha256": "610114cd493232ffd05a9dc5ffe6dd355b1bc3d7c1ad62f65ff02f5c413f6e16",
+      "rows": 16
+    },
+    "test.jsonl": {
+      "sha256": "e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3",
+      "rows": 28
+    }
+  }
+}

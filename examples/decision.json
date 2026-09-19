@@ -1,0 +1,9 @@
+{
+  "state": {"view": "player", "course": "Lunar Gardening", "playback": "playing"},
+  "state_version": 3,
+  "utterance": "Pause this for a moment.",
+  "candidates": [
+    {"id": "player.pause", "description": "Pause the currently playing course video."},
+    {"id": "player.close", "description": "Close the current player and return to the course library."}
+  ]
+}
