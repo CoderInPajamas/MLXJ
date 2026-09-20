@@ -119,5 +119,6 @@
         "size": "6705736"
       }
     }
-  }
+  },
+  "post_recording_changes": "A later UI-only fix refreshes the offline badge after a backend connection failure. Captured requests, model policy and results are unchanged; recording source hashes refer to runtime_revision above."
 }

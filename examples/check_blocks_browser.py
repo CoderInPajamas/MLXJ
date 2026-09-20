@@ -122,6 +122,14 @@ def main():
         assert not errors, errors
         report = {"scope": "mocked browser controls, not model quality", "checks": checks,
                   "errors": errors, "transcript": page.evaluate("window.blocksTranscript")}
+        page.route("**/api/demo/state", lambda route: route.fulfill(status=503, json={}))
+        page.reload(wait_until="networkidle")
+        assert page.locator("#connection-label").inner_text() == "LOCAL BACKEND · OFFLINE"
+        assert page.locator("#step-ai").is_disabled()
+        page.locator("#manual-mode").click()
+        page.keyboard.press("Space")
+        assert state()["pieces"] == 1 and not state()["backendReady"]
+        checks.append("offline backend disables AI and permits manual play")
         (args.output / "checks.json").write_text(json.dumps(report, indent=2) + "\n")
         browser.close()
     print(json.dumps({"passed": len(checks), "checks": checks, "errors": errors}, indent=2))

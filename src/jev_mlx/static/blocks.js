@@ -270,4 +270,4 @@ controls(); render(); requestAnimationFrame(frame);
 fetch("/api/demo/state").then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); }).then((data) => {
   modelIdentity = data.model; backendReady = true;
   $("model-name").textContent = data.model?.name || data.model?.path || "Local MLX model"; controls();
-}).catch(() => { status("Local backend unavailable", "error"); $("model-name").textContent = "Start jev-mlx serve to use a local model."; $("notice").textContent = "Manual play is available. AI needs the localhost MLX service."; });
+}).catch(() => { status("Local backend unavailable", "error"); $("model-name").textContent = "Start jev-mlx serve to use a local model."; $("notice").textContent = "Manual play is available. AI needs the localhost MLX service."; controls(); });

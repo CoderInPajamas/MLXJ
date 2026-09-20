@@ -91,7 +91,7 @@ Browser control checks use explicit mocked responses, never real model answers:
 PLAYWRIGHT_BROWSERS_PATH=.cache/playwright .venv/bin/python examples/check_blocks_browser.py
 ```
 
-Verification passed: 6 Node game-rule tests, 161 core Python tests, and 13 mocked
+Verification passed: 6 Node game-rule tests, 161 core Python tests, and 14 mocked
 browser checks covering controls, stale results, refusal/error handling, row
 clearing, game over, fullscreen, and mobile layout. These are software checks,
 not game-playing accuracy measurements.

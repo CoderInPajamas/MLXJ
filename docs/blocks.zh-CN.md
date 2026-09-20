@@ -77,7 +77,7 @@ PLAYWRIGHT_BROWSERS_PATH=.cache/playwright python -m playwright install chromium
 PLAYWRIGHT_BROWSERS_PATH=.cache/playwright .venv/bin/python examples/check_blocks_browser.py
 ```
 
-已通过 6 项 Node 游戏规则测试、161 项 Python 核心测试，以及 13 项使用模拟响应的浏览器检查，
+已通过 6 项 Node 游戏规则测试、161 项 Python 核心测试，以及 14 项使用模拟响应的浏览器检查，
 覆盖操作、过期结果、拒绝与错误处理、消行、游戏结束、全屏和移动端布局。
 这些验证软件行为，不衡量模型玩游戏的准确率。
 
