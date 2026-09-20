@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/mlxj-hero.en.svg" alt="MLXJ — JEV-inspired local decisions, powered by MLX" width="1280" />
+  <img src="docs/assets/jev-mlx-hero.en.svg" alt="JEV MLX — JEV-inspired local decisions, powered by MLX" width="1280" />
 </p>
 
 <p align="center"><strong>Current state + a sentence → one allowed choice.</strong><br />JEV-inspired local decisions for Apple Silicon.</p>
@@ -32,9 +32,9 @@
 
 ## A local model plays Blocks
 
-![MLXJ Blocks: complete 20-move development run, shown at 4× playback](docs/assets/blocks/preview.gif)
+![JEV MLX Blocks: complete 20-move development run, shown at 4× playback](docs/assets/blocks/preview.gif)
 
-**Qwen3.5-9B · 20 model-selected placements · 4 cleared rows · 400 points.** The GIF shows the entire second development run at **4× playback**, including inference waits. The model chooses from every legal vertical-drop placement using structured board data and rule-computed outcomes; there is no best-move fallback. This is turn-based play, not screenshot understanding or frame-by-frame control.
+**Qwen3.5-9B · 20 model-selected placements · 4 cleared rows · 400 points.** The recording retains the former MLXJ name. The GIF shows the entire second development run at **4× playback**, including inference waits. The model chooses from every legal vertical-drop placement using structured board data and rule-computed outcomes; there is no best-move fallback. This is turn-based play, not screenshot understanding or frame-by-frame control.
 
 [Run the game locally](docs/blocks.md) · [Full-speed video](docs/assets/blocks/full-run.mp4) · [All decisions](docs/assets/blocks/attempt-2.json)
 
@@ -42,11 +42,11 @@ The first attempt refused to place a piece. Both attempts are retained in the [g
 
 ## Connect language to your application
 
-**MLXJ** uses the current application state, a user utterance, and dynamic allowed choices to select a stable business ID with a local model. No-match and abstention are explicit outcomes.
+**JEV MLX** uses the current application state, a user utterance, and dynamic allowed choices to select a stable business ID with a local model. No-match and abstention are explicit outcomes.
 
 Embed it in an existing tool: open a feature, select a visible item, pause a player, or answer a boolean / enum question. Inference runs on your Mac with an existing checkpoint; no training is required.
 
-> **Project and package:** The project is MLXJ. The distribution and CLI are `jev-mlx`, with Python imports from `jev_mlx`. Version 0.1 is experimental and has not been published to PyPI.
+> **Project and package:** The project is JEV MLX. The distribution and CLI are `jev-mlx`, with Python imports from `jev_mlx`. Version 0.1 is experimental and has not been published to PyPI.
 
 | Capability | What it means for your application |
 | :--- | :--- |
@@ -67,8 +67,8 @@ Requires **Apple Silicon, native ARM Python 3.11+**, and a local MLX-LM checkpoi
 Clone the repository and install:
 
 ```sh
-git clone https://github.com/CoderInPajamas/MLXJ.git
-cd MLXJ
+git clone https://github.com/CoderInPajamas/JEV-MLX.git
+cd JEV-MLX
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[mlx]'

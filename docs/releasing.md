@@ -9,6 +9,10 @@ publish it. The local project directory
 does not reserve a package name, and installation examples currently use the
 source checkout or local wheel rather than PyPI.
 
+The current source repository is [CoderInPajamas/JEV-MLX](https://github.com/CoderInPajamas/JEV-MLX).
+Its checkout directory is `JEV-MLX`; the distribution, CLI, and import names above
+are unchanged. A repository rename does not publish a package to a registry.
+
 The latest evidence includes the completed three-model/four-method
 [36-case warm comparison](extended-results.md), the separate
 [original-suite Gemma tests and process cold start](gemma4-results.md), and

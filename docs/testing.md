@@ -22,6 +22,10 @@ These results apply to the specific machine, models, English scenarios, and impl
 
 The original evaluations, screenshots, and recordings use the project's former name, JEVKit MLX. Evidence files retain their original name, source hashes, and recording times; they were not rewritten for the rename. Reproduction commands below use the current `jev-mlx` command, `jev_mlx` module, and `JEV_MLX_MODEL` environment variable. Rename verification reran the core suite and a real-model call from an independent wheel; **it did not rerun the full quality evaluation or browser model tests**. See the [rename verification record](../benchmarks/results/rename-release-checks/verification.json).
 
+Later game and desktop-showcase recordings display the earlier MLXJ name. Those
+videos and original decision records were not re-recorded or altered for the
+current JEV MLX display name.
+
 ## What was tested
 
 | Layer | Samples or checks | What it establishes |

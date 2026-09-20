@@ -2,10 +2,13 @@
 
 [Back to home](../../../README.md)
 
-This is one continuous, real-model browser recording of MLXJ's fictional Morrow
+This is one continuous, real-model browser recording of JEV MLX's fictional Morrow
 Studio desktop. It shows eight predetermined English requests, four labeled
 manual setup clicks, and the actual model-selected DOM actions. It is an
 illustrative walkthrough, not an independent quality or performance benchmark.
+
+The **MLXJ** name visible in this recording predates the current JEV MLX name.
+The rename did not involve re-recording or changing the original media or records.
 
 ![Real local-model recording, original speed](preview.gif)
 

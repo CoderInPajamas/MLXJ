@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/mlxj-hero.zh-CN.svg" alt="MLXJ — 受 JEV 启发，基于 MLX 的本地语义决策" width="1280" />
+  <img src="docs/assets/jev-mlx-hero.zh-CN.svg" alt="JEV MLX — 受 JEV 启发，基于 MLX 的本地语义决策" width="1280" />
 </p>
 
 <p align="center"><strong>当前状态 + 一句话 → 一个允许的选择。</strong><br />受 JEV 启发，为 Apple Silicon 构建。</p>
@@ -32,9 +32,9 @@
 
 ## 看本地模型玩方块
 
-![MLXJ Blocks：完整 20 步开发运行，4 倍速播放](docs/assets/blocks/preview.gif)
+![JEV MLX Blocks：完整 20 步开发运行，4 倍速播放](docs/assets/blocks/preview.gif)
 
-**Qwen3.5-9B · 模型选择 20 次落点 · 消除 4 行 · 400 分。** GIF 以 **4 倍速**展示第二轮完整开发运行，包含推理等待。模型读取结构化棋盘和规则计算的结果，从所有合法垂直落点中选择；没有“最佳落点”算法代走。这是每块一步的回合制决策，不是看截图或逐帧控制。
+**Qwen3.5-9B · 模型选择 20 次落点 · 消除 4 行 · 400 分。** 录制画面保留更名前的 MLXJ 名称。GIF 以 **4 倍速**展示第二轮完整开发运行，包含推理等待。模型读取结构化棋盘和规则计算的结果，从所有合法垂直落点中选择；没有“最佳落点”算法代走。这是每块一步的回合制决策，不是看截图或逐帧控制。
 
 [本地运行游戏](docs/blocks.zh-CN.md) · [原速完整录像](docs/assets/blocks/full-run.mp4) · [全部决策记录](docs/assets/blocks/attempt-2.json)
 
@@ -42,11 +42,11 @@
 
 ## 把自然语言接进你的应用
 
-**MLXJ** 根据当前应用状态、用户的话和动态候选动作，让本地模型选出一个稳定的业务 ID；没有合适选项时，可以返回“不匹配”或“需要澄清”。
+**JEV MLX** 根据当前应用状态、用户的话和动态候选动作，让本地模型选出一个稳定的业务 ID；没有合适选项时，可以返回“不匹配”或“需要澄清”。
 
 它适合嵌入你已有的工具：切换一个入口、选择当前列表里的内容、暂停播放器，或做一个 boolean / enum 判断。模型在 Mac 上运行，权重由你选择；无需先训练新模型。
 
-> **项目与包名：** 项目名为 MLXJ，发行包与命令为 `jev-mlx`，Python 导入为 `jev_mlx`。0.1 是实验版，尚未公开发布到 PyPI。
+> **项目与包名：** 项目名为 JEV MLX，发行包与命令为 `jev-mlx`，Python 导入为 `jev_mlx`。0.1 是实验版，尚未公开发布到 PyPI。
 
 | 能力 | 在应用里意味着什么 |
 | :--- | :--- |
@@ -67,8 +67,8 @@
 克隆仓库并安装：
 
 ```sh
-git clone https://github.com/CoderInPajamas/MLXJ.git
-cd MLXJ
+git clone https://github.com/CoderInPajamas/JEV-MLX.git
+cd JEV-MLX
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[mlx]'

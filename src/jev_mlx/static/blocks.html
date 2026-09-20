@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MLXJ Blocks — A local model. A falling block.</title>
+  <title>JEV MLX Blocks — A local model. A falling block.</title>
   <meta name="description" content="Watch a local MLX model choose where each falling block lands. An experimental, turn-based game with complete decision receipts.">
   <link rel="stylesheet" href="/blocks.css">
   <script type="module" src="/blocks.js"></script>
@@ -11,7 +11,7 @@
 <body>
   <main class="shell" id="game-shell">
     <header class="masthead">
-      <a href="/blocks" class="brand" aria-label="MLXJ Blocks"><span class="brand-icon" aria-hidden="true">▟</span> MLXJ<span class="brand-divider">/</span><strong>BLOCKS</strong></a>
+      <a href="/blocks" class="brand" aria-label="JEV MLX Blocks"><span class="brand-icon" aria-hidden="true">▟</span> JEV MLX<span class="brand-divider">/</span><strong>BLOCKS</strong></a>
       <span class="local-badge"><i></i><span id="connection-label">LOCAL BACKEND · CONNECTING</span></span>
     </header>
     <div class="intro"><div><p class="eyebrow">ONE PIECE. ONE MODEL DECISION.</p><h1>Can a local model clear the board?</h1></div><p class="intro-copy">No cloud. No hidden game solver.<br>Watch the choices. Keep the mistakes.</p></div>
@@ -30,7 +30,7 @@
         <details><summary>What is the model actually doing?</summary><p>It receives a structured board, the next pieces, and every legal vertical-drop placement. The rules calculate each placement’s resulting lines, holes and height; the model chooses the placement. No screenshots, path planner or best-move fallback.</p><p>A poor choice stays in the game. A refusal or error pauses it. Reset, pause and manual changes invalidate an in-flight result.</p><button id="download" type="button">Download complete run JSON ↓</button><pre id="result-json">No decisions yet.</pre></details>
       </aside>
     </section>
-    <footer><span>MLXJ · Experimental local decision making</span><span>Structured board, not vision · One model choice per piece</span></footer>
+    <footer><span>JEV MLX · Experimental local decision making</span><span>Structured board, not vision · One model choice per piece</span></footer>
   </main>
 </body>
 </html>

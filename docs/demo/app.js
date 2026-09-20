@@ -117,7 +117,7 @@ function selectScene(index) {
 function renderLanguage() {
   const text = words[language];
   document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
-  document.title = language === "zh" ? "MLXJ — 浏览器决策录制回放" : "MLXJ — Recorded browser decisions";
+  document.title = language === "zh" ? "JEV MLX — 浏览器决策录制回放" : "JEV MLX — Recorded browser decisions";
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.dataset.i18n;
     if (key === "title") element.innerHTML = text[key];

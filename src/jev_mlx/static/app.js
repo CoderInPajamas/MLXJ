@@ -18,7 +18,7 @@ function showInteractionSource(label, kind) {
 }
 
 if (showcaseMode) {
-  document.title = "MLXJ — Same words. Different context.";
+  document.title = "JEV MLX — Same words. Different context.";
   document.querySelector(".brand").href = "/?showcase=1";
   document.querySelector(".inspector-heading .eyebrow").textContent = "MODEL → ACTION";
   document.querySelector(".decision-card .section-kicker").textContent = "LATEST MODEL CHOICE";

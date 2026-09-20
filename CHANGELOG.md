@@ -7,7 +7,7 @@
 Initial experimental JEV MLX implementation. Public repository/registry
 publication is tracked separately from preparing this source release.
 
-- MLXJ Blocks: an original falling-block game with real local-model placement
+- JEV MLX Blocks: an original falling-block game with real local-model placement
   selection, manual play, stale-result guards, and complete run downloads.
   Six rule tests and fourteen mocked browser checks pass. A recorded Qwen
   development run placed 20 pieces and cleared four rows; the earlier refusal,
@@ -16,7 +16,7 @@ publication is tracked separately from preparing this source release.
 - English-first README with a separate Chinese homepage, complete documentation
   in both languages, original title graphics, and owner-provided X and Xiaohongshu
   links. Language selection sits below the title/navigation area; X appears first.
-  The display name is MLXJ; package/API names remain `jev-mlx` / `jev_mlx`.
+  The display name is JEV MLX; package/API names remain `jev-mlx` / `jev_mlx`.
 - A developer integration showcase, with a real eight-request Qwen recording
   and original-speed GIF in the integration documentation. The full video, every
   response and execution receipt, source hashes, and the recording recovery
@@ -25,7 +25,8 @@ publication is tracked separately from preparing this source release.
 - An offline, bilingual recorded browser replay that preserves all 16 decisions
   and the separate state-change check. It runs without a model or server and is
   explicitly separate from live inference.
-- Public branding changed from JEVKit MLX to JEV MLX before publication. The
+- Current public branding is JEV MLX, following the earlier JEVKit MLX and MLXJ
+  names. The repository is [CoderInPajamas/JEV-MLX](https://github.com/CoderInPajamas/JEV-MLX). The
   distribution and CLI are `jev-mlx`, and the module is `jev_mlx`. Current model
   variables are `JEV_MLX_MODEL` and `JEV_TEST_MODEL`.
   Original benchmark metadata, source hashes, screenshots, and recordings retain

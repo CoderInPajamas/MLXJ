@@ -15,7 +15,7 @@ file without a language defaults to English. Recorded inputs and results are
 unchanged in either language. Missing fields remain missing.
 
 The original artifacts retain the project's previous name. They have not been
-rewritten or retouched. The replay uses the current MLXJ display name for its interface. Python and CLI identifiers remain `jev_mlx` and `jev-mlx`.
+rewritten or retouched. The replay uses the current JEV MLX display name for its interface. Python and CLI identifiers remain `jev_mlx` and `jev-mlx`.
 This single browser smoke run is separate from the held-out model benchmark;
 see [measured results and limitations](../results.md).
 

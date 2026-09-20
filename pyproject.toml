@@ -20,6 +20,11 @@ classifiers = [
 ]
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/CoderInPajamas/JEV-MLX"
+Repository = "https://github.com/CoderInPajamas/JEV-MLX"
+Issues = "https://github.com/CoderInPajamas/JEV-MLX/issues"
+
 [project.optional-dependencies]
 mlx = ["mlx==0.31.2", "mlx-lm==0.31.3", "transformers==5.9.0", "tokenizers==0.22.2"]
 dev = ["pytest>=8,<10", "build>=1,<2", "ruff>=0.11,<1", "setuptools>=77"]

@@ -143,7 +143,7 @@ class Recorder:
         self.request_times: dict[Any, dict[str, Any]] = {}
         self.report: dict[str, Any] = {
             "schema_version": 1,
-            "project": "MLXJ",
+            "project": "JEV MLX",
             "scope": "illustrative live-model recording, not benchmark",
             "capture_started_utc": datetime.now(timezone.utc).isoformat(),
             "video": "original.webm",

@@ -9,7 +9,7 @@ project owner on 2026-09-19 for inclusion in the public README.
 - Xiaohongshu ID: `6236648830`
 - Image and QR code: copied without pixel edits, cropping, or regeneration.
 
-The image is owner-provided social material, not an MLXJ model result or benchmark
+The image is owner-provided social material, not a JEV MLX model result or benchmark
 artifact. It is not a donation/payment QR code. A sponsorship destination is still
 awaiting an owner-provided public link.
 

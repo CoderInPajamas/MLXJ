@@ -1,17 +1,23 @@
-# 命名预览
+# 项目名称与早期命名检索
 
 [返回项目首页](../README.zh-CN.md)
 
-检索日期：2026-09-19。这是公开搜索的时间快照，不代表名称已被保留，也不保证注册平台接受该名称。
+项目名称为 **JEV MLX**，仓库为 [CoderInPajamas/JEV-MLX](https://github.com/CoderInPajamas/JEV-MLX)。名称直接体现 JEV 启发来源和 MLX 运行框架。发行包与命令行为 `jev-mlx`，Python 导入为 `jev_mlx`。
 
-本次 README 视觉稿使用 **MLXJ**。它保留 MLX 的明确识别度，以 J 关联 JEV 启发来源，与同领域已有项目的拼写拉开距离。代码发行包、CLI 和导入名仍为 `jev-mlx` / `jev_mlx`；这次预览没有再次迁移 API。
+2026-09-20，项目对外名称由 MLXJ 改为 JEV MLX。已有录像和评测记录保留原始名称与文件内容；此次更名不改变发行包、命令行、Python API 或已测模型行为。
+
+这是受 Jev 启发的独立项目，不是 TypeSafe AI 官方项目，也不是已有的 [bnsd55/jevmlx](https://github.com/bnsd55/jevmlx)。项目不使用 Jev 权重，也没有复现其未公开训练方法。
+
+## 早期检索记录
+
+检索日期：2026-09-19。下表保留早期公开搜索的时间快照，不代表当前命名决定、名称已被保留或注册平台保证接受该名称。
 
 | 候选 | 本次核对结果 | 判断 |
 | --- | --- | --- |
-| JEV MLX / jevmlx | 已有同领域 [bnsd55/jevmlx](https://github.com/bnsd55/jevmlx) | 容易混淆，不作为这版视觉稿的首选 |
+| JEV MLX / jevmlx | 已有同领域 [bnsd55/jevmlx](https://github.com/bnsd55/jevmlx) | 已有近似名称；请用作者与完整仓库地址区分 |
 | JF | [PyPI 的 jf](https://pypi.org/project/jf/) 已是 JSONL 查询工具 | 太短，也丢失了 MLX 的识别度 |
 | JF MLX | GitHub 仓库名搜索 `jf-mlx` / `jfmlx` 未检出结果 | 无法确认用户记忆中的具体项目，不能说绝无重名 |
-| MLXJ | GitHub `mlxj in:name` 返回部分匹配，没有发现 basename 精确为 `mlxj` 的仓库；[MLXJ 账号](https://github.com/MLXJ) 已存在 | 推荐作为候选项目名；不代表 GitHub 组织名空闲 |
+| MLXJ | GitHub `mlxj in:name` 返回部分匹配，没有发现 basename 精确为 `mlxj` 的仓库；[MLXJ 账号](https://github.com/MLXJ) 已存在 | 早期展示名称，现已改为 JEV MLX，明确体现启发来源 |
 
 当时 [PyPI mlxj JSON API](https://pypi.org/pypi/mlxj/json) 返回 404；`jf-mlx` 与 `jev-mlx` 的对应 API 也返回 404。这里只说明没有公开项目记录，不能保证名称可注册，也没有创建账号、仓库或发布包。
 

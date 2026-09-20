@@ -67,7 +67,7 @@ def test_health_static_demo_and_no_external_dependencies(running_server):
     assert request(server, "/health")[1]["status"] == "ready"
     status, html, headers = request(server, "/")
     assert status == 200
-    assert "MLXJ" in html
+    assert "JEV MLX" in html
     assert "http://" not in html and "https://" not in html
     assert "frame-ancestors 'none'" in headers["Content-Security-Policy"]
     assert "Access-Control-Allow-Origin" not in headers

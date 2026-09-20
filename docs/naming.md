@@ -1,17 +1,23 @@
-# Naming preview
+# Project name and earlier naming research
 
 [Back to home](../README.md)
 
-Research date: 2026-09-19. This is a public-search snapshot, not a reservation or a guarantee that a registry will accept a name.
+The project is **JEV MLX**, hosted at [CoderInPajamas/JEV-MLX](https://github.com/CoderInPajamas/JEV-MLX). The name makes the JEV inspiration and MLX runtime explicit. The distribution and CLI are `jev-mlx`; the Python import is `jev_mlx`.
 
-The README preview uses **MLXJ**. It keeps MLX recognizable and uses J to signal the JEV inspiration, with a spelling distinct from the existing project in this field. The distribution, CLI, and import remain `jev-mlx` / `jev_mlx`; this visual preview does not migrate the API again.
+The public display name changed from MLXJ on 2026-09-20. Existing recordings and benchmark records retain their original names and bytes. This rename does not change the package, CLI, Python API, or measured model behavior.
+
+This is an independent project inspired by Jev, not an official TypeSafe AI release or the existing [bnsd55/jevmlx](https://github.com/bnsd55/jevmlx) project. It does not use Jev weights or reproduce its unpublished training method.
+
+## Earlier research
+
+Research date: 2026-09-19. The table below preserves the earlier public-search snapshot, not the current naming decision, a reservation, or a guarantee that a registry will accept a name.
 
 | Candidate | Findings at the time | Assessment |
 | --- | --- | --- |
-| JEV MLX / jevmlx | [bnsd55/jevmlx](https://github.com/bnsd55/jevmlx) already exists in the same field | Easy to confuse; not the first choice for this preview |
+| JEV MLX / jevmlx | [bnsd55/jevmlx](https://github.com/bnsd55/jevmlx) already exists in the same field | Similar names exist; identify this project by its owner and repository URL |
 | JF | [jf on PyPI](https://pypi.org/project/jf/) is already a JSONL query tool | Too short and loses the MLX identity |
 | JF MLX | GitHub repository-name searches for `jf-mlx` / `jfmlx` returned no matches | The specific remembered project was not identified; this does not prove uniqueness |
-| MLXJ | GitHub `mlxj in:name` returned partial matches, with no exact `mlxj` repository basename found; the [MLXJ account](https://github.com/MLXJ) already exists | Suggested candidate project name; the GitHub organization name is not assumed available |
+| MLXJ | GitHub `mlxj in:name` returned partial matches, with no exact `mlxj` repository basename found; the [MLXJ account](https://github.com/MLXJ) already exists | Earlier display name; replaced by JEV MLX to make the inspiration explicit |
 
 At the time, the [PyPI mlxj JSON API](https://pypi.org/pypi/mlxj/json) returned 404; the corresponding `jf-mlx` and `jev-mlx` APIs also returned 404. This only means no public project record was found, not that registration is guaranteed. No account, repository, or package was created or published.
 
