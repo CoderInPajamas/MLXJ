@@ -1,5 +1,8 @@
 "use strict";
 
+const showcaseMode = new URLSearchParams(window.location.search).get("showcase") === "1";
+document.body.classList.toggle("showcase", showcaseMode);
+
 let current = null;
 let pendingOperation = null;
 let decisionBusy = false;
@@ -7,6 +10,21 @@ let loadingTimer = null;
 let lastLoadingVersion = -1;
 const byId = (id) => document.getElementById(id);
 const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (ch) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+
+// Scenario captions are presentation-only. They never become model inputs or results.
+function showInteractionSource(label, kind) {
+  byId("interaction-source").textContent = label;
+  byId("interaction-source").dataset.kind = kind;
+}
+
+if (showcaseMode) {
+  document.title = "MLXJ — Same words. Different context.";
+  document.querySelector(".brand").href = "/?showcase=1";
+  document.querySelector(".inspector-heading .eyebrow").textContent = "MODEL → ACTION";
+  document.querySelector(".decision-card .section-kicker").textContent = "LATEST MODEL CHOICE";
+  document.querySelector(".metric-label").textContent = "DECISION TIME";
+  byId("result-json").closest("details").querySelector("summary span").textContent = "Full decision, scores & timing";
+}
 
 async function api(path, data) {
   const response = await fetch(path, data === undefined ? {} : {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)});
@@ -37,6 +55,7 @@ function render(snapshot) {
   byId("candidate-list").innerHTML = current.candidates.map((c) => `<span class="candidate" title="${escapeHTML(c.description)}">${escapeHTML(c.id)}</span>`).join("");
   const model = current.model;
   byId("model-name").textContent = typeof model === "object" && model ? (model.name || model.path || JSON.stringify(model)) : String(model || "Local MLX model");
+  byId("showcase-model").textContent = byId("model-name").textContent;
   if (!changed) return;
   const state = current.state;
   const view = state.view;
@@ -72,6 +91,7 @@ async function handleAction(element) {
   const actionId = element.dataset.action;
   const ticket = element.dataset.decisionTicket;
   delete element.dataset.decisionTicket;
+  if (!ticket) showInteractionSource("Manual setup", "manual");
   element.disabled = true;
   try {
     const response = ticket ? await api("/api/demo/execute",{ticket,action_id:actionId}) : await api("/api/demo/action",{action_id:actionId,state_version:current.state_version});
@@ -82,12 +102,16 @@ async function handleAction(element) {
     document.dispatchEvent(new CustomEvent("jev-mlx:receipt",{detail:receipt}));
   } catch (error) {
     byId("notice").textContent = error.message;
+    showInteractionSource(ticket ? "Click rejected" : "Setup rejected", "error");
     if (ticket) showReceipt({executed:false,action_id:actionId,reason:error.message});
     element.disabled = false;
   }
 }
 
 function showReceipt(receipt) {
+  if (receipt.executed) {
+    showInteractionSource(receipt.source === "model" ? "Model action" : "Manual setup", receipt.source === "model" ? "model" : "manual");
+  }
   byId("receipt-status").textContent = receipt.executed ? "EXECUTED" : "REJECTED";
   byId("receipt-status").className = `tag ${receipt.executed ? "success" : "rejected"}`;
   byId("receipt").className = "receipt-details";
@@ -95,6 +119,7 @@ function showReceipt(receipt) {
 }
 
 function showResult(result) {
+  showInteractionSource(result.status === "selected" ? "Model selected" : result.status === "stale" ? "Stale rejected" : "Model declined", result.status === "selected" ? "thinking" : "declined");
   const title = result.candidate_id || ({no_match:"No matching action",abstain:"Needs clarification",stale:"State changed — discarded"})[result.status] || result.status;
   byId("chosen-action").innerHTML = `${escapeHTML(title)}<span>${escapeHTML(result.status)} · state ${result.state_version} · raw choice ${escapeHTML(result.raw_selected_id || "—")}</span>`;
   const timing = result.timing || {};
@@ -102,7 +127,9 @@ function showResult(result) {
   byId("latency").innerHTML = `${Number.isFinite(latency) ? latency.toFixed(1) : "—"}<small> ms</small>`;
   byId("margin").textContent = Number.isFinite(result.margin) ? result.margin.toFixed(3) : "—";
   const cache = result.cache || {};
-  byId("cache-info").textContent = Object.entries(cache).map(([key,value]) => `${key}: ${typeof value === "object" ? JSON.stringify(value) : value}`).join(" · ") || "No cache details supplied";
+  byId("cache-info").textContent = showcaseMode
+    ? `Cache ${cache.hit === true ? "hit" : cache.hit === false ? "miss" : "unreported"} · ${cache.scope || "scope unreported"} · ${cache.reused_tokens ?? "—"} tokens reused · ${cache.prefill_tokens ?? "—"} prefilled`
+    : Object.entries(cache).map(([key,value]) => `${key}: ${typeof value === "object" ? JSON.stringify(value) : value}`).join(" · ") || "No cache details supplied";
   byId("result-json").textContent = JSON.stringify(result,null,2);
   const scores = Object.entries(result.scores || {}).sort((a,b) => b[1]-a[1]).slice(0,5);
   byId("score-list").innerHTML = scores.map(([id,score]) => `<div class="score-item"><span>${escapeHTML(id)}</span><b>${score.toFixed(3)}</b><progress class="score-bar" value="${Math.max(0,Math.min(1,score))}" max="1"></progress></div>`).join("");
@@ -114,6 +141,7 @@ function executeBrowserOperation(operation) {
   byId("execute-pending").hidden = true;
   const target = [...document.querySelectorAll("[data-action]")].find((element) => element.dataset.action === operation.action_id);
   if (!target || current.state_version !== operation.state_version) {
+    showInteractionSource("Stale rejected", "declined");
     showReceipt({executed:false,reason:"The browser state changed before the selected button could be clicked."});
     byId("notice").textContent = "Stale browser operation rejected. Ask again with the current page.";
     return;
@@ -135,6 +163,7 @@ byId("command-form").addEventListener("submit", async (event) => {
   byId("execute-pending").hidden = true;
   byId("decide-button").disabled = true;
   byId("decision-status").textContent = "Thinking locally…";
+  showInteractionSource("Local model…", "thinking");
   byId("notice").textContent = "You can still change the page while inference runs. Old decisions will be rejected.";
   const started = performance.now();
   try {
@@ -150,6 +179,7 @@ byId("command-form").addEventListener("submit", async (event) => {
   } catch (error) {
     byId("notice").textContent = error.message;
     byId("decision-status").textContent = "Decision failed";
+    showInteractionSource("Request failed", "error");
   } finally {
     decisionBusy = false;
     byId("decide-button").disabled = false;
