@@ -138,7 +138,7 @@ Qwen's three original-suite misses include rejection-status distinctions and a t
 
 Repeating 28 cases under several cache conditions does not create more independent samples. The historical one-code baseline reached 26/28, slightly better than the direct returned decision. Direct scoring did not dominate every quality and latency metric. A supplementary JSON-format experiment was informed by earlier test results and is explicitly labeled as such.
 
-The [full report](docs/results.md) includes p50/p95, rejection, executable coverage, memory, versions, input sizes, reproduction commands, and original cache failures. Do not combine timings from different code revisions to calculate a speedup. A [Chinese testing guide](docs/testing.zh-CN.md) is also available.
+The [full report](docs/results.md) includes p50/p95, rejection, executable coverage, memory, versions, input sizes, reproduction commands, and original cache failures. Do not combine timings from different code revisions to calculate a speedup. See the [testing guide](docs/testing.md) for a step-by-step explanation.
 
 </details>
 
@@ -148,7 +148,7 @@ The [full report](docs/results.md) includes p50/p95, rejection, executable cover
 
 The **fully static recorded replay** lets you choose a scenario and inspect its original utterance, candidates, model choice, timing, and execution receipt. It uses saved test evidence and needs no server, model, or external network.
 
-**[Open the static replay file](docs/demo/index.html)** · [Original browser transcript](docs/assets/browser-demo/browser-transcript.json)
+**[Open the static replay file](docs/demo/index.html?lang=en)** · [Original browser transcript](docs/assets/browser-demo/browser-transcript.json)
 
 GitHub displays HTML files as source. Clone or download the repository, then open `docs/demo/index.html` in a browser. It can also be hosted on a static site once a public destination is chosen.
 
@@ -188,7 +188,7 @@ See the [architecture](docs/architecture.md) and [framework audit](docs/framewor
 | [Python API](docs/python-api.md) | Enum / boolean, result fields, and versioned execution |
 | [Model compatibility](docs/models.md) | Checkpoints, quantization, dependencies, licenses, and limits |
 | [Evaluation](docs/evaluation.md) · [Results](docs/results.md) | All baselines, raw evidence, versions, and failures |
-| [Chinese testing guide](docs/testing.zh-CN.md) | Methodology, results, and reproduction in Chinese |
+| [Testing guide](docs/testing.md) | Methodology, results, and reproduction |
 | [Local HTTP](docs/http-and-demo.md) | CLI, service, and actual browser operations |
 | [Contributing](CONTRIBUTING.md) · [Releasing](docs/releasing.md) | Development, builds, and publication |
 
@@ -197,6 +197,7 @@ See the [architecture](docs/architecture.md) and [framework audit](docs/framewor
 
 ```sh
 python -m pip install -e '.[dev]'
+python scripts/check_docs.py
 python -m pytest -m 'not model'
 python -m ruff check src tests benchmarks scripts examples
 ```

@@ -1,6 +1,8 @@
 # 测试方法与实测结果
 
-[English: evaluation protocol](evaluation.md) · [历史完整结果](results.md) · [六领域扩展结果](extended-results.zh-CN.md) · [新增评测协议](extended-evaluation-protocol.md) · [Gemma 原始集实测](gemma4-results.md) · [支持模型](models.md)
+[返回项目首页](../README.md)
+
+[评测协议](evaluation.zh-CN.md) · [历史完整结果](results.zh-CN.md) · [六领域扩展结果](extended-results.zh-CN.md) · [新增评测协议](extended-evaluation-protocol.zh-CN.md) · [Gemma 原始集实测](gemma4-results.zh-CN.md) · [支持模型](models.zh-CN.md)
 
 最新核心测试 **161 项通过**。六领域扩展集的三个模型、四种输出方法已完成同页新话语评测并通过证据审计。下面只列直接评分；完整基线、拒绝率、覆盖率、格式失败、内存和原始记录见[扩展结果](extended-results.zh-CN.md)。
 
@@ -14,11 +16,11 @@
 
 新 wheel 已在仓库外的独立环境安装，14 个运行文件与源码、包内内容逐字节一致；真实 Gemma CLI 调用为示例正确选择 `player.pause`。[安装验证](../benchmarks/results/extended-release-checks/distribution.json)单独记录，不计入模型质量集。
 
-原有 28 题单独保留：Gemma 为 **26/28**，含一次筛选后首项选择错误，即 **1/26 个 enum 请求返回错误动作**，详见[Gemma 原始集报告](gemma4-results.md)。两个数据集不能合并成一个未见测试成绩。
+原有 28 题单独保留：Gemma 为 **26/28**，含一次筛选后首项选择错误，即 **1/26 个 enum 请求返回错误动作**，详见[Gemma 原始集报告](gemma4-results.zh-CN.md)。两个数据集不能合并成一个未见测试成绩。
 
 以下详细解释历史 Qwen、GLM 测量和 Qwen 浏览器演示。原有 28 题实测中，**Qwen3.5-9B-OptiQ-4bit 的最终决策准确率为 25/28（89.3%）**，同页新话语的 p50 / p95 为 **171.7 / 176.4 ms**；GLM-4.7-Flash-4bit 为 **14/28（50.0%）**，当前提示词下不推荐直接用于动作执行。
 
-这些是特定机器、模型、英文场景和实现版本的结果。没有证明任意模型兼容、固定 100 ms、零语义错误或概率已校准。中文文档和界面的中英切换，也不代表中文指令或中英混合指令已经通过模型评测。
+这些是特定机器、模型、英文场景和实现版本的结果。没有证明任意模型兼容、固定 100 ms、零语义错误或概率已校准。中文文档与中文界面文本，也不代表中文指令或中英混合指令已经通过模型评测。
 
 原始评测、截图和录屏使用项目旧称 JEVKit MLX；证据文件保留原名称、源码哈希和记录时间，没有为更名而改写。下文复现命令使用当前 `jev-mlx` 命令、`jev_mlx` 模块和 `JEV_MLX_MODEL` 环境变量。当时更名验证重新做了核心测试与独立 wheel 的真实模型调用，**并非重新运行整套质量评测和浏览器模型测试**，见[更名验证记录](../benchmarks/results/rename-release-checks/verification.json)。
 
@@ -95,7 +97,7 @@ GLM 返回了 10 个动作和 2 个布尔答案，其中两个动作错误。旧
 
 同页复用的是完整页面前缀，页面变化时只复用变化前的稳定系统前缀，并重新计算页面与话语后缀。没有缓存最终答案冒充模型加速。页面更新和 KV 冷状态仍需约一至数秒；这些数据不支持“固定 100 ms”。
 
-实测机器为 Apple M2 Max、64 GiB 统一内存，Python 3.13.2、MLX 0.31.2、MLX-LM 0.31.3。Qwen 是混合 4/8-bit、group size 64；GLM 是 4-bit、group size 64。测试输入每题 2–6 个业务候选，另加两个拒绝候选，话语为 8–34 个英文字符。当前实现串行推理，最多 64 个业务候选、4096 个提示词 token，前缀缓存最多 512 MiB / 16 条。完整模型哈希、内存口径和硬件信息见[完整报告](results.md)及[模型来源](../benchmarks/results/checkpoints.json)。
+实测机器为 Apple M2 Max、64 GiB 统一内存，Python 3.13.2、MLX 0.31.2、MLX-LM 0.31.3。Qwen 是混合 4/8-bit、group size 64；GLM 是 4-bit、group size 64。测试输入每题 2–6 个业务候选，另加两个拒绝候选，话语为 8–34 个英文字符。当前实现串行推理，最多 64 个业务候选、4096 个提示词 token，前缀缓存最多 512 MiB / 16 条。完整模型哈希、内存口径和硬件信息见[完整报告](results.zh-CN.md)及[模型来源](../benchmarks/results/checkpoints.json)。
 
 ## 已知错误，不用保护逻辑冲掉模型错误
 
@@ -141,7 +143,7 @@ GLM 的两个最终误操作是：多窗口歧义下错误选择 `close_settings
 
 权重已加载但 KV 冷，不等于新进程冷启动。另行测了 Qwen 每种方法 3 次、GLM 每种方法 2 次的新进程启动，四种方法合计 20 次。外层计时包括进程启动、加载、首次决策和退出，只使用第一道测试题，未清空操作系统文件缓存。
 
-其中直接评分的外层耗时 p50 / p95：Qwen 为 4897.3 / 4928.1 ms，GLM 为 8726.6 / 8848.2 ms。每组仅 2–3 个样本，不能称为稳定的 p95；20 次没有进程运行异常，也不等于 20 次模型回答都正确。格式和语义失败均保留在 [Qwen 冷启动记录](../benchmarks/results/qwen9b-cold/summary.json)、[GLM 冷启动记录](../benchmarks/results/glm-cold/summary.json)及[完整解释](results.md)。
+其中直接评分的外层耗时 p50 / p95：Qwen 为 4897.3 / 4928.1 ms，GLM 为 8726.6 / 8848.2 ms。每组仅 2–3 个样本，不能称为稳定的 p95；20 次没有进程运行异常，也不等于 20 次模型回答都正确。格式和语义失败均保留在 [Qwen 冷启动记录](../benchmarks/results/qwen9b-cold/summary.json)、[GLM 冷启动记录](../benchmarks/results/glm-cold/summary.json)及[完整解释](results.zh-CN.md)。
 
 ## 真实浏览器怎么测
 
@@ -205,7 +207,7 @@ python -m benchmarks.cold_start --model "$JEV_MLX_MODEL" \
 
 这些命令运行当前源码，不能保证重现历史源码的同一耗时。换 GLM 时设置新的 `JEV_MLX_MODEL` 并使用新的输出目录；原 GLM 冷启动记录每种方法只重复 2 次。查看输出中的 `metadata.json`、`trials.jsonl`、`summary.json` 和 `parity.jsonl`，保留失败与完整输入，比较模型身份、源码哈希和缓存命中条件后再比较速度。
 
-复现六领域扩展时，显式传入 `--fixtures-dir benchmarks/fixtures/extended-v1`，先跑其独立开发集，再跑冻结测试集；本次三模型四方法对照只使用 `--conditions same_page_new_utterance`。完整命令与另外声明的 Gemma 缓存阶段见[固定协议](extended-evaluation-protocol.md)，实际完成范围见[扩展报告](extended-results.zh-CN.md)。不要修改冻结文件或根据这些已公开测试结果调整阈值后仍称其为未见评测。
+复现六领域扩展时，显式传入 `--fixtures-dir benchmarks/fixtures/extended-v1`，先跑其独立开发集，再跑冻结测试集；本次三模型四方法对照只使用 `--conditions same_page_new_utterance`。完整命令与另外声明的 Gemma 缓存阶段见[固定协议](extended-evaluation-protocol.zh-CN.md)，实际完成范围见[扩展报告](extended-results.zh-CN.md)。不要修改冻结文件或根据这些已公开测试结果调整阈值后仍称其为未见评测。
 
 运行浏览器测试时，终端一启动服务：
 
@@ -229,6 +231,6 @@ python examples/browser_smoke.py --url http://127.0.0.1:8765 \
 
 ## 中文与中英混合能力还需要怎样验证
 
-现有冻结模型评测以英文、单轮、单步动作作为范围。可以自行尝试中文指令，但目前没有中文或中英混合指令的准确率、误操作率和延迟结论。文档翻译、按钮翻译、语言切换和模型理解能力是不同的验证对象。
+现有冻结模型评测以英文、单轮、单步动作作为范围。可以自行尝试中文指令，但目前没有中文或中英混合指令的准确率、误操作率和延迟结论。文档翻译、界面文本与模型理解能力是不同的验证对象。
 
 要扩展中文，应另写公开虚构的中文开发集和冻结测试集，覆盖指代、否定、疑问、顺序、歧义及中英混合课程名；用开发集调整后固定提示词、阈值与数据哈希，再分别报告中文、英文和混合输入结果。不要直接修改现有冻结文件，或把人工挑出的成功演示当成完整评测。

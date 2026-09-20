@@ -1,5 +1,7 @@
 # Changelog
 
+[Back to home](README.en.md)
+
 ## 0.1.0 — prepared release
 
 Initial experimental JEV MLX implementation. Public repository/registry

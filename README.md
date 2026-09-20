@@ -9,8 +9,8 @@
 <p align="center">
   <img src="docs/assets/badges/apple-silicon.svg" alt="Apple Silicon" />
   <img src="docs/assets/badges/python.svg" alt="Python 3.11+" />
-  <a href="LICENSE"><img src="docs/assets/badges/license.svg" alt="MIT License" /></a>
-  <a href="CHANGELOG.md"><img src="docs/assets/badges/release.svg" alt="0.1 experimental, not published" /></a>
+  <a href="LICENSE.zh-CN.md"><img src="docs/assets/badges/license.svg" alt="MIT License" /></a>
+  <a href="CHANGELOG.zh-CN.md"><img src="docs/assets/badges/release.svg" alt="0.1 experimental, not published" /></a>
 </p>
 
 <p align="center">
@@ -50,7 +50,7 @@
 
 ## 快速开始
 
-需要 **Apple Silicon Mac、原生 ARM Python 3.11+**，以及本地 MLX-LM 模型权重。建议先从已验证的 Qwen 检查点开始，具体版本见[支持模型](docs/models.md)。
+需要 **Apple Silicon Mac、原生 ARM Python 3.11+**，以及本地 MLX-LM 模型权重。建议先从已验证的 Qwen 检查点开始，具体版本见[支持模型](docs/models.zh-CN.md)。
 
 在此仓库目录内安装：
 
@@ -83,7 +83,7 @@ print(result.margin, result.timing)
 jev-mlx decide --request examples/decision.json
 ```
 
-返回结果包含候选 ID、原始 logits、候选分数、margin、状态版本、模型身份、真实耗时和缓存信息。[Python API](docs/python-api.md) 包含 boolean 判断、状态更新与执行示例。
+返回结果包含候选 ID、原始 logits、候选分数、margin、状态版本、模型身份、真实耗时和缓存信息。[Python API](docs/python-api.zh-CN.md) 包含 boolean 判断、状态更新与执行示例。
 
 <a name="results"></a>
 
@@ -114,7 +114,7 @@ Gemma 选错了一次队列首项，Qwen 选错了一次最长续航产品；GLM
 | GLM-4.7-Flash-4bit | 14 / 28（50.0%） | 2 / 26 | 147.8 / 170.6 ms |
 | Gemma 4 26B-A4B MoE · mixed 4/8-bit | 26 / 28（92.9%） | 1 / 26 | 134.9 / 283.9 ms |
 
-准确率包含 26 个 enum 请求和 2 个 boolean 判断；动作误选只统计 enum。三行来自各自完整的测量记录，不能拼接为算法提速倍数。Gemma 的四种方法、三种缓存条件和全部失败见[专项报告](docs/gemma4-results.md)。
+准确率包含 26 个 enum 请求和 2 个 boolean 判断；动作误选只统计 enum。三行来自各自完整的测量记录，不能拼接为算法提速倍数。Gemma 的四种方法、三种缓存条件和全部失败见[专项报告](docs/gemma4-results.zh-CN.md)。
 
 这里的时间要求**模型已经加载，且页面前缀可复用**。Qwen 在 KV 冷状态下的 p50 是 **2,159.9 ms**，页面更新后的首次决策是 **1,050.2 ms**，因此不能理解成每次请求都约 170 ms。
 
@@ -138,7 +138,7 @@ Qwen 在原始集的 3 个未通过场景包括拒绝状态区分和排序后的
 
 同一批 28 条场景在多个缓存条件下重复运行，不算更多独立样本。历史一编号基线达到 26/28，严格质量略高于直接返回结果；直接评分并未在所有质量和延迟指标上占优。补充 JSON 格式实验受早期测试发现启发，单独标注，不能当作完全未见的测试结果。
 
-完整的 p50/p95、拒绝率、可执行覆盖率、内存、模型版本、输入规模、复现命令，以及原始缓存失败记录都在[中文测试说明](docs/testing.zh-CN.md)和[完整英文报告](docs/results.md)。不同代码版本的时间不能拼起来计算提速倍数。
+完整的 p50/p95、拒绝率、可执行覆盖率、内存、模型版本、输入规模、复现命令，以及原始缓存失败记录都在[中文测试说明](docs/testing.zh-CN.md)和[完整报告](docs/results.zh-CN.md)。不同代码版本的时间不能拼起来计算提速倍数。
 
 </details>
 
@@ -148,7 +148,7 @@ Qwen 在原始集的 3 个未通过场景包括拒绝状态区分和排序后的
 
 提供一个**完全静态的录制回放**：选场景，查看当时的话语、候选、模型选择、耗时和实际执行回执。它读取已保存的测试记录，无服务器、无模型、无网络依赖。
 
-**[打开静态回放文件](docs/demo/index.html)** · [查看原始浏览器记录](docs/assets/browser-demo/browser-transcript.json)
+**[打开静态回放文件](docs/demo/index.html?lang=zh-CN)** · [查看原始浏览器记录](docs/assets/browser-demo/browser-transcript.json)
 
 GitHub 会把 HTML 文件显示为源码。克隆或下载仓库后，用浏览器打开 `docs/demo/index.html` 即可运行；也可以在确定公开仓库后托管到静态站点。
 
@@ -157,7 +157,7 @@ GitHub 会把 HTML 文件显示为源码。克隆或下载仓库后，用浏览�
 
 ![真实本地浏览器测试截图，采集时使用旧项目名](docs/assets/browser-demo/03b-player-control.png)
 
-截图和录制发生在项目更名前，保留原貌。静态回放不接受新的自由文本推理，也不重新操作桌面。真正输入新话语、让本地模型操作模拟页面，需要在 Apple Silicon 上启动 `jev-mlx serve`，具体步骤见[本地 HTTP 与浏览器集成](docs/http-and-demo.md)。
+截图和录制发生在项目更名前，保留原貌。静态回放不接受新的自由文本推理，也不重新操作桌面。真正输入新话语、让本地模型操作模拟页面，需要在 Apple Silicon 上启动 `jev-mlx serve`，具体步骤见[本地 HTTP 与浏览器集成](docs/http-and-demo.zh-CN.md)。
 
 浏览器集成只操作这个虚构应用中预先允许的 DOM 控件，不是任意网站导航或视觉电脑操控。
 
@@ -179,24 +179,25 @@ GitHub 会把 HTML 文件显示为源码。克隆或下载仓库后，用浏览�
 
 候选映射为经过 tokenizer 验证的单 token 编码，再映射回业务 ID。直接评分读取因果模型的下一 token logits，不生成 JSON 续写；没有重写官方量化输出头。混合缓存只保留完整、可复用的前缀边界。
 
-实现细节见[架构](docs/architecture.md)与[官方框架审查](docs/framework-audit.md)。首版范围是**英文、单轮、单步选择**，不包含通用聊天、多步规划、任意参数生成、视觉理解、训练或 GPU 批处理。**中文文档不表示中文模型能力已经验证。**
+实现细节见[架构](docs/architecture.zh-CN.md)与[官方框架审查](docs/framework-audit.zh-CN.md)。首版范围是**英文、单轮、单步选择**，不包含通用聊天、多步规划、任意参数生成、视觉理解、训练或 GPU 批处理。**中文文档不表示中文模型能力已经验证。**
 
 ## 继续阅读
 
 | 文档 | 内容 |
 | :--- | :--- |
 | [中文测试说明](docs/testing.zh-CN.md) | 怎么测、测到了什么、失败在哪里、如何复现 |
-| [Python API](docs/python-api.md) | enum / boolean、返回字段、版本化执行 |
-| [支持模型](docs/models.md) | 检查点、量化、依赖、许可证与限制 |
-| [评测方法](docs/evaluation.md) · [完整结果](docs/results.md) | 全部基线、原始记录、版本与失败 |
-| [本地 HTTP](docs/http-and-demo.md) | CLI、接口和真实浏览器操作 |
-| [贡献指南](CONTRIBUTING.md) · [发布说明](docs/releasing.md) | 开发、构建、发布边界 |
+| [Python API](docs/python-api.zh-CN.md) | enum / boolean、返回字段、版本化执行 |
+| [支持模型](docs/models.zh-CN.md) | 检查点、量化、依赖、许可证与限制 |
+| [评测方法](docs/evaluation.zh-CN.md) · [完整结果](docs/results.zh-CN.md) | 全部基线、原始记录、版本与失败 |
+| [本地 HTTP](docs/http-and-demo.zh-CN.md) | CLI、接口和真实浏览器操作 |
+| [贡献指南](CONTRIBUTING.zh-CN.md) · [发布说明](docs/releasing.zh-CN.md) | 开发、构建、发布边界 |
 
 <details>
 <summary><strong>运行开发检查</strong></summary>
 
 ```sh
 python -m pip install -e '.[dev]'
+python scripts/check_docs.py
 python -m pytest -m 'not model'
 python -m ruff check src tests benchmarks scripts examples
 ```
@@ -228,8 +229,8 @@ python -m ruff check src tests benchmarks scripts examples
 
 ## 许可证与来源
 
-[MIT](LICENSE)。项目独立维护，受 [TypeSafe AI 的 JEV](https://docs.typesafe.ai/) 启发，使用官方 [MLX-LM](https://github.com/ml-explore/mlx-lm)。没有官方合作或背书，不使用 JEV 权重，也不声称复现未公开的 RLCD。
+[MIT](LICENSE.zh-CN.md)。项目独立维护，受 [TypeSafe AI 的 JEV](https://docs.typesafe.ai/) 启发，使用官方 [MLX-LM](https://github.com/ml-explore/mlx-lm)。没有官方合作或背书，不使用 JEV 权重，也不声称复现未公开的 RLCD。
 
-模型和依赖保留各自许可证；参考项目与归属见 [NOTICE](NOTICE.md)。已有实测材料保留更名前的名称、源文件路径和哈希，详见[结果来源说明](docs/results.md)。候选名称的检索记录见[命名说明](docs/naming.md)。
+模型和依赖保留各自许可证；参考项目与归属见 [NOTICE](NOTICE.zh-CN.md)。已有实测材料保留更名前的名称、源文件路径和哈希，详见[结果来源说明](docs/results.zh-CN.md)。候选名称的检索记录见[命名说明](docs/naming.zh-CN.md)。
 
 <p align="center"><sub>Local decisions. Visible evidence. Open source.</sub></p>

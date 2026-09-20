@@ -1,5 +1,7 @@
 # Contributing to JEV MLX
 
+[Back to home](README.en.md)
+
 Use a dedicated environment and a local model directory. Do not install into a
 shared inference environment, modify model weights, or stop other applications
 to improve benchmark numbers. Python 3.11 or newer is required.
@@ -9,6 +11,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -e '.[dev]'
+python scripts/check_docs.py
 python -m pytest -m 'not model'
 python -m ruff check src tests benchmarks scripts
 python -m build
@@ -38,6 +41,15 @@ or real-checkpoint cache correctness.
 The first release targets English single-step choices using existing checkpoints.
 Discuss broader features before expanding the public contract. Documentation
 should describe observed behavior and explicit limits, not future performance.
+
+## Documentation languages
+
+Keep a complete English and Chinese version of each document, registered in
+`docs/locales.json`. Only the two homepages link across languages; inner document
+links stay in the same language and return to that language's homepage. Do not
+add language selectors to inner pages. Preserve original prompts, commands, and
+raw evidence when translating. Run `python scripts/check_docs.py` to check pairs,
+local links, and language routes; CI runs the same check.
 
 ## Evaluation changes
 

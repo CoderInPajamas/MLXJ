@@ -1,5 +1,3 @@
-<p align="center"><strong>简体中文</strong> · <a href="extended-results.md">English</a></p>
-
 # 六领域扩展评测报告
 
 [返回中文首页](../README.md) · [中文测试说明](testing.zh-CN.md)
@@ -16,7 +14,7 @@
 
 Gemma 的单编号基线比直接评分少答对一题，出现三个无效输出，没有格式有效但选错动作的结果。Qwen 的直接评分与单编号基线逐题结果完全相同，包括一次错误的商品选择。GLM 的语义错误和格式失败较多，当前配置不适合无人确认的动作执行。这个小样本既不足以给出通用模型排名，也不支持固定 100 ms 的延迟承诺。
 
-本报告依据[固定的新增评测协议（英文）](extended-evaluation-protocol.md)，评估[六领域虚构场景集（英文说明）](../benchmarks/fixtures/extended-v1/README.md)。[Gemma 原始 28 题报告（英文）](gemma4-results.md)和[历史 Qwen/GLM 报告（英文）](results.md)使用不同的数据集或运行记录，不能当成额外样本并入这里的百分比。
+本报告依据[固定的新增评测协议](extended-evaluation-protocol.zh-CN.md)，评估[六领域虚构场景集](../benchmarks/fixtures/extended-v1/README.zh-CN.md)。[Gemma 原始 28 题报告](gemma4-results.zh-CN.md)和[历史 Qwen/GLM 报告](results.zh-CN.md)使用不同的数据集或运行记录，不能当成额外样本并入这里的百分比。
 
 [完整新增实验审计](../benchmarks/results/extended-campaign.json)覆盖十次正式运行：**1096/1096 次测量完成**，无运行异常或准备阶段异常，**128/128 次缓存数值对照通过**。这些总数包含本扩展集、Gemma 原始集和进程启动实验，表示工作量，不是准确率的分母，也不是独立题目数。
 
@@ -384,4 +382,4 @@ python -m benchmarks.run --model "$JEV_MLX_MODEL" \
 
 测试 Qwen 或 GLM 时，改用已核验的 `Qwen3.5-9B-OptiQ-4bit` 或 `GLM-4.7-Flash-4bit` 路径，保留相同参数并指定新的输出目录；三模型完整循环命令见评测协议。
 
-保留每次调用和原始输出、元数据、汇总与完整性审计。新运行应与已公开的这些尝试分开记录；重复输入仍然是相同的 36 个质量场景。完整实验及单独缓存阶段的命令见[评测协议（英文）](extended-evaluation-protocol.md)。
+保留每次调用和原始输出、元数据、汇总与完整性审计。新运行应与已公开的这些尝试分开记录；重复输入仍然是相同的 36 个质量场景。完整实验及单独缓存阶段的命令见[评测协议](extended-evaluation-protocol.zh-CN.md)。

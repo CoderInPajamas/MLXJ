@@ -1,6 +1,6 @@
-<p align="center"><a href="extended-results.zh-CN.md">简体中文</a> · <strong>English</strong></p>
-
 # Six-domain extended evaluation
+
+[Back to home](../README.en.md)
 
 **The three-model warm comparison and Gemma's separate extended cache
 verification are complete and audited:** 684 measured calls and 72 numerical

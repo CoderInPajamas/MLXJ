@@ -1,5 +1,7 @@
 # Extended fictional suite v1
 
+[Back to home](../../../README.en.md)
+
 This suite adds **12 development cases and 36 frozen test cases** across six
 fictional local applications. It supplements the original 16/28 course-player
 suite; it does not replace or modify it. Every request remains English,

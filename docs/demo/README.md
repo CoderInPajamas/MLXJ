@@ -1,5 +1,7 @@
 # Recorded browser decisions
 
+[Back to home](../../README.en.md)
+
 Open `index.html` directly in a browser, including through `file://`. This is an
 offline, bilingual **recorded replay**, not a live model demonstration. It needs
 no Python runtime, model, HTTP server, CDN, or network connection at viewing time.
@@ -7,8 +9,10 @@ no Python runtime, model, HTTP server, CDN, or network connection at viewing tim
 The page exposes all 16 cases and the separate state-change check from the
 existing public [browser transcript](../assets/browser-demo/browser-transcript.json).
 It preserves the original English utterances, candidate IDs, logits, scores,
-measured timings, cache information, and execution receipts. The interface defaults to 中文; English/中文 changes
-the interface, not the recorded inputs or results. Missing fields remain missing.
+measured timings, cache information, and execution receipts. The interface follows
+the language selected on the homepage (`?lang=en` or `?lang=zh-CN`); opening the
+file without a language defaults to Chinese. Recorded inputs and results are
+unchanged in either language. Missing fields remain missing.
 
 The original artifacts retain the project's previous name. They have not been
 rewritten or retouched. The replay uses the current MLXJ display name for its interface. Python and CLI identifiers remain `jev_mlx` and `jev-mlx`.

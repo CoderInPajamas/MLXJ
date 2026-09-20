@@ -1,5 +1,7 @@
 # Local HTTP API and browser demo
 
+[Back to home](../README.en.md)
+
 Start the real MLX backend with a separate local checkpoint:
 
 ```sh

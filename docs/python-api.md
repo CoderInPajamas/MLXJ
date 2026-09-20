@@ -1,6 +1,6 @@
 # Python API
 
-Install JEV MLX using the [quick start](../README.md#quick-start), then set
+Install JEV MLX using the [quick start](../README.en.md#quick-start), then set
 `JEV_MLX_MODEL` to a verified local checkpoint. See [model compatibility](models.md).
 
 ## Make a decision

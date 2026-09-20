@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "languages": [
+    "en",
+    "zh-CN"
+  ],
+  "homepages": {
+    "en": "README.en.md",
+    "zh-CN": "README.md"
+  },
+  "documents": [
+    {
+      "en": "README.en.md",
+      "zh-CN": "README.md"
+    },
+    {
+      "en": "LICENSE",
+      "zh-CN": "LICENSE.zh-CN.md"
+    },
+    {
+      "en": "CONTRIBUTING.md",
+      "zh-CN": "CONTRIBUTING.zh-CN.md"
+    },
+    {
+      "en": "CHANGELOG.md",
+      "zh-CN": "CHANGELOG.zh-CN.md"
+    },
+    {
+      "en": "NOTICE.md",
+      "zh-CN": "NOTICE.zh-CN.md"
+    },
+    {
+      "en": "docs/architecture.md",
+      "zh-CN": "docs/architecture.zh-CN.md"
+    },
+    {
+      "en": "docs/evaluation.md",
+      "zh-CN": "docs/evaluation.zh-CN.md"
+    },
+    {
+      "en": "docs/extended-evaluation-protocol.md",
+      "zh-CN": "docs/extended-evaluation-protocol.zh-CN.md"
+    },
+    {
+      "en": "docs/extended-results.md",
+      "zh-CN": "docs/extended-results.zh-CN.md"
+    },
+    {
+      "en": "docs/framework-audit.md",
+      "zh-CN": "docs/framework-audit.zh-CN.md"
+    },
+    {
+      "en": "docs/gemma4-audit.md",
+      "zh-CN": "docs/gemma4-audit.zh-CN.md"
+    },
+    {
+      "en": "docs/gemma4-results.md",
+      "zh-CN": "docs/gemma4-results.zh-CN.md"
+    },
+    {
+      "en": "docs/http-and-demo.md",
+      "zh-CN": "docs/http-and-demo.zh-CN.md"
+    },
+    {
+      "en": "docs/implementation-plan.md",
+      "zh-CN": "docs/implementation-plan.zh-CN.md"
+    },
+    {
+      "en": "docs/models.md",
+      "zh-CN": "docs/models.zh-CN.md"
+    },
+    {
+      "en": "docs/naming.md",
+      "zh-CN": "docs/naming.zh-CN.md"
+    },
+    {
+      "en": "docs/python-api.md",
+      "zh-CN": "docs/python-api.zh-CN.md"
+    },
+    {
+      "en": "docs/releasing.md",
+      "zh-CN": "docs/releasing.zh-CN.md"
+    },
+    {
+      "en": "docs/results.md",
+      "zh-CN": "docs/results.zh-CN.md"
+    },
+    {
+      "en": "docs/testing.md",
+      "zh-CN": "docs/testing.zh-CN.md"
+    },
+    {
+      "en": "docs/demo/README.md",
+      "zh-CN": "docs/demo/README.zh-CN.md"
+    },
+    {
+      "en": "docs/assets/social/README.md",
+      "zh-CN": "docs/assets/social/README.zh-CN.md"
+    },
+    {
+      "en": "benchmarks/fixtures/extended-v1/README.md",
+      "zh-CN": "benchmarks/fixtures/extended-v1/README.zh-CN.md"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Additional model and extended-suite evaluation protocol
 
+[Back to home](../README.en.md)
+
 Protocol ID: `extended-evaluation-v1`. Finalized 2026-09-20 before the original
 Gemma test and all extended-suite inference. This document specifies experiments;
 completion belongs in the results. The original 16-case Gemma development run

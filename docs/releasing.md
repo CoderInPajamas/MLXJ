@@ -1,5 +1,7 @@
 # Preparing and publishing a release
 
+[Back to home](../README.en.md)
+
 JEV MLX is distributed as `jev-mlx`, imported as `jev_mlx`, and invoked with
 the `jev-mlx` CLI. Version 0.1 artifacts can be prepared
 locally without choosing an external account. Building a distribution does not

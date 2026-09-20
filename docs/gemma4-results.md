@@ -1,5 +1,7 @@
 # Gemma 4 MoE measured results
 
+[Back to home](../README.en.md)
+
 Measured on 2026-09-20 using the existing local
 `gemma-4-26b-a4b-it-4bit` checkpoint. Direct scoring returned **26/28 correct
 choices in each cache condition**, with same-page decision latency of

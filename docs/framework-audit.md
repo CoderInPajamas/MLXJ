@@ -1,5 +1,7 @@
 # Framework audit for 0.1
 
+[Back to home](../README.en.md)
+
 Verified against the installed MLX **0.31.2** and MLX-LM **0.31.3** source, then
 installed those versions into a separate project environment. The shared reference
 environment and model files are read-only. No custom Metal kernels or attention
