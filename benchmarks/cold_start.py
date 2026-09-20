@@ -17,7 +17,7 @@ from .common import (
     request_from_dict,
     sanitize,
 )
-from .metrics import grouped_summary
+from .metrics import grouped_summary, grouped_summary_by_kind
 
 
 def worker(args) -> int:
@@ -28,6 +28,7 @@ def worker(args) -> int:
     row = {
         "case_id": case["id"],
         "family": case["family"],
+        "kind": case["request"].get("kind", "enum"),
         "mode": args.mode,
         "condition": "process_cold_start",
         "expected": case["expected"],
@@ -74,6 +75,8 @@ def main(argv: list[str] | None = None) -> int:
         "--mode", choices=("direct", "code", "json", "json_code"), help=argparse.SUPPRESS
     )
     args = parser.parse_args(argv)
+    if len(set(args.modes)) != len(args.modes):
+        parser.error("modes must be unique")
     if args.worker_record:
         return worker(args)
     if not args.output or args.repeats < 1 or args.timeout <= 0:
@@ -87,14 +90,19 @@ def main(argv: list[str] | None = None) -> int:
         "fixtures": manifest,
         "split": args.split,
         "model_name": Path(args.model).name,
+        "modes": args.modes,
+        "conditions": ["process_cold_start"],
+        "case_count": 1,
         "repeats": args.repeats,
+        "seed": 20260919,
+        "timeout_seconds": args.timeout,
         "scope": "first_fixture_only",
         "os_filesystem_cache_flushed": False,
         "notes": "Fresh Python process and model weights per attempt; OS disk cache is intentionally not flushed. Parent wall time includes interpreter startup, load, first decision, and shutdown. One repetition cannot establish stable percentiles.",
     }
     (args.output / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
     jobs = [(mode, repeat) for repeat in range(args.repeats) for mode in args.modes]
-    random.Random(20260919).shuffle(jobs)
+    random.Random(metadata["seed"]).shuffle(jobs)
     rows = []
     with (args.output / "trials.jsonl").open("w") as log:
         for index, (mode, repeat) in enumerate(jobs, 1):
@@ -117,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
             start = time.perf_counter()
             row = {
                 "case_id": cases[0]["id"],
+                "kind": cases[0]["request"].get("kind", "enum"),
                 "expected": cases[0]["expected"],
                 "mode": mode,
                 "condition": "process_cold_start",
@@ -173,6 +182,7 @@ def main(argv: list[str] | None = None) -> int:
                         "planned": len(jobs),
                         "complete": index == len(jobs),
                         "groups": grouped_summary(rows),
+                        "groups_by_kind": grouped_summary_by_kind(rows),
                     },
                     indent=2,
                 )

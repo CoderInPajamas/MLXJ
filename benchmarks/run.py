@@ -223,6 +223,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--parity-score-atol", type=float, default=0.1)
     parser.add_argument("--margin-threshold", type=float, default=0.0)
     args = parser.parse_args(argv)
+    if len(set(args.modes)) != len(args.modes):
+        parser.error("modes must be unique")
+    if len(set(args.conditions)) != len(args.conditions):
+        parser.error("conditions must be unique")
     if args.repeats < 1 or (args.limit is not None and args.limit < 1):
         parser.error("repeats and limit must be positive")
     if any(
