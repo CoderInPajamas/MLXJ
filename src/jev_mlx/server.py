@@ -16,6 +16,16 @@ from .types import DecisionRequest
 
 MAX_BODY_BYTES = 65_536
 LOGGER = logging.getLogger(__name__)
+STATIC_ROUTES = {
+    "/": ("index.html", "text/html"),
+    "/app.js": ("app.js", "application/javascript"),
+    "/style.css": ("style.css", "text/css"),
+    "/blocks": ("blocks.html", "text/html"),
+    "/blocks.html": ("blocks.html", "text/html"),
+    "/blocks.js": ("blocks.js", "application/javascript"),
+    "/blocks-engine.js": ("blocks-engine.js", "application/javascript"),
+    "/blocks.css": ("blocks.css", "text/css"),
+}
 
 
 def request_from_dict(data: dict[str, Any]) -> DecisionRequest:
@@ -104,14 +114,13 @@ class RequestHandler(BaseHTTPRequestHandler):
             )
         elif path == "/api/demo/state":
             self._json(200, self.server.controller.snapshot())
-        elif path in ("/", "/app.js", "/style.css"):
-            name = "index.html" if path == "/" else path[1:]
-            mime = {
-                "index.html": "text/html; charset=utf-8",
-                "app.js": "application/javascript; charset=utf-8",
-                "style.css": "text/css; charset=utf-8",
-            }[name]
-            self._send(200, files("jev_mlx").joinpath("static", name).read_bytes(), mime)
+        elif path in STATIC_ROUTES:
+            name, mime = STATIC_ROUTES[path]
+            self._send(
+                200,
+                files("jev_mlx").joinpath("static", name).read_bytes(),
+                f"{mime}; charset=utf-8",
+            )
         else:
             self._json(404, {"error": "not_found"})
 

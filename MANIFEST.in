@@ -7,7 +7,7 @@ recursive-include docs/demo *.html *.js *.css *.py
 recursive-include benchmarks *.py *.md *.json *.jsonl *.xml
 recursive-include examples *.py *.json *.md
 recursive-include scripts *.py
-recursive-include tests *.py
+recursive-include tests *.py *.mjs
 include requirements-macos-py313.lock
 prune benchmarks/__pycache__
 global-exclude *.pyc .DS_Store

@@ -51,9 +51,11 @@
 
 需要 **Apple Silicon Mac、原生 ARM Python 3.11+**，以及本地 MLX-LM 模型权重。建议先从已验证的 Qwen 检查点开始，具体版本见[支持模型](docs/models.zh-CN.md)。
 
-在此仓库目录内安装：
+克隆仓库并安装：
 
 ```sh
+git clone https://github.com/CoderInPajamas/MLXJ.git
+cd MLXJ
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[mlx]'

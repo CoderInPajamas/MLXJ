@@ -31,6 +31,11 @@ jobs:
         run: python scripts/check_docs.py
       - name: Test without MLX or local model weights
         run: python -m pytest -m 'not model'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test deterministic falling-block rules
+        run: node --test tests/blocks-engine.test.mjs
       - name: Build wheel and source archive
         run: python -m build
       - name: Install and smoke-test the built wheel

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MLXJ Blocks — A local model. A falling block.</title>
+  <meta name="description" content="Watch a local MLX model choose where each falling block lands. An experimental, turn-based game with complete decision receipts.">
+  <link rel="stylesheet" href="/blocks.css">
+  <script type="module" src="/blocks.js"></script>
+</head>
+<body>
+  <main class="shell" id="game-shell">
+    <header class="masthead">
+      <a href="/blocks" class="brand" aria-label="MLXJ Blocks"><span class="brand-icon" aria-hidden="true">▟</span> MLXJ<span class="brand-divider">/</span><strong>BLOCKS</strong></a>
+      <span class="local-badge"><i></i><span id="connection-label">LOCAL BACKEND · CONNECTING</span></span>
+    </header>
+    <div class="intro"><div><p class="eyebrow">ONE PIECE. ONE MODEL DECISION.</p><h1>Can a local model clear the board?</h1></div><p class="intro-copy">No cloud. No hidden game solver.<br>Watch the choices. Keep the mistakes.</p></div>
+    <section class="game-layout" aria-label="Blocks game">
+      <div class="canvas-frame"><canvas id="board" width="640" height="700" aria-label="10 by 20 block game board. Use arrow keys to move and rotate, space to drop in manual mode."></canvas></div>
+      <aside class="control-panel">
+        <div class="status-heading"><span class="status-dot" id="status-dot"></span><span id="game-status" role="status">Ready to play</span><span id="seed-label" class="seed"></span></div>
+        <h2>Let your model play.</h2><p class="panel-copy">The model picks a legal landing spot.<br>The game drops the piece.</p>
+        <button id="start-ai" class="primary" type="button"><span>▶</span> Start local AI</button>
+        <div class="button-row"><button id="step-ai" type="button">One piece</button><button id="pause" type="button">Pause</button></div>
+        <div class="decision-card"><p class="eyebrow">LATEST MODEL CHOICE</p><strong id="choice-label">Your move, local AI.</strong><p id="choice-detail">Start a run to see an actual decision.</p><div class="decision-stats"><div><span>DECISION</span><strong id="decision-time">—</strong></div><div><span>OUTCOME</span><strong id="decision-outcome">—</strong></div></div></div>
+        <div class="model-card"><span class="eyebrow">RUNNING ON THIS MAC</span><p id="model-name">Checking local backend…</p><span id="cache-label">Every piece is a new decision.</span></div>
+        <div class="button-row secondary"><button id="manual-mode" type="button">Play yourself</button><button id="reset" type="button">↺ Reset</button></div>
+        <p class="keys"><kbd>←</kbd><kbd>→</kbd> move <kbd>↑</kbd> rotate <kbd>space</kbd> drop<br><kbd>F</kbd> fullscreen · turn-based, no gravity timer</p>
+        <p id="notice" class="notice" aria-live="polite"></p>
+        <details><summary>What is the model actually doing?</summary><p>It receives a structured board, the next pieces, and every legal vertical-drop placement. The rules calculate each placement’s resulting lines, holes and height; the model chooses the placement. No screenshots, path planner or best-move fallback.</p><p>A poor choice stays in the game. A refusal or error pauses it. Reset, pause and manual changes invalidate an in-flight result.</p><button id="download" type="button">Download complete run JSON ↓</button><pre id="result-json">No decisions yet.</pre></details>
+      </aside>
+    </section>
+    <footer><span>MLXJ · Experimental local decision making</span><span>Structured board, not vision · One model choice per piece</span></footer>
+  </main>
+</body>
+</html>

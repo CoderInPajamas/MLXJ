@@ -73,6 +73,16 @@ def test_health_static_demo_and_no_external_dependencies(running_server):
     assert "Access-Control-Allow-Origin" not in headers
     assert request(server, "/app.js")[0] == 200
     assert request(server, "/style.css")[0] == 200
+    for path, content_type in (
+        ("/blocks", "text/html"),
+        ("/blocks.html", "text/html"),
+        ("/blocks.js", "application/javascript"),
+        ("/blocks-engine.js", "application/javascript"),
+        ("/blocks.css", "text/css"),
+    ):
+        status, _, headers = request(server, path)
+        assert status == 200
+        assert headers["Content-Type"].startswith(content_type)
     assert request(server, "/../../LICENSE")[0] == 404
 
 

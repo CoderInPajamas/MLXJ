@@ -51,9 +51,11 @@ Models can make mistakes. Candidate scores rank choices and are **not calibrated
 
 Requires **Apple Silicon, native ARM Python 3.11+**, and a local MLX-LM checkpoint. Start with the verified Qwen checkpoint in the [model table](docs/models.md).
 
-From this checkout:
+Clone the repository and install:
 
 ```sh
+git clone https://github.com/CoderInPajamas/MLXJ.git
+cd MLXJ
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[mlx]'

@@ -104,6 +104,10 @@
     {
       "en": "benchmarks/fixtures/extended-v1/README.md",
       "zh-CN": "benchmarks/fixtures/extended-v1/README.zh-CN.md"
+    },
+    {
+      "en": "docs/blocks.md",
+      "zh-CN": "docs/blocks.zh-CN.md"
     }
   ]
 }
