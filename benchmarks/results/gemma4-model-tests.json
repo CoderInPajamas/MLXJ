@@ -1,0 +1,40 @@
+{
+  "model": "gemma-4-26b-a4b-it-4bit",
+  "checkpoint_revision": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+  "command": "JEV_TEST_MODEL=/absolute/path/to/gemma-4-26b-a4b-it-4bit python -m pytest tests/test_model.py -q --junitxml=runs/gemma4-model-tests.xml",
+  "tests": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 41.619,
+  "timestamp": "2026-09-20T08:11:24.060653+02:00",
+  "test_source_sha256": "d9d656a6b089482682a1e21778bb8c8c3af03914af5d5fa0a248d9083e310532",
+  "source_junit_sha256": "22f378917863d4a3dec446ff1b9b469ae237969e08eb261079d3f531386795d8",
+  "cases": [
+    {
+      "name": "test_real_cache_parity_and_changed_middle",
+      "seconds": 16.415,
+      "properties": {}
+    },
+    {
+      "name": "test_real_scores_and_generation_baselines",
+      "seconds": 6.024,
+      "properties": {}
+    },
+    {
+      "name": "test_real_cache_parity_beyond_1024_token_prefix",
+      "seconds": 19.099,
+      "properties": {
+        "long_prefix_tokens": "1741",
+        "same_page_max_logit_difference": "0.0",
+        "same_page_max_score_difference": "0.0",
+        "page_update_max_logit_difference": "0.0",
+        "page_update_max_score_difference": "0.0"
+      }
+    }
+  ],
+  "warnings": [
+    "pytest record_property is incompatible with default junit_family=xunit2; emitted property values are retained in this record."
+  ],
+  "scope": "Three opt-in integration invariants, not a semantic-quality benchmark. No claim that all 4096-token prompts have numerical parity."
+}
