@@ -13,6 +13,7 @@
 
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
+  <a href="#live-demo">Live demo</a> ·
   <a href="#results">Measured results</a> ·
   <a href="docs/evaluation.md">Methodology</a> ·
   <a href="#replay">Static replay</a> ·
@@ -28,13 +29,27 @@
 
 ---
 
+<a name="live-demo"></a>
+
+## Same words. Different context.
+
+“Close it” closes the focused window. “First one” follows the filtered, reordered list. A question stays a question.
+
+![Real local Qwen inference: changing context, model choices, and actual browser clicks](docs/assets/live-demo/preview.gif)
+
+**A real local-model recording, at original speed.** Manual scene setup is labeled. The GIF plays directly on GitHub; new requests run through the local MLX backend.
+
+[Watch the full video](docs/assets/live-demo/full-run.mp4) · [Try it on your Mac](docs/http-and-demo.md#interactive-showcase) · [All eight outcomes and recording details](docs/assets/live-demo/README.md)
+
+This fixed walkthrough illustrates the integration; it is not a held-out accuracy or latency benchmark. The [measured results](#results) retain model failures and broader evaluation limits.
+
 ## Connect language to your application
 
 **MLXJ** uses the current application state, a user utterance, and dynamic allowed choices to select a stable business ID with a local model. No-match and abstention are explicit outcomes.
 
 Embed it in an existing tool: open a feature, select a visible item, pause a player, or answer a boolean / enum question. Inference runs on your Mac with an existing checkpoint; no training is required.
 
-> **Naming preview:** MLXJ is the candidate name used in this README preview. The working distribution and CLI remain `jev-mlx`, with Python imports from `jev_mlx`. Version 0.1 is experimental and has not been published to PyPI.
+> **Project and package:** The project is MLXJ. The distribution and CLI are `jev-mlx`, with Python imports from `jev_mlx`. Version 0.1 is experimental and has not been published to PyPI.
 
 | Capability | What it means for your application |
 | :--- | :--- |
@@ -202,7 +217,7 @@ python -m pytest -m 'not model'
 python -m ruff check src tests benchmarks scripts examples
 ```
 
-Real-model tests require explicitly selected local weights. Run model workloads sequentially. GitHub CI is configured; no remote CI pass is claimed.
+Real-model tests require explicitly selected local weights. Run model workloads sequentially. GitHub CI runs core checks and distribution builds on Python 3.11 and 3.13; local MLX inference is verified separately.
 
 </details>
 

@@ -38,6 +38,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--width", type=int, default=1120)
     parser.add_argument("--fps", type=int, default=10)
+    parser.add_argument(
+        "--recovery-manifest", type=Path,
+        help="Optional capture-local JSON documenting recovery of a finalized raw video.",
+    )
     args = parser.parse_args(argv)
     if not 320 <= args.width <= 1920 or not 1 <= args.fps <= 30:
         parser.error("width must be 320–1920 and fps must be 1–30")
@@ -54,12 +58,22 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("expected the original Playwright WebM recording")
     if transcript["video"] != "original.webm":
         parser.error("recording must use video='original.webm' for portable evidence")
-    if not transcript.get("video_saved") or not transcript.get("video_sha256"):
-        parser.error("transcript must confirm a finalized video and its capture SHA-256")
-    if sha256(video) != transcript["video_sha256"]:
+    recovery_path = None
+    expected_hash = transcript.get("video_sha256")
+    if args.recovery_manifest:
+        recovery_path = args.recovery_manifest.resolve()
+        if not recovery_path.is_relative_to(capture) or recovery_path.name != "video-recovery.json":
+            parser.error("recovery manifest must be capture-local video-recovery.json")
+        recovery = json.loads(recovery_path.read_text())
+        if recovery.get("transcript_sha256") != sha256(transcript_path):
+            parser.error("recovery manifest does not match the unchanged capture transcript")
+        expected_hash = recovery.get("video_sha256")
+    elif not transcript.get("video_saved"):
+        parser.error("capture did not finalize the named video; inspect raw video before recovery")
+    if not expected_hash or sha256(video) != expected_hash:
         parser.error("original video does not match the capture SHA-256; preserve and inspect it")
     # These are public synthetic captures, never arbitrary browser profiles.
-    text = transcript_path.read_text()
+    text = transcript_path.read_text() + (recovery_path.read_text() if recovery_path else "")
     if any(marker in text for marker in ("/Users/", "C:\\Users\\", "Bearer ")):
         parser.error("review and remove private paths or credentials before packaging")
     output = args.output.resolve()
@@ -70,6 +84,8 @@ def main(argv: list[str] | None = None) -> int:
     shutil.copy2(video, original)
     # Preserve the raw transcript byte-for-byte, including failures and timing.
     shutil.copy2(transcript_path, output / "transcript.json")
+    if recovery_path:
+        shutil.copy2(recovery_path, output / recovery_path.name)
     for screenshot in sorted(capture.glob("*.png")):
         shutil.copy2(screenshot, output / screenshot.name)
     mp4 = output / "full-run.mp4"
@@ -100,6 +116,7 @@ def main(argv: list[str] | None = None) -> int:
         "format_version": 1,
         "scope": "Illustrative live-model recording, not a held-out quality benchmark.",
         "source": "transcript.json and original.webm from examples/record_showcase.py",
+        "capture_recovery": recovery_path.name if recovery_path else None,
         "presentation": (
             "Full recording, without trimming or speed changes. MP4 re-encodes the "
             "original; GIF reduces dimensions, frame rate and colors and loops. "

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "recovered_at_utc": "2026-09-20T13:39:54.550577+00:00",
+  "reason": "Playwright finalized the raw WebM when its context closed, but save_as was called after closing the browser and failed. The complete raw file remained on disk.",
+  "method": "Byte-for-byte shutil.copy2 of the single raw-video WebM to original.webm. No inference rerun, frame change, trimming, speed adjustment or transcript mutation.",
+  "raw_source": "raw-video/page@e7c347aec3f0e5949e8a6094598fe20b.webm",
+  "video": "original.webm",
+  "video_sha256": "1f0a1bdc2486abe37b52cd853492d248143f221dadd322d8bb0c9d3fe9a07b74",
+  "transcript_sha256": "a24de50f9a36c4460beb7f2bea934e3fec7d91a63c1921de34437b6a5474fec9",
+  "original_error_preserved": true,
+  "ffprobe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 1280,
+        "height": 800
+      }
+    ],
+    "format": {
+      "duration": "62.040000",
+      "size": "2988068"
+    }
+  }
+}

@@ -605,24 +605,32 @@ class Recorder:
                 if not self.report["source_unchanged_during_capture"]:
                     self.report["recording_errors"].append("Source files changed during capture.")
                 self.save()
-                for label, resource in (("context", context), ("browser", browser)):
-                    if resource is not None:
+                try:
+                    if context is not None:
                         try:
-                            resource.close()
+                            context.close()
                         except Exception as error:
-                            self.report["recording_errors"].append(f"Close {label}: {error}")
-                if video is not None:
-                    try:
-                        video.save_as(str(self.args.output / "original.webm"))
-                        self.report["video_saved"] = True
-                        self.report["video_sha256"] = hashlib.sha256(
-                            (self.args.output / "original.webm").read_bytes()
-                        ).hexdigest()
-                        # save_as copies identical bytes; retain only the named raw artifact.
-                        video.delete()
-                        (self.args.output / "raw-video").rmdir()
-                    except Exception as error:
-                        self.report["recording_errors"].append(f"Video finalization: {error}")
+                            self.report["recording_errors"].append(f"Close context: {error}")
+                    # Context closure finishes the recording. The browser must remain
+                    # connected while Playwright saves and deletes its video artifact.
+                    if video is not None:
+                        try:
+                            video.save_as(str(self.args.output / "original.webm"))
+                            self.report["video_saved"] = True
+                            self.report["video_sha256"] = hashlib.sha256(
+                                (self.args.output / "original.webm").read_bytes()
+                            ).hexdigest()
+                            # save_as copies identical bytes; retain only the named raw artifact.
+                            video.delete()
+                            (self.args.output / "raw-video").rmdir()
+                        except Exception as error:
+                            self.report["recording_errors"].append(f"Video finalization: {error}")
+                finally:
+                    if browser is not None:
+                        try:
+                            browser.close()
+                        except Exception as error:
+                            self.report["recording_errors"].append(f"Close browser: {error}")
                 self.save()
         print(json.dumps(self.report["summary"]), flush=True)
         return int(

@@ -51,6 +51,69 @@ model time and browser round-trip time separately, and exposes candidate scores,
 raw-logit margin, cache metadata, and the complete response. Restricted-softmax
 scores are not calibrated probabilities of correctness.
 
+<a name="interactive-showcase"></a>
+
+## Interactive showcase and README recording
+
+With the local service running, open
+[the interactive showcase](http://127.0.0.1:8765/?showcase=1).
+This compact layout uses the same live model, allowed actions, DOM controls, and
+execution checks as the regular demo. It is sized for a 1280 × 800 browser viewport.
+The input, latest model choice, and execution receipt are enlarged; complete
+scores, timing, state, and cache information remain available in the inspector.
+The scenario caption describes the setup, while the interaction label distinguishes
+manual setup from model inference and an actual model-selected click.
+
+You can type new requests into this **local live demo**. The GIF embedded in the
+README and the downloadable video are **recordings**: viewing them does not run a
+model or accept new input. Uploading these static assets does not host the Python
+inference service.
+
+To reproduce a recording, use an independent project environment, a verified
+local checkpoint, and the optional browser dependencies:
+
+```sh
+python -m pip install -e '.[mlx,browser]'
+export PLAYWRIGHT_BROWSERS_PATH=.cache/playwright
+python -m playwright install chromium --only-shell
+```
+
+Media conversion also requires **ffmpeg and ffprobe**, installed separately and
+available on `PATH`; on macOS, one option is `brew install ffmpeg`.
+Start the real backend and leave it running:
+
+```sh
+export JEV_MLX_MODEL=/path/to/local/mlx-model
+jev-mlx serve --model "$JEV_MLX_MODEL" --port 8765
+```
+
+In a second terminal using the same project environment, record the predefined
+eight-request sequence once, then build the presentation media:
+
+```sh
+export PLAYWRIGHT_BROWSERS_PATH=.cache/playwright
+python examples/record_showcase.py --output output/playwright-showcase/my-run
+python scripts/build_showcase_media.py \
+  --capture-dir output/playwright-showcase/my-run \
+  --output output/playwright-showcase/my-run-media
+```
+
+Use a new, empty output directory for every attempt. The recorder uses a separate
+browser context, marks setup clicks as manual, and does not retry model inference
+to obtain a better answer. Leave other demo tabs untouched during recording because
+they share the same application state. Model errors, rejections, complete HTTP
+responses, execution receipts, and the original `original.webm` are retained in
+the capture. A failed run remains evidence, not a successful demonstration.
+
+The media builder preserves the original video and transcript, and produces
+`full-run.mp4`, `preview.gif`, and provenance with artifact hashes. Both derivatives
+retain the complete timeline at **1× speed**, without temporal cuts or image
+cropping. The GIF reduces frame rate, dimensions, and palette size for distribution;
+it does not replace model outputs or generate missing frames. This is an
+illustrative browser recording, **not a benchmark or an independent accuracy
+sample**. See the [recording and media provenance](assets/live-demo/README.md) for
+the actual captured run and its limitations.
+
 ## Interactive checks
 
 These are reproduction steps, not claims that every model will pass every request.

@@ -13,6 +13,7 @@
 
 <p align="center">
   <a href="#quick-start">快速开始</a> ·
+  <a href="#live-demo">动态演示</a> ·
   <a href="#results">实测结果</a> ·
   <a href="docs/testing.zh-CN.md">怎么测试</a> ·
   <a href="#replay">静态演示</a> ·
@@ -28,13 +29,27 @@
 
 ---
 
+<a name="live-demo"></a>
+
+## 同一句话，不同上下文。
+
+“Close it” 关闭当前窗口；“First one” 遵循筛选、排序后的可见列表；询问不会被当成又一次操作。
+
+![真实本地 Qwen 推理：变化的上下文、模型选择与实际浏览器点击](docs/assets/live-demo/preview.gif)
+
+**本地模型真实录制，保持原速。** 手动准备场景会明确标注。GitHub 可直接播放 GIF；输入新话语进行交互，需要运行本地 MLX 后端。
+
+[观看完整视频](docs/assets/live-demo/full-run.mp4) · [在 Mac 上亲自试用](docs/http-and-demo.zh-CN.md#interactive-showcase) · [八次完整结果与录制说明](docs/assets/live-demo/README.zh-CN.md)
+
+这组固定流程用于展示集成方式，不是未见测试集的准确率或速度成绩。[实测结果](#results) 保留了模型错误与更广泛评测的局限。
+
 ## 把自然语言接进你的应用
 
 **MLXJ** 根据当前应用状态、用户的话和动态候选动作，让本地模型选出一个稳定的业务 ID；没有合适选项时，可以返回“不匹配”或“需要澄清”。
 
 它适合嵌入你已有的工具：切换一个入口、选择当前列表里的内容、暂停播放器，或做一个 boolean / enum 判断。模型在 Mac 上运行，权重由你选择；无需先训练新模型。
 
-> **命名预览：** MLXJ 是本次首页的候选名称。当前可运行代码的发行包与命令仍为 `jev-mlx`，Python 导入为 `jev_mlx`。0.1 是实验版，尚未公开发布到 PyPI。
+> **项目与包名：** 项目名为 MLXJ，发行包与命令为 `jev-mlx`，Python 导入为 `jev_mlx`。0.1 是实验版，尚未公开发布到 PyPI。
 
 | 能力 | 在应用里意味着什么 |
 | :--- | :--- |
@@ -202,7 +217,7 @@ python -m pytest -m 'not model'
 python -m ruff check src tests benchmarks scripts examples
 ```
 
-真实模型测试需要显式指定本地权重，顺序运行模型任务。GitHub CI 已配置，尚未声称远程 CI 通过。
+真实模型测试需要显式指定本地权重，顺序运行模型任务。GitHub CI 在 Python 3.11 和 3.13 上执行核心检查并构建发行包；本地 MLX 推理单独验证。
 
 </details>
 

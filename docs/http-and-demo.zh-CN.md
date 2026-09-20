@@ -32,6 +32,43 @@ Morrow Studio 是原创的虚构桌面，包含课程库、野外笔记和模拟
 
 检查面板将模型选择与实际执行分开显示，分别报告实测模型耗时和浏览器往返耗时，并展示候选分数、原始 logit 分差、缓存元数据与完整响应。受限 softmax 分数不是经过校准的正确概率。
 
+<a name="interactive-showcase"></a>
+
+## 实时交互展示与 README 录像
+
+本地服务启动后，打开[实时交互展示](http://127.0.0.1:8765/?showcase=1)。这个紧凑布局与普通演示使用相同的真实模型、允许动作、DOM 控件和执行检查，针对 1280 × 800 浏览器视口设计。输入、最近一次模型选择和执行回执被放大；检查面板仍可查看完整分数、耗时、状态和缓存信息。场景说明描述准备步骤，独立的交互标签则区分手动准备、模型推理和实际执行的模型点击。
+
+你可以在这个**本地实时演示**中输入新请求。README 内嵌的 GIF 和可下载视频都是**录像**：观看它们不会运行模型，也不能提交新输入。上传这些静态资源不等于托管 Python 推理服务。
+
+要复现录像，请使用独立项目环境、已验证的本地检查点，以及可选浏览器依赖：
+
+```sh
+python -m pip install -e '.[mlx,browser]'
+export PLAYWRIGHT_BROWSERS_PATH=.cache/playwright
+python -m playwright install chromium --only-shell
+```
+
+媒体转换还需要单独安装 **ffmpeg 和 ffprobe**，并确保它们在 `PATH` 中；在 macOS 上，可以使用 `brew install ffmpeg`。启动真实后端并保持运行：
+
+```sh
+export JEV_MLX_MODEL=/path/to/local/mlx-model
+jev-mlx serve --model "$JEV_MLX_MODEL" --port 8765
+```
+
+在使用同一项目环境的第二个终端中，单次录制预先定义的八条请求，然后生成展示媒体：
+
+```sh
+export PLAYWRIGHT_BROWSERS_PATH=.cache/playwright
+python examples/record_showcase.py --output output/playwright-showcase/my-run
+python scripts/build_showcase_media.py \
+  --capture-dir output/playwright-showcase/my-run \
+  --output output/playwright-showcase/my-run-media
+```
+
+每次尝试都使用新的空输出目录。录制脚本使用独立浏览器上下文，将准备点击标记为手动操作，不会为了得到更好的答案而重试模型推理。录制期间请勿操作其他演示标签页，因为它们共享同一个应用状态。捕获产物保留模型错误、拒绝、完整 HTTP 响应、执行回执，以及原始 `original.webm`。失败的运行仍是证据，不会被算作成功演示。
+
+媒体构建器保留原始视频与记录，并生成 `full-run.mp4`、`preview.gif`，以及包含产物哈希的来源说明。两种衍生媒体均以 **1× 原速**保留完整时间线，不剪掉片段，也不裁剪画面。GIF 为便于分发而降低帧率、尺寸和调色板大小，不替换模型输出，也不生成缺失画面。这是用于说明交互过程的浏览器录像，**不是性能基准或独立的准确率样本**。实际录制结果与限制见[录像和媒体来源说明](assets/live-demo/README.zh-CN.md)。
+
 ## 交互检查
 
 以下是复现步骤，不代表每个模型都会通过每条请求。实测准确率请参阅已发布的评测报告。

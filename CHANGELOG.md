@@ -10,8 +10,12 @@ publication is tracked separately from preparing this source release.
 - English-first README with a separate Chinese homepage, complete documentation
   in both languages, original title graphics, and owner-provided X and Xiaohongshu
   links. Language selection sits below the title/navigation area; X appears first.
-  MLXJ is a candidate display name in this preview; package/API names remain
-  `jev-mlx` / `jev_mlx` pending a naming decision.
+  The display name is MLXJ; package/API names remain `jev-mlx` / `jev_mlx`.
+- A compact live context showcase, with a real eight-request Qwen recording
+  embedded as an original-speed GIF in both READMEs. The full video, every
+  response and execution receipt, source hashes, and the recording recovery
+  record are retained. Recording and conversion scripts reproduce the workflow;
+  this walkthrough is distinct from the quality benchmark.
 - An offline, bilingual recorded browser replay that preserves all 16 decisions
   and the separate state-change check. It runs without a model or server and is
   explicitly separate from live inference.

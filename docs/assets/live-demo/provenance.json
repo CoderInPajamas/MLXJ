@@ -1,0 +1,69 @@
+{
+  "format_version": 1,
+  "scope": "Illustrative live-model recording, not a held-out quality benchmark.",
+  "source": "transcript.json and original.webm from examples/record_showcase.py",
+  "capture_recovery": "video-recovery.json",
+  "presentation": "Full recording, without trimming or speed changes. MP4 re-encodes the original; GIF reduces dimensions, frame rate and colors and loops. No model result, measured latency or execution receipt is rewritten.",
+  "ffmpeg": "ffmpeg version 7.1.3 Copyright (c) 2000-2025 the FFmpeg developers",
+  "gif_settings": {
+    "width": 1120,
+    "fps": 10,
+    "colors": 128
+  },
+  "media": {
+    "original.webm": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "vp8",
+          "width": 1280,
+          "height": 800
+        }
+      ],
+      "format": {
+        "duration": "62.040000",
+        "size": "2988068"
+      }
+    },
+    "full-run.mp4": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 800
+        }
+      ],
+      "format": {
+        "duration": "62.040000",
+        "size": "1900260"
+      }
+    },
+    "preview.gif": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "gif",
+          "width": 1120,
+          "height": 700
+        }
+      ],
+      "format": {
+        "duration": "62.000000",
+        "size": "9880168"
+      }
+    }
+  },
+  "artifact_sha256": {
+    "final.png": "621c20430862ba4c66c3a0f9ba6d11102be47136aaedc1e4814a505059a967fb",
+    "full-run.mp4": "6512da8a20bade7d996ff35964deb16d9100260e05bc223bf537571d620909db",
+    "initial.png": "9cfa6fb0064f609e28d5e1c439aac0e4d9fec1c944b3024e90d45c5955c757f0",
+    "original.webm": "1f0a1bdc2486abe37b52cd853492d248143f221dadd322d8bb0c9d3fe9a07b74",
+    "preview.gif": "c9194b5c96d5dd1919b3f0a99b2a37f6f21e925cb2544a51044b8a1f5ebbef17",
+    "transcript.json": "a24de50f9a36c4460beb7f2bea934e3fec7d91a63c1921de34437b6a5474fec9",
+    "video-recovery.json": "b27756b7c8d9f73d3af509df2684afa6c5c2b2636bb6dc0be1db9b7d723e7070"
+  }
+}
