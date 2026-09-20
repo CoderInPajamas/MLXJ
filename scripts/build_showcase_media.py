@@ -54,6 +54,10 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("expected the original Playwright WebM recording")
     if transcript["video"] != "original.webm":
         parser.error("recording must use video='original.webm' for portable evidence")
+    if not transcript.get("video_saved") or not transcript.get("video_sha256"):
+        parser.error("transcript must confirm a finalized video and its capture SHA-256")
+    if sha256(video) != transcript["video_sha256"]:
+        parser.error("original video does not match the capture SHA-256; preserve and inspect it")
     # These are public synthetic captures, never arbitrary browser profiles.
     text = transcript_path.read_text()
     if any(marker in text for marker in ("/Users/", "C:\\Users\\", "Bearer ")):

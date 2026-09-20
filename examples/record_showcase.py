@@ -268,7 +268,7 @@ class Recorder:
         step = f"{(self.active_case or 0) + 1:02d} / {len(PLAN):02d}"
         label = f"MANUAL SETUP · {step}" if setup else f"LIVE REQUEST · {step}"
         if self.active_case is None:
-            label = "CAPTURE COMPLETE"
+            label = "RECORDING SUMMARY"
         self.page.locator("#showcase-step").evaluate(
             "(element, text) => {element.textContent = text;}",
             label,
@@ -580,7 +580,14 @@ class Recorder:
                 for index, planned in enumerate(PLAN):
                     self.case(index, planned)
                 self.active_case = None
-                self.caption("Eight fixed requests complete. Every response is preserved.")
+                summary = self.report["summary"]
+                self.caption(
+                    f"{summary['submitted']} submitted · {summary['responses']} model responses. "
+                    f"Checks: {summary['passed']} passed / "
+                    f"{summary['recorded'] - summary['passed']} failed. "
+                    f"Not submitted: {summary['planned'] - summary['submitted']}. "
+                    f"No model response: {summary['submitted'] - summary['responses']}."
+                )
                 self.page.wait_for_timeout(RESULT_PAUSE_MS)
                 self.screenshot("final.png")
                 self.report["final_snapshot"] = self.snapshot()
