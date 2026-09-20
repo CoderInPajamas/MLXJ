@@ -1,5 +1,8 @@
+import hashlib
 import json
 import shutil
+
+import pytest
 
 from benchmarks.audit import audit_run
 from benchmarks.common import load_fixtures
@@ -99,3 +102,29 @@ def test_incomplete_run_cannot_pass_release_audit(tmp_path):
     (original / "summary.json").write_text(json.dumps(summary))
     assert not audit_run(original)["passed"]
     assert audit_run(original, require_complete=False)["passed"]
+
+
+def test_separate_frozen_suite_is_audited_against_its_own_ground_truth(tmp_path):
+    original = tmp_path / "run"
+    row, _ = make_run(original)
+    case = load_fixtures("test")[0][0]
+    case["id"] = "independent-suite-case"
+    suite = tmp_path / "suite"
+    suite.mkdir()
+    data = (json.dumps(case) + "\n").encode()
+    (suite / "test.jsonl").write_bytes(data)
+    manifest = {"files": {"test.jsonl": {"sha256": hashlib.sha256(data).hexdigest(), "rows": 1}}}
+    (suite / "manifest.json").write_text(json.dumps(manifest))
+    row["case_id"] = case["id"]
+    (original / "trials.jsonl").write_text(json.dumps(row) + "\n")
+    metadata_path = original / "metadata.json"
+    metadata = json.loads(metadata_path.read_text())
+    metadata["fixtures"] = manifest
+    metadata_path.write_text(json.dumps(metadata))
+    assert not audit_run(original)["passed"]
+    assert audit_run(original, fixtures_dir=suite)["passed"]
+    # A changed utterance must invalidate the frozen suite before it can be used.
+    case["request"]["utterance"] = "Different request after the freeze"
+    (suite / "test.jsonl").write_text(json.dumps(case) + "\n")
+    with pytest.raises(ValueError, match="Frozen fixture hash mismatch"):
+        audit_run(original, fixtures_dir=suite)

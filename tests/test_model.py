@@ -1,10 +1,12 @@
 """Opt-in numerical invariants; semantic quality belongs in the frozen evaluation."""
 
 import os
+from dataclasses import replace
 
 import pytest
 
 from jev_mlx import Candidate, DecisionRequest, MLXDecisionEngine
+from jev_mlx.prompt import prepare_prompt
 
 pytestmark = pytest.mark.model
 
@@ -72,3 +74,77 @@ def test_real_scores_and_generation_baselines(real_engine):
         else:
             assert output["candidate_id"] is None
         assert output["timing"]["total_ms"] > 0
+
+
+def test_real_cache_parity_beyond_1024_token_prefix(real_engine, record_property):
+    """Exercise a complete snapshot after Gemma 4's 1,024-token window wraps.
+
+    This remains an opt-in numerical test on other checkpoints too. The synthetic
+    reference text is shared by both pages; the changed visible order follows it,
+    so reusing an arbitrary common prefix would be a different cache boundary.
+    """
+    engine = real_engine
+    candidates = (
+        Candidate("play_amber", "Play the visible course Amber Maps"),
+        Candidate("play_cloud", "Play the visible course Cloud Songs"),
+        Candidate("close_library", "Close the course library"),
+    )
+    reference = "Amber glass, moss paper, quiet rivers, and silver leaves. "
+    request = DecisionRequest(
+        state={
+            "archive_reference": "",
+            "view": "library",
+            "visible_titles": ["Amber Maps", "Cloud Songs"],
+        },
+        utterance="Play the first one",
+        candidates=candidates,
+        state_version=0,
+    )
+    # Choose a token-length boundary, rather than assuming every tokenizer splits
+    # this text alike. More than 1,536 cached tokens ensures a window has rotated.
+    prompt = prepare_prompt(engine.backend.tokenizer, request)
+    while len(prompt.state_tokens) <= 1536:
+        request = replace(
+            request,
+            state={
+                **request.state,
+                "archive_reference": request.state["archive_reference"] + reference * 16,
+            },
+        )
+        prompt = prepare_prompt(engine.backend.tokenizer, request)
+    assert len(prompt.tokens) < engine.backend.max_prompt_tokens
+    record_property("long_prefix_tokens", len(prompt.state_tokens))
+
+    engine.backend.clear_cache()
+    key = "long-prefix-parity"
+    engine.decide(replace(request, utterance="Close the course library"), cache_key=key)
+    same_page = engine.decide(request, cache_key=key)
+    fresh_same_page = engine.decide(request, use_cache=False)
+    assert same_page.cache["scope"] == "state"
+    assert same_page.cache["reused_tokens"] > 1536
+    assert same_page.cache["prefill_tokens"] > 0
+
+    updated_request = replace(
+        request,
+        state={**request.state, "visible_titles": ["Cloud Songs", "Amber Maps"]},
+        state_version=1,
+    )
+    updated_page = engine.decide(updated_request, cache_key=key)
+    fresh_updated_page = engine.decide(updated_request, use_cache=False)
+    assert updated_page.cache["scope"] == "prefix"
+    assert updated_page.cache["reused_tokens"] == updated_page.cache["system_tokens"]
+    assert updated_page.cache["state_tokens"] > 1536
+
+    for condition, cached, fresh in (
+        ("same_page", same_page, fresh_same_page),
+        ("page_update", updated_page, fresh_updated_page),
+    ):
+        assert cached.raw_selected_id == fresh.raw_selected_id, condition
+        logit_delta = max(
+            abs(cached.raw_scores[k] - fresh.raw_scores[k]) for k in cached.raw_scores
+        )
+        score_delta = max(abs(cached.scores[k] - fresh.scores[k]) for k in cached.scores)
+        record_property(f"{condition}_max_logit_difference", logit_delta)
+        record_property(f"{condition}_max_score_difference", score_delta)
+        assert logit_delta <= 0.5, (condition, logit_delta)
+        assert score_delta <= 0.1, (condition, score_delta)

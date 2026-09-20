@@ -16,11 +16,14 @@ from typing import Any
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
-def load_fixtures(split: str = "test") -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def load_fixtures(
+    split: str = "test", fixtures_dir: Path | None = None
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     if split not in {"dev", "test"}:
         raise ValueError("split must be dev or test")
-    manifest = json.loads((FIXTURES / "manifest.json").read_text())
-    path = FIXTURES / f"{split}.jsonl"
+    directory = Path(fixtures_dir) if fixtures_dir is not None else FIXTURES
+    manifest = json.loads((directory / "manifest.json").read_text())
+    path = directory / f"{split}.jsonl"
     expected = manifest["files"][path.name]
     actual = hashlib.sha256(path.read_bytes()).hexdigest()
     if actual != expected["sha256"]:

@@ -23,7 +23,7 @@ from .metrics import grouped_summary
 def worker(args) -> int:
     from .run import call
 
-    cases, _ = load_fixtures(args.split)
+    cases, _ = load_fixtures(args.split, args.fixtures_dir)
     case = cases[0]
     row = {
         "case_id": case["id"],
@@ -61,6 +61,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", type=Path)
     parser.add_argument("--repeats", type=int, default=1)
     parser.add_argument("--split", choices=("dev", "test"), default="test")
+    parser.add_argument("--fixtures-dir", type=Path, help="Separate frozen suite directory")
     parser.add_argument(
         "--modes",
         nargs="+",
@@ -77,7 +78,7 @@ def main(argv: list[str] | None = None) -> int:
         return worker(args)
     if not args.output or args.repeats < 1 or args.timeout <= 0:
         parser.error("output is required; repeats and timeout must be positive")
-    cases, manifest = load_fixtures(args.split)
+    cases, manifest = load_fixtures(args.split, args.fixtures_dir)
     args.output.mkdir(parents=True, exist_ok=True)
     if any(args.output.iterdir()):
         parser.error("Output directory must be empty so earlier attempts cannot be overwritten")
@@ -111,6 +112,8 @@ def main(argv: list[str] | None = None) -> int:
                 "--worker-record",
                 str(record),
             ]
+            if args.fixtures_dir is not None:
+                command.extend(["--fixtures-dir", str(args.fixtures_dir)])
             start = time.perf_counter()
             row = {
                 "case_id": cases[0]["id"],

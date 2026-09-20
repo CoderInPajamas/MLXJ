@@ -1,0 +1,105 @@
+{
+  "name": "gemma-4-26b-a4b-it-4bit",
+  "repository": "mlx-community/gemma-4-26b-a4b-it-4bit",
+  "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+  "verified_utc": "2026-09-20T06:06:51.467878+00:00",
+  "verification": "Read-only full-file SHA-256 of local files; compared with retained Hugging Face download metadata. No GPU inference.",
+  "weights_bytes": 15608838574,
+  "all_download_digests_match": true,
+  "source_model_from_local_card": "google/gemma-4-26b-a4b-it",
+  "source_model_revision_from_local_card": null,
+  "conversion_framework_from_local_card": "mlx-vlm 0.4.3",
+  "license_from_local_card": "apache-2.0",
+  "files": [
+    {
+      "name": "model-00001-of-00003.safetensors",
+      "bytes": 5275612587,
+      "sha256": "6a6cba167e5c630a69b527b2b095c0da623507511e43c05a57c5527d9b66fa0d",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "6a6cba167e5c630a69b527b2b095c0da623507511e43c05a57c5527d9b66fa0d",
+      "download_digest_algorithm": "sha256",
+      "matches_download_digest": true
+    },
+    {
+      "name": "model-00002-of-00003.safetensors",
+      "bytes": 5296718232,
+      "sha256": "922461e4da8c9e3ae2dc5e4f0ccedf5a0259f1e81d3ebda20b3af39e28118f33",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "922461e4da8c9e3ae2dc5e4f0ccedf5a0259f1e81d3ebda20b3af39e28118f33",
+      "download_digest_algorithm": "sha256",
+      "matches_download_digest": true
+    },
+    {
+      "name": "model-00003-of-00003.safetensors",
+      "bytes": 5036507755,
+      "sha256": "2e92af87837744c385101b71883b4af898be7a6ce03e5babca475899a8268347",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "2e92af87837744c385101b71883b4af898be7a6ce03e5babca475899a8268347",
+      "download_digest_algorithm": "sha256",
+      "matches_download_digest": true
+    },
+    {
+      "name": "README.md",
+      "bytes": 737,
+      "sha256": "7f1ab1fb69c8fe2109e3eddf4ab98c8c3fb88a09406cad917944a3dc5490f232",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "2efe3f646b7e11cdaca96579e08a4d65306cc1ea",
+      "download_digest_algorithm": "git_blob_sha1",
+      "matches_download_digest": true
+    },
+    {
+      "name": "config.json",
+      "bytes": 33381,
+      "sha256": "a64883e3afd8e8b76e7370ba1b288f6f2dc9a0e071337c9eddb420b747555209",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "b9fdfd6d8f5f541e9ae213dfc5f85d04830ab4a3",
+      "download_digest_algorithm": "git_blob_sha1",
+      "matches_download_digest": true
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 32169626,
+      "sha256": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+      "download_digest_algorithm": "sha256",
+      "matches_download_digest": true
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 2685,
+      "sha256": "b9686f02a0bb2d5de25e5bed7949d5858109e62cbb1111ce4cea731885e779e9",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "59dd4b62a8146872b850e3ce072ceaf157d01bdc",
+      "download_digest_algorithm": "git_blob_sha1",
+      "matches_download_digest": true
+    },
+    {
+      "name": "chat_template.jinja",
+      "bytes": 12045,
+      "sha256": "2dfbfc7d538912f4ea11d29d85b4e25d7bc26386e53f57529f1d707c28b5828c",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "33c51c2dbf7e7494b2c055cae7b52f523d3df564",
+      "download_digest_algorithm": "git_blob_sha1",
+      "matches_download_digest": true
+    },
+    {
+      "name": "generation_config.json",
+      "bytes": 208,
+      "sha256": "d4226bbe3117d2d253ba4609720ba82c6c4ce4627a9a6ae05387c78983ac03de",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "e605bb4523b1462ea9d9a3810b9e3ecf7ab7b1f6",
+      "download_digest_algorithm": "git_blob_sha1",
+      "matches_download_digest": true
+    },
+    {
+      "name": "model.safetensors.index.json",
+      "bytes": 176940,
+      "sha256": "5455e83705bbdd4e3702c7d4f9d49d4900e84533036628f74500538075dd5c80",
+      "revision_from_download_metadata": "8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87",
+      "download_digest": "ebc8565a0ecf420c25627bc5b0edc699c5ba16e9",
+      "download_digest_algorithm": "git_blob_sha1",
+      "matches_download_digest": true
+    }
+  ]
+}

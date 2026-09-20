@@ -10,7 +10,7 @@ from collections import Counter
 from pathlib import Path
 
 from .common import load_fixtures
-from .metrics import grouped_summary, outcome
+from .metrics import grouped_summary, grouped_summary_by_kind, outcome
 
 EVIDENCE_FILES = ("metadata.json", "summary.json", "trials.jsonl", "parity.jsonl")
 
@@ -34,6 +34,7 @@ def audit_run(
     public: Path | None = None,
     source_revision: str | None = None,
     require_complete: bool = True,
+    fixtures_dir: Path | None = None,
 ) -> dict:
     data = (directory / "trials.jsonl").read_bytes()
     rows = [json.loads(line) for line in data.splitlines() if line.strip()]
@@ -51,7 +52,7 @@ def audit_run(
     keys = [(row["case_id"], row["mode"], row["condition"], row["repeat"]) for row in rows]
     if len(set(keys)) != len(keys):
         errors.append("Duplicate case/mode/condition/repeat trial")
-    fixtures, manifest = load_fixtures(metadata.get("split", "test"))
+    fixtures, manifest = load_fixtures(metadata.get("split", "test"), fixtures_dir)
     expected_cases = {case["id"]: case for case in fixtures}
     if metadata.get("fixtures", {}).get("files") != manifest["files"]:
         errors.append("Recorded fixture hashes differ from the frozen public manifest")
@@ -59,6 +60,12 @@ def audit_run(
         case = expected_cases.get(row["case_id"])
         if case is None or row["expected"] != case["expected"]:
             errors.append(f"{row['case_id']}: ground truth differs from frozen fixture")
+        if (
+            case is not None
+            and "kind" in row
+            and row["kind"] != case["request"].get("kind", "enum")
+        ):
+            errors.append(f"{row['case_id']}: recorded kind differs from frozen request")
     if all(field in metadata for field in ("modes", "conditions", "case_count", "repeats")):
         fixture_ids = [case["id"] for case in fixtures[: metadata["case_count"]]]
         scheduled = {
@@ -75,7 +82,12 @@ def audit_run(
         ):
             errors.append("Measured trials do not match the declared schedule")
     groups = grouped_summary(rows)
+    groups_by_kind = grouped_summary_by_kind(rows)
     errors.extend(_subset_differences(summary.get("groups", {}), groups))
+    if "groups_by_kind" in summary:
+        errors.extend(
+            _subset_differences(summary["groups_by_kind"], groups_by_kind, "summary.groups_by_kind")
+        )
     cache_counts = Counter()
     failure_counts = Counter()
     for row in rows:
@@ -153,6 +165,12 @@ def audit_run(
             if report.get("source_trials_sha256") != hashlib.sha256(data).hexdigest():
                 errors.append(f"Derived {derived.name} refers to different trial evidence")
             errors.extend(_subset_differences(report.get("groups", {}), groups, derived.name))
+            if "groups_by_kind" in report:
+                errors.extend(
+                    _subset_differences(
+                        report["groups_by_kind"], groups_by_kind, f"{derived.name}.groups_by_kind"
+                    )
+                )
             # A report recomputed after parity finishes can legitimately differ
             # from an earlier local derivative; it is not an evidence copy.
     source_checks = {}
@@ -188,6 +206,7 @@ def audit_run(
         "source_revision": source_revision,
         "source_hash_matches": source_checks,
         "groups": groups,
+        "groups_by_kind": groups_by_kind,
     }
 
 
@@ -196,6 +215,7 @@ def main(argv=None):
     parser.add_argument("run_directory", type=Path)
     parser.add_argument("--public", type=Path)
     parser.add_argument("--source-revision")
+    parser.add_argument("--fixtures-dir", type=Path, help="Frozen suite used for this run")
     parser.add_argument("--allow-incomplete", action="store_true")
     args = parser.parse_args(argv)
     report = audit_run(
@@ -203,6 +223,7 @@ def main(argv=None):
         public=args.public,
         source_revision=args.source_revision,
         require_complete=not args.allow_incomplete,
+        fixtures_dir=args.fixtures_dir,
     )
     print(json.dumps(report, indent=2, allow_nan=False))
     return 0 if report["passed"] else 1

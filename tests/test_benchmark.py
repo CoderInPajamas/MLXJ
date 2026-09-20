@@ -4,8 +4,15 @@ import json
 
 import pytest
 
+from benchmarks.audit import audit_run
 from benchmarks.common import load_fixtures, request_from_dict, sanitize
-from benchmarks.metrics import grouped_summary, outcome, percentile, summarize
+from benchmarks.metrics import (
+    grouped_summary,
+    grouped_summary_by_kind,
+    outcome,
+    percentile,
+    summarize,
+)
 from benchmarks.recompute import main as recompute_main
 from benchmarks.recompute import recompute
 from benchmarks.run import attempt, exit_code, parity_attempt, run_summary
@@ -143,6 +150,67 @@ def test_no_match_and_abstain_distinct_but_neither_is_false_action():
 def test_groups_keep_generation_and_cache_conditions_separate():
     rows = [trial(mode="direct", condition="kv_cold"), trial(mode="json", condition="page_update")]
     assert set(grouped_summary(rows)) == {"direct/kv_cold", "json/page_update"}
+
+
+def test_boolean_error_does_not_contaminate_enum_action_metrics_or_coverage():
+    rows = [
+        trial("pause", "pause", kind="enum", mode="direct", condition="kv_cold"),
+        trial("true", "false", kind="boolean", mode="direct", condition="kv_cold"),
+    ]
+    summary = run_summary(rows, 2, [], 0)
+    assert summary["groups"]["direct/kv_cold"]["false_action_rate"] == 0.5
+    enum = summary["groups_by_kind"]["direct/kv_cold/enum"]
+    boolean = summary["groups_by_kind"]["direct/kv_cold/boolean"]
+    assert enum["false_action_rate"] == 0
+    assert enum["executable_request_coverage"] == 1
+    assert enum["attempts"] == 1
+    assert boolean["accuracy"] == 0
+    assert boolean["executable_request_coverage"] == 0
+    legacy = trial(mode="direct", condition="kv_cold")
+    assert set(grouped_summary_by_kind([legacy])) == {"direct/kv_cold/unknown"}
+
+
+def test_measured_rows_record_request_kind():
+    cases, _ = load_fixtures("test")
+    for kind in ("enum", "boolean"):
+        case = next(case for case in cases if case["request"]["kind"] == kind)
+        row = attempt(RecordingEngine(), case, "direct", "kv_cold", 0)
+        assert row["kind"] == kind
+
+
+def test_audit_validates_kind_and_kind_specific_summary_but_accepts_legacy(tmp_path):
+    cases, manifest = load_fixtures("test")
+    case = cases[0]
+    row = trial(
+        "close_player",
+        "close_player",
+        case_id=case["id"],
+        mode="direct",
+        condition="kv_cold",
+        repeat=0,
+        trial_index=1,
+        kind="enum",
+        preparation=None,
+    )
+    row["prediction"]["cache"] = {"scope": "cold", "reused_tokens": 0}
+    (tmp_path / "metadata.json").write_text(json.dumps({"split": "test", "fixtures": manifest}))
+
+    def write_run():
+        (tmp_path / "trials.jsonl").write_text(json.dumps(row) + "\n")
+        (tmp_path / "summary.json").write_text(json.dumps(run_summary([row], 1, [], 0)))
+
+    write_run()
+    assert audit_run(tmp_path)["passed"]
+    row["kind"] = "boolean"
+    write_run()
+    assert any("recorded kind" in error for error in audit_run(tmp_path)["errors"])
+    row.pop("kind")
+    write_run()
+    assert audit_run(tmp_path)["passed"]
+    summary = json.loads((tmp_path / "summary.json").read_text())
+    summary["groups_by_kind"]["direct/kv_cold/unknown"]["accuracy"] = 0
+    (tmp_path / "summary.json").write_text(json.dumps(summary))
+    assert any("groups_by_kind" in error for error in audit_run(tmp_path)["errors"])
 
 
 @pytest.mark.parametrize("split,count", [("dev", 16), ("test", 28)])

@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "suite_id": "extended-v1",
+  "origin": "Written from scratch as a post-development extension for JEV MLX. Fictional local documents, calendar drafts, files, music, product comparison, and settings; no production exports or external datasets.",
+  "language": "en",
+  "test_frozen_before_inference": true,
+  "frozen_utc": "2026-09-20T06:09:44.415784+00:00",
+  "threshold_policy": "Comparison default margin threshold 0.0 inherited from the existing protocol. Any tuning uses this development split only and must be recorded before test inference; no test-driven label or threshold tuning.",
+  "authoring_context": {
+    "historical_project_results_known": true,
+    "new_suite_model_outputs_seen_before_freeze": false,
+    "original_unseen_benchmark_claim": false,
+    "development_test_disjoint_utterances": true,
+    "no_private_or_production_data": true,
+    "no_external_dataset_derived_examples": true,
+    "independent_annotation_review": "Completed read-only semantic review of all 48 cases before freeze; no label conflicts found. No model inference used."
+  },
+  "files": {
+    "dev.jsonl": {
+      "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+      "rows": 12,
+      "domains": {
+        "documents": 2,
+        "calendar_drafts": 2,
+        "files": 2,
+        "music": 2,
+        "comparison": 2,
+        "settings": 2
+      },
+      "expected_status_counts": {
+        "selected": 8,
+        "no_match": 3,
+        "abstain": 1
+      },
+      "kind_counts": {
+        "enum": 11,
+        "boolean": 1
+      }
+    },
+    "test.jsonl": {
+      "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+      "rows": 36,
+      "domains": {
+        "documents": 6,
+        "calendar_drafts": 6,
+        "files": 6,
+        "music": 6,
+        "comparison": 6,
+        "settings": 6
+      },
+      "expected_status_counts": {
+        "selected": 19,
+        "no_match": 11,
+        "abstain": 6
+      },
+      "kind_counts": {
+        "enum": 30,
+        "boolean": 6
+      }
+    }
+  },
+  "validation": {
+    "api": "jev_mlx.DecisionRequest.from_dict",
+    "current_and_previous_requests_parsed": 96,
+    "warmup_requests_parsed": 48,
+    "unique_case_ids": 48,
+    "expected_status_and_candidate_ids_checked": true,
+    "boolean_choices_typed_and_unique": true,
+    "previous_versions_lower_and_state_changed": true,
+    "old_fixture_hashes_unchanged": true,
+    "model_inference_performed": false,
+    "source_base_commit": "386314907d1f37373572a65ecde5b086f62a85a7",
+    "validation_source_sha256": {
+      "src/jev_mlx/types.py": "f58e3d27a2fd2ea3ace839cdef75b50aa3fe793c8a47a56ce043e21f1b4c5c94",
+      "src/jev_mlx/prompt.py": "8d0b340fb804a83ad37a6ee6a0feca39b4af061598712a2078ae1903e3c76f6b"
+    }
+  },
+  "original_suite_provenance": {
+    "manifest_sha256": "fec041f74c8f645a68e1bf59a7760c92bd9dbdba830a60232a9c04e99da1b9b9",
+    "files": {
+      "dev.jsonl": {
+        "sha256": "610114cd493232ffd05a9dc5ffe6dd355b1bc3d7c1ad62f65ff02f5c413f6e16",
+        "rows": 16
+      },
+      "test.jsonl": {
+        "sha256": "e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3",
+        "rows": 28
+      }
+    }
+  },
+  "metric_note": "Test has 15 selected enum actions and 4 selected boolean answers. Existing executable/false_action aggregate metrics include boolean selections; report enum and boolean results separately for action-safety interpretation."
+}

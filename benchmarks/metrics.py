@@ -107,3 +107,12 @@ def grouped_summary(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
     for row in rows:
         groups[f"{row['mode']}/{row['condition']}"].append(row)
     return {key: summarize(value) for key, value in sorted(groups.items())}
+
+
+def grouped_summary_by_kind(rows: Iterable[dict[str, Any]]) -> dict[str, Any]:
+    """Separate enum action metrics from boolean choice metrics and legacy rows."""
+    groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        kind = row.get("kind", "unknown")
+        groups[f"{row['mode']}/{row['condition']}/{kind}"].append(row)
+    return {key: summarize(value) for key, value in sorted(groups.items())}

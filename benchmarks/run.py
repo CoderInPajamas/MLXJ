@@ -19,7 +19,7 @@ from .common import (
     request_from_dict,
     sanitize,
 )
-from .metrics import grouped_summary
+from .metrics import grouped_summary, grouped_summary_by_kind
 
 MODES = ("direct", "code", "json", "json_code")
 DEFAULT_MODES = ("direct", "code", "json")
@@ -44,6 +44,7 @@ def attempt(engine, case: dict[str, Any], mode: str, condition: str, repeat: int
     row = {
         "case_id": case["id"],
         "family": case["family"],
+        "kind": request.kind,
         "mode": mode,
         "condition": condition,
         "repeat": repeat,
@@ -171,6 +172,7 @@ def run_summary(rows, planned, parity_rows, parity_planned):
         "measurements_complete": len(rows) == planned,
         "complete": len(rows) == planned and len(parity_rows) == parity_planned,
         "groups": grouped_summary(rows),
+        "groups_by_kind": grouped_summary_by_kind(rows),
         "parity": {
             "completed": len(parity_rows),
             "planned": parity_planned,
@@ -194,6 +196,11 @@ def main(argv: list[str] | None = None) -> int:
         "--model", required=True, help="Local MLX model directory; weights are never modified"
     )
     parser.add_argument("--split", choices=("dev", "test"), default="test")
+    parser.add_argument(
+        "--fixtures-dir",
+        type=Path,
+        help="Separate frozen suite directory containing manifest.json, dev.jsonl and test.jsonl",
+    )
     parser.add_argument("--modes", nargs="+", choices=MODES, default=list(DEFAULT_MODES))
     parser.add_argument(
         "--conditions", "--cohorts", nargs="+", choices=CONDITIONS, default=list(CONDITIONS)
@@ -227,7 +234,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error(
             "Frozen test policy uses margin threshold 0.0; tune on dev and freeze a new protocol before a new test split"
         )
-    cases, manifest = load_fixtures(args.split)
+    cases, manifest = load_fixtures(args.split, args.fixtures_dir)
     total_cases = len(cases)
     if args.limit:
         cases = cases[: args.limit]
