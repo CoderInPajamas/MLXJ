@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "model_name": "gemma-4-26b-a4b-it-4bit",
+  "environment": {
+    "python": "3.13.2",
+    "dependencies": {
+      "jev-mlx": "0.1.0",
+      "mlx": "0.31.2",
+      "mlx-lm": "0.31.3",
+      "mlx-metal": "0.31.2",
+      "transformers": "5.9.0",
+      "tokenizers": "0.22.2",
+      "numpy": "2.5.3"
+    },
+    "hardware": {
+      "architecture": "arm64",
+      "system": "Darwin",
+      "release": "25.6.0",
+      "hw.model": "Mac14,6",
+      "machdep.cpu.brand_string": "Apple M2 Max",
+      "hw.memsize": "68719476736",
+      "hw.ncpu": "12"
+    },
+    "git_commit": "ba98b71792f418f527146d4a073c9a7f420f9534",
+    "git_worktree_dirty": true,
+    "source_sha256": {
+      "src/jev_mlx/prompt.py": "8d0b340fb804a83ad37a6ee6a0feca39b4af061598712a2078ae1903e3c76f6b",
+      "src/jev_mlx/types.py": "f58e3d27a2fd2ea3ace839cdef75b50aa3fe793c8a47a56ce043e21f1b4c5c94",
+      "src/jev_mlx/engine.py": "10aebdb027d54fbc42f49f7a249abc2f4149b613de6d063c5e91fe300ba15baa",
+      "src/jev_mlx/backends/mlx_lm.py": "9925f8da4c7b8b9ab6c879d0d2f354170365792a5f886b142ca339af5254d84c",
+      "benchmarks/common.py": "0ed55256cf6eb0bf8f6499ad9e8fcca73862e947496f061490ba41bc62e5d9b0",
+      "benchmarks/run.py": "65e3f810bc9f9607aa7efcbce80dd4609bdc91ecb39010be5cec6ed3027dfadf",
+      "benchmarks/metrics.py": "8e19d32d7e64debf55e68fe7d8c3756f3969f85bdb8cf2b090b189af053403e4",
+      "benchmarks/cold_start.py": "31b57be8182439c33615fdb84edc986083d7fa6059268e14b7232c15f7257d80"
+    }
+  },
+  "fixtures": {
+    "schema_version": 1,
+    "origin": "Written from scratch for JEVKit MLX. Fictional courses, interface states, and utterances; no production exports.",
+    "test_frozen_before_inference": true,
+    "threshold_policy": "Default margin threshold 0.0 fixed before test evaluation. No test-driven threshold tuning.",
+    "files": {
+      "dev.jsonl": {
+        "sha256": "610114cd493232ffd05a9dc5ffe6dd355b1bc3d7c1ad62f65ff02f5c413f6e16",
+        "rows": 16
+      },
+      "test.jsonl": {
+        "sha256": "e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3",
+        "rows": 28
+      }
+    }
+  },
+  "split": "test",
+  "scope": "full",
+  "case_count": 28,
+  "full_split_case_count": 28,
+  "modes": [
+    "direct",
+    "code",
+    "json",
+    "json_code"
+  ],
+  "conditions": [
+    "kv_cold",
+    "same_page_new_utterance",
+    "page_update"
+  ],
+  "repeats": 1,
+  "seed": 20260919,
+  "margin_threshold": 0.0,
+  "generation": {
+    "sampling": "greedy",
+    "code_max_tokens": 1,
+    "json_max_tokens": 96,
+    "json_code_max_tokens": 96
+  },
+  "supplementary_output_format_control": {
+    "enabled": true,
+    "mode": "json_code",
+    "origin": "Added after observing code-versus-business-ID confusion in the original JSON test run; not a preregistered comparison.",
+    "protocol": "Same semantic policy/state/choices/threshold; different generated JSON output format. Evaluate on dev before the unchanged frozen test; preserve the original JSON results."
+  },
+  "parity": {
+    "enabled": true,
+    "atol": 0.5,
+    "rtol": 0.0,
+    "score_atol": 0.1,
+    "same_top_choice_required": true
+  },
+  "notes": [
+    "Model decisions scored before any execution gate.",
+    "Preparation calls are recorded and excluded from measured decision latency.",
+    "Wall times include backend synchronization; failed attempts are retained.",
+    "OS filesystem caches are not flushed; loaded-model inference is separate from process cold start."
+  ],
+  "engine_load_wall_ms": 5672.311874994193,
+  "memory_after_load": {
+    "process_peak_rss_bytes": 12366610432,
+    "active_memory_bytes": 14469705876,
+    "peak_memory_bytes": 14469705876,
+    "cache_memory_bytes": 6692
+  },
+  "memory_at_end": {
+    "process_peak_rss_bytes": 12366610432,
+    "active_memory_bytes": 14903067760,
+    "peak_memory_bytes": 15420459706,
+    "cache_memory_bytes": 6320264966
+  }
+}

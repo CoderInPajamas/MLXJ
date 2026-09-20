@@ -1,7 +1,13 @@
 # Recorded results for 0.1
 
-The project is now named **JEV MLX**. The measurements, original release-candidate
-checks, screenshots, and recordings below were collected under its former name,
+For the additional campaign, see the [fixed evaluation protocol](extended-evaluation-protocol.md)
+and [Gemma report](gemma4-results.md): Gemma reached 26/28 on the original suite,
+including one wrong filtered-first action among 26 enum requests. The new
+36-case extension is still running; no extended-suite result is claimed here.
+The latest core check is 161 passed; historical verification remains below.
+
+The project is now named **JEV MLX**. The historical Qwen/GLM measurements,
+original release-candidate checks, screenshots, and recordings were collected under its former name,
 **JEVKit MLX**. Their metadata still identifies `jevkit-mlx`, the `jevkit_mlx`
 module, original source paths, and recorded commit/file hashes. Those evidence
 files and media have not been rewritten or renamed to imply a new measurement.
@@ -56,16 +62,38 @@ rather than an invented clean-checkout claim, identify that run's implementation
 The 16 development and 28 frozen test fixtures are fictional and separate. The
 test fixture SHA-256 is
 `e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3`.
-There are 18 executable requests and 10 rejection requests in the test split.
+There are **16 executable enum requests, 10 enum rejection requests, and 2
+selected boolean answers** in the test split. The legacy mixed selected
+denominator is 18; it is not a count of 18 application actions.
 Each method ran every test case once in each of three cache conditions. Thus,
 84 rows per method still represent **28 unique quality examples**, not 84
 independent examples. Timing percentiles use 28 calls per method/condition.
 The fixed shuffle seed was 20260919. This is one run without statistical
 confidence intervals, an isolated-device claim, or a machine-boot measurement.
 
+## Interpreting the historical mixed metrics
+
+Original summaries are unchanged. Their `executable_request_coverage` counts
+all expected `selected` choices, including boolean answers; `false_action` and
+`raw_false_action` likewise apply to all kinds. Tables below label those retained
+values **mixed choice coverage** and **wrong choices**. Boolean errors must not
+be described as application misoperations.
+
+A [read-only derivation](../benchmarks/results/legacy-kind-breakdown.json) joins
+preserved trial IDs to the verified original fixture kinds. For the revised
+cache runtime, every condition has:
+
+| Model | Enum wrong actions / enum requests | Correct executable enum coverage | Boolean accuracy | Retained mixed coverage |
+|---|---:|---:|---:|---:|
+| Qwen | 0/26 | 15/16 (93.8%) | 2/2 | 17/18 (94.4%) |
+| GLM | 2/26 (7.7%) | 8/16 (50.0%) | 2/2 | 10/18 (55.6%) |
+
+These are model choices before execution, not counts of actions performed.
+The derivation verifies source hashes and leaves all original evidence intact.
+
 ## Development and frozen-test boundary
 
-| Development run | Method / condition | Correct | False actions | Executable coverage | Incorrect cases |
+| Development run | Method / condition | Correct | Wrong choices (all kinds) | Mixed choice coverage | Incorrect cases |
 |---|---|---:|---:|---:|---|
 | [Initial](../benchmarks/results/qwen9b-dev-initial/summary.json) | Direct, same page | 14/16 | 1/16 | 9/10 | `dev-first`: selected `play_moss` instead of `play_copper`; `dev-unknown-title`: abstain instead of no-match |
 | [Refined](../benchmarks/results/qwen9b-dev-refined/summary.json) | Direct, same page | 15/16 | 0/16 | 10/10 | `dev-unspecified`: no-match instead of abstain |
@@ -89,10 +117,10 @@ has not been replaced.
 
 Quality was identical across the three conditions for each primary method. The
 table reports one 28-case cohort; denominators repeat across all three cohorts.
-Accuracy requires the correct rejection status as well as the correct action.
+Accuracy requires the correct rejection status as well as the correct selected ID.
 Host execution guards are not involved in assigning correctness.
 
-| Method | Exact accuracy | Raw-choice accuracy | False actions / all requests | Rejection rate | Abstention rate | Correct executable coverage | Schema validity |
+| Method | Exact accuracy | Raw-choice accuracy | Wrong choices / all requests | Rejection rate | Abstention rate | Mixed choice coverage | Schema validity |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Direct, returned decision | 25/28 (89.3%) | 26/28 (92.9%) | 0/28 | 11/28 (39.3%) | 1/28 (3.6%) | 17/18 (94.4%) | 28/28 |
 | One-code generation | 26/28 (92.9%) | 26/28 (92.9%) | 0/28 | 10/28 (35.7%) | 0/28 | 18/18 (100%) | 28/28 |
@@ -101,8 +129,8 @@ Host execution guards are not involved in assigning correctness.
 Across the primary 252 measured attempts, there were no runtime exceptions or
 preparation exceptions. The 66 invalid JSON outputs are still failures of the
 requested output contract, even though generation itself completed. Among valid
-selections, the false-action rate was 0/51 for direct and 0/54 for one-code; it
-is undefined for original JSON because that method made no valid selections.
+selections (including boolean answers), the wrong-choice rate was 0/51 for direct
+and 0/54 for one-code; it is undefined for original JSON because that method made no valid selections.
 Zero observed false actions on this small set does not establish a zero-error
 system.
 
@@ -189,9 +217,10 @@ attempts**:
 This output-format confusion makes original JSON a weak quality comparator; it
 does not show that structured generation is inherently unable to solve the task.
 The supplementary `{"choice":"<code>"}` control restored 28/28 schema validity
-and 26/28 accuracy per condition, with 18/18 executable coverage. It nevertheless
-made 1/28 false actions (3.6%), or 1/19 among selections (5.3%), rejected 9/28
-(32.1%), and never abstained. Across its 84 attempts there were three false
+and 26/28 accuracy per condition, with 18/18 mixed choice coverage. It nevertheless
+made one wrong action: 1/28 among all kinds (3.6%), or 1/19 among all selected
+choices including boolean answers (5.3%). It rejected 9/28 (32.1%) and never
+abstained. Across its 84 attempts there were three false
 actions, six incorrect results, and no runtime or preparation exceptions.
 
 ## Historical Qwen cache parity and memory
@@ -240,7 +269,7 @@ control, not an independently preregistered comparison.
 
 The [GLM development run](../benchmarks/results/glm-dev/summary.json) completed
 32/32 measurements: direct scored 7/16 (43.8%), with two false actions and 4/10
-correct executable coverage; JSON code scored 1/16 (6.3%), with 12 invalid outputs
+mixed choice coverage; JSON code scored 1/16 (6.3%), with 12 invalid outputs
 and 1/10 coverage. Both had zero runtime exceptions. These poor development
 results were retained, and the unchanged configuration was evaluated on test.
 
@@ -251,15 +280,15 @@ Cold-KV and page-update latency cohorts were not part of this historical GLM
 comparison. All measured trial records are available in
 [GLM trials](../benchmarks/results/glm-test/trials.jsonl).
 
-| Method | Exact accuracy | Raw-choice accuracy | False actions / all requests | Rejection / abstention | Correct executable coverage | Schema validity | Warm p50 / p95, ms |
+| Method | Exact accuracy | Raw-choice accuracy | Wrong choices / all requests | Rejection / abstention | Mixed choice coverage | Schema validity | Warm p50 / p95, ms |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Direct returned decision | 14/28 (50.0%) | 15/28 (53.6%) | 2/28 (7.1%) | 16/28 / 12/28 | 10/18 (55.6%) | 28/28 | 191.4 / 652.5 |
 | One-code generation | 5/28 (17.9%) | 5/28 (17.9%) | 0/28 | 8/28 / 7/28 | 3/18 (16.7%) | 11/28 (39.3%) | 335.9 / 810.7 |
 | JSON business ID | 19/28 (67.9%) | 19/28 (67.9%) | 3/28 (10.7%) | 3/28 / 0/28 | 16/18 (88.9%) | 22/28 (78.6%) | 576.8 / 1,900.1 |
 | Supplementary JSON code | 5/28 (17.9%) | 5/28 (17.9%) | 0/28 | 9/28 / 8/28 | 3/18 (16.7%) | 12/28 (42.9%) | 507.1 / 1,558.8 |
 
-Direct raw choices contained **three** false actions (10.7%), while returned
-decisions contained two. On `test-content-not-executable`, the raw choice was
+Direct raw choices contained **three** wrong action proposals (3/28 across all
+kinds), while returned decisions contained two. On `test-content-not-executable`, the raw choice was
 `open_library`, tied at logit 104.5 with `open_settings`; the zero-margin rule
 returned abstention. That result was still incorrect because the expected status
 was no-match. On `test-close-library`, the raw correct action tied with no-match
@@ -283,10 +312,10 @@ JSON's three non-schema errors were all false actions.
 | JSON business ID | `test-loading-pause` | `close_player` instead of no-match |
 | JSON business ID | `test-first-reordered` | `play_glass` instead of the currently first visible `play_lunar` |
 
-Among actual selections, false-action rates were 2/12 (16.7%) for direct and
-3/19 (15.8%) for JSON. Code and JSON-code methods each selected only three actions
-and their zero false-action count must be read with their 16.7% executable
-coverage. GLM often emitted business-ID text where an internal code was required:
+Among all selected choices, including boolean answers, wrong-choice rates were
+2/12 (16.7%) for direct and 3/19 (15.8%) for JSON. Code and JSON-code methods each
+selected only three choices; their zero wrong-choice count must be read with
+their 16.7% mixed choice coverage. GLM often emitted business-ID text where an internal code was required:
 the one-token baseline produced fragments such as `close`, `play`, and `__`,
 while JSON code produced objects such as `{"choice":"close_settings"}`. These
 remain invalid; no parser repaired them into apparently correct answers. Every
@@ -345,7 +374,7 @@ The semantic prompt, weights, fixture labels, threshold, and parity tolerances
 were unchanged. This is post-failure engineering verification on the existing
 frozen fixtures, not a newly unseen quality test.
 
-| Revised GLM direct condition | Exact accuracy | Raw-choice accuracy | Returned / raw false actions | Correct executable coverage | p50 / p95, ms | Observed prefix reuse |
+| Revised GLM direct condition | Exact accuracy | Raw-choice accuracy | Returned / raw wrong choices (all kinds) | Mixed choice coverage | p50 / p95, ms | Observed prefix reuse |
 |---|---:|---:|---:|---:|---:|---|
 | Weights loaded, KV cold | 14/28 (50.0%) | 15/28 (53.6%) | 2/28 / 3/28 | 10/18 (55.6%) | 1,837.6 / 2,154.5 | 28/28 cold; 0 reused tokens |
 | Same page, fresh utterance | 14/28 (50.0%) | 15/28 (53.6%) | 2/28 / 3/28 | 10/18 (55.6%) | 147.8 / 170.6 | 28/28 state hits; 443–585 reused tokens |
@@ -382,7 +411,7 @@ files all match `579daf3`; the
 verifies those matches and public artifact copies. This distinguishes measured
 code from an incidental documentation/publication commit.
 
-| Revised Qwen direct condition | Exact accuracy | Raw-choice accuracy | Returned / raw false actions | Correct executable coverage | p50 / p95, ms | Observed prefix reuse |
+| Revised Qwen direct condition | Exact accuracy | Raw-choice accuracy | Returned / raw wrong choices (all kinds) | Mixed choice coverage | p50 / p95, ms | Observed prefix reuse |
 |---|---:|---:|---:|---:|---:|---|
 | Weights loaded, KV cold | 25/28 (89.3%) | 26/28 (92.9%) | 0/28 / 0/28 | 17/18 (94.4%) | 2,159.9 / 2,406.6 | 28/28 cold; 0 reused tokens |
 | Same page, fresh utterance | 25/28 (89.3%) | 26/28 (92.9%) | 0/28 / 0/28 | 17/18 (94.4%) | 171.7 / 176.4 | 28/28 state hits; 465–607 reused tokens |
@@ -522,10 +551,19 @@ neither the model prompt nor the decision threshold was changed for that rerun.
 
 ## Local automated and HTTP validation
 
-The core suite completed with **145 tests passed**. Opt-in real-model integration
-tests completed with **2 passed for Qwen in 23.01 seconds** and **2 passed for GLM
-in 25.11 seconds**, as reported by pytest. These are local Python 3.13.2 checks;
-configured Linux/Python-version CI jobs have not been executed on GitHub.
+The latest [core-suite record](../benchmarks/results/extended-release-checks/core-tests.json)
+reports **161 passed, zero failures/errors/skips**, with three model tests
+excluded, in one local run with loopback access. Pytest reported 3.76 seconds;
+the JUnit suite duration is 3.752 seconds. Ruff also passed. No GPU model was
+loaded by this suite; remote GitHub CI has not been executed.
+
+Historical 0.1 validation recorded 145 core tests. The separate
+[rename check](../benchmarks/results/rename-release-checks/verification.json)
+first passed 138 with seven sandbox-blocked HTTP fixture setups, then passed
+eight HTTP tests with loopback access (one overlap): 145 distinct tests across
+those attempts. Those records are preserved, not relabeled as the latest run.
+Historical opt-in model integration tests passed **2 for Qwen in 23.01 seconds**
+and **2 for GLM in 25.11 seconds** on local Python 3.13.2.
 Model integration checks validate their specified invariants and do not replace
 the full semantic results above, particularly GLM's poor action-selection quality.
 

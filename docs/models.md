@@ -13,10 +13,11 @@ Python 3.13.2. Full hardware and dependency metadata accompany each run.
 |---|---|---|---:|---|
 | Qwen3.5-9B-OptiQ-4bit | `qwen3_5`, hybrid recurrent + full attention | Mixed 4/8-bit, group 64 | 5.63 GiB | Revised `579daf3` source: 84 direct decisions completed; 56/56 numerical cache comparisons passed. Returned accuracy 25/28 and coverage 17/18 in every condition; no observed false actions. Historical baselines and all errors remain in [results](results.md). |
 | GLM-4.7-Flash-4bit | `glm4_moe_lite` | 4-bit, group 64 | 15.70 GiB | Revised `579daf3` runtime: 84 direct decisions completed; 56/56 numerical cache comparisons passed. Semantic quality remains 14/28 correct and 2/28 returned false actions in every condition; **not recommended for direct action execution with this prompt**. Original 25/28 parity failures remain published. See [results](results.md). |
+| gemma-4-26b-a4b-it-4bit | `gemma4` / `gemma4_text`, MoE with sliding + full attention | Mixed 4/8-bit, group 64 | 14.54 GiB | `ba98b71`: all 336 decisions across four methods/three conditions completed; direct 26/28 correct per condition, including **one wrong enum action** and one incorrect rejection category. Enum coverage 15/16; boolean accuracy 2/2. All 56 cached/fresh comparisons and three integration tests passed, including a 1,741-token prefix. Same-page direct p50/p95 134.9/283.9 ms; full process cold start 7933.0/8465.9 ms on one case × three repetitions. **Not a default recommendation for automatic execution.** See [Gemma results](gemma4-results.md). |
 
 The compatibility table must be read together with the results document. A tokenizer
 check alone is not a real-model validation. Other locally inventoried checkpoints,
-including Qwen3.6, Gemma and Nemotron conversions, are not certified by this release.
+including Qwen3.6, other Gemma conversions and Nemotron, are not certified by this release.
 Multi-question batching and vision inputs are not supported.
 
 Recorded Qwen and GLM comparison tables describe historical source revisions.
@@ -25,13 +26,18 @@ snapshots. Full Qwen and GLM numerical verification passed, each with 56/56
 comparisons and identical measured logits to its original valid reference path.
 Semantic quality did not improve. Do not treat prior-run latency as revised-runtime
 comparison evidence or combine methods measured under different implementations.
+Gemma's four-method comparison was recorded together on `ba98b71`; do not combine
+its times with the older Qwen/GLM tables to claim cross-model speedups. Gemma's
+code/JSON baselines use the existing prompt and strict parser without model-specific
+optimization; their format failures remain in every quality denominator.
 
 The recorded real-browser demonstration uses Qwen only. Its 16 scenarios accept
 either no-match or abstention for declines and are not a substitute for strict
-benchmark accuracy. GLM browser operation has not been evaluated.
+benchmark accuracy. GLM and Gemma browser operation have not been evaluated.
 
 Exact local checkpoint provenance is recorded in
-[`checkpoints.json`](../benchmarks/results/checkpoints.json). All weight shards were
+[`checkpoints.json`](../benchmarks/results/checkpoints.json) for Qwen/GLM and
+[`gemma4-checkpoint.json`](../benchmarks/results/gemma4-checkpoint.json) for Gemma. All weight shards were
 read and hashed; their SHA256 digests match the local Hugging Face download metadata.
 The model basenames alone are insufficient: the upstream Qwen conversion at `main`
 has changed since this local copy was downloaded.
@@ -40,6 +46,7 @@ has changed since this local copy was downloaded.
 |---|---|
 | [mlx-community/Qwen3.5-9B-OptiQ-4bit](https://huggingface.co/mlx-community/Qwen3.5-9B-OptiQ-4bit/tree/76b3310ab7aa52a34303c66fc928b6d7239c860c) | `76b3310ab7aa52a34303c66fc928b6d7239c860c` |
 | [mlx-community/GLM-4.7-Flash-4bit](https://huggingface.co/mlx-community/GLM-4.7-Flash-4bit/tree/1454cffb1a21737e162f508e5bc70be9def89276) | `1454cffb1a21737e162f508e5bc70be9def89276` |
+| [mlx-community/gemma-4-26b-a4b-it-4bit](https://huggingface.co/mlx-community/gemma-4-26b-a4b-it-4bit/tree/8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87) | `8bcfa0de037c2b1bfa323a1e8d1f0132243b9e87` |
 
 For exact reproduction, obtain that revision separately, compare hashes, and pass
 the local directory to JEV MLX. The package neither includes nor modifies model weights.
@@ -52,5 +59,9 @@ The Qwen base checkpoint is under [Apache 2.0](https://huggingface.co/Qwen/Qwen3
 also declared by the [OptiQ conversion card](https://huggingface.co/mlx-community/Qwen3.5-9B-OptiQ-4bit).
 The [GLM base card](https://huggingface.co/zai-org/GLM-4.7-Flash) and
 [MLX conversion card](https://huggingface.co/mlx-community/GLM-4.7-Flash-4bit) declare MIT.
+Gemma 4's local conversion card declares Apache 2.0, consistent with
+[Google's Gemma 4 license page](https://ai.google.dev/gemma/apache_2); its original
+base revision is not pinned by the retained conversion card. See the
+[Gemma audit](gemma4-audit.md) for the exact provenance boundary.
 Those are separate from JEV MLX's MIT license. No Jev weights or training artifacts
 are used.

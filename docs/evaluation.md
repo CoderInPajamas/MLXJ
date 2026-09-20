@@ -1,5 +1,12 @@
 # Reproducing evaluations
 
+The [additional-run protocol](extended-evaluation-protocol.md) covers Gemma and
+the separate 12-dev/36-test extension. [Gemma results](gemma4-results.md) on the
+original 28 cases reached 26/28 correct, including a wrong filtered-first action
+(1/26 enum requests); extended-suite runs are still in progress. The latest
+[core check](../benchmarks/results/extended-release-checks/core-tests.json) passed
+161 tests without failures or errors (pytest 3.76 s; JUnit suite time 3.752 s).
+
 The public fixtures are fictional, written specifically for this repository. They
 contain no production exports, recordings, screenshots, transcripts, or derived
 private examples. The 16 development cases and 28 frozen test cases have separate
@@ -118,11 +125,14 @@ Metrics use these denominators:
 
 - **Accuracy:** exact expected status and, for selections, business ID, divided by
   all attempts. No-match and abstain are distinct labels.
-- **False action rate:** incorrect model selections divided by all attempts;
-  the conditional rate among selections is also reported. A host blocking the
-  action never turns it into a correct model prediction.
-- **Raw choice accuracy / raw false action rate:** use `raw_selected_id` before
-  the score-margin abstention policy, with the same all-attempt denominator.
+- **Wrong selected-choice rate:** incorrect returned selections divided by all
+  attempts in the reported group. The legacy field is named `false_action`, but
+  an all-kind group includes boolean answers as well as actions. Report enum
+  action errors over enum requests and boolean classification errors separately.
+  A host blocking an action never makes the model prediction correct.
+- **Raw choice accuracy / raw wrong-choice rate:** use `raw_selected_id` before
+  the score-margin abstention policy, with all attempts in the same reported
+  group as denominator. The legacy aggregate `raw_false_action` also mixes kinds.
   Reserved IDs map to their distinct no-match/abstain statuses. A wrong raw
   action followed by policy abstention remains a raw error and raw false action;
   a correct raw action followed by abstention is raw-correct but not a correct
@@ -131,9 +141,10 @@ Metrics use these denominators:
   separate model top-choice quality from both margin rejection and executor guards.
 - **Rejection rate:** valid no-match or abstain outputs divided by all attempts.
   Abstention is also reported separately.
-- **Executable-request coverage:** correct selections divided by requests with
-  an executable labeled action. A wrong selection does not count as coverage.
-  Selection rate on executable requests is reported separately.
+- **Enum executable-request coverage:** correct action choices divided by enum
+  requests with an executable labeled action. A wrong selection does not count.
+  Legacy all-kind `executable_request_coverage` instead includes every expected
+  `selected` answer, including boolean facts; label that mixed choice coverage.
 - **Schema validity:** valid allowed IDs or reserved rejection outcomes divided
   by all attempts. Exceptions and invalid generated output fail this metric.
 - **Latency:** p50 and p95 with linear interpolation, grouped by method and
@@ -142,7 +153,14 @@ Metrics use these denominators:
   always include failures. With small cohorts, percentiles are descriptive only.
 - **Memory:** process lifetime peak RSS and available MLX active, peak, and cache
   memory. Peaks are cumulative within a process and are not independent per-call
-allocation measurements; do not sum RSS and MLX memory as independent pools.
+  allocation measurements; do not sum RSS and MLX memory as independent pools.
+
+The original 28 tests contain 16 executable enum requests, 10 enum rejection
+requests, and 2 selected boolean answers: the legacy selected denominator is 18,
+not 18 application actions. The extension has 15 executable enum requests and
+4 selected boolean answers, giving a mixed denominator of 19. Read the
+[kind-separated historical derivation](../benchmarks/results/legacy-kind-breakdown.json)
+for corrected action-only interpretation; it does not change original trials.
 
 Earlier run summaries remain immutable. To calculate the added raw-choice fields
 from their recorded trials without rerunning inference or overwriting evidence:

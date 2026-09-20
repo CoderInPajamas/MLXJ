@@ -4,6 +4,9 @@ Audit date: 2026-09-20. This audit covers text-only use of the existing local
 `gemma-4-26b-a4b-it-4bit` checkpoint. Reading source, configuration, and tokenizer
 files does not establish semantic accuracy or numerical cache parity. Those
 claims require the separately recorded model runs.
+The completed [Gemma results](gemma4-results.md) now report the full original
+28-case comparison, cache parity, and separate process cold start, including
+the observed wrong action and every generation-format failure.
 
 ## Official framework support
 
@@ -84,19 +87,52 @@ reuse and the earlier system boundary, comparing both decisions against fresh
 computation with the existing limits: absolute logit difference at most 0.5,
 restricted-score difference at most 0.1, and identical raw winning ID.
 
-Run it sequentially after other model jobs finish:
+The [recorded real-model integration run](../benchmarks/results/gemma4-model-tests.json)
+completed all three tests in `tests/test_model.py`: **3 passed, 0 failed,
+0 skipped, 41.62 seconds total**. This is test-suite elapsed time, not per-decision
+latency. The wraparound case used a **1,741-token stable page prefix** and
+confirmed actual page-prefix reuse and system-prefix reuse after the page update.
+Both cached results retained the same raw winning ID as their fresh computations.
+
+| Cache comparison against fresh computation | Maximum returned-logit difference | Maximum restricted-score difference |
+| --- | ---: | ---: |
+| Same page, different utterance | 0.0 | 0.0 |
+| Page update after the long shared prefix | 0.0 | 0.0 |
+
+The record includes the test-source and source-JUnit hashes and the emitted JUnit
+properties. These results cover the constructed prefix and update, not every
+prompt up to the backend's 4,096-token limit, batch shape, or model configuration.
+The complete 4,096-token range remains unverified. Passing these integration
+invariants does not establish general semantic accuracy or valid JSON generation.
+
+Reproduce the integration run sequentially after other model jobs finish:
 
 ```sh
 JEV_TEST_MODEL=/absolute/path/to/gemma-4-26b-a4b-it-4bit \
   python -m pytest tests/test_model.py \
-  -k beyond_1024_token_prefix -q \
-  --junitxml=results/gemma4-long-prefix.xml
+  -q --junitxml=runs/gemma4-model-tests.xml
 ```
 
-The JUnit properties include prefix length and both numerical differences.
-Adding this test is not evidence that it passed. Even a passing result would
-cover this constructed prefix and update only, not every supported prompt
-length, batch shape, or model configuration.
+## Preliminary development evidence
+
+Two completed development runs are retained separately:
+
+- [Smoke run](../benchmarks/results/gemma4-moe-smoke/summary.json): two development
+  cases, four output modes, three cache conditions, one repetition; 24 attempts.
+- [Development run](../benchmarks/results/gemma4-dev/summary.json): all 16 original
+  development cases, four output modes, the same-page/new-utterance condition,
+  one repetition; 64 attempts.
+
+Their directories retain metadata and individual trials, including invalid
+generated output. These remain preliminary development results, separate from
+the completed [336-attempt frozen-test run](../benchmarks/results/gemma4-test/summary.json)
+and [12-attempt process cold-start run](../benchmarks/results/gemma4-cold/summary.json).
+Both passed evidence-integrity audits with recorded source hashes matching
+`ba98b71`. All 56 cached/fresh comparisons passed. Direct scoring was correct on
+26/28 requests per cache condition, including one wrong selected enum action
+and one incorrect rejection category; numerical parity does not make those
+semantic decisions correct. Full methods, conditions, quality denominators,
+timings, failures, and scope limits are in the [results report](gemma4-results.md).
 
 ## Checkpoint provenance and license
 

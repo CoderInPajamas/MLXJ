@@ -1,0 +1,14 @@
+{
+  "source_revision": "7174e56",
+  "command": "python -m ruff check src tests benchmarks scripts examples && python -m pytest -m 'not model' -q --junitxml=runs/extended-core-tests.xml",
+  "tests": 161,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "model_tests_deselected": 3,
+  "elapsed_seconds": 3.752,
+  "timestamp": "2026-09-20T08:36:24.520692+02:00",
+  "ruff_passed": true,
+  "scope": "Single local core-suite run; localhost HTTP tests ran with loopback access, no GPU model loaded by this suite. Remote CI not executed.",
+  "junit_sha256": "766fcc2b64f0f56e0b2c0f1909f15b724bc0dc1bd0bd954bc932340ac9a9cd65"
+}
