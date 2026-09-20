@@ -21,6 +21,11 @@
   <a href="#connect">Connect & support</a>
 </p>
 
+<p align="center">
+  <a href="https://xhslink.com/m/18bjTTf180W"><img src="docs/assets/badges/follow-xiaohongshu.svg" alt="Follow 里奥YetAnotherLeo on Xiaohongshu, account ID 6236648830" /></a>
+  <a href="https://x.com/YetAnotherLeo"><img src="docs/assets/badges/follow-x.svg" alt="Follow @YetAnotherLeo on X / Twitter" /></a>
+</p>
+
 ---
 
 ## Connect language to your application
@@ -185,7 +190,7 @@ Share use cases, reproduction results, and suggestions. Issues, documentation fi
 
 <p align="center"><strong>里奥YetAnotherLeo</strong><br />Xiaohongshu ID: <code>6236648830</code></p>
 
-<p align="center"><a href="https://xhslink.com/m/18bjTTf180W">Xiaohongshu · 里奥YetAnotherLeo ↗</a></p>
+<p align="center"><a href="https://xhslink.com/m/18bjTTf180W">Xiaohongshu · 里奥YetAnotherLeo ↗</a> · <a href="https://x.com/YetAnotherLeo">X / Twitter · @YetAnotherLeo ↗</a></p>
 
 <details>
 <summary><strong>Scan the Xiaohongshu profile card</strong></summary>
@@ -196,7 +201,7 @@ Original public profile card supplied by the owner. The QR code has not been red
 
 </details>
 
-<p align="center"><sub>Twitter/X and sponsorship destinations are still awaiting owner-provided links. No payment link or donation QR code is enabled.</sub></p>
+<p align="center"><sub>A sponsorship destination is still awaiting an owner-provided public link. No payment link or donation QR code is enabled.</sub></p>
 
 ## License & inspiration
 

@@ -21,6 +21,11 @@
   <a href="#connect">联系与支持</a>
 </p>
 
+<p align="center">
+  <a href="https://xhslink.com/m/18bjTTf180W"><img src="docs/assets/badges/follow-xiaohongshu.svg" alt="关注小红书：里奥YetAnotherLeo，小红书号6236648830" /></a>
+  <a href="https://x.com/YetAnotherLeo"><img src="docs/assets/badges/follow-x.svg" alt="关注 X / Twitter：@YetAnotherLeo" /></a>
+</p>
+
 ---
 
 ## 把自然语言接进你的应用
@@ -185,7 +190,7 @@ python -m ruff check src tests benchmarks scripts examples
 
 <p align="center"><strong>里奥YetAnotherLeo</strong><br />小红书号：<code>6236648830</code></p>
 
-<p align="center"><a href="https://xhslink.com/m/18bjTTf180W">小红书 · 里奥YetAnotherLeo ↗</a></p>
+<p align="center"><a href="https://xhslink.com/m/18bjTTf180W">小红书 · 里奥YetAnotherLeo ↗</a> · <a href="https://x.com/YetAnotherLeo">X / Twitter · @YetAnotherLeo ↗</a></p>
 
 <details>
 <summary><strong>扫码关注小红书</strong></summary>
@@ -196,7 +201,7 @@ python -m ruff check src tests benchmarks scripts examples
 
 </details>
 
-<p align="center"><sub>Twitter/X 和赞助入口等待公开链接；目前没有启用收款链接或打赏二维码。</sub></p>
+<p align="center"><sub>赞助入口仍待作者提供公开链接；目前没有启用收款链接或打赏二维码。</sub></p>
 
 ## 许可证与来源
 
