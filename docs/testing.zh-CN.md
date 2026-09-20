@@ -1,8 +1,8 @@
 # 测试方法与实测结果
 
-[English: evaluation protocol](evaluation.md) · [历史完整结果](results.md) · [六领域扩展结果](extended-results.md) · [新增评测协议](extended-evaluation-protocol.md) · [Gemma 原始集实测](gemma4-results.md) · [支持模型](models.md)
+[English: evaluation protocol](evaluation.md) · [历史完整结果](results.md) · [六领域扩展结果](extended-results.zh-CN.md) · [新增评测协议](extended-evaluation-protocol.md) · [Gemma 原始集实测](gemma4-results.md) · [支持模型](models.md)
 
-最新核心测试 **161 项通过**。六领域扩展集的三个模型、四种输出方法已完成同页新话语评测并通过证据审计。下面只列直接评分；完整基线、拒绝率、覆盖率、格式失败、内存和原始记录见[扩展结果](extended-results.md)。
+最新核心测试 **161 项通过**。六领域扩展集的三个模型、四种输出方法已完成同页新话语评测并通过证据审计。下面只列直接评分；完整基线、拒绝率、覆盖率、格式失败、内存和原始记录见[扩展结果](extended-results.zh-CN.md)。
 
 | 模型 | 严格正确 / 36 | 动作误选 / 30 个 enum 请求 | 正确动作覆盖 / 15 | 布尔正确 / 6 | 同页 p50 / p95 |
 |---|---:|---:|---:|---:|---:|
@@ -205,7 +205,7 @@ python -m benchmarks.cold_start --model "$JEV_MLX_MODEL" \
 
 这些命令运行当前源码，不能保证重现历史源码的同一耗时。换 GLM 时设置新的 `JEV_MLX_MODEL` 并使用新的输出目录；原 GLM 冷启动记录每种方法只重复 2 次。查看输出中的 `metadata.json`、`trials.jsonl`、`summary.json` 和 `parity.jsonl`，保留失败与完整输入，比较模型身份、源码哈希和缓存命中条件后再比较速度。
 
-复现六领域扩展时，显式传入 `--fixtures-dir benchmarks/fixtures/extended-v1`，先跑其独立开发集，再跑冻结测试集；本次三模型四方法对照只使用 `--conditions same_page_new_utterance`。完整命令与另外声明的 Gemma 缓存阶段见[固定协议](extended-evaluation-protocol.md)，实际完成范围见[扩展报告](extended-results.md)。不要修改冻结文件或根据这些已公开测试结果调整阈值后仍称其为未见评测。
+复现六领域扩展时，显式传入 `--fixtures-dir benchmarks/fixtures/extended-v1`，先跑其独立开发集，再跑冻结测试集；本次三模型四方法对照只使用 `--conditions same_page_new_utterance`。完整命令与另外声明的 Gemma 缓存阶段见[固定协议](extended-evaluation-protocol.md)，实际完成范围见[扩展报告](extended-results.zh-CN.md)。不要修改冻结文件或根据这些已公开测试结果调整阈值后仍称其为未见评测。
 
 运行浏览器测试时，终端一启动服务：
 

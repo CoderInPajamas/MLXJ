@@ -1,3 +1,5 @@
+<p align="center"><a href="extended-results.zh-CN.md">简体中文</a> · <strong>English</strong></p>
+
 # Six-domain extended evaluation
 
 **The three-model warm comparison and Gemma's separate extended cache
