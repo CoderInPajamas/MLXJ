@@ -13,10 +13,8 @@
 
 <p align="center">
   <a href="#quick-start">快速开始</a> ·
-  <a href="#live-demo">动态演示</a> ·
   <a href="#results">实测结果</a> ·
   <a href="docs/testing.zh-CN.md">怎么测试</a> ·
-  <a href="#replay">静态演示</a> ·
   <a href="#connect">联系</a>
 </p>
 
@@ -28,20 +26,6 @@
 <p align="center"><a href="README.md">English</a> · <strong>简体中文</strong></p>
 
 ---
-
-<a name="live-demo"></a>
-
-## 同一句话，不同上下文。
-
-“Close it” 关闭当前窗口；“First one” 遵循筛选、排序后的可见列表；询问不会被当成又一次操作。
-
-![真实本地 Qwen 推理：变化的上下文、模型选择与实际浏览器点击](docs/assets/live-demo/preview.gif)
-
-**本地模型真实录制，保持原速。** 手动准备场景会明确标注。GitHub 可直接播放 GIF；输入新话语进行交互，需要运行本地 MLX 后端。
-
-[观看完整视频](docs/assets/live-demo/full-run.mp4) · [在 Mac 上亲自试用](docs/http-and-demo.zh-CN.md#interactive-showcase) · [八次完整结果与录制说明](docs/assets/live-demo/README.zh-CN.md)
-
-这组固定流程用于展示集成方式，不是未见测试集的准确率或速度成绩。[实测结果](#results) 保留了模型错误与更广泛评测的局限。
 
 ## 把自然语言接进你的应用
 
@@ -158,23 +142,16 @@ Qwen 在原始集的 3 个未通过场景包括拒绝状态区分和排序后的
 </details>
 
 <a name="replay"></a>
-
-## 无需安装模型，也能看一次真实记录
-
-提供一个**完全静态的录制回放**：选场景，查看当时的话语、候选、模型选择、耗时和实际执行回执。它读取已保存的测试记录，无服务器、无模型、无网络依赖。
-
-**[打开静态回放文件](docs/demo/index.html?lang=zh-CN)** · [查看原始浏览器记录](docs/assets/browser-demo/browser-transcript.json)
-
-GitHub 会把 HTML 文件显示为源码。克隆或下载仓库后，用浏览器打开 `docs/demo/index.html` 即可运行；也可以在确定公开仓库后托管到静态站点。
+<a name="live-demo"></a>
 
 <details>
-<summary><strong>查看真实浏览器截图与动态推理的区别</strong></summary>
+<summary><strong>开发者集成示例：浏览器动作与执行回执</strong></summary>
 
-![真实本地浏览器测试截图，采集时使用旧项目名](docs/assets/browser-demo/03b-player-control.png)
+虚构桌面 Morrow Studio 用于说明如何把允许动作连接到真实 DOM 控件、验证状态版本并查看执行回执。
 
-截图和录制发生在项目更名前，保留原貌。静态回放不接受新的自由文本推理，也不重新操作桌面。真正输入新话语、让本地模型操作模拟页面，需要在 Apple Silicon 上启动 `jev-mlx serve`，具体步骤见[本地 HTTP 与浏览器集成](docs/http-and-demo.zh-CN.md)。
+[本地安装与集成说明](docs/http-and-demo.zh-CN.md) · [八次请求的完整录制](docs/assets/live-demo/README.zh-CN.md) · [原始浏览器记录](docs/assets/browser-demo/browser-transcript.json)
 
-浏览器集成只操作这个虚构应用中预先允许的 DOM 控件，不是任意网站导航或视觉电脑操控。
+[静态证据回放](docs/demo/index.html?lang=zh-CN)读取保存的结果，不需要模型或服务。克隆仓库后在本地打开 `docs/demo/index.html`；GitHub 会将 HTML 文件显示为源码。输入新请求需要本地 MLX 服务。这个集成示例只操作虚构应用中预先允许的按钮，不负责任意网站导航。
 
 </details>
 

@@ -13,10 +13,8 @@
 
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
-  <a href="#live-demo">Live demo</a> ·
   <a href="#results">Measured results</a> ·
   <a href="docs/evaluation.md">Methodology</a> ·
-  <a href="#replay">Static replay</a> ·
   <a href="#connect">Connect & support</a>
 </p>
 
@@ -28,20 +26,6 @@
 <p align="center"><strong>English</strong> · <a href="README.zh-CN.md">简体中文</a></p>
 
 ---
-
-<a name="live-demo"></a>
-
-## Same words. Different context.
-
-“Close it” closes the focused window. “First one” follows the filtered, reordered list. A question stays a question.
-
-![Real local Qwen inference: changing context, model choices, and actual browser clicks](docs/assets/live-demo/preview.gif)
-
-**A real local-model recording, at original speed.** Manual scene setup is labeled. The GIF plays directly on GitHub; new requests run through the local MLX backend.
-
-[Watch the full video](docs/assets/live-demo/full-run.mp4) · [Try it on your Mac](docs/http-and-demo.md#interactive-showcase) · [All eight outcomes and recording details](docs/assets/live-demo/README.md)
-
-This fixed walkthrough illustrates the integration; it is not a held-out accuracy or latency benchmark. The [measured results](#results) retain model failures and broader evaluation limits.
 
 ## Connect language to your application
 
@@ -158,23 +142,16 @@ The [full report](docs/results.md) includes p50/p95, rejection, executable cover
 </details>
 
 <a name="replay"></a>
-
-## Explore a real recording without installing a model
-
-The **fully static recorded replay** lets you choose a scenario and inspect its original utterance, candidates, model choice, timing, and execution receipt. It uses saved test evidence and needs no server, model, or external network.
-
-**[Open the static replay file](docs/demo/index.html?lang=en)** · [Original browser transcript](docs/assets/browser-demo/browser-transcript.json)
-
-GitHub displays HTML files as source. Clone or download the repository, then open `docs/demo/index.html` in a browser. It can also be hosted on a static site once a public destination is chosen.
+<a name="live-demo"></a>
 
 <details>
-<summary><strong>See the original screenshot and the live-inference boundary</strong></summary>
+<summary><strong>Developer integration example: browser actions and execution receipts</strong></summary>
 
-![Real local browser test, captured under the former project name](docs/assets/browser-demo/03b-player-control.png)
+The fictional Morrow Studio desktop demonstrates how to connect allowed actions to real DOM controls, validate state versions, and inspect execution receipts.
 
-The screenshot and recording retain their original branding. The static replay does not infer new free-text requests or operate the desktop again. Live decisions require `jev-mlx serve` on Apple Silicon; see the [local HTTP and browser guide](docs/http-and-demo.md).
+[Local setup and integration guide](docs/http-and-demo.md) · [Recorded eight-request walkthrough](docs/assets/live-demo/README.md) · [Original browser transcript](docs/assets/browser-demo/browser-transcript.json)
 
-The browser integration operates allowlisted DOM controls in a fictional application. It is not arbitrary website navigation or visual computer use.
+The [static evidence replay](docs/demo/index.html?lang=en) reads saved results without a model or server. Clone the repository and open `docs/demo/index.html` locally; GitHub displays HTML files as source. New requests require the local MLX service. This integration example controls allowlisted buttons in a fictional application; it does not navigate arbitrary websites.
 
 </details>
 

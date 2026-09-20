@@ -53,7 +53,7 @@ scores are not calibrated probabilities of correctness.
 
 <a name="interactive-showcase"></a>
 
-## Interactive showcase and README recording
+## Interactive integration example and recording
 
 With the local service running, open
 [the interactive showcase](http://127.0.0.1:8765/?showcase=1).
@@ -64,8 +64,8 @@ scores, timing, state, and cache information remain available in the inspector.
 The scenario caption describes the setup, while the interaction label distinguishes
 manual setup from model inference and an actual model-selected click.
 
-You can type new requests into this **local live demo**. The GIF embedded in the
-README and the downloadable video are **recordings**: viewing them does not run a
+You can type new requests into this **local live demo**. The GIF in the
+recording documentation and the downloadable video are **recordings**: viewing them does not run a
 model or accept new input. Uploading these static assets does not host the Python
 inference service.
 

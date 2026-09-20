@@ -11,8 +11,8 @@ publication is tracked separately from preparing this source release.
   in both languages, original title graphics, and owner-provided X and Xiaohongshu
   links. Language selection sits below the title/navigation area; X appears first.
   The display name is MLXJ; package/API names remain `jev-mlx` / `jev_mlx`.
-- A compact live context showcase, with a real eight-request Qwen recording
-  embedded as an original-speed GIF in both READMEs. The full video, every
+- A developer integration showcase, with a real eight-request Qwen recording
+  and original-speed GIF in the integration documentation. The full video, every
   response and execution receipt, source hashes, and the recording recovery
   record are retained. Recording and conversion scripts reproduce the workflow;
   this walkthrough is distinct from the quality benchmark.
