@@ -7,6 +7,12 @@
 Initial experimental JEV MLX implementation. Public repository/registry
 publication is tracked separately from preparing this source release.
 
+- MLXJ Blocks: an original falling-block game with real local-model placement
+  selection, manual play, stale-result guards, and complete run downloads.
+  Six rule tests and thirteen mocked browser checks pass. A recorded Qwen
+  development run placed 20 pieces and cleared four rows; the earlier refusal,
+  all decisions, original videos, and the explicitly 4× GIF are retained in the
+  [game report](docs/blocks.md). This is not a frozen gameplay benchmark.
 - English-first README with a separate Chinese homepage, complete documentation
   in both languages, original title graphics, and owner-provided X and Xiaohongshu
   links. Language selection sits below the title/navigation area; X appears first.

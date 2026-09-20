@@ -13,6 +13,7 @@
 
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
+  <a href="#blocks">Game demo</a> ·
   <a href="#results">Measured results</a> ·
   <a href="docs/evaluation.md">Methodology</a> ·
   <a href="#connect">Connect & support</a>
@@ -85,6 +86,18 @@ jev-mlx decide --request examples/decision.json
 ```
 
 Results include the candidate ID, raw logits, candidate scores, margin, state version, model identity, actual timing, and cache details. See the [Python API](docs/python-api.md) for booleans, state updates, and versioned execution.
+
+<a name="blocks"></a>
+
+## A local model plays Blocks
+
+![MLXJ Blocks: complete 20-move development run, shown at 4× playback](docs/assets/blocks/preview.gif)
+
+**Qwen3.5-9B · 20 model-selected placements · 4 cleared rows · 400 points.** The GIF shows the entire second development run at **4× playback**, including inference waits. The model chooses from every legal vertical-drop placement using structured board data and rule-computed outcomes; there is no best-move fallback. This is turn-based play, not screenshot understanding or frame-by-frame control.
+
+[Run the game locally](docs/blocks.md) · [Full-speed video](docs/assets/blocks/full-run.mp4) · [All decisions](docs/assets/blocks/attempt-2.json)
+
+The first attempt refused to place a piece. Both attempts are retained in the [game report](docs/blocks.md#recorded-development-attempts). After clarifying the game instruction, the second run reached its planned 20-piece limit. Its decision p50 / p95 was **5.78 / 11.57 seconds**; this is an illustrative development run, not a held-out game benchmark or a speed claim. Manual play can run on a static server; new AI decisions require the local MLX backend.
 
 <a name="results"></a>
 

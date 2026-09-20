@@ -61,6 +61,7 @@ HTML、JavaScript 和手动游戏可以通过静态文件服务运行。发布�
 
 ```sh
 node --test tests/blocks-engine.test.mjs
+.venv/bin/python -m pytest -q -m 'not model'
 ```
 
 录制真实本地模型运行时，先在项目环境中安装可选浏览器依赖和 Chromium，并保持 MLX 服务运行：
@@ -69,6 +70,16 @@ node --test tests/blocks-engine.test.mjs
 python -m pip install -e '.[mlx,browser]'
 PLAYWRIGHT_BROWSERS_PATH=.cache/playwright python -m playwright install chromium --only-shell
 ```
+
+浏览器交互检查使用明确标识的模拟响应，不冒充真实模型答案：
+
+```sh
+PLAYWRIGHT_BROWSERS_PATH=.cache/playwright .venv/bin/python examples/check_blocks_browser.py
+```
+
+已通过 6 项 Node 游戏规则测试、161 项 Python 核心测试，以及 13 项使用模拟响应的浏览器检查，
+覆盖操作、过期结果、拒绝与错误处理、消行、游戏结束、全屏和移动端布局。
+这些验证软件行为，不衡量模型玩游戏的准确率。
 
 在另一个终端中，用隔离的浏览器上下文录制固定种子的运行：
 
@@ -81,6 +92,23 @@ PLAYWRIGHT_BROWSERS_PATH=.cache/playwright .venv/bin/python examples/record_bloc
 
 每次使用新的输出目录。失败、拒绝和执行错误都应与成功运行一并保留。
 固定种子可复现方块序列，不保证不同硬件或依赖版本下的模型分数完全一致。
+
+<a name="recorded-development-attempts"></a>
+
+## 已录制的开发尝试
+
+两次开发录制均使用种子 42，在 Apple M2 Max、64 GiB 内存上运行 Qwen3.5-9B-OptiQ-4bit（MLX 0.31.2、MLX-LM 0.31.3；混合 4/8 位量化，分组大小 64）。
+
+| 尝试 | 决策次数／实际落子 | 消行／分数 | 决策耗时 p50／p95 |
+| --- | --- | --- | --- |
+| [初始指令](assets/blocks/attempt-1.json) | 1／0；首个方块返回 `no_match` | 0／0 | 仅一次请求：6.642 秒 |
+| [澄清后的指令](assets/blocks/attempt-2.json) | 20／20；达到预设方块数量后停止 | 4／400 | 5.781 秒／11.573 秒 |
+
+首次拒绝后，仅澄清游戏指令：允许本轮不消行，也允许任选同样好的落点。核心策略和阈值没有变化。两次尝试均保留，这是开发迭代，不是冻结的质量评测。第二次未触发游戏结束，也没有浏览器或录制错误；执行了 20 次落子不代表 20 次都是最优选择。
+
+分位数使用全部 20 次 `result.timing.decision_ms` 线性插值计算，不包括浏览器动画和传输。第二次运行每轮有 9–34 个候选、1,213–2,693 个输入 token；首轮复用了已有的初始棋盘缓存，后续 19 轮仅复用 300 token 的稳定前缀。棋盘变化及大量候选描述需要重新计算较长输入，所以这里的决策耗时以秒计，不能套用语义评测中缓存充分复用时的毫秒成绩。
+
+[完整视频](assets/blocks/full-run.mp4)以原速保留全部 156.6 秒，包括推理等待。README 的 GIF 以 **4 倍速**展示完整第二次尝试，画面内标明倍速。[来源记录](assets/blocks/provenance.json)保留两次原始视频和源码哈希；第二次运行的运行时文件哈希与提交 `d0d8a55` 一致。
 
 ## 当前范围
 

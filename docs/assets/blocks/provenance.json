@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "scope": "Two illustrative development attempts; neither is a frozen game benchmark",
+  "runtime_revision": "d0d8a55b7760a12cf0fe5e864d2af152317bdd73",
+  "source_note": "The second recording began before commit, so its original git metadata remains dirty. Every recorded source-file hash matches this committed implementation. Attempt 1 has a historical uncommitted blocks.js hash; its exact request and response are preserved. The model core and threshold were unchanged.",
+  "attempts": [
+    {
+      "transcript": "attempt-1.json",
+      "requests": 1,
+      "executed": 0,
+      "stop": "no_match",
+      "instruction_revision": 1
+    },
+    {
+      "transcript": "attempt-2.json",
+      "requests": 20,
+      "executed": 20,
+      "lines": 4,
+      "score": 400,
+      "stop": "planned 20-piece limit",
+      "instruction_revision": 2
+    }
+  ],
+  "evaluation": "No retries or fallback moves. The game instruction was clarified after the first refusal. These are development observations, not test accuracy, policy comparisons or proof of gameplay strength.",
+  "hardware": {
+    "chip": "Apple M2 Max",
+    "memory_gib": 64,
+    "source": "same host as recorded semantic benchmark; backend model/quantization/dependencies in every response"
+  },
+  "recording": {
+    "originals": "unaltered browser webm recordings",
+    "full_run_mp4": {
+      "speed": 1,
+      "cuts": false,
+      "inference_waits_removed": false
+    },
+    "preview_gif": {
+      "speed": 4,
+      "cuts": false,
+      "inference_waits_removed": false,
+      "fps": 8,
+      "width": 880,
+      "max_palette_colors": 96,
+      "embedded_speed_label": true,
+      "entire_second_attempt_timeline": true
+    }
+  },
+  "reproduction_commands": [
+    [
+      "ffmpeg",
+      "-i",
+      "docs/assets/blocks/original-attempt-2.webm",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "medium",
+      "-crf",
+      "22",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "-an",
+      "docs/assets/blocks/full-run.mp4"
+    ],
+    [
+      "ffmpeg",
+      "-i",
+      "docs/assets/blocks/original-attempt-2.webm",
+      "-filter_complex",
+      "[0:v]setpts=PTS/4,fps=8,scale=880:-1:flags=lanczos,drawtext=fontfile=/System/Library/Fonts/Helvetica.ttc:text='4x playback | full 20-move development run':fontcolor=white:fontsize=15:box=1:boxcolor=black@0.8:boxborderw=6:x=(w-text_w)/2:y=18,split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=none",
+      "-loop",
+      "0",
+      "docs/assets/blocks/preview.gif"
+    ]
+  ],
+  "artifacts": {
+    "attempt-1.json": {
+      "bytes": 29919,
+      "sha256": "2a181fe958f754ab57a72328b79bee0c9c6b4f805acb123683b0a0d29c20e28d"
+    },
+    "attempt-2.json": {
+      "bytes": 802533,
+      "sha256": "14c88e01098a3fbbce08e4cae076020882278e02fefee61a049056e573d3d16a"
+    },
+    "final.png": {
+      "bytes": 309396,
+      "sha256": "2c147ccf28b52a67eff49cd3e4df247cf37a4c329a394558ace93543e87f6c62"
+    },
+    "full-run.mp4": {
+      "bytes": 3996797,
+      "sha256": "83bd692802a1b1f2b4a9b14ba5d035f2684598521cfbb85c660a92d40e7ba058",
+      "media": {
+        "duration": "156.600000",
+        "size": "3996797"
+      }
+    },
+    "original-attempt-1.webm": {
+      "bytes": 455086,
+      "sha256": "79a081d60c4f3ae1d84d66565d23623269101420ea8b5dec3c7dcef0fb51a8e2",
+      "media": {
+        "duration": "9.920000",
+        "size": "455086"
+      }
+    },
+    "original-attempt-2.webm": {
+      "bytes": 12450017,
+      "sha256": "fed80bc7505829b3ea658c17f5488ecc49cb6b76f0269dc44ec9bd374bbc9be2",
+      "media": {
+        "duration": "156.600000",
+        "size": "12450017"
+      }
+    },
+    "preview.gif": {
+      "bytes": 6705736,
+      "sha256": "fcb088f7673aaa083923b19856872dead25e8cced78d1220f66d0de09efe9ecf",
+      "media": {
+        "duration": "39.130000",
+        "size": "6705736"
+      }
+    }
+  }
+}

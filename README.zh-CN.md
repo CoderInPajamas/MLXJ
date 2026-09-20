@@ -13,6 +13,7 @@
 
 <p align="center">
   <a href="#quick-start">快速开始</a> ·
+  <a href="#blocks">游戏演示</a> ·
   <a href="#results">实测结果</a> ·
   <a href="docs/testing.zh-CN.md">怎么测试</a> ·
   <a href="#connect">联系</a>
@@ -85,6 +86,18 @@ jev-mlx decide --request examples/decision.json
 ```
 
 返回结果包含候选 ID、原始 logits、候选分数、margin、状态版本、模型身份、真实耗时和缓存信息。[Python API](docs/python-api.zh-CN.md) 包含 boolean 判断、状态更新与执行示例。
+
+<a name="blocks"></a>
+
+## 看本地模型玩方块
+
+![MLXJ Blocks：完整 20 步开发运行，4 倍速播放](docs/assets/blocks/preview.gif)
+
+**Qwen3.5-9B · 模型选择 20 次落点 · 消除 4 行 · 400 分。** GIF 以 **4 倍速**展示第二轮完整开发运行，包含推理等待。模型读取结构化棋盘和规则计算的结果，从所有合法垂直落点中选择；没有“最佳落点”算法代走。这是每块一步的回合制决策，不是看截图或逐帧控制。
+
+[本地运行游戏](docs/blocks.zh-CN.md) · [原速完整录像](docs/assets/blocks/full-run.mp4) · [全部决策记录](docs/assets/blocks/attempt-2.json)
+
+第一轮在落下第一块前就被模型拒绝了，两次尝试都保留在[中文游戏报告](docs/blocks.zh-CN.md#recorded-development-attempts)。澄清游戏指令后，第二轮达到预设的 20 块上限，决策 p50 / p95 为 **5.78 / 11.57 秒**。这是开发演示，不是冻结的游戏基准或速度优势证明。手动模式可通过静态服务器运行；新的 AI 决策需要本地 MLX 后端。
 
 <a name="results"></a>
 

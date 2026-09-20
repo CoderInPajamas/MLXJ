@@ -74,6 +74,7 @@ The deterministic game-engine checks run without a model:
 
 ```sh
 node --test tests/blocks-engine.test.mjs
+.venv/bin/python -m pytest -q -m 'not model'
 ```
 
 For an actual local-model recording, install the optional browser dependency and
@@ -83,6 +84,17 @@ Chromium in the project environment, then leave the MLX server running:
 python -m pip install -e '.[mlx,browser]'
 PLAYWRIGHT_BROWSERS_PATH=.cache/playwright python -m playwright install chromium --only-shell
 ```
+
+Browser control checks use explicit mocked responses, never real model answers:
+
+```sh
+PLAYWRIGHT_BROWSERS_PATH=.cache/playwright .venv/bin/python examples/check_blocks_browser.py
+```
+
+Verification passed: 6 Node game-rule tests, 161 core Python tests, and 13 mocked
+browser checks covering controls, stale results, refusal/error handling, row
+clearing, game over, fullscreen, and mobile layout. These are software checks,
+not game-playing accuracy measurements.
 
 In another terminal, record a fixed-seed run in an isolated browser context:
 
@@ -97,6 +109,23 @@ Use a fresh output directory for each attempt. Keep failed runs, refusals, and
 execution errors alongside successful runs. A fixed seed reproduces the piece
 sequence; it does not guarantee identical model scores across hardware or
 dependency versions.
+
+<a name="recorded-development-attempts"></a>
+
+## Recorded development attempts
+
+Two development recordings used seed 42 and Qwen3.5-9B-OptiQ-4bit on an Apple M2 Max with 64 GiB memory (MLX 0.31.2, MLX-LM 0.31.3; mixed 4/8-bit weights, group size 64).
+
+| Attempt | Decisions / executed placements | Cleared rows / score | Decision p50 / p95 |
+| --- | --- | --- | --- |
+| [Initial instruction](assets/blocks/attempt-1.json) | 1 / 0; `no_match` on the first piece | 0 / 0 | One request: 6.642 s |
+| [Clarified instruction](assets/blocks/attempt-2.json) | 20 / 20; stopped at the planned piece limit | 4 / 400 | 5.781 s / 11.573 s |
+
+After the first refusal, only the game's instruction was clarified: a move may clear no rows, and any equally good placement is acceptable. The core policy and threshold were unchanged. Both attempts are retained; this is development iteration, not a frozen quality test. The second run had no game over, browser errors, or recording errors; 20 executed placements does not mean 20 optimal choices.
+
+Percentiles use linear interpolation over all 20 `result.timing.decision_ms` values. This excludes browser animation and transport. The second run used 9–34 candidates and 1,213–2,693 prompt tokens; its first request reused the existing initial-board cache, and the next 19 reused only the 300-token stable prefix. Changing boards and many candidate descriptions require substantial new prefill, so these game decisions take seconds; the warm semantic benchmarks' millisecond results do not transfer to this workload.
+
+The [complete video](assets/blocks/full-run.mp4) preserves all 156.6 seconds at 1× speed, including inference waits. The README GIF shows the complete second attempt at **4× speed**, labeled in the image. [Provenance](assets/blocks/provenance.json) retains both originals and source hashes; the second run's runtime hashes match commit `d0d8a55`.
 
 ## Current scope
 

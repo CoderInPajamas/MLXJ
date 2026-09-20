@@ -1,0 +1,1056 @@
+{
+  "schema_version": 1,
+  "project": "MLXJ Blocks",
+  "scope": "fixed-seed illustrative development run, not a held-out benchmark",
+  "started_utc": "2026-09-20T14:55:18.929979+00:00",
+  "planned_pieces": 20,
+  "seed": 42,
+  "policy": "All legal vertical-drop placements; rule-computed facts; model chooses. No retries, hidden fallback, response substitution or answer cache.",
+  "recording": {
+    "playback_speed": 1,
+    "inference_waits_removed": false
+  },
+  "source": {
+    "revision": "5d3453a7170c13a86c10e181b09d9c6dff4f6d40",
+    "dirty": true
+  },
+  "source_files": {
+    "examples/record_showcase.py": "6e3ed01b3b0c7d737180b48230141db82adc15badb6c10c334bb22271e2148a8",
+    "pyproject.toml": "860e71ae50b7a84107b0627a3dd39290884c5794209240061c3531e2e770a681",
+    "src/jev_mlx/__init__.py": "b2aba21e21a700d9e86c4f336ab8c123c0b6bca9ea984715018bfd9303b25023",
+    "src/jev_mlx/backends/__init__.py": "3262ab71b23c6b43d5d4ad4fbec4ec8f62ba43547cdbdad717493a595a5e6220",
+    "src/jev_mlx/backends/mlx_lm.py": "9925f8da4c7b8b9ab6c879d0d2f354170365792a5f886b142ca339af5254d84c",
+    "src/jev_mlx/cli.py": "0af502fd7fa13077ec0fff465b104024ae520342e646ecc90617644f0f923ab5",
+    "src/jev_mlx/demo.py": "cbf21b0375eb9b027ba904d4f739f977627c8777d2a5113f5d2321ebffd8d8bf",
+    "src/jev_mlx/engine.py": "10aebdb027d54fbc42f49f7a249abc2f4149b613de6d063c5e91fe300ba15baa",
+    "src/jev_mlx/prompt.py": "8d0b340fb804a83ad37a6ee6a0feca39b4af061598712a2078ae1903e3c76f6b",
+    "src/jev_mlx/server.py": "51abf6e12e95b29f89b016969c4d53d15dc0414261fa257e586b9d8c82c5af0b",
+    "src/jev_mlx/session.py": "25e05c1866d9fd30360c4dc5d97cee7b7c7086570b9454434c5332ce10d06436",
+    "src/jev_mlx/static/app.js": "d223a2654b0184f883dc240e63ab4f4890ae8fc365574f4fe8d0e9d18b3fe512",
+    "src/jev_mlx/static/blocks-engine.js": "a7e74e0cfa0863155f63fb0daf4d8f0196ad7a50590ee9cbbb731e34d6520f03",
+    "src/jev_mlx/static/blocks.css": "128c4c385019694d7be205fc97cdba80030cd37c76523c85515d20b65a14d0c5",
+    "src/jev_mlx/static/blocks.html": "d094cbb3b4a95fd3a6ba54f83032df1fecd477a449b1667977cd88ab53dc5967",
+    "src/jev_mlx/static/blocks.js": "6a1ee6524089796fcdbc6c56b50904a849d8188a8699e49aa0669e3cf47ea5c1",
+    "src/jev_mlx/static/index.html": "7f0fd2ccd37fde0fd61607e0fa55e300e2a7a3f389cc767c893a8cfc5db2e77b",
+    "src/jev_mlx/static/style.css": "376b3e0ca720b04d9972ced1f4fb22cec0a929562a35821f1e9dd0b55d248b98",
+    "src/jev_mlx/types.py": "f58e3d27a2fd2ea3ace839cdef75b50aa3fe793c8a47a56ce043e21f1b4c5c94",
+    "examples/record_blocks.py": "0d7753db32fec39331e5e83c9de3429de4dda990ab607d945603f47af173adff"
+  },
+  "environment": {
+    "machine": "arm64",
+    "system": "Darwin",
+    "release": "25.6.0",
+    "python": "3.13.2",
+    "recorder_dependencies": {
+      "playwright": "1.63.0",
+      "jev-mlx": "0.1.0",
+      "mlx": "0.31.2",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.9.0",
+      "tokenizers": "0.22.2"
+    }
+  },
+  "attempts": [
+    {
+      "index": 1,
+      "before": {
+        "coordinates": "origin top-left, x right, y down",
+        "mode": "ready",
+        "seed": 42,
+        "board": [
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          ".........."
+        ],
+        "current": "O",
+        "active": {
+          "x": 4,
+          "y": 0,
+          "rotation": 0
+        },
+        "next": [
+          "Z",
+          "T",
+          "J"
+        ],
+        "score": 0,
+        "lines": 0,
+        "pieces": 0,
+        "state_version": 0,
+        "game_over": false,
+        "inFlight": false,
+        "animating": false,
+        "auto": false,
+        "backendReady": true,
+        "legal_placements": [
+          {
+            "id": "drop.O.r0.x0",
+            "x": 0,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x1",
+            "x": 1,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x2",
+            "x": 2,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x3",
+            "x": 3,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x4",
+            "x": 4,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x5",
+            "x": 5,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x6",
+            "x": 6,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x7",
+            "x": 7,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x8",
+            "x": 8,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          }
+        ],
+        "last_choice": null
+      },
+      "submitted_at_ms": 1040.381,
+      "request": {
+        "kind": "enum",
+        "state_version": 0,
+        "question": "Choose a single legal final placement for the current falling block, following the user's goal. Every candidate is executable. Candidate descriptions are exact resulting board facts, calculated by the game rules. The game supplies no recommended placement. A hole is an empty cell below an occupied cell in the same column. Smaller height and roughness mean a lower, flatter stack. Choose only from the supplied placements.",
+        "utterance": "Place this piece to clear complete rows and keep playing. Favor clearing rows, avoid leaving holes under blocks, and keep the stack low and flat.",
+        "state": {
+          "game": "MLXJ Blocks",
+          "width": 10,
+          "height": 20,
+          "coordinates": "origin top-left; x right; y down; '.' empty",
+          "board_rows": [
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            ".........."
+          ],
+          "current_piece": "O",
+          "next_pieces": [
+            "Z",
+            "T",
+            "J"
+          ],
+          "lines": 0,
+          "pieces": 0,
+          "current_metrics": {
+            "holes": 0,
+            "maxHeight": 0,
+            "aggregateHeight": 0,
+            "roughness": 0,
+            "heights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "move_rule": "Choose rotation and column before a straight vertical hard drop; no sideways movement after dropping."
+        },
+        "candidates": [
+          {
+            "id": "drop.O.r0.x0",
+            "description": "Drop O, orientation 0, leftmost column 1: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 2.",
+            "value": {
+              "rotation": 0,
+              "x": 0
+            }
+          },
+          {
+            "id": "drop.O.r0.x1",
+            "description": "Drop O, orientation 0, leftmost column 2: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 1
+            }
+          },
+          {
+            "id": "drop.O.r0.x2",
+            "description": "Drop O, orientation 0, leftmost column 3: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 2
+            }
+          },
+          {
+            "id": "drop.O.r0.x3",
+            "description": "Drop O, orientation 0, leftmost column 4: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 3
+            }
+          },
+          {
+            "id": "drop.O.r0.x4",
+            "description": "Drop O, orientation 0, leftmost column 5: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 4
+            }
+          },
+          {
+            "id": "drop.O.r0.x5",
+            "description": "Drop O, orientation 0, leftmost column 6: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 5
+            }
+          },
+          {
+            "id": "drop.O.r0.x6",
+            "description": "Drop O, orientation 0, leftmost column 7: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 6
+            }
+          },
+          {
+            "id": "drop.O.r0.x7",
+            "description": "Drop O, orientation 0, leftmost column 8: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 7
+            }
+          },
+          {
+            "id": "drop.O.r0.x8",
+            "description": "Drop O, orientation 0, leftmost column 9: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 2.",
+            "value": {
+              "rotation": 0,
+              "x": 8
+            }
+          }
+        ]
+      },
+      "http_status": 200,
+      "result": {
+        "candidate_id": null,
+        "status": "no_match",
+        "raw_selected_id": "__no_match__",
+        "raw_scores": {
+          "drop.O.r0.x0": 20.875,
+          "drop.O.r0.x1": 18.875,
+          "drop.O.r0.x2": 17.375,
+          "drop.O.r0.x3": 16.5,
+          "drop.O.r0.x4": 17.125,
+          "drop.O.r0.x5": 16.375,
+          "drop.O.r0.x6": 16.25,
+          "drop.O.r0.x7": 15.8125,
+          "drop.O.r0.x8": 20.0,
+          "__no_match__": 21.375,
+          "__abstain__": 21.375
+        },
+        "scores": {
+          "drop.O.r0.x0": 0.20229870059942384,
+          "drop.O.r0.x1": 0.027378151944021736,
+          "drop.O.r0.x2": 0.006108891427837614,
+          "drop.O.r0.x3": 0.0025465648186051154,
+          "drop.O.r0.x4": 0.004757609427698127,
+          "drop.O.r0.x5": 0.0022473355646499163,
+          "drop.O.r0.x6": 0.001983266674871754,
+          "drop.O.r0.x7": 0.0012804932061444931,
+          "drop.O.r0.x8": 0.08433064491021369,
+          "__no_match__": 0.33353417071326685,
+          "__abstain__": 0.33353417071326685
+        },
+        "margin": 0.0,
+        "state_version": 0,
+        "model": {
+          "name": "Qwen3.5-9B-OptiQ-4bit",
+          "model_type": "qwen3_5",
+          "config_sha256": "0362df988d40561f6b41a54635b943f3268f7db190f535373b7573bed8354925",
+          "tokenizer_sha256": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+          "quantization": {
+            "default_bits": 4,
+            "group_size": 64,
+            "mode": "affine",
+            "layer_bits_counts": {
+              "8": 93,
+              "4": 157
+            },
+            "sha256": "d718236e19f73d69e684b2e92ddbc5cfbadbb566f1c88295316029ddbba5745d"
+          },
+          "dependencies": {
+            "mlx": "0.31.2",
+            "mlx-lm": "0.31.3",
+            "transformers": "5.9.0",
+            "tokenizers": "0.22.2"
+          },
+          "cache_types": [
+            "ArraysCache",
+            "KVCache"
+          ]
+        },
+        "timing": {
+          "total_ms": 6641.516208997928,
+          "inference_ms": 6641.515583993169,
+          "queue_ms": 0.0006250047590583563,
+          "load_ms": 3548.261582996929,
+          "peak_memory_bytes": 6797866642,
+          "active_memory_bytes": 6301925962,
+          "decision_ms": 6641.684541013092
+        },
+        "cache": {
+          "hit": false,
+          "scope": "cold",
+          "prompt_tokens": 1189,
+          "reused_tokens": 0,
+          "prefill_tokens": 1189,
+          "system_tokens": 300,
+          "state_tokens": 1150,
+          "bytes": 163184640,
+          "entries": 2
+        },
+        "request_id": "bac85166e51b4396b1c8a9b8213b1d6e",
+        "selected_value": null
+      },
+      "response_at_ms": 7747.961,
+      "after": {
+        "coordinates": "origin top-left, x right, y down",
+        "mode": "paused",
+        "seed": 42,
+        "board": [
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          "..........",
+          ".........."
+        ],
+        "current": "O",
+        "active": {
+          "x": 4,
+          "y": 0,
+          "rotation": 0
+        },
+        "next": [
+          "Z",
+          "T",
+          "J"
+        ],
+        "score": 0,
+        "lines": 0,
+        "pieces": 0,
+        "state_version": 0,
+        "game_over": false,
+        "inFlight": false,
+        "animating": false,
+        "auto": false,
+        "backendReady": true,
+        "legal_placements": [
+          {
+            "id": "drop.O.r0.x0",
+            "x": 0,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x1",
+            "x": 1,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x2",
+            "x": 2,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x3",
+            "x": 3,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x4",
+            "x": 4,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x5",
+            "x": 5,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x6",
+            "x": 6,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x7",
+            "x": 7,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          },
+          {
+            "id": "drop.O.r0.x8",
+            "x": 8,
+            "y": 18,
+            "rotation": 0,
+            "lines": 0,
+            "holes": 0
+          }
+        ],
+        "last_choice": null
+      },
+      "execution_receipt": {
+        "executed": false,
+        "reason": "no_match"
+      }
+    }
+  ],
+  "browser_errors": [],
+  "recording_errors": [],
+  "stop_reason": "model_declined_or_error",
+  "video_saved": true,
+  "initial_state": {
+    "coordinates": "origin top-left, x right, y down",
+    "mode": "ready",
+    "seed": 42,
+    "board": [
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      ".........."
+    ],
+    "current": "O",
+    "active": {
+      "x": 4,
+      "y": 0,
+      "rotation": 0
+    },
+    "next": [
+      "Z",
+      "T",
+      "J"
+    ],
+    "score": 0,
+    "lines": 0,
+    "pieces": 0,
+    "state_version": 0,
+    "game_over": false,
+    "inFlight": false,
+    "animating": false,
+    "auto": false,
+    "backendReady": true,
+    "legal_placements": [
+      {
+        "id": "drop.O.r0.x0",
+        "x": 0,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x1",
+        "x": 1,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x2",
+        "x": 2,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x3",
+        "x": 3,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x4",
+        "x": 4,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x5",
+        "x": 5,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x6",
+        "x": 6,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x7",
+        "x": 7,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x8",
+        "x": 8,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      }
+    ],
+    "last_choice": null
+  },
+  "game_transcript": [
+    {
+      "kind": "decision",
+      "status": "complete",
+      "started_at": "2026-09-20T14:55:20.071Z",
+      "request": {
+        "kind": "enum",
+        "state_version": 0,
+        "question": "Choose a single legal final placement for the current falling block, following the user's goal. Every candidate is executable. Candidate descriptions are exact resulting board facts, calculated by the game rules. The game supplies no recommended placement. A hole is an empty cell below an occupied cell in the same column. Smaller height and roughness mean a lower, flatter stack. Choose only from the supplied placements.",
+        "utterance": "Place this piece to clear complete rows and keep playing. Favor clearing rows, avoid leaving holes under blocks, and keep the stack low and flat.",
+        "state": {
+          "game": "MLXJ Blocks",
+          "width": 10,
+          "height": 20,
+          "coordinates": "origin top-left; x right; y down; '.' empty",
+          "board_rows": [
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            "..........",
+            ".........."
+          ],
+          "current_piece": "O",
+          "next_pieces": [
+            "Z",
+            "T",
+            "J"
+          ],
+          "lines": 0,
+          "pieces": 0,
+          "current_metrics": {
+            "holes": 0,
+            "maxHeight": 0,
+            "aggregateHeight": 0,
+            "roughness": 0,
+            "heights": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "move_rule": "Choose rotation and column before a straight vertical hard drop; no sideways movement after dropping."
+        },
+        "candidates": [
+          {
+            "id": "drop.O.r0.x0",
+            "description": "Drop O, orientation 0, leftmost column 1: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 2.",
+            "value": {
+              "rotation": 0,
+              "x": 0
+            }
+          },
+          {
+            "id": "drop.O.r0.x1",
+            "description": "Drop O, orientation 0, leftmost column 2: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 1
+            }
+          },
+          {
+            "id": "drop.O.r0.x2",
+            "description": "Drop O, orientation 0, leftmost column 3: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 2
+            }
+          },
+          {
+            "id": "drop.O.r0.x3",
+            "description": "Drop O, orientation 0, leftmost column 4: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 3
+            }
+          },
+          {
+            "id": "drop.O.r0.x4",
+            "description": "Drop O, orientation 0, leftmost column 5: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 4
+            }
+          },
+          {
+            "id": "drop.O.r0.x5",
+            "description": "Drop O, orientation 0, leftmost column 6: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 5
+            }
+          },
+          {
+            "id": "drop.O.r0.x6",
+            "description": "Drop O, orientation 0, leftmost column 7: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 6
+            }
+          },
+          {
+            "id": "drop.O.r0.x7",
+            "description": "Drop O, orientation 0, leftmost column 8: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 4.",
+            "value": {
+              "rotation": 0,
+              "x": 7
+            }
+          },
+          {
+            "id": "drop.O.r0.x8",
+            "description": "Drop O, orientation 0, leftmost column 9: clears 0 rows; resulting holes 0, max height 2, total column heights 4, surface roughness 2.",
+            "value": {
+              "rotation": 0,
+              "x": 8
+            }
+          }
+        ]
+      },
+      "board_before": [
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        ".........."
+      ],
+      "result": {
+        "candidate_id": null,
+        "status": "no_match",
+        "raw_selected_id": "__no_match__",
+        "raw_scores": {
+          "drop.O.r0.x0": 20.875,
+          "drop.O.r0.x1": 18.875,
+          "drop.O.r0.x2": 17.375,
+          "drop.O.r0.x3": 16.5,
+          "drop.O.r0.x4": 17.125,
+          "drop.O.r0.x5": 16.375,
+          "drop.O.r0.x6": 16.25,
+          "drop.O.r0.x7": 15.8125,
+          "drop.O.r0.x8": 20,
+          "__no_match__": 21.375,
+          "__abstain__": 21.375
+        },
+        "scores": {
+          "drop.O.r0.x0": 0.20229870059942384,
+          "drop.O.r0.x1": 0.027378151944021736,
+          "drop.O.r0.x2": 0.006108891427837614,
+          "drop.O.r0.x3": 0.0025465648186051154,
+          "drop.O.r0.x4": 0.004757609427698127,
+          "drop.O.r0.x5": 0.0022473355646499163,
+          "drop.O.r0.x6": 0.001983266674871754,
+          "drop.O.r0.x7": 0.0012804932061444931,
+          "drop.O.r0.x8": 0.08433064491021369,
+          "__no_match__": 0.33353417071326685,
+          "__abstain__": 0.33353417071326685
+        },
+        "margin": 0,
+        "state_version": 0,
+        "model": {
+          "name": "Qwen3.5-9B-OptiQ-4bit",
+          "model_type": "qwen3_5",
+          "config_sha256": "0362df988d40561f6b41a54635b943f3268f7db190f535373b7573bed8354925",
+          "tokenizer_sha256": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+          "quantization": {
+            "default_bits": 4,
+            "group_size": 64,
+            "mode": "affine",
+            "layer_bits_counts": {
+              "4": 157,
+              "8": 93
+            },
+            "sha256": "d718236e19f73d69e684b2e92ddbc5cfbadbb566f1c88295316029ddbba5745d"
+          },
+          "dependencies": {
+            "mlx": "0.31.2",
+            "mlx-lm": "0.31.3",
+            "transformers": "5.9.0",
+            "tokenizers": "0.22.2"
+          },
+          "cache_types": [
+            "ArraysCache",
+            "KVCache"
+          ]
+        },
+        "timing": {
+          "total_ms": 6641.516208997928,
+          "inference_ms": 6641.515583993169,
+          "queue_ms": 0.0006250047590583563,
+          "load_ms": 3548.261582996929,
+          "peak_memory_bytes": 6797866642,
+          "active_memory_bytes": 6301925962,
+          "decision_ms": 6641.684541013092
+        },
+        "cache": {
+          "hit": false,
+          "scope": "cold",
+          "prompt_tokens": 1189,
+          "reused_tokens": 0,
+          "prefill_tokens": 1189,
+          "system_tokens": 300,
+          "state_tokens": 1150,
+          "bytes": 163184640,
+          "entries": 2
+        },
+        "request_id": "bac85166e51b4396b1c8a9b8213b1d6e",
+        "selected_value": null
+      },
+      "receipt": {
+        "executed": false,
+        "reason": "no_match"
+      },
+      "completed_at": "2026-09-20T14:55:26.722Z",
+      "elapsed_ms": 6651.5,
+      "board_after": [
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        "..........",
+        ".........."
+      ],
+      "game_after": {
+        "seed": 42,
+        "pieces": 0,
+        "lines": 0,
+        "score": 0,
+        "game_over": false,
+        "state_version": 0
+      }
+    }
+  ],
+  "final_state": {
+    "coordinates": "origin top-left, x right, y down",
+    "mode": "paused",
+    "seed": 42,
+    "board": [
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      "..........",
+      ".........."
+    ],
+    "current": "O",
+    "active": {
+      "x": 4,
+      "y": 0,
+      "rotation": 0
+    },
+    "next": [
+      "Z",
+      "T",
+      "J"
+    ],
+    "score": 0,
+    "lines": 0,
+    "pieces": 0,
+    "state_version": 0,
+    "game_over": false,
+    "inFlight": false,
+    "animating": false,
+    "auto": false,
+    "backendReady": true,
+    "legal_placements": [
+      {
+        "id": "drop.O.r0.x0",
+        "x": 0,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x1",
+        "x": 1,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x2",
+        "x": 2,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x3",
+        "x": 3,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x4",
+        "x": 4,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x5",
+        "x": 5,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x6",
+        "x": 6,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x7",
+        "x": 7,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      },
+      {
+        "id": "drop.O.r0.x8",
+        "x": 8,
+        "y": 18,
+        "rotation": 0,
+        "lines": 0,
+        "holes": 0
+      }
+    ],
+    "last_choice": null
+  },
+  "video_sha256": "79a081d60c4f3ae1d84d66565d23623269101420ea8b5dec3c7dcef0fb51a8e2",
+  "elapsed_ms": 9426.688
+}
