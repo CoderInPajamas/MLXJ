@@ -1,6 +1,6 @@
 # JEV MLX implementation plan
 
-[Back to home](../README.en.md)
+[Back to home](../README.md)
 
 Status: 0.1 implemented. The package, versioned sessions, localhost service, real-model browser demo, synthetic fixtures, and measurement tools are present. Actual completed checks and limitations are recorded in [results](results.md); a source implementation or skipped test alone does not establish model compatibility.
 

@@ -1,6 +1,6 @@
 # Recorded browser decisions
 
-[Back to home](../../README.en.md)
+[Back to home](../../README.md)
 
 Open `index.html` directly in a browser, including through `file://`. This is an
 offline, bilingual **recorded replay**, not a live model demonstration. It needs
@@ -11,7 +11,7 @@ existing public [browser transcript](../assets/browser-demo/browser-transcript.j
 It preserves the original English utterances, candidate IDs, logits, scores,
 measured timings, cache information, and execution receipts. The interface follows
 the language selected on the homepage (`?lang=en` or `?lang=zh-CN`); opening the
-file without a language defaults to Chinese. Recorded inputs and results are
+file without a language defaults to English. Recorded inputs and results are
 unchanged in either language. Missing fields remain missing.
 
 The original artifacts retain the project's previous name. They have not been

@@ -1,6 +1,6 @@
 # Model compatibility
 
-[Back to home](../README.en.md)
+[Back to home](../README.md)
 
 Compatibility means the checkpoint loads through the official MLX-LM implementation,
 its tokenizer supports verified one-token codes, real semantic inference runs, and

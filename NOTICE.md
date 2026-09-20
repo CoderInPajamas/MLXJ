@@ -1,6 +1,6 @@
 # Attribution and scope
 
-[Back to home](README.en.md)
+[Back to home](README.md)
 
 JEV MLX is independently maintained under MIT. The project name and typed,
 state-aware decision interface are inspired by [TypeSafe AI's Jev](https://docs.typesafe.ai/).

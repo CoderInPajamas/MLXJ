@@ -6,7 +6,7 @@ const assetRoot = "../assets/browser-demo/";
 const scenes = capture.cases.map((record) => ({name:record.name,record}));
 scenes.push({name:"state-change-protection",record:capture.state_change_check,concurrency:true});
 let currentIndex = 3;
-const language = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "zh";
+const language = new URLSearchParams(location.search).get("lang") === "zh-CN" ? "zh" : "en";
 const byId = (id) => document.getElementById(id);
 const escapeHTML = (value) => String(value).replace(/[&<>"']/g,(ch) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 
@@ -124,8 +124,8 @@ function renderLanguage() {
     else element.textContent = text[key];
   });
   const links = language === "en"
-    ? {home:"../../README.en.md",evaluation:"../results.md",live:"../http-and-demo.md"}
-    : {home:"../../README.md",evaluation:"../results.zh-CN.md",live:"../http-and-demo.zh-CN.md"};
+    ? {home:"../../README.md",evaluation:"../results.md",live:"../http-and-demo.md"}
+    : {home:"../../README.zh-CN.md",evaluation:"../results.zh-CN.md",live:"../http-and-demo.zh-CN.md"};
   document.querySelector(".brand").href = links.home;
   document.querySelector('[data-i18n="homeLink"]').href = links.home;
   document.querySelector('[data-i18n="evaluationLink"]').href = links.evaluation;

@@ -1,6 +1,6 @@
 # 测试方法与实测结果
 
-[返回项目首页](../README.md)
+[返回项目首页](../README.zh-CN.md)
 
 [评测协议](evaluation.zh-CN.md) · [历史完整结果](results.zh-CN.md) · [六领域扩展结果](extended-results.zh-CN.md) · [新增评测协议](extended-evaluation-protocol.zh-CN.md) · [Gemma 原始集实测](gemma4-results.zh-CN.md) · [支持模型](models.zh-CN.md)
 

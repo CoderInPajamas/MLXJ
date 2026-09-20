@@ -1,6 +1,6 @@
 # Reproducing evaluations
 
-[Back to home](../README.en.md)
+[Back to home](../README.md)
 
 The [additional-run protocol](extended-evaluation-protocol.md) covers Gemma and
 the separate 12-dev/36-test extension. The completed three-model, four-method

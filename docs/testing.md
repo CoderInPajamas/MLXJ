@@ -1,6 +1,6 @@
 # Test methods and measured results
 
-[Home](../README.en.md) · [Evaluation protocol](evaluation.md) · [Complete historical results](results.md) · [Six-domain extended results](extended-results.md) · [Additional evaluation protocol](extended-evaluation-protocol.md) · [Gemma original-suite measurements](gemma4-results.md) · [Supported models](models.md)
+[Home](../README.md) · [Evaluation protocol](evaluation.md) · [Complete historical results](results.md) · [Six-domain extended results](extended-results.md) · [Additional evaluation protocol](extended-evaluation-protocol.md) · [Gemma original-suite measurements](gemma4-results.md) · [Supported models](models.md)
 
 The latest core suite has **161 passing tests**. The three-model, four-method comparison on the six-domain extended suite has completed the same-page/fresh-utterance evaluation and passed its evidence audit. Only direct scoring is listed below; see the [extended results](extended-results.md) for all baselines, rejection rates, coverage, format failures, memory, and raw records.
 

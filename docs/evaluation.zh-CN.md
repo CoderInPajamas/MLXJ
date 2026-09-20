@@ -1,6 +1,6 @@
 # 复现评测
 
-[返回项目首页](../README.md)
+[返回项目首页](../README.zh-CN.md)
 
 [新增实验协议](extended-evaluation-protocol.zh-CN.md)涵盖 Gemma，以及独立的 12 条开发用例、36 条测试用例扩展集。已完成的三模型、四方法同页面比较见[扩展结果](extended-results.zh-CN.md)：直接评分准确率为 Gemma 31/36、Qwen 30/36、GLM 21/36，错误 enum 动作分别为 1/30、1/30 和 8/30。布尔回答单独报告。Gemma 的扩展缓存阶段已完成全部 108 次决策和 72 次缓存／全新计算比较；所有比较通过，三个条件均保持 31/36 正确、一次错误 enum 动作。新增实验计划中的 1,096 次测量已全部完成。单独的 [Gemma 原始测试集结果](gemma4-results.zh-CN.md)为 26/28 正确，其中包含一次筛选后首项选择错误（26 条 enum 请求中的 1 条）。最新[核心检查](../benchmarks/results/extended-release-checks/core-tests.json)通过 161 项测试，无失败或错误（pytest 3.76 秒；JUnit 测试集时间 3.752 秒）。
 

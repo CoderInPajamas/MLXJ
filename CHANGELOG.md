@@ -1,14 +1,15 @@
 # Changelog
 
-[Back to home](README.en.md)
+[Back to home](README.md)
 
 ## 0.1.0 — prepared release
 
 Initial experimental JEV MLX implementation. Public repository/registry
 publication is tracked separately from preparing this source release.
 
-- Chinese-first README with an English switch, original title graphics, a
-  Chinese testing guide, and an owner-provided Xiaohongshu profile link/card.
+- English-first README with a separate Chinese homepage, complete documentation
+  in both languages, original title graphics, and owner-provided X and Xiaohongshu
+  links. Language selection sits below the title/navigation area; X appears first.
   MLXJ is a candidate display name in this preview; package/API names remain
   `jev-mlx` / `jev_mlx` pending a naming decision.
 - An offline, bilingual recorded browser replay that preserves all 16 decisions

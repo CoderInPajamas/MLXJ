@@ -1,58 +1,58 @@
-<p align="center"><strong>简体中文</strong> · <a href="README.en.md">English</a></p>
-
 <p align="center">
-  <img src="docs/assets/mlxj-hero.zh-CN.svg" alt="MLXJ — 受 JEV 启发，基于 MLX 的本地语义决策" width="1280" />
+  <img src="docs/assets/mlxj-hero.en.svg" alt="MLXJ — JEV-inspired local decisions, powered by MLX" width="1280" />
 </p>
 
-<p align="center"><strong>当前状态 + 一句话 → 一个允许的选择。</strong><br />受 JEV 启发，为 Apple Silicon 构建。</p>
+<p align="center"><strong>Current state + a sentence → one allowed choice.</strong><br />JEV-inspired local decisions for Apple Silicon.</p>
 
 <p align="center">
   <img src="docs/assets/badges/apple-silicon.svg" alt="Apple Silicon" />
   <img src="docs/assets/badges/python.svg" alt="Python 3.11+" />
-  <a href="LICENSE.zh-CN.md"><img src="docs/assets/badges/license.svg" alt="MIT License" /></a>
-  <a href="CHANGELOG.zh-CN.md"><img src="docs/assets/badges/release.svg" alt="0.1 experimental, not published" /></a>
+  <a href="LICENSE"><img src="docs/assets/badges/license.svg" alt="MIT License" /></a>
+  <a href="CHANGELOG.md"><img src="docs/assets/badges/release.svg" alt="0.1 experimental, not published" /></a>
 </p>
 
 <p align="center">
-  <a href="#quick-start">快速开始</a> ·
-  <a href="#results">实测结果</a> ·
-  <a href="docs/testing.zh-CN.md">怎么测试</a> ·
-  <a href="#replay">静态演示</a> ·
-  <a href="#connect">联系</a>
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#results">Measured results</a> ·
+  <a href="docs/evaluation.md">Methodology</a> ·
+  <a href="#replay">Static replay</a> ·
+  <a href="#connect">Connect & support</a>
 </p>
 
 <p align="center">
-  <a href="https://xhslink.com/m/18bjTTf180W"><img src="docs/assets/badges/follow-xiaohongshu.svg" alt="关注小红书：里奥YetAnotherLeo，小红书号6236648830" /></a>
-  <a href="https://x.com/YetAnotherLeo"><img src="docs/assets/badges/follow-x.svg" alt="关注 X / Twitter：@YetAnotherLeo" /></a>
+  <a href="https://x.com/YetAnotherLeo"><img src="docs/assets/badges/follow-x.svg" alt="Follow @YetAnotherLeo on X / Twitter" /></a>
+  <a href="https://xhslink.com/m/18bjTTf180W"><img src="docs/assets/badges/follow-xiaohongshu.svg" alt="Follow 里奥YetAnotherLeo on Xiaohongshu" /></a>
 </p>
+
+<p align="center"><strong>English</strong> · <a href="README.zh-CN.md">简体中文</a></p>
 
 ---
 
-## 把自然语言接进你的应用
+## Connect language to your application
 
-**MLXJ** 根据当前应用状态、用户的话和动态候选动作，让本地模型选出一个稳定的业务 ID；没有合适选项时，可以返回“不匹配”或“需要澄清”。
+**MLXJ** uses the current application state, a user utterance, and dynamic allowed choices to select a stable business ID with a local model. No-match and abstention are explicit outcomes.
 
-它适合嵌入你已有的工具：切换一个入口、选择当前列表里的内容、暂停播放器，或做一个 boolean / enum 判断。模型在 Mac 上运行，权重由你选择；无需先训练新模型。
+Embed it in an existing tool: open a feature, select a visible item, pause a player, or answer a boolean / enum question. Inference runs on your Mac with an existing checkpoint; no training is required.
 
-> **命名预览：** MLXJ 是本次首页的候选名称。当前可运行代码的发行包与命令仍为 `jev-mlx`，Python 导入为 `jev_mlx`。0.1 是实验版，尚未公开发布到 PyPI。
+> **Naming preview:** MLXJ is the candidate name used in this README preview. The working distribution and CLI remain `jev-mlx`, with Python imports from `jev_mlx`. Version 0.1 is experimental and has not been published to PyPI.
 
-| 能力 | 在应用里意味着什么 |
+| Capability | What it means for your application |
 | :--- | :--- |
-| **动态候选** | 页面变了，允许动作跟着变；业务 ID 由应用定义。 |
-| **明确拒绝** | `no_match` 和 `abstain` 是正式结果，不必把每句话硬变成操作。 |
-| **版本保护** | 推理期间状态变化，旧结果不能拿去执行；执行授权只能使用一次。 |
-| **前缀复用** | 复用稳定上下文，每句新话仍实际推理；不缓存最终答案。 |
-| **便于接入** | 提供 Python API、CLI 和 localhost HTTP 服务。 |
+| **Dynamic choices** | Update allowed actions with the page; keep your own stable business IDs. |
+| **Explicit rejection** | Return `no_match` or `abstain` when an action is not appropriate. |
+| **Version protection** | Reject stale decisions after state changes; consume execution authorization once. |
+| **Prefix reuse** | Reuse stable context while evaluating every new utterance. Never cache final answers. |
+| **Small integration surface** | Python API, CLI, and a localhost HTTP service. |
 
-模型会犯错。候选分数用于排序，**不是经过校准的正确概率**；状态保护也不能替代语义判断。
+Models can make mistakes. Candidate scores rank choices and are **not calibrated probabilities of correctness**. State guards do not establish semantic correctness.
 
 <a name="quick-start"></a>
 
-## 快速开始
+## Quick start
 
-需要 **Apple Silicon Mac、原生 ARM Python 3.11+**，以及本地 MLX-LM 模型权重。建议先从已验证的 Qwen 检查点开始，具体版本见[支持模型](docs/models.zh-CN.md)。
+Requires **Apple Silicon, native ARM Python 3.11+**, and a local MLX-LM checkpoint. Start with the verified Qwen checkpoint in the [model table](docs/models.md).
 
-在此仓库目录内安装：
+From this checkout:
 
 ```sh
 python3 -m venv .venv
@@ -77,123 +77,123 @@ print(result.status, result.candidate_id)
 print(result.margin, result.timing)
 ```
 
-命令行使用同一份请求约定：
+The CLI uses the same request contract:
 
 ```sh
 jev-mlx decide --request examples/decision.json
 ```
 
-返回结果包含候选 ID、原始 logits、候选分数、margin、状态版本、模型身份、真实耗时和缓存信息。[Python API](docs/python-api.zh-CN.md) 包含 boolean 判断、状态更新与执行示例。
+Results include the candidate ID, raw logits, candidate scores, margin, state version, model identity, actual timing, and cache details. See the [Python API](docs/python-api.md) for booleans, state updates, and versioned execution.
 
 <a name="results"></a>
 
-## 实测结果，连同局限一起公开
+## Measurements, with their limits
 
-**新增六领域测试 · Apple M2 Max · 64 GiB · 36 个虚构英文场景。**
+**New six-domain evaluation · Apple M2 Max · 64 GiB · 36 fictional English cases.**
 
-覆盖文档、日历草稿、文件列表、音乐队列、商品比较和设置。三个模型使用相同的冻结输入、提示词和阈值，每个模型比较四种输出方法。下面是直接评分结果：
+Documents, calendar drafts, files, music queues, product comparisons, and settings. Three models receive the same frozen inputs, semantic prompt, and threshold, with four output methods each. These are the direct-scoring results:
 
-| 本地检查点 | 严格正确 / 36 | 动作误选 / 30 | 同页新话语 p50 / p95 |
+| Local checkpoint | Exact decisions / 36 | Wrong actions / 30 | Same-page p50 / p95 |
 | :--- | ---: | ---: | ---: |
-| Qwen3.5-9B-OptiQ-4bit | 30 / 36（83.3%） | 1 / 30 | 194.8 / 407.5 ms |
-| Gemma 4 26B-A4B MoE | 31 / 36（86.1%） | 1 / 30 | 168.9 / 556.5 ms |
-| GLM-4.7-Flash-4bit | 21 / 36（58.3%） | 8 / 30 | 170.6 / 330.5 ms |
+| Qwen3.5-9B-OptiQ-4bit | 30 / 36 (83.3%) | 1 / 30 | 194.8 / 407.5 ms |
+| Gemma 4 26B-A4B MoE | 31 / 36 (86.1%) | 1 / 30 | 168.9 / 556.5 ms |
+| GLM-4.7-Flash-4bit | 21 / 36 (58.3%) | 8 / 30 | 170.6 / 330.5 ms |
 
-36 题包含 30 个 enum 请求和 6 个 boolean 判断；动作误选只统计 enum。**这些是模型已加载、页面前缀可复用时的耗时**，不代表启动或任意页面上的请求速度。全部方法的准确率、拒绝率、动作覆盖率、布尔判断、内存和失败见[扩展评测报告](docs/extended-results.zh-CN.md)。
+The 36 cases contain 30 enum requests and six boolean decisions; action errors count enum requests only. **Timings require loaded weights and a reusable page prefix.** They do not describe startup or arbitrary new pages. See the [extended report](docs/extended-results.md) for every method, rejection and coverage rates, boolean quality, memory, and failures.
 
-Gemma 选错了一次队列首项，Qwen 选错了一次最长续航产品；GLM 的动作错误更多。原来小样本中的零误操作没有延续到新场景。**当前结果不能支持无人确认的通用动作执行，也不代表任意模型兼容或固定 100 ms。**
+Gemma selected the wrong queue item; Qwen selected the wrong longest-battery product. GLM made more action errors. The earlier small sample's zero-error observation did not carry over to new cases. **These results do not establish reliable unattended actions, arbitrary-model compatibility, or fixed 100 ms performance.**
 
 <details>
-<summary><strong>原始 28 题：保留此前结果</strong></summary>
+<summary><strong>Original 28 cases: previous results retained</strong></summary>
 
-**Apple M2 Max · 64 GiB · 28 条虚构英文测试场景 · 修订后的缓存实现。**
+**Apple M2 Max · 64 GiB · 28 fictional English test cases · revised cache runtime.**
 
-| 本地检查点 | 严格正确 | 动作误选 / enum 请求 | 同页面新话语 p50 / p95 |
+| Local checkpoint | Exact decisions | Wrong actions / enum requests | Same-page p50 / p95 |
 | :--- | ---: | ---: | ---: |
-| Qwen3.5-9B-OptiQ-4bit | **25 / 28（89.3%）** | **0 / 26** | **171.7 / 176.4 ms** |
-| GLM-4.7-Flash-4bit | 14 / 28（50.0%） | 2 / 26 | 147.8 / 170.6 ms |
-| Gemma 4 26B-A4B MoE · mixed 4/8-bit | 26 / 28（92.9%） | 1 / 26 | 134.9 / 283.9 ms |
+| Qwen3.5-9B-OptiQ-4bit | **25 / 28 (89.3%)** | **0 / 26** | **171.7 / 176.4 ms** |
+| GLM-4.7-Flash-4bit | 14 / 28 (50.0%) | 2 / 26 | 147.8 / 170.6 ms |
+| Gemma 4 26B-A4B MoE · mixed 4/8-bit | 26 / 28 (92.9%) | 1 / 26 | 134.9 / 283.9 ms |
 
-准确率包含 26 个 enum 请求和 2 个 boolean 判断；动作误选只统计 enum。三行来自各自完整的测量记录，不能拼接为算法提速倍数。Gemma 的四种方法、三种缓存条件和全部失败见[专项报告](docs/gemma4-results.zh-CN.md)。
+Accuracy includes 26 enum requests and two boolean decisions; action errors count enum requests only. These are separate recorded runs, not inputs to a cross-revision algorithm speedup claim. The [Gemma report](docs/gemma4-results.md) includes all four methods, three cache conditions, and every failure.
 
-这里的时间要求**模型已经加载，且页面前缀可复用**。Qwen 在 KV 冷状态下的 p50 是 **2,159.9 ms**，页面更新后的首次决策是 **1,050.2 ms**，因此不能理解成每次请求都约 170 ms。
+These timings require **loaded weights and a reusable page prefix**. Qwen's KV-cold p50 was **2,159.9 ms**; its first decision after a page update was **1,050.2 ms**. About 170 ms is not a per-request guarantee.
 
-Qwen 在原始集的 3 个未通过场景包括拒绝状态区分和排序后的选项并列。Gemma 在“筛选后的第一个”上选错内容；GLM 也出现错误动作。原始集和扩展集分别报告，不合并为一个未见测试成绩。
+Qwen's three original-suite misses include rejection-status distinctions and a tied choice after reordering. Gemma selected the wrong filtered first item; GLM also produced incorrect actions. The original and extended sets are reported separately, not combined into one unseen-test score.
 
 </details>
 
-- **161 项核心测试通过**：请求约定、状态更新、过期结果、单次执行授权、HTTP 等。它们不等于模型语义准确率。
-- **168 / 168 原始场景缓存比较通过**：三个模型各 28 场景 × 2 种复用条件，和全新计算对照。
-- **72 / 72 新场景缓存比较通过**：Gemma 另测 36 场景 × 2 种复用条件，最大 logit 与分数差均为 0；不代表没有语义错误。
-- **浏览器记录完成 16 个场景检查**：包含真实 DOM 点击与执行回执；拒绝场景允许两种拒绝状态，标准与上面的严格质量集不同。
+- **161 core tests passed:** contracts, state updates, stale decisions, single-use authorization, HTTP, and related behavior. These do not measure model semantics.
+- **168 / 168 original-suite cache comparisons passed:** three models × 28 cases × two reuse conditions, each compared with fresh computation.
+- **72 / 72 extended-suite cache comparisons passed:** Gemma's 36 new cases × two reuse conditions, with observed maximum logit and score differences of 0. Numerical agreement does not establish semantic correctness.
+- **16 recorded browser scenarios checked:** actual DOM clicks and execution receipts. Decline cases accept either rejection outcome, unlike the strict quality set above.
 
 <details>
-<summary><strong>我们具体怎么测？点击展开</strong></summary>
+<summary><strong>How was this tested?</strong></summary>
 
-1. 从零编写原始 **16 条开发 + 28 条测试**，再增加独立的 **12 条开发 + 36 条测试**；冻结哈希，不导出任何生产数据。首版只验证英文输入。
-2. 原始提示词在开发集调整后冻结。本次三个模型沿用同一提示词和阈值，没有根据新测试结果调整。
-3. 比较直接候选评分、单编号、业务 ID JSON 和编号 JSON 四种方法；保留原始失败输出。
-4. 分别记录进程启动、权重已加载但 KV 冷、同页面新话语、页面更新后首次决策。计时等待 MLX 计算完成。
-5. 单独评估模型选择与执行器行为。执行器拦住错误，仍然是模型选错。
+1. Write the original **16 dev / 28 test** cases and the separate **12 dev / 36 test** extension from scratch. Freeze their hashes; use no production exports. Version 0.1 validates English inputs only.
+2. Freeze the original development-refined semantic prompt and threshold. This three-model campaign keeps them unchanged after seeing new test outputs.
+3. Compare direct scoring, one-code generation, business-ID JSON, and option-code JSON. Retain every failed output.
+4. Measure process startup, loaded weights with cold KV, a new utterance on the same page, and the first decision after a page update. Synchronize MLX work before stopping the timer.
+5. Score model choice separately from execution. A guard blocking a bad action does not make the model correct.
 
-同一批 28 条场景在多个缓存条件下重复运行，不算更多独立样本。历史一编号基线达到 26/28，严格质量略高于直接返回结果；直接评分并未在所有质量和延迟指标上占优。补充 JSON 格式实验受早期测试发现启发，单独标注，不能当作完全未见的测试结果。
+Repeating 28 cases under several cache conditions does not create more independent samples. The historical one-code baseline reached 26/28, slightly better than the direct returned decision. Direct scoring did not dominate every quality and latency metric. A supplementary JSON-format experiment was informed by earlier test results and is explicitly labeled as such.
 
-完整的 p50/p95、拒绝率、可执行覆盖率、内存、模型版本、输入规模、复现命令，以及原始缓存失败记录都在[中文测试说明](docs/testing.zh-CN.md)和[完整报告](docs/results.zh-CN.md)。不同代码版本的时间不能拼起来计算提速倍数。
+The [full report](docs/results.md) includes p50/p95, rejection, executable coverage, memory, versions, input sizes, reproduction commands, and original cache failures. Do not combine timings from different code revisions to calculate a speedup. See the [testing guide](docs/testing.md) for a step-by-step explanation.
 
 </details>
 
 <a name="replay"></a>
 
-## 无需安装模型，也能看一次真实记录
+## Explore a real recording without installing a model
 
-提供一个**完全静态的录制回放**：选场景，查看当时的话语、候选、模型选择、耗时和实际执行回执。它读取已保存的测试记录，无服务器、无模型、无网络依赖。
+The **fully static recorded replay** lets you choose a scenario and inspect its original utterance, candidates, model choice, timing, and execution receipt. It uses saved test evidence and needs no server, model, or external network.
 
-**[打开静态回放文件](docs/demo/index.html?lang=zh-CN)** · [查看原始浏览器记录](docs/assets/browser-demo/browser-transcript.json)
+**[Open the static replay file](docs/demo/index.html?lang=en)** · [Original browser transcript](docs/assets/browser-demo/browser-transcript.json)
 
-GitHub 会把 HTML 文件显示为源码。克隆或下载仓库后，用浏览器打开 `docs/demo/index.html` 即可运行；也可以在确定公开仓库后托管到静态站点。
+GitHub displays HTML files as source. Clone or download the repository, then open `docs/demo/index.html` in a browser. It can also be hosted on a static site once a public destination is chosen.
 
 <details>
-<summary><strong>查看真实浏览器截图与动态推理的区别</strong></summary>
+<summary><strong>See the original screenshot and the live-inference boundary</strong></summary>
 
-![真实本地浏览器测试截图，采集时使用旧项目名](docs/assets/browser-demo/03b-player-control.png)
+![Real local browser test, captured under the former project name](docs/assets/browser-demo/03b-player-control.png)
 
-截图和录制发生在项目更名前，保留原貌。静态回放不接受新的自由文本推理，也不重新操作桌面。真正输入新话语、让本地模型操作模拟页面，需要在 Apple Silicon 上启动 `jev-mlx serve`，具体步骤见[本地 HTTP 与浏览器集成](docs/http-and-demo.zh-CN.md)。
+The screenshot and recording retain their original branding. The static replay does not infer new free-text requests or operate the desktop again. Live decisions require `jev-mlx serve` on Apple Silicon; see the [local HTTP and browser guide](docs/http-and-demo.md).
 
-浏览器集成只操作这个虚构应用中预先允许的 DOM 控件，不是任意网站导航或视觉电脑操控。
+The browser integration operates allowlisted DOM controls in a fictional application. It is not arbitrary website navigation or visual computer use.
 
 </details>
 
-## 它如何做出选择
+## How a choice is made
 
 ```text
-应用状态 + 自然语言 + 允许动作
-              │
-        官方 MLX-LM 模型
-              │
-       最后位置的候选 logits
-              │
-   selected(id) / no_match / abstain
-              │
-    应用校验版本 → 执行 → 回执
+Application state + utterance + allowed choices
+                       │
+               Official MLX-LM model
+                       │
+           Final-position candidate logits
+                       │
+          selected(id) / no_match / abstain
+                       │
+       Application version check → execution → receipt
 ```
 
-候选映射为经过 tokenizer 验证的单 token 编码，再映射回业务 ID。直接评分读取因果模型的下一 token logits，不生成 JSON 续写；没有重写官方量化输出头。混合缓存只保留完整、可复用的前缀边界。
+Choices map to tokenizer-verified single-token codes, then back to business IDs. Direct scoring reads a causal model's next-token logits without generating a JSON continuation. It retains the official quantized output head. Hybrid caches reuse only complete, valid prefix boundaries.
 
-实现细节见[架构](docs/architecture.zh-CN.md)与[官方框架审查](docs/framework-audit.zh-CN.md)。首版范围是**英文、单轮、单步选择**，不包含通用聊天、多步规划、任意参数生成、视觉理解、训练或 GPU 批处理。**中文文档不表示中文模型能力已经验证。**
+See the [architecture](docs/architecture.md) and [framework audit](docs/framework-audit.md). Version 0.1 focuses on **English, single-turn, single-step choices**. General chat, multi-step planning, arbitrary arguments, vision, training, and GPU batching are outside its scope. **Chinese documentation does not mean Chinese model behavior has been validated.**
 
-## 继续阅读
+## Documentation
 
-| 文档 | 内容 |
+| Guide | Contents |
 | :--- | :--- |
-| [中文测试说明](docs/testing.zh-CN.md) | 怎么测、测到了什么、失败在哪里、如何复现 |
-| [Python API](docs/python-api.zh-CN.md) | enum / boolean、返回字段、版本化执行 |
-| [支持模型](docs/models.zh-CN.md) | 检查点、量化、依赖、许可证与限制 |
-| [评测方法](docs/evaluation.zh-CN.md) · [完整结果](docs/results.zh-CN.md) | 全部基线、原始记录、版本与失败 |
-| [本地 HTTP](docs/http-and-demo.zh-CN.md) | CLI、接口和真实浏览器操作 |
-| [贡献指南](CONTRIBUTING.zh-CN.md) · [发布说明](docs/releasing.zh-CN.md) | 开发、构建、发布边界 |
+| [Python API](docs/python-api.md) | Enum / boolean, result fields, and versioned execution |
+| [Model compatibility](docs/models.md) | Checkpoints, quantization, dependencies, licenses, and limits |
+| [Evaluation](docs/evaluation.md) · [Results](docs/results.md) | All baselines, raw evidence, versions, and failures |
+| [Testing guide](docs/testing.md) | Methodology, results, and reproduction |
+| [Local HTTP](docs/http-and-demo.md) | CLI, service, and actual browser operations |
+| [Contributing](CONTRIBUTING.md) · [Releasing](docs/releasing.md) | Development, builds, and publication |
 
 <details>
-<summary><strong>运行开发检查</strong></summary>
+<summary><strong>Run development checks</strong></summary>
 
 ```sh
 python -m pip install -e '.[dev]'
@@ -202,35 +202,35 @@ python -m pytest -m 'not model'
 python -m ruff check src tests benchmarks scripts examples
 ```
 
-真实模型测试需要显式指定本地权重，顺序运行模型任务。GitHub CI 已配置，尚未声称远程 CI 通过。
+Real-model tests require explicitly selected local weights. Run model workloads sequentially. GitHub CI is configured; no remote CI pass is claimed.
 
 </details>
 
 <a name="connect"></a>
 
-## 联系作者 · 支持项目
+## Connect & support
 
-欢迎分享使用场景、复现结果和改进建议。你也可以通过提交 issue、修正文档或提供新的公开测试场景支持项目。
+Share use cases, reproduction results, and suggestions. Issues, documentation fixes, and new public test cases also support the project.
 
-<p align="center"><strong>里奥YetAnotherLeo</strong><br />小红书号：<code>6236648830</code></p>
+<p align="center"><strong>YetAnotherLeo</strong></p>
 
-<p align="center"><a href="https://xhslink.com/m/18bjTTf180W">小红书 · 里奥YetAnotherLeo ↗</a> · <a href="https://x.com/YetAnotherLeo">X / Twitter · @YetAnotherLeo ↗</a></p>
+<p align="center"><a href="https://x.com/YetAnotherLeo">X / Twitter · @YetAnotherLeo ↗</a> · <a href="https://xhslink.com/m/18bjTTf180W">Xiaohongshu · 里奥YetAnotherLeo ↗</a></p>
 
 <details>
-<summary><strong>扫码关注小红书</strong></summary>
+<summary><strong>Scan the Xiaohongshu profile card</strong></summary>
 
-<p align="center"><img src="docs/assets/social/xiaohongshu-profile.jpg" alt="里奥YetAnotherLeo的小红书名片，小红书号6236648830" width="320" /></p>
+<p align="center"><img src="docs/assets/social/xiaohongshu-profile.jpg" alt="Xiaohongshu profile card for 里奥YetAnotherLeo" width="320" /></p>
 
-扫描名片上的二维码，在小红书找到我。
+Scan the profile QR to follow on Xiaohongshu.
 
 </details>
 
-<p align="center"><sub>欢迎 Star、分享或提交 PR，一起改进本地语义决策。</sub></p>
+<p align="center"><sub>Support the project with a star, a share, or a pull request.</sub></p>
 
-## 许可证与来源
+## License & inspiration
 
-[MIT](LICENSE.zh-CN.md)。项目独立维护，受 [TypeSafe AI 的 JEV](https://docs.typesafe.ai/) 启发，使用官方 [MLX-LM](https://github.com/ml-explore/mlx-lm)。没有官方合作或背书，不使用 JEV 权重，也不声称复现未公开的 RLCD。
+[MIT](LICENSE). Independently maintained, inspired by [TypeSafe AI's JEV](https://docs.typesafe.ai/), and built on official [MLX-LM](https://github.com/ml-explore/mlx-lm). No affiliation or endorsement, no JEV weights, and no claim to reproduce unpublished RLCD.
 
-模型和依赖保留各自许可证；参考项目与归属见 [NOTICE](NOTICE.zh-CN.md)。已有实测材料保留更名前的名称、源文件路径和哈希，详见[结果来源说明](docs/results.zh-CN.md)。候选名称的检索记录见[命名说明](docs/naming.zh-CN.md)。
+Models and dependencies retain their own licenses; see [NOTICE](NOTICE.md). Recorded evidence retains former project names, source paths, and hashes as explained in [results](docs/results.md). See the [naming research](docs/naming.md) for the candidate name.
 
 <p align="center"><sub>Local decisions. Visible evidence. Open source.</sub></p>

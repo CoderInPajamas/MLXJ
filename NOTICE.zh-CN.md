@@ -1,6 +1,6 @@
 # 归属与范围
 
-[返回项目首页](README.md)
+[返回项目首页](README.zh-CN.md)
 
 JEV MLX 是独立维护的 MIT 开源项目。项目名称及带类型、感知状态的决策接口受 [TypeSafe AI 的 Jev](https://docs.typesafe.ai/) 启发。没有官方关联或背书，不包含 Jev 检查点，也不声称复现未公开的 RLCD。
 

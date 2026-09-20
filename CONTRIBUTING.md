@@ -1,6 +1,6 @@
 # Contributing to JEV MLX
 
-[Back to home](README.en.md)
+[Back to home](README.md)
 
 Use a dedicated environment and a local model directory. Do not install into a
 shared inference environment, modify model weights, or stop other applications

@@ -1,6 +1,6 @@
 # Gemma 4 MoE framework and checkpoint audit
 
-[Back to home](../README.en.md)
+[Back to home](../README.md)
 
 Audit date: 2026-09-20. This audit covers text-only use of the existing local
 `gemma-4-26b-a4b-it-4bit` checkpoint. Reading source, configuration, and tokenizer

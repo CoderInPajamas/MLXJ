@@ -1,6 +1,6 @@
 # 作者提供的社交资料
 
-[返回项目首页](../../../README.md)
+[返回项目首页](../../../README.zh-CN.md)
 
 `xiaohongshu-profile.jpg` 是项目作者于 2026-09-19 提供的原始公开主页名片，用于公开 README。
 

@@ -1,6 +1,6 @@
 # Naming preview
 
-[Back to home](../README.en.md)
+[Back to home](../README.md)
 
 Research date: 2026-09-19. This is a public-search snapshot, not a reservation or a guarantee that a registry will accept a name.
 
@@ -25,6 +25,6 @@ The page structure was informed by these first-party READMEs, without copying th
 - [RAGFlow](https://github.com/infiniflow/ragflow#readme): separate language READMEs, documentation navigation, and clear sections.
 - [Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev#readme): identity, language entry points, and sponsorship information.
 
-Language is chosen on the homepage: the Chinese homepage is `README.md`, and the English homepage is `README.en.md`. Each leads to a complete set of documents in that language, with no language switch on individual documents. Relative links work on GitHub without JavaScript. New visual assets are original project SVGs.
+Language is chosen on the homepage: the default English homepage is `README.md`, and the Chinese homepage is `README.zh-CN.md`. Each leads to a complete set of documents in that language, with no language switch on individual documents. Relative links work on GitHub without JavaScript. New visual assets are original project SVGs.
 
 Public social and sponsorship links use owner-provided destinations. The Xiaohongshu card for 里奥YetAnotherLeo (ID `6236648830`) is included unchanged. The owner updated X to [@YetAnotherLeo](https://x.com/YetAnotherLeo) on 2026-09-20; [social provenance](assets/social/README.md) retains the source history. A sponsorship destination remains unconfigured; no payment link is invented.

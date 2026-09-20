@@ -5,13 +5,13 @@
     "zh-CN"
   ],
   "homepages": {
-    "en": "README.en.md",
-    "zh-CN": "README.md"
+    "en": "README.md",
+    "zh-CN": "README.zh-CN.md"
   },
   "documents": [
     {
-      "en": "README.en.md",
-      "zh-CN": "README.md"
+      "en": "README.md",
+      "zh-CN": "README.zh-CN.md"
     },
     {
       "en": "LICENSE",

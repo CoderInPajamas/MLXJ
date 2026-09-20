@@ -1,6 +1,6 @@
 # 命名预览
 
-[返回项目首页](../README.md)
+[返回项目首页](../README.zh-CN.md)
 
 检索日期：2026-09-19。这是公开搜索的时间快照，不代表名称已被保留，也不保证注册平台接受该名称。
 
@@ -25,6 +25,6 @@
 - [RAGFlow](https://github.com/infiniflow/ragflow#readme)：分语言 README、文档导航与清晰章节。
 - [Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev#readme)：标识、语言入口和赞助信息。
 
-语言只在主页选择：`README.md` 是中文首页，`README.en.md` 是英文首页。分别进入完整的同语言文档路径，内页不再提供语言切换。相对链接在 GitHub 上无需 JavaScript 即可使用。所有新视觉素材为本项目原创 SVG。
+语言只在主页选择：`README.md` 是默认英文首页，`README.zh-CN.md` 是中文首页。分别进入完整的同语言文档路径，内页不再提供语言切换。相对链接在 GitHub 上无需 JavaScript 即可使用。所有新视觉素材为本项目原创 SVG。
 
 公开社交和赞助链接使用作者提供的地址。小红书名片属于里奥YetAnotherLeo（小红书号 `6236648830`），图片原样保留。作者于 2026-09-20 将 X 更新为 [@YetAnotherLeo](https://x.com/YetAnotherLeo)，[社交资料来源](assets/social/README.zh-CN.md)保留了历史记录。赞助入口仍未配置，没有编造支付链接。

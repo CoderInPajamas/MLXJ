@@ -1,8 +1,8 @@
 # Python API
 
-[返回项目首页](../README.md)
+[返回项目首页](../README.zh-CN.md)
 
-按照[快速开始](../README.md#quick-start)安装 JEV MLX，然后将 `JEV_MLX_MODEL` 设置为已验证的本地检查点路径。参见[模型兼容性](models.zh-CN.md)。
+按照[快速开始](../README.zh-CN.md#quick-start)安装 JEV MLX，然后将 `JEV_MLX_MODEL` 设置为已验证的本地检查点路径。参见[模型兼容性](models.zh-CN.md)。
 
 ## 做出决策
 

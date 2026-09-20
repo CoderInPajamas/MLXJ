@@ -1,6 +1,6 @@
 # 0.1 实测结果记录
 
-[返回首页](../README.md)
+[返回首页](../README.zh-CN.md)
 
 已完成的三模型、四方法热缓存对照见
 [36 题扩展结果](extended-results.zh-CN.md)，采用

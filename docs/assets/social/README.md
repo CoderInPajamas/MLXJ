@@ -1,6 +1,6 @@
 # Owner-provided social material
 
-[Back to home](../../../README.en.md)
+[Back to home](../../../README.md)
 
 `xiaohongshu-profile.jpg` is the original public profile card supplied by the
 project owner on 2026-09-19 for inclusion in the public README.
