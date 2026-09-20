@@ -9,6 +9,26 @@ The 0.1 runtime is pinned to MLX 0.31.2 / MLX-LM 0.31.3 / Transformers 5.9.0 /
 Tokenizers 0.22.2. The actual host is Apple M2 Max with 64 GiB unified memory and
 Python 3.13.2. Full hardware and dependency metadata accompany each run.
 
+The latest [six-domain comparison](extended-results.md) completed all four methods
+on a separate 36-case test suite for each of these three checkpoints. Direct
+same-page results are below; boolean accuracy is separate from action errors.
+The canonical recorded runtime source hashes match `ba98b71`.
+
+| Checkpoint | Correct / 36 | Wrong enum actions / 30 | Correct action coverage / 15 | Boolean correct / 6 |
+|---|---:|---:|---:|---:|
+| Gemma 4 MoE | 31/36 | 1/30 | 12/15 | 5/6 |
+| Qwen3.5-9B-OptiQ-4bit | 30/36 | 1/30 | 12/15 | 6/6 |
+| GLM-4.7-Flash-4bit | 21/36 | 8/30 | 9/15 | 2/6 |
+
+All three returned wrong actions on this extension. The earlier Qwen zero-error
+observation is specific to the original suite, and none of these results supports
+general unattended execution. Gemma's separate extended cache phase completed
+108 direct decisions and passed all 72 cached/fresh comparisons; each condition
+retained 31/36 correct with one wrong enum action. Qwen/GLM extended cold-KV and
+page-update phases are outside this campaign.
+
+The table below preserves verification on the **original 28-case suite**:
+
 | Local checkpoint | Architecture | Quantization | Weight size | Verification |
 |---|---|---|---:|---|
 | Qwen3.5-9B-OptiQ-4bit | `qwen3_5`, hybrid recurrent + full attention | Mixed 4/8-bit, group 64 | 5.63 GiB | Revised `579daf3` source: 84 direct decisions completed; 56/56 numerical cache comparisons passed. Returned accuracy 25/28 and coverage 17/18 in every condition; no observed false actions. Historical baselines and all errors remain in [results](results.md). |

@@ -1,10 +1,23 @@
 # Recorded results for 0.1
 
-For the additional campaign, see the [fixed evaluation protocol](extended-evaluation-protocol.md)
-and [Gemma report](gemma4-results.md): Gemma reached 26/28 on the original suite,
-including one wrong filtered-first action among 26 enum requests. The new
-36-case extension is still running; no extended-suite result is claimed here.
-The latest core check is 161 passed; historical verification remains below.
+The completed three-model, four-method warm comparison is in the
+[36-case extended results](extended-results.md), under the
+[fixed evaluation protocol](extended-evaluation-protocol.md). Direct accuracy was
+31/36 for Gemma, 30/36 for Qwen, and 21/36 for GLM; wrong enum actions were
+respectively 1/30, 1/30, and 8/30. Boolean accuracy is separate: 5/6, 6/6, and 2/6.
+All three made action errors; the original Qwen zero-error observation below did
+not generalize to the new cases. Gemma's separate extended cache phase completed
+108 decisions and all 72 cached/fresh comparisons, with the same 31/36 correct
+and 1/30 wrong enum actions in each condition. All 1,096 measurements planned in
+the additional campaign are complete; repeated conditions are not new quality
+examples. The latest core check is 161 passed. The rebuilt wheel passed a fresh
+independent install and a real Gemma CLI call; all 14 runtime files match the
+source and archive bytes. See [distribution verification](../benchmarks/results/extended-release-checks/distribution.json).
+
+The [Gemma original-suite report](gemma4-results.md) separately records 26/28
+correct, including one wrong filtered-first action among 26 enum requests.
+Keep both datasets and their runtime revisions separate. This page preserves
+the historical Qwen/GLM results and release verification below.
 
 The project is now named **JEV MLX**. The historical Qwen/GLM measurements,
 original release-candidate checks, screenshots, and recordings were collected under its former name,
@@ -16,8 +29,9 @@ and `JEV_MLX_MODEL`. Separate verification of the
 renamed package is recorded in
 [rename release checks](../benchmarks/results/rename-release-checks/verification.json).
 
-The revised cache runtime produces consistent local decisions across fresh and
-reused prefixes, with clear semantic limits. Qwen direct decisions reached
+On the original 28-case suite, the revised cache runtime produced consistent
+local decisions across fresh and reused prefixes, with clear semantic limits.
+Qwen direct decisions reached
 **25/28 correct (89.3%)** in each cache condition, with warm-page **171.7 / 176.4 ms
 p50 / p95** and no observed false actions. GLM reached **14/28 (50.0%)** with two
 false actions per condition. Both checkpoints passed all 56 revised-cache parity
@@ -574,7 +588,13 @@ the separate browser receipt evidence above demonstrates actual execution.
 
 ## Distribution and installation validation
 
-A wheel and source distribution were built successfully. The final rebuilt
+The records in this section describe historical artifacts. The current
+extended release has separate [wheel installation and real Gemma evidence](../benchmarks/results/extended-release-checks/distribution.json).
+Its source archive includes the new fixtures and reports; artifact-side content
+checks and hashes are in `dist/extended-v1/verification.json` and `SHA256SUMS`.
+Earlier verification remains attached to its original artifacts.
+
+A historical wheel and source distribution were built successfully. The final rebuilt
 wheel was installed offline into a separate validation environment; its import
 location was checked to ensure Python loaded the installed package rather than
 the source checkout. All three packaged browser assets were present. Invoked

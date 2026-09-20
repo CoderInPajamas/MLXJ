@@ -1,0 +1,652 @@
+{
+  "schema_version": 1,
+  "derivation_source_sha256": "50dc9f0ecb65e25ae4adbd3fc6d11accf53bae9de68540dce64b4a33f471e4e7",
+  "metrics_source_sha256": "8e19d32d7e64debf55e68fe7d8c3756f3969f85bdb8cf2b090b189af053403e4",
+  "audit_source_sha256": "a1e964e2f2c62de92c785ccadfcb8faa48240d8b7a02180c6f6a5125ab907548",
+  "complete": true,
+  "audit_passed": true,
+  "runs": [
+    {
+      "run_name": "extended-v1-glm-dev",
+      "model_name": "GLM-4.7-Flash-4bit",
+      "split": "dev",
+      "scope": "full",
+      "complete": true,
+      "measurements_complete": true,
+      "attempts": 48,
+      "planned": 48,
+      "audit_passed": true,
+      "errors": [],
+      "warnings": [],
+      "source_trials_sha256": "a3b7c5072993b71a4dc493707a2bc64e30cd525e1c6e994636eb4edcaf62a809",
+      "source_summary_sha256": "bffdb384663629b28b349eeb31c67fe2992653be81c29159ba2e2bbd9bdeab26",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+          "rows": 12,
+          "domains": {
+            "documents": 2,
+            "calendar_drafts": 2,
+            "files": 2,
+            "music": 2,
+            "comparison": 2,
+            "settings": 2
+          },
+          "expected_status_counts": {
+            "selected": 8,
+            "no_match": 3,
+            "abstain": 1
+          },
+          "kind_counts": {
+            "enum": 11,
+            "boolean": 1
+          }
+        },
+        "test.jsonl": {
+          "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+          "rows": 36,
+          "domains": {
+            "documents": 6,
+            "calendar_drafts": 6,
+            "files": 6,
+            "music": 6,
+            "comparison": 6,
+            "settings": 6
+          },
+          "expected_status_counts": {
+            "selected": 19,
+            "no_match": 11,
+            "abstain": 6
+          },
+          "kind_counts": {
+            "enum": 30,
+            "boolean": 6
+          }
+        }
+      },
+      "fixture_hashes_verified": true,
+      "kind_resolution": {
+        "requested": false,
+        "resolved_rows": 0
+      },
+      "groups": {
+        "code/same_page_new_utterance": {
+          "overall": {
+            "attempts": 12,
+            "correct_choices": 0,
+            "accuracy": 0.0,
+            "rejection_rate": 0.0,
+            "abstention_rate": 0.0,
+            "schema_validity": 0.0,
+            "wrong_returned_choice_count": 0,
+            "wrong_returned_choice_rate": 0.0,
+            "raw_choice_accuracy": 0.0,
+            "raw_wrong_choice_count": 0,
+            "raw_wrong_choice_rate": 0.0,
+            "runtime_errors": 0,
+            "schema_invalid_count": 12,
+            "latency_ms": {
+              "successful_attempts": 12,
+              "p50": 350.61291699821595,
+              "p95": 386.9128437501786
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "enum": {
+            "attempts": 11,
+            "correct_choices": 0,
+            "accuracy": 0.0,
+            "rejection_rate": 0.0,
+            "abstention_rate": 0.0,
+            "schema_validity": 0.0,
+            "wrong_returned_choice_count": 0,
+            "wrong_returned_choice_rate": 0.0,
+            "raw_choice_accuracy": 0.0,
+            "raw_wrong_choice_count": 0,
+            "raw_wrong_choice_rate": 0.0,
+            "runtime_errors": 0,
+            "schema_invalid_count": 11,
+            "latency_ms": {
+              "successful_attempts": 11,
+              "p50": 348.95787500136066,
+              "p95": 387.625562500034
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            },
+            "wrong_action_count": 0,
+            "wrong_action_rate": 0.0,
+            "raw_wrong_action_count": 0,
+            "raw_wrong_action_rate": 0.0,
+            "executable_requests": 7,
+            "correct_action_choices": 0,
+            "executable_request_coverage": 0.0
+          },
+          "boolean": {
+            "attempts": 1,
+            "correct_choices": 0,
+            "accuracy": 0.0,
+            "rejection_rate": 0.0,
+            "abstention_rate": 0.0,
+            "schema_validity": 0.0,
+            "wrong_returned_choice_count": 0,
+            "wrong_returned_choice_rate": 0.0,
+            "raw_choice_accuracy": 0.0,
+            "raw_wrong_choice_count": 0,
+            "raw_wrong_choice_rate": 0.0,
+            "runtime_errors": 0,
+            "schema_invalid_count": 1,
+            "latency_ms": {
+              "successful_attempts": 1,
+              "p50": 362.1552089898614,
+              "p95": 362.1552089898614
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "unknown_kind_attempts": 0,
+          "input_ranges": {
+            "prompt_tokens": {
+              "min": 464,
+              "max": 524,
+              "observations": 12
+            },
+            "reused_tokens": {
+              "min": 457,
+              "max": 511,
+              "observations": 12
+            },
+            "candidate_count": {
+              "min": 2,
+              "max": 3,
+              "observations": 12
+            },
+            "utterance_chars": {
+              "min": 17,
+              "max": 44,
+              "observations": 12
+            },
+            "state_chars": {
+              "min": 147,
+              "max": 293,
+              "observations": 12
+            }
+          },
+          "memory_maxima": {
+            "process_peak_rss_bytes": 11438407680,
+            "mlx_peak_memory_bytes": 17709829484,
+            "mlx_active_memory_max_bytes": 17318458600,
+            "mlx_allocator_cache_max_bytes": 75499852,
+            "saved_prefix_cache_max_bytes": 454051584,
+            "note": "Process-lifetime and allocator maxima, not independent per-call allocations; RSS and MLX memory overlap."
+          }
+        },
+        "direct/same_page_new_utterance": {
+          "overall": {
+            "attempts": 12,
+            "correct_choices": 9,
+            "accuracy": 0.75,
+            "rejection_rate": 0.5,
+            "abstention_rate": 0.25,
+            "schema_validity": 1.0,
+            "wrong_returned_choice_count": 1,
+            "wrong_returned_choice_rate": 0.08333333333333333,
+            "raw_choice_accuracy": 0.8333333333333334,
+            "raw_wrong_choice_count": 2,
+            "raw_wrong_choice_rate": 0.16666666666666666,
+            "runtime_errors": 0,
+            "schema_invalid_count": 0,
+            "latency_ms": {
+              "successful_attempts": 12,
+              "p50": 209.10293750057463,
+              "p95": 479.27220464553096
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "enum": {
+            "attempts": 11,
+            "correct_choices": 8,
+            "accuracy": 0.7272727272727273,
+            "rejection_rate": 0.5454545454545454,
+            "abstention_rate": 0.2727272727272727,
+            "schema_validity": 1.0,
+            "wrong_returned_choice_count": 1,
+            "wrong_returned_choice_rate": 0.09090909090909091,
+            "raw_choice_accuracy": 0.8181818181818182,
+            "raw_wrong_choice_count": 2,
+            "raw_wrong_choice_rate": 0.18181818181818182,
+            "runtime_errors": 0,
+            "schema_invalid_count": 0,
+            "latency_ms": {
+              "successful_attempts": 11,
+              "p50": 211.3793330063345,
+              "p95": 484.14287549530854
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            },
+            "wrong_action_count": 1,
+            "wrong_action_rate": 0.09090909090909091,
+            "raw_wrong_action_count": 2,
+            "raw_wrong_action_rate": 0.18181818181818182,
+            "executable_requests": 7,
+            "correct_action_choices": 4,
+            "executable_request_coverage": 0.5714285714285714
+          },
+          "boolean": {
+            "attempts": 1,
+            "correct_choices": 1,
+            "accuracy": 1.0,
+            "rejection_rate": 0.0,
+            "abstention_rate": 0.0,
+            "schema_validity": 1.0,
+            "wrong_returned_choice_count": 0,
+            "wrong_returned_choice_rate": 0.0,
+            "raw_choice_accuracy": 1.0,
+            "raw_wrong_choice_count": 0,
+            "raw_wrong_choice_rate": 0.0,
+            "runtime_errors": 0,
+            "schema_invalid_count": 0,
+            "latency_ms": {
+              "successful_attempts": 1,
+              "p50": 202.8298750083195,
+              "p95": 202.8298750083195
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "unknown_kind_attempts": 0,
+          "input_ranges": {
+            "prompt_tokens": {
+              "min": 464,
+              "max": 524,
+              "observations": 12
+            },
+            "reused_tokens": {
+              "min": 457,
+              "max": 511,
+              "observations": 12
+            },
+            "candidate_count": {
+              "min": 2,
+              "max": 3,
+              "observations": 12
+            },
+            "utterance_chars": {
+              "min": 17,
+              "max": 44,
+              "observations": 12
+            },
+            "state_chars": {
+              "min": 147,
+              "max": 293,
+              "observations": 12
+            }
+          },
+          "memory_maxima": {
+            "process_peak_rss_bytes": 11438407680,
+            "mlx_peak_memory_bytes": 17709911460,
+            "mlx_active_memory_max_bytes": 17315771648,
+            "mlx_allocator_cache_max_bytes": 1367968398,
+            "saved_prefix_cache_max_bytes": 451831680,
+            "note": "Process-lifetime and allocator maxima, not independent per-call allocations; RSS and MLX memory overlap."
+          }
+        },
+        "json/same_page_new_utterance": {
+          "overall": {
+            "attempts": 12,
+            "correct_choices": 8,
+            "accuracy": 0.6666666666666666,
+            "rejection_rate": 0.08333333333333333,
+            "abstention_rate": 0.0,
+            "schema_validity": 1.0,
+            "wrong_returned_choice_count": 4,
+            "wrong_returned_choice_rate": 0.3333333333333333,
+            "raw_choice_accuracy": 0.6666666666666666,
+            "raw_wrong_choice_count": 4,
+            "raw_wrong_choice_rate": 0.3333333333333333,
+            "runtime_errors": 0,
+            "schema_invalid_count": 0,
+            "latency_ms": {
+              "successful_attempts": 12,
+              "p50": 635.0583335006377,
+              "p95": 2251.1544106026113
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "enum": {
+            "attempts": 11,
+            "correct_choices": 8,
+            "accuracy": 0.7272727272727273,
+            "rejection_rate": 0.09090909090909091,
+            "abstention_rate": 0.0,
+            "schema_validity": 1.0,
+            "wrong_returned_choice_count": 3,
+            "wrong_returned_choice_rate": 0.2727272727272727,
+            "raw_choice_accuracy": 0.7272727272727273,
+            "raw_wrong_choice_count": 3,
+            "raw_wrong_choice_rate": 0.2727272727272727,
+            "runtime_errors": 0,
+            "schema_invalid_count": 0,
+            "latency_ms": {
+              "successful_attempts": 11,
+              "p50": 661.0617919941433,
+              "p95": 2302.6823960026377
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            },
+            "wrong_action_count": 3,
+            "wrong_action_rate": 0.2727272727272727,
+            "raw_wrong_action_count": 3,
+            "raw_wrong_action_rate": 0.2727272727272727,
+            "executable_requests": 7,
+            "correct_action_choices": 7,
+            "executable_request_coverage": 1.0
+          },
+          "boolean": {
+            "attempts": 1,
+            "correct_choices": 0,
+            "accuracy": 0.0,
+            "rejection_rate": 0.0,
+            "abstention_rate": 0.0,
+            "schema_validity": 1.0,
+            "wrong_returned_choice_count": 1,
+            "wrong_returned_choice_rate": 1.0,
+            "raw_choice_accuracy": 0.0,
+            "raw_wrong_choice_count": 1,
+            "raw_wrong_choice_rate": 1.0,
+            "runtime_errors": 0,
+            "schema_invalid_count": 0,
+            "latency_ms": {
+              "successful_attempts": 1,
+              "p50": 574.1056660044705,
+              "p95": 574.1056660044705
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "unknown_kind_attempts": 0,
+          "input_ranges": {
+            "prompt_tokens": {
+              "min": 481,
+              "max": 541,
+              "observations": 12
+            },
+            "reused_tokens": {
+              "min": 474,
+              "max": 528,
+              "observations": 12
+            },
+            "candidate_count": {
+              "min": 2,
+              "max": 3,
+              "observations": 12
+            },
+            "utterance_chars": {
+              "min": 17,
+              "max": 44,
+              "observations": 12
+            },
+            "state_chars": {
+              "min": 147,
+              "max": 293,
+              "observations": 12
+            }
+          },
+          "memory_maxima": {
+            "process_peak_rss_bytes": 11438407680,
+            "mlx_peak_memory_bytes": 17709911460,
+            "mlx_active_memory_max_bytes": 17317606632,
+            "mlx_allocator_cache_max_bytes": 79197044,
+            "saved_prefix_cache_max_bytes": 454051584,
+            "note": "Process-lifetime and allocator maxima, not independent per-call allocations; RSS and MLX memory overlap."
+          }
+        },
+        "json_code/same_page_new_utterance": {
+          "overall": {
+            "attempts": 12,
+            "correct_choices": 2,
+            "accuracy": 0.16666666666666666,
+            "rejection_rate": 0.0,
+            "abstention_rate": 0.0,
+            "schema_validity": 0.16666666666666666,
+            "wrong_returned_choice_count": 0,
+            "wrong_returned_choice_rate": 0.0,
+            "raw_choice_accuracy": 0.16666666666666666,
+            "raw_wrong_choice_count": 0,
+            "raw_wrong_choice_rate": 0.0,
+            "runtime_errors": 0,
+            "schema_invalid_count": 10,
+            "latency_ms": {
+              "successful_attempts": 12,
+              "p50": 604.6891459991457,
+              "p95": 2462.8222186031044
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "enum": {
+            "attempts": 11,
+            "correct_choices": 2,
+            "accuracy": 0.18181818181818182,
+            "rejection_rate": 0.0,
+            "abstention_rate": 0.0,
+            "schema_validity": 0.18181818181818182,
+            "wrong_returned_choice_count": 0,
+            "wrong_returned_choice_rate": 0.0,
+            "raw_choice_accuracy": 0.18181818181818182,
+            "raw_wrong_choice_count": 0,
+            "raw_wrong_choice_rate": 0.0,
+            "runtime_errors": 0,
+            "schema_invalid_count": 9,
+            "latency_ms": {
+              "successful_attempts": 11,
+              "p50": 608.3349169930443,
+              "p95": 2511.115104003693
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            },
+            "wrong_action_count": 0,
+            "wrong_action_rate": 0.0,
+            "raw_wrong_action_count": 0,
+            "raw_wrong_action_rate": 0.0,
+            "executable_requests": 7,
+            "correct_action_choices": 2,
+            "executable_request_coverage": 0.2857142857142857
+          },
+          "boolean": {
+            "attempts": 1,
+            "correct_choices": 0,
+            "accuracy": 0.0,
+            "rejection_rate": 0.0,
+            "abstention_rate": 0.0,
+            "schema_validity": 0.0,
+            "wrong_returned_choice_count": 0,
+            "wrong_returned_choice_rate": 0.0,
+            "raw_choice_accuracy": 0.0,
+            "raw_wrong_choice_count": 0,
+            "raw_wrong_choice_rate": 0.0,
+            "runtime_errors": 0,
+            "schema_invalid_count": 1,
+            "latency_ms": {
+              "successful_attempts": 1,
+              "p50": 523.7467080005445,
+              "p95": 523.7467080005445
+            },
+            "failure_latency_ms": {
+              "attempts": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "unknown_kind_attempts": 0,
+          "input_ranges": {
+            "prompt_tokens": {
+              "min": 486,
+              "max": 546,
+              "observations": 12
+            },
+            "reused_tokens": {
+              "min": 479,
+              "max": 533,
+              "observations": 12
+            },
+            "candidate_count": {
+              "min": 2,
+              "max": 3,
+              "observations": 12
+            },
+            "utterance_chars": {
+              "min": 17,
+              "max": 44,
+              "observations": 12
+            },
+            "state_chars": {
+              "min": 147,
+              "max": 293,
+              "observations": 12
+            }
+          },
+          "memory_maxima": {
+            "process_peak_rss_bytes": 11438407680,
+            "mlx_peak_memory_bytes": 17709829484,
+            "mlx_active_memory_max_bytes": 17317803240,
+            "mlx_allocator_cache_max_bytes": 50430130,
+            "saved_prefix_cache_max_bytes": 454051584,
+            "note": "Process-lifetime and allocator maxima, not independent per-call allocations; RSS and MLX memory overlap."
+          }
+        }
+      },
+      "input_ranges": {
+        "prompt_tokens": {
+          "min": 464,
+          "max": 546,
+          "observations": 48
+        },
+        "reused_tokens": {
+          "min": 457,
+          "max": 533,
+          "observations": 48
+        },
+        "candidate_count": {
+          "min": 2,
+          "max": 3,
+          "observations": 48
+        },
+        "utterance_chars": {
+          "min": 17,
+          "max": 44,
+          "observations": 48
+        },
+        "state_chars": {
+          "min": 147,
+          "max": 293,
+          "observations": 48
+        }
+      },
+      "memory_maxima": {
+        "process_peak_rss_bytes": 11438407680,
+        "mlx_peak_memory_bytes": 17709911460,
+        "mlx_active_memory_max_bytes": 17318458600,
+        "mlx_allocator_cache_max_bytes": 1367968398,
+        "saved_prefix_cache_max_bytes": 454051584,
+        "note": "Process-lifetime and allocator maxima, not independent per-call allocations; RSS and MLX memory overlap."
+      },
+      "parity": {
+        "attempts": 0,
+        "passed": 0
+      },
+      "cache_verification": {
+        "same_page_new_utterance/attempts": 48,
+        "same_page_new_utterance/verified_hits": 48
+      },
+      "failure_counts": {
+        "runtime_errors": 0,
+        "schema_invalid": 22,
+        "raw_false_actions": 6,
+        "returned_false_actions": 5
+      },
+      "environment": {
+        "python": "3.13.2",
+        "dependencies": {
+          "jev-mlx": "0.1.0",
+          "mlx": "0.31.2",
+          "mlx-lm": "0.31.3",
+          "mlx-metal": "0.31.2",
+          "transformers": "5.9.0",
+          "tokenizers": "0.22.2",
+          "numpy": "2.5.3"
+        },
+        "hardware": {
+          "architecture": "arm64",
+          "system": "Darwin",
+          "release": "25.6.0",
+          "hw.model": "Mac14,6",
+          "machdep.cpu.brand_string": "Apple M2 Max",
+          "hw.memsize": "68719476736",
+          "hw.ncpu": "12"
+        },
+        "git_commit": "efed866cd8d2b49538fc6a1b3139e36fca66d08d",
+        "git_worktree_dirty": true,
+        "source_sha256": {
+          "src/jev_mlx/prompt.py": "8d0b340fb804a83ad37a6ee6a0feca39b4af061598712a2078ae1903e3c76f6b",
+          "src/jev_mlx/types.py": "f58e3d27a2fd2ea3ace839cdef75b50aa3fe793c8a47a56ce043e21f1b4c5c94",
+          "src/jev_mlx/engine.py": "10aebdb027d54fbc42f49f7a249abc2f4149b613de6d063c5e91fe300ba15baa",
+          "src/jev_mlx/backends/mlx_lm.py": "9925f8da4c7b8b9ab6c879d0d2f354170365792a5f886b142ca339af5254d84c",
+          "benchmarks/common.py": "0ed55256cf6eb0bf8f6499ad9e8fcca73862e947496f061490ba41bc62e5d9b0",
+          "benchmarks/run.py": "65e3f810bc9f9607aa7efcbce80dd4609bdc91ecb39010be5cec6ed3027dfadf",
+          "benchmarks/metrics.py": "8e19d32d7e64debf55e68fe7d8c3756f3969f85bdb8cf2b090b189af053403e4",
+          "benchmarks/cold_start.py": "31b57be8182439c33615fdb84edc986083d7fa6059268e14b7232c15f7257d80"
+        }
+      },
+      "supplementary_output_format_control": {
+        "enabled": true,
+        "mode": "json_code",
+        "origin": "Added after observing code-versus-business-ID confusion in the original JSON test run; not a preregistered comparison.",
+        "protocol": "Same semantic policy/state/choices/threshold; different generated JSON output format. Evaluate on dev before the unchanged frozen test; preserve the original JSON results."
+      },
+      "notes": [
+        "No raw evidence was modified. Mode/condition groups are reported separately; repetitions are not independent quality cases.",
+        "Wrong returned choices include enum and boolean choices. Wrong actions and executable coverage use enum rows only.",
+        "Correct executable choices are model selections before any executor; this does not establish actual execution.",
+        "Loaded-model decision latency excludes recorded preparation and loading. process_cold_start latency instead includes interpreter startup, loading, the first decision, and shutdown; it does not flush OS file caches.",
+        "audit_passed refers to evidence integrity, not semantic accuracy or numerical parity acceptance; failure counts and parity outcomes are reported separately.",
+        "Missing legacy kinds remain unknown; no fixture-based inference was requested."
+      ]
+    }
+  ]
+}

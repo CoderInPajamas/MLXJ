@@ -1,0 +1,66 @@
+{
+  "candidate_id": "player.pause",
+  "status": "selected",
+  "raw_selected_id": "player.pause",
+  "raw_scores": {
+    "player.pause": 24.5,
+    "player.close": 3.203125,
+    "__no_match__": -1.515625,
+    "__abstain__": -8.0625
+  },
+  "scores": {
+    "player.pause": 0.9999999994314748,
+    "player.close": 5.634880437163336e-10,
+    "__no_match__": 5.029879941612155e-12,
+    "__abstain__": 7.215824015320542e-15
+  },
+  "margin": 21.296875,
+  "state_version": 3,
+  "model": {
+    "name": "gemma-4-26b-a4b-it-4bit",
+    "model_type": "gemma4",
+    "config_sha256": "a64883e3afd8e8b76e7370ba1b288f6f2dc9a0e071337c9eddb420b747555209",
+    "tokenizer_sha256": "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f",
+    "quantization": {
+      "default_bits": 4,
+      "group_size": 64,
+      "mode": "affine",
+      "layer_bits_counts": {
+        "8": 120
+      },
+      "sha256": "dc40fa7486879d9e30af801f35cd81e7b59d5d94f05b0b0c188c58c7c4f8c7a2"
+    },
+    "dependencies": {
+      "mlx": "0.31.2",
+      "mlx-lm": "0.31.3",
+      "transformers": "5.9.0",
+      "tokenizers": "0.22.2"
+    },
+    "cache_types": [
+      "KVCache",
+      "RotatingKVCache"
+    ]
+  },
+  "timing": {
+    "total_ms": 3590.2224999881582,
+    "inference_ms": 3590.221249993192,
+    "queue_ms": 0.0012499949662014842,
+    "load_ms": 10442.677832994377,
+    "peak_memory_bytes": 14888928422,
+    "active_memory_bytes": 14813807722,
+    "decision_ms": 3590.369791010744
+  },
+  "cache": {
+    "hit": false,
+    "scope": "cold",
+    "prompt_tokens": 492,
+    "reused_tokens": 0,
+    "prefill_tokens": 492,
+    "system_tokens": 300,
+    "state_tokens": 476,
+    "bytes": 179896320,
+    "entries": 2
+  },
+  "request_id": "826eef17db0d4e8596141824215f8faf",
+  "selected_value": null
+}

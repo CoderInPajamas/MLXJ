@@ -89,27 +89,50 @@ Results include the candidate ID, raw logits, candidate scores, margin, state ve
 
 ## Measurements, with their limits
 
+**New six-domain evaluation · Apple M2 Max · 64 GiB · 36 fictional English cases.**
+
+Documents, calendar drafts, files, music queues, product comparisons, and settings. Three models receive the same frozen inputs, semantic prompt, and threshold, with four output methods each. These are the direct-scoring results:
+
+| Local checkpoint | Exact decisions / 36 | Wrong actions / 30 | Same-page p50 / p95 |
+| :--- | ---: | ---: | ---: |
+| Qwen3.5-9B-OptiQ-4bit | 30 / 36 (83.3%) | 1 / 30 | 194.8 / 407.5 ms |
+| Gemma 4 26B-A4B MoE | 31 / 36 (86.1%) | 1 / 30 | 168.9 / 556.5 ms |
+| GLM-4.7-Flash-4bit | 21 / 36 (58.3%) | 8 / 30 | 170.6 / 330.5 ms |
+
+The 36 cases contain 30 enum requests and six boolean decisions; action errors count enum requests only. **Timings require loaded weights and a reusable page prefix.** They do not describe startup or arbitrary new pages. See the [extended report](docs/extended-results.md) for every method, rejection and coverage rates, boolean quality, memory, and failures.
+
+Gemma selected the wrong queue item; Qwen selected the wrong longest-battery product. GLM made more action errors. The earlier small sample's zero-error observation did not carry over to new cases. **These results do not establish reliable unattended actions, arbitrary-model compatibility, or fixed 100 ms performance.**
+
+<details>
+<summary><strong>Original 28 cases: previous results retained</strong></summary>
+
 **Apple M2 Max · 64 GiB · 28 fictional English test cases · revised cache runtime.**
 
-| Local checkpoint | Exact decisions | Wrong action choices / all requests | Same-page p50 / p95 |
+| Local checkpoint | Exact decisions | Wrong actions / enum requests | Same-page p50 / p95 |
 | :--- | ---: | ---: | ---: |
-| Qwen3.5-9B-OptiQ-4bit | **25 / 28 (89.3%)** | **0 / 28** | **171.7 / 176.4 ms** |
-| GLM-4.7-Flash-4bit | 14 / 28 (50.0%) | 2 / 28 | 147.8 / 170.6 ms |
+| Qwen3.5-9B-OptiQ-4bit | **25 / 28 (89.3%)** | **0 / 26** | **171.7 / 176.4 ms** |
+| GLM-4.7-Flash-4bit | 14 / 28 (50.0%) | 2 / 26 | 147.8 / 170.6 ms |
+| Gemma 4 26B-A4B MoE · mixed 4/8-bit | 26 / 28 (92.9%) | 1 / 26 | 134.9 / 283.9 ms |
+
+Accuracy includes 26 enum requests and two boolean decisions; action errors count enum requests only. These are separate recorded runs, not inputs to a cross-revision algorithm speedup claim. The [Gemma report](docs/gemma4-results.md) includes all four methods, three cache conditions, and every failure.
 
 These timings require **loaded weights and a reusable page prefix**. Qwen's KV-cold p50 was **2,159.9 ms**; its first decision after a page update was **1,050.2 ms**. About 170 ms is not a per-request guarantee.
 
-- **145 core tests passed:** contracts, state updates, stale decisions, single-use authorization, HTTP, and related behavior. These do not measure model semantics.
-- **112 / 112 cache comparisons passed:** two models × 28 cases × two reuse conditions, each compared with fresh computation.
-- **16 recorded browser scenarios checked:** actual DOM clicks and execution receipts. Decline cases accept either rejection outcome, unlike the strict quality set above.
+Qwen's three original-suite misses include rejection-status distinctions and a tied choice after reordering. Gemma selected the wrong filtered first item; GLM also produced incorrect actions. The original and extended sets are reported separately, not combined into one unseen-test score.
 
-Qwen's three misses include rejection-status distinctions and a tied choice after reordering. GLM produced incorrect actions and is **not recommended for automatic execution with the current prompt**. A 28-case sample cannot establish zero errors or broad reliability.
+</details>
+
+- **161 core tests passed:** contracts, state updates, stale decisions, single-use authorization, HTTP, and related behavior. These do not measure model semantics.
+- **168 / 168 original-suite cache comparisons passed:** three models × 28 cases × two reuse conditions, each compared with fresh computation.
+- **72 / 72 extended-suite cache comparisons passed:** Gemma's 36 new cases × two reuse conditions, with observed maximum logit and score differences of 0. Numerical agreement does not establish semantic correctness.
+- **16 recorded browser scenarios checked:** actual DOM clicks and execution receipts. Decline cases accept either rejection outcome, unlike the strict quality set above.
 
 <details>
 <summary><strong>How was this tested?</strong></summary>
 
-1. Write **16 development cases and 28 frozen test cases** from scratch, with no production exports. Version 0.1 validates English inputs only.
-2. Refine the general prompt on development data, then freeze the semantic prompt and rejection threshold. Do not tune the threshold on test data.
-3. Compare the same model using direct candidate scoring, one-code generation, and structured JSON generation. Retain failed outputs.
+1. Write the original **16 dev / 28 test** cases and the separate **12 dev / 36 test** extension from scratch. Freeze their hashes; use no production exports. Version 0.1 validates English inputs only.
+2. Freeze the original development-refined semantic prompt and threshold. This three-model campaign keeps them unchanged after seeing new test outputs.
+3. Compare direct scoring, one-code generation, business-ID JSON, and option-code JSON. Retain every failed output.
 4. Measure process startup, loaded weights with cold KV, a new utterance on the same page, and the first decision after a page update. Synchronize MLX work before stopping the timer.
 5. Score model choice separately from execution. A guard blocking a bad action does not make the model correct.
 
@@ -197,11 +220,11 @@ Share use cases, reproduction results, and suggestions. Issues, documentation fi
 
 <p align="center"><img src="docs/assets/social/xiaohongshu-profile.jpg" alt="Xiaohongshu profile card for 里奥YetAnotherLeo, ID 6236648830" width="320" /></p>
 
-Original public profile card supplied by the owner. The QR code has not been redrawn or modified.
+Scan the profile QR to follow on Xiaohongshu.
 
 </details>
 
-<p align="center"><sub>A sponsorship destination is still awaiting an owner-provided public link. No payment link or donation QR code is enabled.</sub></p>
+<p align="center"><sub>Support the project with a star, a share, or a pull request.</sub></p>
 
 ## License & inspiration
 

@@ -32,6 +32,26 @@ publication is tracked separately from preparing this source release.
 - Core tests, opt-in real-model tests, fictional development/frozen fixtures,
   parity tools, one-code/JSON baselines, process cold-start measurements, and
   complete failure records.
+- Verified Gemma 4 MoE text inference through official MLX-LM, with original-suite
+  four-method/cache-condition evidence, separate process cold start, and a
+  1,741-token rotating-cache integration check. All model-specific limits and
+  wrong choices remain in the [Gemma report](docs/gemma4-results.md).
+- Added an independently frozen 12-development/36-test fictional six-domain
+  extension and completed all four output methods in the same-page condition
+  for Gemma, Qwen, and GLM. Direct exact accuracy is 31/36, 30/36, and 21/36;
+  wrong enum actions are 1/30, 1/30, and 8/30. Boolean answers are separate.
+  [Extended results](docs/extended-results.md) retain every failure and explain
+  why these results do not justify general unattended action execution.
+- Fixture-directory selection, pre-load duplicate-schedule rejection, explicit
+  cold-start schedule metadata, and kind-separated evidence reporting/audits.
+  The latest non-model core suite passed 161 tests. The separate extended Gemma
+  cache phase completed 108 decisions and passed all 72 comparisons; all 1,096
+  planned campaign measurements are complete.
+- Rebuilt the wheel, installed its MLX dependencies in a fresh environment outside
+  the checkout, and verified all 14 runtime files against source and wheel bytes.
+  A real Gemma CLI call selected `player.pause` for the public example. This is
+  an installation smoke check, not an additional quality benchmark; see
+  [distribution verification](benchmarks/results/extended-release-checks/distribution.json).
 - Architecture, framework audit, model support, evaluation protocol, recorded
   results, contribution guidance, and release instructions.
 

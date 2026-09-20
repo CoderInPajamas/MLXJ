@@ -1,9 +1,16 @@
 # Reproducing evaluations
 
 The [additional-run protocol](extended-evaluation-protocol.md) covers Gemma and
-the separate 12-dev/36-test extension. [Gemma results](gemma4-results.md) on the
-original 28 cases reached 26/28 correct, including a wrong filtered-first action
-(1/26 enum requests); extended-suite runs are still in progress. The latest
+the separate 12-dev/36-test extension. The completed three-model, four-method
+same-page comparison is in [extended results](extended-results.md): direct
+accuracy was Gemma 31/36, Qwen 30/36, and GLM 21/36, with respectively 1/30,
+1/30, and 8/30 wrong enum actions. Boolean answers are reported separately.
+Gemma's additional extended cache phase completed all 108 decisions and 72
+cached/fresh comparisons; all comparisons passed, and all three conditions
+retained 31/36 correct with one wrong enum action. The additional campaign's
+1,096 planned measurements are complete. The separate
+[Gemma original-suite results](gemma4-results.md) reached 26/28 correct, including
+a wrong filtered-first action (1/26 enum requests). The latest
 [core check](../benchmarks/results/extended-release-checks/core-tests.json) passed
 161 tests without failures or errors (pytest 3.76 s; JUnit suite time 3.752 s).
 
@@ -44,6 +51,16 @@ preparation calls. Run one model at a time to avoid competing Metal workloads.
 Record other active applications when interpreting results; the runner does not
 stop them. Test accuracy uses all attempts; model errors and invalid outputs are
 retained. JSON output can be large because each trial retains its evidence.
+
+The extension uses its own frozen manifest; pass
+`--fixtures-dir benchmarks/fixtures/extended-v1` to both runner and evidence
+audit. Its completed primary comparison explicitly uses
+`--modes direct code json json_code --conditions same_page_new_utterance`
+after the separate 12-case development run. That is 144 test records per model
+but 36 distinct quality cases. See the [additional-run protocol](extended-evaluation-protocol.md)
+for exact commands and the separate Gemma direct-cache phase. Do not infer three
+cache-condition or fresh-process coverage for every extended model from the
+primary warm comparison, or pool it with the original dataset.
 
 ## What is compared
 

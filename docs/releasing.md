@@ -7,6 +7,24 @@ publish it. The local project directory
 does not reserve a package name, and installation examples currently use the
 source checkout or local wheel rather than PyPI.
 
+The latest evidence includes the completed three-model/four-method
+[36-case warm comparison](extended-results.md), the separate
+[original-suite Gemma tests and process cold start](gemma4-results.md), and
+[161 passing core tests](../benchmarks/results/extended-release-checks/core-tests.json).
+Gemma's additional extended cache phase completed 108 decisions and passed all
+72 cached/fresh comparisons. The rebuilt wheel passed a fresh independent install
+with MLX dependencies: all 14 runtime files match source and archive bytes, and
+the public example selected `player.pause` in a real Gemma CLI call. See the
+[wheel verification](../benchmarks/results/extended-release-checks/distribution.json).
+Source-archive content checks and distribution hashes accompany local artifacts
+in `dist/extended-v1/verification.json` and `SHA256SUMS`; that post-build record
+is outside the source archive to avoid hashing itself. Historical wheel checks
+remain separate records.
+Benchmark completion and audit success do not imply correct model choices:
+direct wrong enum actions were Gemma 1/30, Qwen 1/30, and GLM 8/30 on the extension.
+Keep boolean classification metrics separate and preserve these failures in the
+release notes.
+
 ## Verify release contents
 
 1. Review the working tree, version in `pyproject.toml` and `__init__.py`, license,
@@ -20,6 +38,10 @@ source checkout or local wheel rather than PyPI.
    checkpoint advertised as verified. Label failures and unrun checks.
 5. Reproduce published benchmark cohorts with fixture/source/model identities,
    commands, hardware, every attempt, and failures. Match claims to evidence.
+   Keep original and extended manifests separate, pass the correct `--fixtures-dir`
+   to audits, and describe the extension's primary cohort as same-page only.
+   Retain the separate completed Gemma cache phase and its parity evidence;
+   do not imply that Qwen/GLM ran that phase on the extended suite.
 
 ```sh
 python -m pytest -m 'not model'

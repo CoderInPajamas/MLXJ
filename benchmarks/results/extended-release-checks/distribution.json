@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-09-20T07:25:37.565211+00:00",
+  "scope": "Fresh standalone wheel installation outside checkout with offline cached MLX dependencies; one real Gemma CLI smoke, not a new quality benchmark.",
+  "artifact": {
+    "name": "jev_mlx-0.1.0-py3-none-any.whl",
+    "sha256": "4333bd5dc4b1aaf8188ecaaa01bf33991ed25f12afe7db41b3409e36311ddc89",
+    "bytes": 42496
+  },
+  "source_head": "efed866cd8d2b49538fc6a1b3139e36fca66d08d",
+  "source_worktree_dirty": true,
+  "source_package_sha256": {
+    "server.py": "28429f79193f8ee4982904a95615bd3c5d7287f26351798e5897edcae9fa74bc",
+    "session.py": "25e05c1866d9fd30360c4dc5d97cee7b7c7086570b9454434c5332ce10d06436",
+    "__init__.py": "b2aba21e21a700d9e86c4f336ab8c123c0b6bca9ea984715018bfd9303b25023",
+    "types.py": "f58e3d27a2fd2ea3ace839cdef75b50aa3fe793c8a47a56ce043e21f1b4c5c94",
+    "engine.py": "10aebdb027d54fbc42f49f7a249abc2f4149b613de6d063c5e91fe300ba15baa",
+    "cli.py": "0af502fd7fa13077ec0fff465b104024ae520342e646ecc90617644f0f923ab5",
+    "py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prompt.py": "8d0b340fb804a83ad37a6ee6a0feca39b4af061598712a2078ae1903e3c76f6b",
+    "demo.py": "cbf21b0375eb9b027ba904d4f739f977627c8777d2a5113f5d2321ebffd8d8bf",
+    "backends/mlx_lm.py": "9925f8da4c7b8b9ab6c879d0d2f354170365792a5f886b142ca339af5254d84c",
+    "backends/__init__.py": "3262ab71b23c6b43d5d4ad4fbec4ec8f62ba43547cdbdad717493a595a5e6220",
+    "static/index.html": "56c69509b07363b3d04c0abd27d396850b6e7b963e0adb27a7185d1d0608fcb3",
+    "static/style.css": "f5ce78d77248673db37265669357dff2314161ea08a072889dc54a3d2cc47afe",
+    "static/app.js": "4bb98c2e3699eea3f8ed44b053f62d72d6b0a54b34859cdda7f79971d2403eb1"
+  },
+  "package_file_count": 14,
+  "all_source_wheel_and_installed_package_bytes_equal": true,
+  "import_outside_checkout": true,
+  "editable_install": false,
+  "cli_help_passed": true,
+  "readme_metadata_matches": true,
+  "license_static_typing_files_present": true,
+  "dependencies": {
+    "jev-mlx": "0.1.0",
+    "mlx": "0.31.2",
+    "mlx-lm": "0.31.3",
+    "mlx-metal": "0.31.2",
+    "transformers": "5.9.0",
+    "tokenizers": "0.22.2"
+  },
+  "model_smoke": {
+    "model_name": "gemma-4-26b-a4b-it-4bit",
+    "request_file": "examples/decision.json",
+    "request_sha256": "94202e222aa09498c0633f407bfbd56cf34d8989fd9ecc31ce5b52159096ab43",
+    "expected_id": "player.pause",
+    "returned_id": "player.pause",
+    "passed": true,
+    "evidence_file": "wheel-cli-smoke.json",
+    "evidence_sha256": "37f601912ec0af8697d6d645e76790566dcbb5ec441704dbb57f3a8907d0eac1",
+    "timing": {
+      "total_ms": 3590.2224999881582,
+      "inference_ms": 3590.221249993192,
+      "queue_ms": 0.0012499949662014842,
+      "load_ms": 10442.677832994377,
+      "peak_memory_bytes": 14888928422,
+      "active_memory_bytes": 14813807722,
+      "decision_ms": 3590.369791010744
+    }
+  },
+  "source_distribution_note": "This wheel verification is included in the later source archive. Source-archive content checks and both distribution hashes are recorded alongside the artifacts in dist/extended-v1/verification.json and SHA256SUMS to avoid self-referential archive hashes.",
+  "publication": "Not uploaded or pushed; external destinations remain unspecified."
+}

@@ -1,0 +1,786 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-09-20T07:22:45.000482+00:00",
+  "protocol": "docs/extended-evaluation-protocol.md",
+  "protocol_revision": "ba98b71",
+  "protocol_sha256": "4949fff4b20b581aa680af5a8e28d789e5c7f73c8c8ad35d638214681ccfee26",
+  "complete": true,
+  "planned_measured_rows": 1096,
+  "completed_measured_rows": 1096,
+  "runtime_errors": 0,
+  "preparation_errors": 0,
+  "parity_comparisons": 128,
+  "parity_comparisons_passed": 128,
+  "scope_notes": [
+    "This is a count of repeated measurements, not 1096 independent questions.",
+    "Original suite:16dev/28test; extended suite:12dev/36test, reported separately.",
+    "Includes formal Gemma original dev/test and process-cold, six extended model/split runs, and Gemma extended direct-cache.",
+    "Excludes preparation calls, earlier smoke, core/integration tests, and historical Qwen/GLM runs.",
+    "Incorrect outcomes and wrong choices are repeated across output methods and conditions; enum actions and boolean facts are separate.",
+    "No runtime exception does not imply correct semantics or valid output format.",
+    "Extended Qwen/GLM KV-cold and page-update measurements were not run."
+  ],
+  "runs": [
+    {
+      "run": "gemma4-dev",
+      "audit_passed": true,
+      "measured_rows": 64,
+      "planned_rows": 64,
+      "model_name": "gemma-4-26b-a4b-it-4bit",
+      "split": "dev",
+      "conditions": [
+        "same_page_new_utterance"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "71de96c",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "610114cd493232ffd05a9dc5ffe6dd355b1bc3d7c1ad62f65ff02f5c413f6e16",
+          "rows": 16
+        },
+        "test.jsonl": {
+          "sha256": "e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3",
+          "rows": 28
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 56,
+          "incorrect_outcomes": 21,
+          "invalid_schema": 20,
+          "wrong_returned_choices": 0
+        },
+        "boolean": {
+          "measured_rows": 8,
+          "incorrect_outcomes": 4,
+          "invalid_schema": 4,
+          "wrong_returned_choices": 0
+        }
+      },
+      "parity_comparisons": 0,
+      "parity_comparisons_passed": 0,
+      "files_sha256": {
+        "metadata.json": "336bdd86ffd5f232a044df45b1233b305142820edf2c4f9172c5cf6050b9de44",
+        "summary.json": "5407e0160c7b6721a14b9e539d252100155a08c1ed5794de965b1094e15ab8b9",
+        "trials.jsonl": "b591fab0fa765d3f7e85e2e9dc1f9ad99e02acf8ac03bb643b48b366061f81f4"
+      }
+    },
+    {
+      "run": "gemma4-test",
+      "audit_passed": true,
+      "measured_rows": 336,
+      "planned_rows": 336,
+      "model_name": "gemma-4-26b-a4b-it-4bit",
+      "split": "test",
+      "conditions": [
+        "kv_cold",
+        "same_page_new_utterance",
+        "page_update"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "610114cd493232ffd05a9dc5ffe6dd355b1bc3d7c1ad62f65ff02f5c413f6e16",
+          "rows": 16
+        },
+        "test.jsonl": {
+          "sha256": "e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3",
+          "rows": 28
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 312,
+          "incorrect_outcomes": 147,
+          "invalid_schema": 132,
+          "wrong_returned_choices": 3
+        },
+        "boolean": {
+          "measured_rows": 24,
+          "incorrect_outcomes": 9,
+          "invalid_schema": 9,
+          "wrong_returned_choices": 0
+        }
+      },
+      "parity_comparisons": 56,
+      "parity_comparisons_passed": 56,
+      "files_sha256": {
+        "metadata.json": "d4c9d537f613d35af3c343baa2b4f835d106a8952e8e3058173a5b65e65b8bb9",
+        "summary.json": "4e2812f06713d6cee2c7456652fe59c3885c3cafdb29b1edbaa4cc320d19f60f",
+        "trials.jsonl": "9e6ac807a058b5ad5a8ad7661623bf0f1421e7c91d1989e273c20caf3de9e39a",
+        "parity.jsonl": "3f7ef5a9b79e9377afbcc920da545bbcdb40284555b83875f37c4d4e98d7d593"
+      }
+    },
+    {
+      "run": "gemma4-cold",
+      "audit_passed": true,
+      "measured_rows": 12,
+      "planned_rows": 12,
+      "model_name": "gemma-4-26b-a4b-it-4bit",
+      "split": "test",
+      "conditions": [
+        "process_cold_start"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 3,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "610114cd493232ffd05a9dc5ffe6dd355b1bc3d7c1ad62f65ff02f5c413f6e16",
+          "rows": 16
+        },
+        "test.jsonl": {
+          "sha256": "e86e2278a872ab37b2143a12b2e39fb6dde7a0ffac96afa6cc80c139ddfafce3",
+          "rows": 28
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 12,
+          "incorrect_outcomes": 6,
+          "invalid_schema": 6,
+          "wrong_returned_choices": 0
+        },
+        "boolean": {
+          "measured_rows": 0,
+          "incorrect_outcomes": 0,
+          "invalid_schema": 0,
+          "wrong_returned_choices": 0
+        }
+      },
+      "parity_comparisons": 0,
+      "parity_comparisons_passed": 0,
+      "files_sha256": {
+        "metadata.json": "542f6657645456e5abd2cab0227792d97774291b6ba5a6d385c3cd44ed50bdc0",
+        "summary.json": "c7ce4572a02df28aed9946d614767d190b4533c6bff4e295877f04dac78232c8",
+        "trials.jsonl": "184688b8838810cfaa88014d2d87e14c9dead1408f90d588604bb018536de608"
+      }
+    },
+    {
+      "run": "extended-v1-gemma4-dev",
+      "audit_passed": true,
+      "measured_rows": 48,
+      "planned_rows": 48,
+      "model_name": "gemma-4-26b-a4b-it-4bit",
+      "split": "dev",
+      "conditions": [
+        "same_page_new_utterance"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+          "rows": 12,
+          "domains": {
+            "documents": 2,
+            "calendar_drafts": 2,
+            "files": 2,
+            "music": 2,
+            "comparison": 2,
+            "settings": 2
+          },
+          "expected_status_counts": {
+            "selected": 8,
+            "no_match": 3,
+            "abstain": 1
+          },
+          "kind_counts": {
+            "enum": 11,
+            "boolean": 1
+          }
+        },
+        "test.jsonl": {
+          "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+          "rows": 36,
+          "domains": {
+            "documents": 6,
+            "calendar_drafts": 6,
+            "files": 6,
+            "music": 6,
+            "comparison": 6,
+            "settings": 6
+          },
+          "expected_status_counts": {
+            "selected": 19,
+            "no_match": 11,
+            "abstain": 6
+          },
+          "kind_counts": {
+            "enum": 30,
+            "boolean": 6
+          }
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 44,
+          "incorrect_outcomes": 19,
+          "invalid_schema": 19,
+          "wrong_returned_choices": 0
+        },
+        "boolean": {
+          "measured_rows": 4,
+          "incorrect_outcomes": 2,
+          "invalid_schema": 2,
+          "wrong_returned_choices": 0
+        }
+      },
+      "parity_comparisons": 0,
+      "parity_comparisons_passed": 0,
+      "files_sha256": {
+        "metadata.json": "83b29deea48d2260539c3b6e227ec61d4cfb76373a4707be252f24a1ffaea02a",
+        "summary.json": "fd1908294cbda60dfcf0c04c5cfe59e4e139a56e0dd72128d7d53dd1d6919963",
+        "trials.jsonl": "54a91d38ec0da13d9bbb5dfbd804f2fdaf8adb0628a3baae5d66bcd8e4e8f16e"
+      }
+    },
+    {
+      "run": "extended-v1-gemma4-test",
+      "audit_passed": true,
+      "measured_rows": 144,
+      "planned_rows": 144,
+      "model_name": "gemma-4-26b-a4b-it-4bit",
+      "split": "test",
+      "conditions": [
+        "same_page_new_utterance"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+          "rows": 12,
+          "domains": {
+            "documents": 2,
+            "calendar_drafts": 2,
+            "files": 2,
+            "music": 2,
+            "comparison": 2,
+            "settings": 2
+          },
+          "expected_status_counts": {
+            "selected": 8,
+            "no_match": 3,
+            "abstain": 1
+          },
+          "kind_counts": {
+            "enum": 11,
+            "boolean": 1
+          }
+        },
+        "test.jsonl": {
+          "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+          "rows": 36,
+          "domains": {
+            "documents": 6,
+            "calendar_drafts": 6,
+            "files": 6,
+            "music": 6,
+            "comparison": 6,
+            "settings": 6
+          },
+          "expected_status_counts": {
+            "selected": 19,
+            "no_match": 11,
+            "abstain": 6
+          },
+          "kind_counts": {
+            "enum": 30,
+            "boolean": 6
+          }
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 120,
+          "incorrect_outcomes": 57,
+          "invalid_schema": 49,
+          "wrong_returned_choices": 1
+        },
+        "boolean": {
+          "measured_rows": 24,
+          "incorrect_outcomes": 12,
+          "invalid_schema": 9,
+          "wrong_returned_choices": 3
+        }
+      },
+      "parity_comparisons": 0,
+      "parity_comparisons_passed": 0,
+      "files_sha256": {
+        "metadata.json": "ad75d2794e563b195683dc92acfb90b5cd9b978b4f016a9e77d1dfa22035ab30",
+        "summary.json": "e4d807867726f3c6b4744dff39824b3f61515eea0126da53293912869d50cbd0",
+        "trials.jsonl": "91e733178c96964f1056c16609be69b7456983b10fc38cb4e051bdc4e43c68b3"
+      }
+    },
+    {
+      "run": "extended-v1-qwen9b-dev",
+      "audit_passed": true,
+      "measured_rows": 48,
+      "planned_rows": 48,
+      "model_name": "Qwen3.5-9B-OptiQ-4bit",
+      "split": "dev",
+      "conditions": [
+        "same_page_new_utterance"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+          "rows": 12,
+          "domains": {
+            "documents": 2,
+            "calendar_drafts": 2,
+            "files": 2,
+            "music": 2,
+            "comparison": 2,
+            "settings": 2
+          },
+          "expected_status_counts": {
+            "selected": 8,
+            "no_match": 3,
+            "abstain": 1
+          },
+          "kind_counts": {
+            "enum": 11,
+            "boolean": 1
+          }
+        },
+        "test.jsonl": {
+          "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+          "rows": 36,
+          "domains": {
+            "documents": 6,
+            "calendar_drafts": 6,
+            "files": 6,
+            "music": 6,
+            "comparison": 6,
+            "settings": 6
+          },
+          "expected_status_counts": {
+            "selected": 19,
+            "no_match": 11,
+            "abstain": 6
+          },
+          "kind_counts": {
+            "enum": 30,
+            "boolean": 6
+          }
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 44,
+          "incorrect_outcomes": 12,
+          "invalid_schema": 7,
+          "wrong_returned_choices": 3
+        },
+        "boolean": {
+          "measured_rows": 4,
+          "incorrect_outcomes": 0,
+          "invalid_schema": 0,
+          "wrong_returned_choices": 0
+        }
+      },
+      "parity_comparisons": 0,
+      "parity_comparisons_passed": 0,
+      "files_sha256": {
+        "metadata.json": "4dbea96562bc71f4d08604a7664761056555782824ead9512e1a91c2dd1867bc",
+        "summary.json": "803783c320b466bd216daac065e5c395ec399cbed032b214d6bf72c3de7bc637",
+        "trials.jsonl": "1784acb3ef2b3db0ddc42ae944c59f2f97464deceffb6ec4be531c82b8694020"
+      }
+    },
+    {
+      "run": "extended-v1-qwen9b-test",
+      "audit_passed": true,
+      "measured_rows": 144,
+      "planned_rows": 144,
+      "model_name": "Qwen3.5-9B-OptiQ-4bit",
+      "split": "test",
+      "conditions": [
+        "same_page_new_utterance"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+          "rows": 12,
+          "domains": {
+            "documents": 2,
+            "calendar_drafts": 2,
+            "files": 2,
+            "music": 2,
+            "comparison": 2,
+            "settings": 2
+          },
+          "expected_status_counts": {
+            "selected": 8,
+            "no_match": 3,
+            "abstain": 1
+          },
+          "kind_counts": {
+            "enum": 11,
+            "boolean": 1
+          }
+        },
+        "test.jsonl": {
+          "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+          "rows": 36,
+          "domains": {
+            "documents": 6,
+            "calendar_drafts": 6,
+            "files": 6,
+            "music": 6,
+            "comparison": 6,
+            "settings": 6
+          },
+          "expected_status_counts": {
+            "selected": 19,
+            "no_match": 11,
+            "abstain": 6
+          },
+          "kind_counts": {
+            "enum": 30,
+            "boolean": 6
+          }
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 120,
+          "incorrect_outcomes": 35,
+          "invalid_schema": 16,
+          "wrong_returned_choices": 3
+        },
+        "boolean": {
+          "measured_rows": 24,
+          "incorrect_outcomes": 2,
+          "invalid_schema": 0,
+          "wrong_returned_choices": 2
+        }
+      },
+      "parity_comparisons": 0,
+      "parity_comparisons_passed": 0,
+      "files_sha256": {
+        "metadata.json": "5f69ef055d660a740524721f0430cc0bcd51e3dc500f93188eb1f2870db86674",
+        "summary.json": "65d5a764badf61601fca4adf73e310b74a9e2a310044fc5c2e8e86a599518eed",
+        "trials.jsonl": "5dddea0b06ca24ed88b6f7594dc18402b5487415f704ae296f7c05aa89c3a2ea"
+      }
+    },
+    {
+      "run": "extended-v1-glm-dev",
+      "audit_passed": true,
+      "measured_rows": 48,
+      "planned_rows": 48,
+      "model_name": "GLM-4.7-Flash-4bit",
+      "split": "dev",
+      "conditions": [
+        "same_page_new_utterance"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+          "rows": 12,
+          "domains": {
+            "documents": 2,
+            "calendar_drafts": 2,
+            "files": 2,
+            "music": 2,
+            "comparison": 2,
+            "settings": 2
+          },
+          "expected_status_counts": {
+            "selected": 8,
+            "no_match": 3,
+            "abstain": 1
+          },
+          "kind_counts": {
+            "enum": 11,
+            "boolean": 1
+          }
+        },
+        "test.jsonl": {
+          "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+          "rows": 36,
+          "domains": {
+            "documents": 6,
+            "calendar_drafts": 6,
+            "files": 6,
+            "music": 6,
+            "comparison": 6,
+            "settings": 6
+          },
+          "expected_status_counts": {
+            "selected": 19,
+            "no_match": 11,
+            "abstain": 6
+          },
+          "kind_counts": {
+            "enum": 30,
+            "boolean": 6
+          }
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 44,
+          "incorrect_outcomes": 26,
+          "invalid_schema": 20,
+          "wrong_returned_choices": 4
+        },
+        "boolean": {
+          "measured_rows": 4,
+          "incorrect_outcomes": 3,
+          "invalid_schema": 2,
+          "wrong_returned_choices": 1
+        }
+      },
+      "parity_comparisons": 0,
+      "parity_comparisons_passed": 0,
+      "files_sha256": {
+        "metadata.json": "42545adf89b23a074f319dd6aed1b92b070264aeedb2e70e8e3d29d5c50d6a7e",
+        "summary.json": "bffdb384663629b28b349eeb31c67fe2992653be81c29159ba2e2bbd9bdeab26",
+        "trials.jsonl": "a3b7c5072993b71a4dc493707a2bc64e30cd525e1c6e994636eb4edcaf62a809"
+      }
+    },
+    {
+      "run": "extended-v1-glm-test",
+      "audit_passed": true,
+      "measured_rows": 144,
+      "planned_rows": 144,
+      "model_name": "GLM-4.7-Flash-4bit",
+      "split": "test",
+      "conditions": [
+        "same_page_new_utterance"
+      ],
+      "modes": [
+        "direct",
+        "code",
+        "json",
+        "json_code"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+          "rows": 12,
+          "domains": {
+            "documents": 2,
+            "calendar_drafts": 2,
+            "files": 2,
+            "music": 2,
+            "comparison": 2,
+            "settings": 2
+          },
+          "expected_status_counts": {
+            "selected": 8,
+            "no_match": 3,
+            "abstain": 1
+          },
+          "kind_counts": {
+            "enum": 11,
+            "boolean": 1
+          }
+        },
+        "test.jsonl": {
+          "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+          "rows": 36,
+          "domains": {
+            "documents": 6,
+            "calendar_drafts": 6,
+            "files": 6,
+            "music": 6,
+            "comparison": 6,
+            "settings": 6
+          },
+          "expected_status_counts": {
+            "selected": 19,
+            "no_match": 11,
+            "abstain": 6
+          },
+          "kind_counts": {
+            "enum": 30,
+            "boolean": 6
+          }
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 120,
+          "incorrect_outcomes": 83,
+          "invalid_schema": 59,
+          "wrong_returned_choices": 21
+        },
+        "boolean": {
+          "measured_rows": 24,
+          "incorrect_outcomes": 19,
+          "invalid_schema": 12,
+          "wrong_returned_choices": 6
+        }
+      },
+      "parity_comparisons": 0,
+      "parity_comparisons_passed": 0,
+      "files_sha256": {
+        "metadata.json": "56749b2bc591198422a7b41e137b7009d67c6d597777dfd8066fda38391269e5",
+        "summary.json": "12d0c9f47ddc9505c9e3d12d072687057bf99475e6c6d8038ae7f655402f44ac",
+        "trials.jsonl": "7a2a6eeac06c5800188e84e6fa2d3820f33202785a93a58b81803fde8c6ee092"
+      }
+    },
+    {
+      "run": "extended-v1-gemma4-cache",
+      "audit_passed": true,
+      "measured_rows": 108,
+      "planned_rows": 108,
+      "model_name": "gemma-4-26b-a4b-it-4bit",
+      "split": "test",
+      "conditions": [
+        "kv_cold",
+        "same_page_new_utterance",
+        "page_update"
+      ],
+      "modes": [
+        "direct"
+      ],
+      "repeats": 1,
+      "source_revision_verified": "ba98b71",
+      "fixture_files": {
+        "dev.jsonl": {
+          "sha256": "b5c070b8aa40ac313723f996bc9f7c3e406e11fa7332dbf47ab49958d0dd3408",
+          "rows": 12,
+          "domains": {
+            "documents": 2,
+            "calendar_drafts": 2,
+            "files": 2,
+            "music": 2,
+            "comparison": 2,
+            "settings": 2
+          },
+          "expected_status_counts": {
+            "selected": 8,
+            "no_match": 3,
+            "abstain": 1
+          },
+          "kind_counts": {
+            "enum": 11,
+            "boolean": 1
+          }
+        },
+        "test.jsonl": {
+          "sha256": "ad804e681bb6906c81dc5da316b61a805dd1dbfc8df20940c7b1cc22776aa25e",
+          "rows": 36,
+          "domains": {
+            "documents": 6,
+            "calendar_drafts": 6,
+            "files": 6,
+            "music": 6,
+            "comparison": 6,
+            "settings": 6
+          },
+          "expected_status_counts": {
+            "selected": 19,
+            "no_match": 11,
+            "abstain": 6
+          },
+          "kind_counts": {
+            "enum": 30,
+            "boolean": 6
+          }
+        }
+      },
+      "runtime_errors": 0,
+      "preparation_errors": 0,
+      "by_kind_across_modes_and_conditions": {
+        "enum": {
+          "measured_rows": 90,
+          "incorrect_outcomes": 12,
+          "invalid_schema": 0,
+          "wrong_returned_choices": 3
+        },
+        "boolean": {
+          "measured_rows": 18,
+          "incorrect_outcomes": 3,
+          "invalid_schema": 0,
+          "wrong_returned_choices": 3
+        }
+      },
+      "parity_comparisons": 72,
+      "parity_comparisons_passed": 72,
+      "files_sha256": {
+        "metadata.json": "1f263072ec3869886d2cea6b0277e77d9ed1efea48e141734332f373f71b5c74",
+        "summary.json": "a23fc538d2d5bd91815d71f6369dace5192fc6e251986ef3e2a1c856c1553ca5",
+        "trials.jsonl": "67d4f1009743a47015dbfc584d0599e835beba3a11c769ce633e521db10ffaaa",
+        "parity.jsonl": "eeb92eb5107294dc327198c14f4af88a9ae77be1c42fb895568878ad19bb5046"
+      }
+    }
+  ]
+}

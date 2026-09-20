@@ -1,0 +1,460 @@
+{
+  "completed": 144,
+  "planned": 144,
+  "measurements_complete": true,
+  "complete": true,
+  "groups": {
+    "code/same_page_new_utterance": {
+      "attempts": 36,
+      "counts": {
+        "correct": 30,
+        "selected": 17,
+        "executable": 19,
+        "false_action": 1,
+        "rejected": 19,
+        "abstained": 3,
+        "schema_valid": 36,
+        "failed": 0,
+        "raw_choice_available": 36,
+        "raw_correct": 30,
+        "raw_selected": 17,
+        "raw_false_action": 1
+      },
+      "accuracy": 0.8333333333333334,
+      "false_action_rate": 0.027777777777777776,
+      "raw_choice_accuracy": 0.8333333333333334,
+      "raw_false_action_rate": 0.027777777777777776,
+      "false_action_rate_among_selections": 0.058823529411764705,
+      "rejection_rate": 0.5277777777777778,
+      "abstention_rate": 0.08333333333333333,
+      "executable_request_coverage": 0.8421052631578947,
+      "selection_rate_on_executable_requests": 0.8947368421052632,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 36,
+        "p50": 453.36856249923585,
+        "p95": 721.3976457460376
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "direct/same_page_new_utterance": {
+      "attempts": 36,
+      "counts": {
+        "correct": 30,
+        "selected": 17,
+        "executable": 19,
+        "false_action": 1,
+        "rejected": 19,
+        "abstained": 3,
+        "schema_valid": 36,
+        "failed": 0,
+        "raw_choice_available": 36,
+        "raw_correct": 30,
+        "raw_selected": 17,
+        "raw_false_action": 1
+      },
+      "accuracy": 0.8333333333333334,
+      "false_action_rate": 0.027777777777777776,
+      "raw_choice_accuracy": 0.8333333333333334,
+      "raw_false_action_rate": 0.027777777777777776,
+      "false_action_rate_among_selections": 0.058823529411764705,
+      "rejection_rate": 0.5277777777777778,
+      "abstention_rate": 0.08333333333333333,
+      "executable_request_coverage": 0.8421052631578947,
+      "selection_rate_on_executable_requests": 0.8947368421052632,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 36,
+        "p50": 194.80541649681982,
+        "p95": 407.5135207567655
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "json/same_page_new_utterance": {
+      "attempts": 36,
+      "counts": {
+        "correct": 17,
+        "selected": 6,
+        "executable": 19,
+        "false_action": 1,
+        "rejected": 14,
+        "abstained": 4,
+        "schema_valid": 20,
+        "failed": 0,
+        "raw_choice_available": 20,
+        "raw_correct": 17,
+        "raw_selected": 6,
+        "raw_false_action": 1
+      },
+      "accuracy": 0.4722222222222222,
+      "false_action_rate": 0.027777777777777776,
+      "raw_choice_accuracy": 0.4722222222222222,
+      "raw_false_action_rate": 0.027777777777777776,
+      "false_action_rate_among_selections": 0.16666666666666666,
+      "rejection_rate": 0.3888888888888889,
+      "abstention_rate": 0.1111111111111111,
+      "executable_request_coverage": 0.2631578947368421,
+      "selection_rate_on_executable_requests": 0.2631578947368421,
+      "schema_validity": 0.5555555555555556,
+      "latency_ms": {
+        "successful_attempts": 36,
+        "p50": 645.6786665003165,
+        "p95": 1279.9506037408719
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "json_code/same_page_new_utterance": {
+      "attempts": 36,
+      "counts": {
+        "correct": 30,
+        "selected": 19,
+        "executable": 19,
+        "false_action": 2,
+        "rejected": 17,
+        "abstained": 7,
+        "schema_valid": 36,
+        "failed": 0,
+        "raw_choice_available": 36,
+        "raw_correct": 30,
+        "raw_selected": 19,
+        "raw_false_action": 2
+      },
+      "accuracy": 0.8333333333333334,
+      "false_action_rate": 0.05555555555555555,
+      "raw_choice_accuracy": 0.8333333333333334,
+      "raw_false_action_rate": 0.05555555555555555,
+      "false_action_rate_among_selections": 0.10526315789473684,
+      "rejection_rate": 0.4722222222222222,
+      "abstention_rate": 0.19444444444444445,
+      "executable_request_coverage": 0.8947368421052632,
+      "selection_rate_on_executable_requests": 0.9473684210526315,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 36,
+        "p50": 586.7089585008216,
+        "p95": 1133.7340415011568
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    }
+  },
+  "groups_by_kind": {
+    "code/same_page_new_utterance/boolean": {
+      "attempts": 6,
+      "counts": {
+        "correct": 6,
+        "selected": 4,
+        "executable": 4,
+        "false_action": 0,
+        "rejected": 2,
+        "abstained": 2,
+        "schema_valid": 6,
+        "failed": 0,
+        "raw_choice_available": 6,
+        "raw_correct": 6,
+        "raw_selected": 4,
+        "raw_false_action": 0
+      },
+      "accuracy": 1.0,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 1.0,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": 0.0,
+      "rejection_rate": 0.3333333333333333,
+      "abstention_rate": 0.3333333333333333,
+      "executable_request_coverage": 1.0,
+      "selection_rate_on_executable_requests": 1.0,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 6,
+        "p50": 436.4968544978183,
+        "p95": 466.1458229966229
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "code/same_page_new_utterance/enum": {
+      "attempts": 30,
+      "counts": {
+        "correct": 24,
+        "selected": 13,
+        "executable": 15,
+        "false_action": 1,
+        "rejected": 17,
+        "abstained": 1,
+        "schema_valid": 30,
+        "failed": 0,
+        "raw_choice_available": 30,
+        "raw_correct": 24,
+        "raw_selected": 13,
+        "raw_false_action": 1
+      },
+      "accuracy": 0.8,
+      "false_action_rate": 0.03333333333333333,
+      "raw_choice_accuracy": 0.8,
+      "raw_false_action_rate": 0.03333333333333333,
+      "false_action_rate_among_selections": 0.07692307692307693,
+      "rejection_rate": 0.5666666666666667,
+      "abstention_rate": 0.03333333333333333,
+      "executable_request_coverage": 0.8,
+      "selection_rate_on_executable_requests": 0.8666666666666667,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 30,
+        "p50": 454.6431459966698,
+        "p95": 722.6205210514308
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "direct/same_page_new_utterance/boolean": {
+      "attempts": 6,
+      "counts": {
+        "correct": 6,
+        "selected": 4,
+        "executable": 4,
+        "false_action": 0,
+        "rejected": 2,
+        "abstained": 2,
+        "schema_valid": 6,
+        "failed": 0,
+        "raw_choice_available": 6,
+        "raw_correct": 6,
+        "raw_selected": 4,
+        "raw_false_action": 0
+      },
+      "accuracy": 1.0,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 1.0,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": 0.0,
+      "rejection_rate": 0.3333333333333333,
+      "abstention_rate": 0.3333333333333333,
+      "executable_request_coverage": 1.0,
+      "selection_rate_on_executable_requests": 1.0,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 6,
+        "p50": 182.34602099983022,
+        "p95": 366.55266625530203
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "direct/same_page_new_utterance/enum": {
+      "attempts": 30,
+      "counts": {
+        "correct": 24,
+        "selected": 13,
+        "executable": 15,
+        "false_action": 1,
+        "rejected": 17,
+        "abstained": 1,
+        "schema_valid": 30,
+        "failed": 0,
+        "raw_choice_available": 30,
+        "raw_correct": 24,
+        "raw_selected": 13,
+        "raw_false_action": 1
+      },
+      "accuracy": 0.8,
+      "false_action_rate": 0.03333333333333333,
+      "raw_choice_accuracy": 0.8,
+      "raw_false_action_rate": 0.03333333333333333,
+      "false_action_rate_among_selections": 0.07692307692307693,
+      "rejection_rate": 0.5666666666666667,
+      "abstention_rate": 0.03333333333333333,
+      "executable_request_coverage": 0.8,
+      "selection_rate_on_executable_requests": 0.8666666666666667,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 30,
+        "p50": 195.20666649623308,
+        "p95": 357.5109064062414
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "json/same_page_new_utterance/boolean": {
+      "attempts": 6,
+      "counts": {
+        "correct": 5,
+        "selected": 5,
+        "executable": 4,
+        "false_action": 1,
+        "rejected": 1,
+        "abstained": 1,
+        "schema_valid": 6,
+        "failed": 0,
+        "raw_choice_available": 6,
+        "raw_correct": 5,
+        "raw_selected": 5,
+        "raw_false_action": 1
+      },
+      "accuracy": 0.8333333333333334,
+      "false_action_rate": 0.16666666666666666,
+      "raw_choice_accuracy": 0.8333333333333334,
+      "raw_false_action_rate": 0.16666666666666666,
+      "false_action_rate_among_selections": 0.2,
+      "rejection_rate": 0.16666666666666666,
+      "abstention_rate": 0.16666666666666666,
+      "executable_request_coverage": 1.0,
+      "selection_rate_on_executable_requests": 1.0,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 6,
+        "p50": 619.6250209977734,
+        "p95": 958.8545309998153
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "json/same_page_new_utterance/enum": {
+      "attempts": 30,
+      "counts": {
+        "correct": 12,
+        "selected": 1,
+        "executable": 15,
+        "false_action": 0,
+        "rejected": 13,
+        "abstained": 3,
+        "schema_valid": 14,
+        "failed": 0,
+        "raw_choice_available": 14,
+        "raw_correct": 12,
+        "raw_selected": 1,
+        "raw_false_action": 0
+      },
+      "accuracy": 0.4,
+      "false_action_rate": 0.0,
+      "raw_choice_accuracy": 0.4,
+      "raw_false_action_rate": 0.0,
+      "false_action_rate_among_selections": 0.0,
+      "rejection_rate": 0.43333333333333335,
+      "abstention_rate": 0.1,
+      "executable_request_coverage": 0.06666666666666667,
+      "selection_rate_on_executable_requests": 0.06666666666666667,
+      "schema_validity": 0.4666666666666667,
+      "latency_ms": {
+        "successful_attempts": 30,
+        "p50": 665.1192709905445,
+        "p95": 1298.0732290452577
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "json_code/same_page_new_utterance/boolean": {
+      "attempts": 6,
+      "counts": {
+        "correct": 5,
+        "selected": 5,
+        "executable": 4,
+        "false_action": 1,
+        "rejected": 1,
+        "abstained": 1,
+        "schema_valid": 6,
+        "failed": 0,
+        "raw_choice_available": 6,
+        "raw_correct": 5,
+        "raw_selected": 5,
+        "raw_false_action": 1
+      },
+      "accuracy": 0.8333333333333334,
+      "false_action_rate": 0.16666666666666666,
+      "raw_choice_accuracy": 0.8333333333333334,
+      "raw_false_action_rate": 0.16666666666666666,
+      "false_action_rate_among_selections": 0.2,
+      "rejection_rate": 0.16666666666666666,
+      "abstention_rate": 0.16666666666666666,
+      "executable_request_coverage": 1.0,
+      "selection_rate_on_executable_requests": 1.0,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 6,
+        "p50": 598.4297079994576,
+        "p95": 937.7494477485016
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    },
+    "json_code/same_page_new_utterance/enum": {
+      "attempts": 30,
+      "counts": {
+        "correct": 25,
+        "selected": 14,
+        "executable": 15,
+        "false_action": 1,
+        "rejected": 16,
+        "abstained": 6,
+        "schema_valid": 30,
+        "failed": 0,
+        "raw_choice_available": 30,
+        "raw_correct": 25,
+        "raw_selected": 14,
+        "raw_false_action": 1
+      },
+      "accuracy": 0.8333333333333334,
+      "false_action_rate": 0.03333333333333333,
+      "raw_choice_accuracy": 0.8333333333333334,
+      "raw_false_action_rate": 0.03333333333333333,
+      "false_action_rate_among_selections": 0.07142857142857142,
+      "rejection_rate": 0.5333333333333333,
+      "abstention_rate": 0.2,
+      "executable_request_coverage": 0.8666666666666667,
+      "selection_rate_on_executable_requests": 0.9333333333333333,
+      "schema_validity": 1.0,
+      "latency_ms": {
+        "successful_attempts": 30,
+        "p50": 586.4124580039061,
+        "p95": 1135.7415917016624
+      },
+      "failure_latency_ms": {
+        "attempts": 0,
+        "p50": null,
+        "p95": null
+      }
+    }
+  },
+  "parity": {
+    "completed": 0,
+    "planned": 0,
+    "passed": 0,
+    "failed": 0
+  }
+}
